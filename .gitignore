@@ -4,3 +4,8 @@ __pycache__/
 .pytest_cache/
 data/validators/*.csv
 data/validators/snapshots.jsonl
+data/txmix/*.csv
+data/txmix/samples.jsonl
+data/txmix/state.json
+data/txmix/.hmac_key
+data/txmix/collect.log
