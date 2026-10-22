@@ -5,7 +5,10 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "validators"))
 
-from analyze_validations import analyze, longest_streak  # noqa: E402
+import json  # noqa: E402
+import tempfile  # noqa: E402
+
+from analyze_validations import analyze, churn, longest_streak, render, unl_changes, unl_split  # noqa: E402
 from crosscheck_validations import compare  # noqa: E402
 
 A, B, C = "nHvalidatorA", "nHvalidatorB", "nHvalidatorC"
@@ -74,6 +77,41 @@ class TestParticipation(unittest.TestCase):
         rows, _ = analyze(self.ledgers, [], trusted={"nHsilent"}, quorum=1)
         self.assertEqual(rows[0]["participation_pct"], 0.0)
         self.assertEqual(rows[0]["longest_missed_streak"], 100)
+
+    def test_churn(self):
+        late = [val(i, "nHlate") for i in range(200, 301)]
+        ledgers = [ledger(i) for i in range(1, 301)]
+        rows, _ = analyze(ledgers, late + [val(i, A) for i in range(1, 301)], trusted={A, "nHsilent"})
+        joined, left, silent = churn(rows, 1, 300, margin=100)
+        self.assertEqual((joined, left, silent), (["nHlate"], [], ["nHsilent"]))
+        joined, left, _ = churn(self.rows, 1, 100, margin=40)
+        self.assertEqual((joined, left), ([], [C]))     # C last seen at 50, 50 > 40 before the end
+
+    def test_unl_split(self):
+        sp = unl_split(self.rows)
+        self.assertEqual(sp["unl"]["validators"], 2)
+        self.assertEqual(sp["unl"]["median_participation_pct"], 95.0)    # median(100, 90)
+        self.assertEqual(sp["unl"]["min_participation_pct"], 90.0)
+        self.assertEqual(sp["non_unl"]["validators"], 1)
+        self.assertEqual(sp["non_unl"]["canonical_validations"], 49)
+
+    def test_unl_changes(self):
+        with tempfile.NamedTemporaryFile("w", suffix=".jsonl", delete=False) as f:
+            for keys in ([A, B], [A, B], [A, C]):
+                d = {"command": "validators", "result": {"trusted_validator_keys": keys}}
+                f.write(json.dumps(d) + "\n")
+        try:
+            first, last = unl_changes(f.name)
+        finally:
+            os.unlink(f.name)
+        self.assertEqual((last - first, first - last), ({C}, {B}))
+
+    def test_report_render(self):
+        md = render(self.rows, self.per_ledger, {"start_utc": "S", "end_utc": "E"}, [], 2, {A, B},
+                    {"added": [], "removed": []}, [], [C], [], 251, charts=False)
+        self.assertIn("Ledgers observed: **100** (1–100)", md)
+        self.assertIn("Ledgers below quorum in this node's view: **10**", md)
+        self.assertIn(f"| `{B}` | yes | 90.0 | 10 | 10 |", md)
 
     def test_longest_streak(self):
         self.assertEqual(longest_streak([1, 2, 3, 4, 5], {1, 5}), 3)
