@@ -28,7 +28,7 @@ window to plain CSV/JSONL, so the report can be rebuilt and audited later from c
 ## Run it on any node
 
 ```bash
-git clone https://github.com/circle9-mining/pft-ledger-stats && cd pft-ledger-stats
+git clone https://github.com/darkmatter-sudo/pft-ledger-stats && cd pft-ledger-stats
 
 # 24h collection (default), <= 1 request/second, sudo docker exec into container "postfiatd"
 python3 collect.py --out data --log logs/collect.log
