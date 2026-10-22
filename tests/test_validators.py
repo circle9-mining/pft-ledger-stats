@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "validators"))
 
 from analyze_validations import analyze, longest_streak  # noqa: E402
+from crosscheck_validations import compare  # noqa: E402
 
 A, B, C = "nHvalidatorA", "nHvalidatorB", "nHvalidatorC"
 
@@ -76,6 +77,22 @@ class TestParticipation(unittest.TestCase):
 
     def test_longest_streak(self):
         self.assertEqual(longest_streak([1, 2, 3, 4, 5], {1, 5}), 3)
+
+
+class TestCrosscheckCompare(unittest.TestCase):
+    ROW = {"ledger_index": "7", "ledger_hash": "AA", "ledger_time": "1021", "txn_count": "2"}
+
+    def test_match(self):
+        ok, f = compare(self.ROW, 30, {"ledger_hash": "AA", "close_time": 1021, "transactions": ["t1", "t2"]})
+        self.assertTrue(ok)
+        self.assertEqual(f["canonical_validations"], 30)
+
+    def test_each_field_mismatch_fails(self):
+        good = {"ledger_hash": "AA", "close_time": 1021, "transactions": ["t1", "t2"]}
+        for bad in ({**good, "ledger_hash": "BB"}, {**good, "close_time": 1022},
+                    {**good, "transactions": ["t1"]}):
+            self.assertFalse(compare(self.ROW, 30, bad)[0], bad)
+        self.assertFalse(compare(self.ROW, 0, good)[0], "no canonical validation recorded")
 
 
 if __name__ == "__main__":

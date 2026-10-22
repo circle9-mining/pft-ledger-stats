@@ -9,3 +9,4 @@ data/txmix/samples.jsonl
 data/txmix/state.json
 data/txmix/.hmac_key
 data/txmix/collect.log
+data/validators/collect.log
