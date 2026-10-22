@@ -1,0 +1,33 @@
+2026-10-22T09:12:30Z OS: Ubuntu 22.04.5 LTS | kernel 5.15.0-198-generic | python 3.10.12
+commit e482217a6b305960227fff586510fe61e1b7bbe3
+$ .venv/bin/python analyze.py --data data --out REPORT.md --charts charts --crosscheck data/crosscheck.csv
+wrote REPORT.md: 28556 ledgers, 288 samples, 8640 stalls
+exit=0
+$ .venv/bin/python -m pytest -v tests
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.1.1, pluggy-1.7.0 -- ~/work/pft-ledger-stats/.venv/bin/python
+rootdir: ~/work/pft-ledger-stats
+configfile: pyproject.toml
+collecting ... collected 13 items
+
+tests/test_crosscheck.py::TestRanges::test_held PASSED                   [  7%]
+tests/test_crosscheck.py::TestRanges::test_parse PASSED                  [ 15%]
+tests/test_stats.py::TestPercentile::test_errors PASSED                  [ 23%]
+tests/test_stats.py::TestPercentile::test_matches_linear_interpolation PASSED [ 30%]
+tests/test_stats.py::TestPercentile::test_summarize PASSED               [ 38%]
+tests/test_stats.py::TestPercentile::test_unsorted_and_single PASSED     [ 46%]
+tests/test_stats.py::TestIntervals::test_gaps PASSED                     [ 53%]
+tests/test_stats.py::TestIntervals::test_intervals_skip_gap PASSED       [ 61%]
+tests/test_stats.py::TestIntervals::test_stalls PASSED                   [ 69%]
+tests/test_stats.py::TestIntervals::test_stalls_empty PASSED             [ 76%]
+tests/test_stats.py::TestIntervals::test_stalls_floor PASSED             [ 84%]
+tests/test_stats.py::TestHourlyAndBurn::test_by_hour_and_burn PASSED     [ 92%]
+tests/test_stats.py::TestHourlyAndBurn::test_quorum_margin PASSED        [100%]
+
+============================== 13 passed in 0.07s ==============================
+exit=0
+$ .venv/bin/ruff check .
+All checks passed!
+exit=0
+$ .venv/bin/ruff --version
+ruff 0.17.1

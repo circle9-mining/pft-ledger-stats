@@ -1,0 +1,11 @@
+2026-10-22T09:12:04Z OS: Ubuntu 22.04.5 LTS | kernel 5.15.0-198-generic | python 3.10.12
+$ python3 crosscheck.py --ssh relay --remote-container postfiatd-sentry --out data/crosscheck.csv
+collected 28556 ledgers; held by both nodes now: 648 (7380241-7380888)
+seed 1792660329; picked [7380407, 7380548, 7380702, 7380843, 7380884]
+ledger 7380407 hash csv=5F93AFB5C0093D8D local=5F93AFB5C0093D8D second=5F93AFB5C0093D8D match=yes | close_time 845974052/845974052/845974052 match=yes
+ledger 7380548 hash csv=7F7199F419A9612B local=7F7199F419A9612B second=7F7199F419A9612B match=yes | close_time 845974481/845974481/845974481 match=yes
+ledger 7380702 hash csv=4437D95BAEA83E1F local=4437D95BAEA83E1F second=4437D95BAEA83E1F match=yes | close_time 845974942/845974942/845974942 match=yes
+ledger 7380843 hash csv=1B954E556F0B4130 local=1B954E556F0B4130 second=1B954E556F0B4130 match=yes | close_time 845975371/845975371/845975371 match=yes
+ledger 7380884 hash csv=3938BD7735ABF37D local=3938BD7735ABF37D second=3938BD7735ABF37D match=yes | close_time 845975492/845975492/845975492 match=yes
+RESULT 5/5 hash matches, 5/5 close_time matches
+exit=0

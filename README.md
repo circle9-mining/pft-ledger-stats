@@ -119,6 +119,21 @@ local node and the second node to be identical.
 git diff --stat REPORT.md charts/   # REPORT.md is byte-identical; PNGs may differ in metadata only
 ```
 
+## Published run (2026-10-21T09:11Z – 2026-10-22T09:11Z)
+
+| file | content |
+|---|---|
+| `logs/collect.log` | collector log; OS line at top, final `RANGE 7352333-7380888 ledgers=28556 consecutive=yes skipped=0` |
+| `logs/crosscheck.log` | 5 random ledgers vs the sentry node: 5/5 hash and close_time matches |
+| `logs/analyze-tests.log` | `analyze.py`, `pytest -v` (13 passed) and `ruff check` (clean) |
+| `data/` | `ledgers.csv`, `samples.jsonl`, `state.json`, `crosscheck.csv` |
+| `REPORT.md`, `charts/`, `stalls.csv` | analyzer output |
+
+The collector ran as a systemd service. The host rebooted at 20:20Z; the log shows the
+`STOP (signal)` / interim `RANGE` lines and the `RESUME from ledger 7365587` line, and no ledger was
+skipped. The only edit to any published log: home-directory paths in `logs/analyze-tests.log`
+(pytest prints `rootdir`) were replaced with `~/` using `sed 's#/home/[a-z0-9_-]*/#~/#g'`.
+
 ## Privacy
 
 Published data holds only public chain data (ledger hashes, close times, coin totals, transaction
