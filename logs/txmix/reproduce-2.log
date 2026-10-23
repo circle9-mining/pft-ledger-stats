@@ -1,0 +1,34 @@
+OS: Ubuntu 22.04.5 LTS | 2026-10-23T18:08:43Z
+$ git rev-parse HEAD
+76a4721233160fa12c302cb04b254b1ad3646c11
+$ sha256sum data/txmix/tx.csv.gz
+5feea40bed715d5324e139b7cfa561cee9c586daa9ba70d06447226224bf552f  data/txmix/tx.csv.gz
+$ cat txmix/reproduce.sh
+#!/usr/bin/env bash
+# Rebuild REPORT.md from the published .gz files only and compare it byte-for-byte with the committed report.
+set -euo pipefail
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+cp data/txmix/window.json "$T/state.json"
+for f in data/txmix/*.gz; do gunzip -c "$f" > "$T/$(basename "$f" .gz)"; echo "unpacked $f ($(wc -l < "$T/$(basename "$f" .gz)") lines)"; done
+.venv/bin/python txmix/analyze_tx.py --data "$T" --out "$T/report" --no-charts
+committed=$(sha256sum < txmix/report/REPORT.md | cut -d' ' -f1)
+rebuilt=$(sha256sum < "$T/report/REPORT.md" | cut -d' ' -f1)
+echo "sha256 committed txmix/report/REPORT.md: $committed"
+echo "sha256 rebuilt   <tmp>/report/REPORT.md: $rebuilt"
+if cmp txmix/report/REPORT.md "$T/report/REPORT.md"; then
+  echo "REPORT.md byte-identical (cmp exit 0; whole file incl. chart link lines; PNGs not rebuilt: --no-charts)"
+else
+  echo "REPORT.md DIFFERS"; exit 1
+fi
+$ bash txmix/reproduce.sh; echo "exit $?"
+unpacked data/txmix/ledgers.csv.gz (28562 lines)
+unpacked data/txmix/samples.jsonl.gz (144 lines)
+unpacked data/txmix/tx.csv.gz (9891 lines)
+ledgers 28561 range 7390454-7419014 missing_in_range 0 gaps.csv 0
+tx 9890 (raw 9890, dupes 0) types 3 accounts 46 gini 0.266 top10 33.0%
+fees p50 10 p90 10 p99 10 max 12 above_10x 0 base 10
+wrote /tmp/tmp.WGK5EqQZvC/report/REPORT.md
+sha256 committed txmix/report/REPORT.md: 0f4a0164514127dd4f6f1471966af4751872c429ffbca5e58a9479d9416eeb8b
+sha256 rebuilt   <tmp>/report/REPORT.md: 0f4a0164514127dd4f6f1471966af4751872c429ffbca5e58a9479d9416eeb8b
+REPORT.md byte-identical (cmp exit 0; whole file incl. chart link lines; PNGs not rebuilt: --no-charts)
+exit 0

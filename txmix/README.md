@@ -9,7 +9,7 @@ then report the transaction-type mix, result codes, fees, sender concentration a
 | `analyze_tx.py` | `REPORT.md` + 3 PNG charts from a collected window | stdlib + `matplotlib` (charts) |
 | `crosscheck_tx.py` | re-fetches random collected ledgers and compares them with the CSVs | Python 3 stdlib |
 | `resume_drill.sh` + `resume_check.py` | live SIGTERM/SIGKILL interrupt-and-restart drill with checks | bash, Python 3 stdlib |
-| `reproduce.sh` | rebuilds `report/REPORT.md` from the published `data/txmix/*.gz` and diffs it | bash + `.venv` |
+| `reproduce.sh` | rebuilds `report/REPORT.md` from the published `data/txmix/*.gz` and compares it byte-for-byte (sha256 + `cmp`) | bash + `.venv` |
 
 ## Results: 24h run 2026-10-22T17:14:22Z → 2026-10-23T17:14:22Z
 
@@ -32,8 +32,8 @@ Full report: [`report/REPORT.md`](report/REPORT.md). Data: `data/txmix/{tx,ledge
 
 Checks for this run: the live cross-check matched 5/5 random collected ledgers against fresh `ledger`
 RPC (hash, txn_count, tx rows, tx-hash set). The negative control, a copy with every ledger hash
-altered, failed 0/5 with exit 1. `reproduce.sh` rebuilt an identical `REPORT.md` from the `.gz`
-files.
+altered, failed 0/5 with exit 1. `reproduce.sh` rebuilt a byte-identical `REPORT.md` (same sha256, `cmp` exit 0) from the `.gz`
+files (`logs/txmix/reproduce-2.log`; the first run, `reproduce.log`, compared with chart link lines excluded).
 
 ## Run it
 
