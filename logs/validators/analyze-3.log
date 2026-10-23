@@ -1,0 +1,7 @@
+OS: Ubuntu 22.04.5 LTS | python 3.10.12 (.venv, matplotlib 3.10.9)
+2026-10-23T14:24:55Z
+$ .venv/bin/python validators/analyze_validations.py --data data/validators --out validators/report
+validations=1724180 ledgers=28550 gaps=0 validators=61 trusted=25 quorum=17
+churn: joined=1 left=0 silent=0; unl added=0 removed=0; below_quorum=0
+rc=0
+2026-10-23T14:26:00Z

@@ -1,0 +1,12 @@
+OS: Ubuntu 22.04.5 LTS | kernel 5.15.0-198-generic | python 3.10.12
+2026-10-23T14:20:24Z
+$ python3 validators/crosscheck_validations.py --data data/validators --count 5 --seed 20261023
+node complete range 7414764-7415562; collected ledgers still held: 794 of 28550
+ledger_index,hash_match,close_time_match,txn_count_match,canonical_validations,result
+7414970,True,True,True,61,MATCH
+7415023,True,True,True,61,MATCH
+7415034,True,True,True,61,MATCH
+7415125,True,True,True,61,MATCH
+7415310,True,True,True,61,MATCH
+CROSSCHECK PASS: 5/5 ledgers match
+rc=0

@@ -44,8 +44,8 @@ INK = "#3c3c3a"
 
 SUMMARY_FIELDS = [
     "master_key", "domain", "trusted", "observed_ledgers", "canonical", "participation_pct",
-    "missed", "longest_missed_streak", "non_canonical", "median_sign_delay_s", "median_recv_lag_s",
-    "first_ledger", "last_ledger",
+    "active_ledgers", "active_participation_pct", "missed", "longest_missed_streak", "non_canonical",
+    "median_sign_delay_s", "median_recv_lag_s", "first_ledger", "last_ledger",
 ]
 LEDGER_FIELDS = ["ledger_index", "trusted_canonical", "quorum", "below_quorum", "all_canonical"]
 
@@ -167,6 +167,8 @@ def analyze(ledgers, validations, trusted=frozenset(), quorum=None, domains=None
     for m in sorted(set(seen) | set(trusted)):
         n = len(observed)
         c = len(signed[m])
+        lo, hi = seen[m]
+        act = sum(1 for i in observed if lo <= i <= hi) if lo is not None else 0
         rows.append({
             "master_key": m,
             "domain": domains.get(m, ""),
@@ -174,10 +176,12 @@ def analyze(ledgers, validations, trusted=frozenset(), quorum=None, domains=None
             "observed_ledgers": n,
             "canonical": c,
             "participation_pct": round(100.0 * c / n, 2) if n else 0.0,
+            "active_ledgers": act,
+            "active_participation_pct": round(100.0 * c / act, 2) if act else "",
             "missed": n - c,
             "longest_missed_streak": longest_streak(observed, signed[m]),
             "non_canonical": len(noncanon[m] - signed[m]),
-            "median_sign_delay_s": statistics.median(delays[m]) if delays[m] else "",
+            "median_sign_delay_s": float(statistics.median(delays[m])) if delays[m] else "",
             "median_recv_lag_s": round(statistics.median(lags[m]), 3) if lags[m] else "",
             "first_ledger": seen[m][0] if seen[m][0] is not None else "",
             "last_ledger": seen[m][1] if seen[m][1] is not None else "",
@@ -350,12 +354,16 @@ def render(rows, per_ledger, window, gaps, quorum, trusted, unl, joined, left, s
     w("## Per-validator table\n")
     w("Sign delay = median `signing_time` − ledger close time (1 s resolution). Receive lag = median arrival "
       "at this node − `signing_time` (relay latency plus clock skew).\n")
-    w("| validator | UNL | participation % | missed | longest streak | non-canonical | sign delay s "
-      "| recv lag s | first | last |")
-    w("|---|---|---:|---:|---:|---:|---:|---:|---:|---:|")
+    w("Participation % uses every observed ledger in the window; active % uses only observed ledgers "
+      "between the validator's first and last validation seen, so a validator that joined or left mid-window "
+      "is not penalised there for ledgers before or after it existed (see Churn).\n")
+    w("| validator | UNL | participation % | active % | missed | longest streak | non-canonical "
+      "| sign delay s | recv lag s | first | last |")
+    w("|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|")
     for r in rows:
         ident = f"{r['domain']} `{r['master_key']}`" if r["domain"] else f"`{r['master_key']}`"
-        w(f"| {ident} | {'yes' if r['trusted'] else 'no'} | {r['participation_pct']} | {r['missed']} "
+        w(f"| {ident} | {'yes' if r['trusted'] else 'no'} | {r['participation_pct']} "
+          f"| {r['active_participation_pct']} | {r['missed']} "
           f"| {r['longest_missed_streak']} | {r['non_canonical']} | {r['median_sign_delay_s']} "
           f"| {r['median_recv_lag_s']} | {r['first_ledger']} | {r['last_ledger']} |")
     w("\n## Limits\n")

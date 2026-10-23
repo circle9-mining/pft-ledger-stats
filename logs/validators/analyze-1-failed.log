@@ -1,0 +1,21 @@
+OS: Ubuntu 22.04.5 LTS | python 3.10.12
+2026-10-23T14:21:08Z
+$ python3 validators/analyze_validations.py --data data/validators --out validators/report
+Traceback (most recent call last):
+  File "~/work/pft-ledger-stats/validators/analyze_validations.py", line 417, in <module>
+    main()
+  File "~/work/pft-ledger-stats/validators/analyze_validations.py", line 402, in main
+    chart_participation(rows, os.path.join(out, "participation.png"))
+  File "~/work/pft-ledger-stats/validators/analyze_validations.py", line 222, in chart_participation
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+Command exited with non-zero status 1
+	Command being timed: "python3 validators/analyze_validations.py --data data/validators --out validators/report"
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:07.52
+	Maximum resident set size (kbytes): 2156816
+rc=1
+total 576
+drwxrwxr-x 2 <user> <user>   4096 Oct 23 16:22 .
+drwxrwxr-x 4 <user> <user>   4096 Oct 23 16:21 ..
+-rw-rw-r-- 1 <user> <user> 571066 Oct 23 16:22 ledger_quorum.csv
+-rw-rw-r-- 1 <user> <user>   7647 Oct 23 16:22 validators_summary.csv

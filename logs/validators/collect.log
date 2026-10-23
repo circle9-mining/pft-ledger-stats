@@ -1,0 +1,29 @@
+OS: Ubuntu 22.04.5 LTS (validator-host) | collector: validators/collect_validations.py via pft-validators-record.service
+2026-10-22T14:20:11.652Z WINDOW start=2026-10-22T14:20:11Z end=2026-10-23T14:20:11Z container=postfiatd port=6006 commands=manifest,server_info,subscribe,validators
+2026-10-22T14:20:11.653Z connect (remaining 86400s, last ledger None)
+2026-10-22T14:20:12.027Z subscribe status=success
+2026-10-22T15:20:12.210Z progress validations=71161 ledgers=1186 gaps=0 last_ledger=7388193
+2026-10-22T16:20:12.613Z progress validations=142288 ledgers=2371 gaps=0 last_ledger=7389378
+2026-10-22T17:20:13.019Z progress validations=213772 ledgers=3563 gaps=0 last_ledger=7390570
+2026-10-22T18:20:14.445Z progress validations=285100 ledgers=4751 gaps=0 last_ledger=7391758
+2026-10-22T19:20:13.400Z progress validations=356569 ledgers=5943 gaps=0 last_ledger=7392950
+2026-10-22T20:20:14.127Z progress validations=427909 ledgers=7132 gaps=0 last_ledger=7394139
+2026-10-22T21:20:14.121Z progress validations=499174 ledgers=8320 gaps=0 last_ledger=7395327
+2026-10-22T22:20:14.376Z progress validations=570527 ledgers=9509 gaps=0 last_ledger=7396516
+2026-10-22T23:20:15.884Z progress validations=641867 ledgers=10698 gaps=0 last_ledger=7397705
+2026-10-23T00:20:16.770Z progress validations=713380 ledgers=11890 gaps=0 last_ledger=7398897
+2026-10-23T01:20:16.812Z progress validations=784664 ledgers=13078 gaps=0 last_ledger=7400085
+2026-10-23T02:20:17.241Z progress validations=855921 ledgers=14266 gaps=0 last_ledger=7401273
+2026-10-23T03:20:19.486Z progress validations=927501 ledgers=15459 gaps=0 last_ledger=7402466
+2026-10-23T04:20:20.581Z progress validations=998959 ledgers=16650 gaps=0 last_ledger=7403657
+2026-10-23T05:20:24.401Z progress validations=1071142 ledgers=17835 gaps=0 last_ledger=7404842
+2026-10-23T06:20:22.589Z progress validations=1143674 ledgers=19024 gaps=0 last_ledger=7406031
+2026-10-23T07:20:21.996Z progress validations=1216370 ledgers=20216 gaps=0 last_ledger=7407223
+2026-10-23T08:20:23.133Z progress validations=1289104 ledgers=21408 gaps=0 last_ledger=7408415
+2026-10-23T09:20:23.793Z progress validations=1361717 ledgers=22599 gaps=0 last_ledger=7409606
+2026-10-23T10:20:24.337Z progress validations=1433945 ledgers=23791 gaps=0 last_ledger=7410798
+2026-10-23T11:20:24.896Z progress validations=1506508 ledgers=24981 gaps=0 last_ledger=7411988
+2026-10-23T12:20:27.553Z progress validations=1579220 ledgers=26173 gaps=0 last_ledger=7413180
+2026-10-23T13:20:30.049Z progress validations=1651902 ledgers=27365 gaps=0 last_ledger=7414372
+2026-10-23T14:20:12.069Z relay exited rc=124
+2026-10-23T14:20:17.999Z END window 2026-10-22T14:20:11Z -> 2026-10-23T14:20:11Z rows: validations.csv=1724180 ledgers.csv=28550 manifests.csv=61 gaps.csv=0

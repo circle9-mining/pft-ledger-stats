@@ -1,0 +1,31 @@
+OS: Ubuntu 22.04.5 LTS
+2026-10-23T14:27:54Z
+++ mkdir -p /tmp/vdata
+++ cp data/validators/window.json /tmp/vdata/
+++ for f in data/validators/*.gz
+++ gunzip -c data/validators/gaps.csv.gz
++++ basename data/validators/gaps.csv
+++ for f in data/validators/*.gz
+++ gunzip -c data/validators/ledgers.csv.gz
++++ basename data/validators/ledgers.csv
+++ for f in data/validators/*.gz
+++ gunzip -c data/validators/manifests.csv.gz
++++ basename data/validators/manifests.csv
+++ for f in data/validators/*.gz
+++ gunzip -c data/validators/snapshots.jsonl.gz
++++ basename data/validators/snapshots.jsonl
+++ for f in data/validators/*.gz
+++ gunzip -c data/validators/validations.csv.gz
++++ basename data/validators/validations.csv
+++ .venv/bin/python validators/analyze_validations.py --data /tmp/vdata --out /tmp/vreport --no-charts
+validations=1724180 ledgers=28550 gaps=0 validators=61 trusted=25 quorum=17
+churn: joined=1 left=0 silent=0; unl added=0 removed=0; below_quorum=0
++++ sed 1d validators/report/validators_summary.csv
+++ diff /dev/fd/63 /dev/fd/62
++++ sed 1d /tmp/vreport/validators_summary.csv
+++ echo same
+same
+++ cmp validators/report/ledger_quorum.csv /tmp/vreport/ledger_quorum.csv
+++ echo ledger_quorum same
+ledger_quorum same
+++ set +x

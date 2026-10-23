@@ -1,0 +1,32 @@
+OS: Ubuntu 22.04.5 LTS | python 3.10.12
+2026-10-23T14:20:55Z
+$ python3 -m pytest -v tests/test_validators.py tests/test_crosscheck.py
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.1.1, pluggy-1.7.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: ~/work/pft-ledger-stats
+configfile: pyproject.toml
+collecting ... collected 16 items
+
+tests/test_validators.py::TestParticipation::test_churn PASSED           [  6%]
+tests/test_validators.py::TestParticipation::test_delays PASSED          [ 12%]
+tests/test_validators.py::TestParticipation::test_full_participation_and_dedupe PASSED [ 18%]
+tests/test_validators.py::TestParticipation::test_longest_streak PASSED  [ 25%]
+tests/test_validators.py::TestParticipation::test_non_canonical_and_churn PASSED [ 31%]
+tests/test_validators.py::TestParticipation::test_positive_control_10_of_100 PASSED [ 37%]
+tests/test_validators.py::TestParticipation::test_quorum_per_ledger PASSED [ 43%]
+tests/test_validators.py::TestParticipation::test_report_render PASSED   [ 50%]
+tests/test_validators.py::TestParticipation::test_trusted_never_seen PASSED [ 56%]
+tests/test_validators.py::TestParticipation::test_unl_changes PASSED     [ 62%]
+tests/test_validators.py::TestParticipation::test_unl_split PASSED       [ 68%]
+tests/test_validators.py::TestParticipation::test_unl_split_order PASSED [ 75%]
+tests/test_validators.py::TestCrosscheckCompare::test_each_field_mismatch_fails PASSED [ 81%]
+tests/test_validators.py::TestCrosscheckCompare::test_match PASSED       [ 87%]
+tests/test_crosscheck.py::TestRanges::test_held PASSED                   [ 93%]
+tests/test_crosscheck.py::TestRanges::test_parse PASSED                  [100%]
+
+============================== 16 passed in 0.24s ==============================
+rc=0
+$ ruff check validators/ tests/test_validators.py
+All checks passed!
+rc=0

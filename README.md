@@ -16,6 +16,8 @@ window to plain CSV/JSONL, so the report can be rebuilt and audited later from c
 | `tests/` | `pytest` / `unittest` tests |
 | `data/` | raw data of the published run |
 | `logs/` | raw logs of the published run |
+| `txmix/` | transaction-type mix analyzer, see [`txmix/README.md`](txmix/README.md) |
+| `validators/` | per-validator participation analyzer, see [`validators/README.md`](validators/README.md) |
 
 ## Requirements
 

@@ -46,6 +46,9 @@ class TestParticipation(unittest.TestCase):
         self.assertEqual(b["participation_pct"], 90.0)
         self.assertEqual(b["missed"], 10)
         self.assertEqual(b["longest_missed_streak"], 10)
+        self.assertEqual(b["active_participation_pct"], 90.0)
+        print(f"\npositive control: {b['master_key']} participation={b['participation_pct']}% "
+              f"missed={b['missed']} longest_streak={b['longest_missed_streak']}")
 
     def test_full_participation_and_dedupe(self):
         a = self.by[A]
@@ -77,6 +80,15 @@ class TestParticipation(unittest.TestCase):
         rows, _ = analyze(self.ledgers, [], trusted={"nHsilent"}, quorum=1)
         self.assertEqual(rows[0]["participation_pct"], 0.0)
         self.assertEqual(rows[0]["longest_missed_streak"], 100)
+
+    def test_active_participation_late_joiner(self):
+        late = [val(i, "nHlate") for i in range(200, 301)]
+        ledgers = [ledger(i) for i in range(1, 301)]
+        rows, _ = analyze(ledgers, late, trusted=set())
+        r = rows[0]
+        self.assertEqual(r["participation_pct"], 33.67)        # 101 of 300 window ledgers
+        self.assertEqual((r["active_ledgers"], r["active_participation_pct"]), (101, 100.0))
+        self.assertEqual(self.by[C]["active_participation_pct"], 98.0)   # 49 of 50 while active
 
     def test_churn(self):
         late = [val(i, "nHlate") for i in range(200, 301)]
@@ -111,7 +123,7 @@ class TestParticipation(unittest.TestCase):
                     {"added": [], "removed": []}, [], [C], [], 251, charts=False)
         self.assertIn("Ledgers observed: **100** (1–100)", md)
         self.assertIn("Ledgers below quorum in this node's view: **10**", md)
-        self.assertIn(f"| `{B}` | yes | 90.0 | 10 | 10 |", md)
+        self.assertIn(f"| `{B}` | yes | 90.0 | 90.0 | 10 | 10 |", md)
 
     def test_longest_streak(self):
         self.assertEqual(longest_streak([1, 2, 3, 4, 5], {1, 5}), 3)
