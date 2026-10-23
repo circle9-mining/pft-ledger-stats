@@ -1,0 +1,8 @@
+OS: Ubuntu 22.04.5 LTS | 2026-10-23T17:16:16Z
+== re-run after adding the partial-hour note to the per-hour table (first/last hour of the window are partial)
+$ .venv/bin/python txmix/analyze_tx.py --data data/txmix --out txmix/report
+ledgers 28561 range 7390454-7419014 missing_in_range 0 gaps.csv 0
+tx 9890 (raw 9890, dupes 0) types 3 accounts 46 gini 0.266 top10 33.0%
+fees p50 10 p90 10 p99 10 max 12 above_10x 0 base 10
+wrote txmix/report/REPORT.md
+exit 0

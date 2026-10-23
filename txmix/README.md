@@ -8,6 +8,32 @@ then report the transaction-type mix, result codes, fees, sender concentration a
 | `collect_tx.py` | throttled, resumable forward collector (one CSV row per transaction) | Python 3 stdlib |
 | `analyze_tx.py` | `REPORT.md` + 3 PNG charts from a collected window | stdlib + `matplotlib` (charts) |
 | `crosscheck_tx.py` | re-fetches random collected ledgers and compares them with the CSVs | Python 3 stdlib |
+| `resume_drill.sh` + `resume_check.py` | live SIGTERM/SIGKILL interrupt-and-restart drill with checks | bash, Python 3 stdlib |
+| `reproduce.sh` | rebuilds `report/REPORT.md` from the published `data/txmix/*.gz` and diffs it | bash + `.venv` |
+
+## Results: 24h run 2026-10-22T17:14:22Z → 2026-10-23T17:14:22Z
+
+Full report: [`report/REPORT.md`](report/REPORT.md). Data: `data/txmix/{tx,ledgers}.csv.gz`,
+`samples.jsonl.gz`, `window.json`. Logs: [`logs/txmix/`](../logs/txmix/).
+
+- **28,561 ledgers** (7390454–7419014), **0 gaps**, 80,355 requests (≤ 1/s). 81.2% of ledgers were empty.
+- **9,890 transactions** (0.35 per ledger), 0 duplicate rows. Only 3 types were seen: Payment 79.4%,
+  NFTokenMint 11.4%, NFTokenBurn 9.2%.
+- **Results:** 6 non-tesSUCCESS (all `tecUNFUNDED_PAYMENT` on Payments, 0.1%).
+- **Fees:** p50 = p90 = p99 = 10 drops (the base fee), max 12. 99.6% of transactions paid exactly the
+  base fee and none paid more than 10× it. In total 98,986 drops (0.099 PFT) were burned.
+- **Senders:** 46 active accounts, top-10 share 33.0%, Gini 0.266. The busiest sender sent 335 tx and
+  the median sender 245, and no account sent only one. Traffic is spread evenly over a fixed set of
+  senders, which looks like scheduled automation rather than organic use.
+- 14 accounts were newly funded (all by Payment). 43 transactions (0.4%) carried memos, and none
+  were multi-signed.
+- The hourly rate was flat at about 390–445 tx/h. The first and last bars of `types_by_hour.png`
+  are partial hours (46 and 14 minutes).
+
+Checks for this run: the live cross-check matched 5/5 random collected ledgers against fresh `ledger`
+RPC (hash, txn_count, tx rows, tx-hash set). The negative control, a copy with every ledger hash
+altered, failed 0/5 with exit 1. `reproduce.sh` rebuilt an identical `REPORT.md` from the `.gz`
+files.
 
 ## Run it
 
@@ -32,11 +58,26 @@ python3 -m venv .venv && .venv/bin/pip install matplotlib pytest ruff
 
 # tests + lint
 .venv/bin/python -m pytest -q tests/test_txmix.py && .venv/bin/ruff check txmix tests
+
+# rebuild the published report from the published .gz data
+txmix/reproduce.sh
 ```
 
 For an unattended 24h run, wrap the collector in a systemd service with `Restart=on-failure`. A
 restart resumes at the ledger after the last row of `ledgers.csv`/`gaps.csv`, and the window end
-stays fixed by `state.json`.
+stays fixed by `state.json`. Before resuming, the collector repairs what a kill can leave behind and
+logs each repair as a `RESUME dropped ...` line:
+- a torn (partial) last line in any CSV is cut;
+- `tx.csv` rows of a ledger whose `ledgers.csv` row was never written are cut. A ledger's tx rows
+  are appended before its ledger row, so without this cut they would be written twice.
+
+A restart before the first ledger row keeps the original window. `resume_drill.sh <new dir>` proves
+this live: it runs an 8-minute window (`MINUTES=`), sends SIGTERM after 120 s, restarts after 30 s,
+sends SIGKILL 90 s later, restarts again, and then checks that the window was kept, that each
+interrupt snapshot is a byte-identical prefix of the final files, and that there are no duplicates,
+torn rows, unaccounted gaps or curl processes left in the container. In the published drill
+(`logs/txmix/resume-drill.log`, 9/9 PASS) the SIGKILL landed between ledgers, so it left no torn line
+and no orphan rows. That repair path is covered by `TestResume` instead.
 
 ## Method
 
@@ -71,12 +112,19 @@ report also gives the top-10 sender share and a Lorenz chart.
 **Cross-check.** `crosscheck_tx.py` picks random collected ledgers that the node still holds,
 re-fetches them and compares `ledger_hash`, `txn_count`, the number of `tx.csv` rows and the set
 of tx hashes. Exit codes: 0 all match, 1 any mismatch, 2 too few collected ledgers still in
-history.
+history. Right after the 24h window, the node listed its oldest ledger in `complete_ledgers` but
+answered `lgrNotFound` for it, because online_delete was removing it. That ledger crashed the first
+negative-control run (`logs/txmix/crosscheck-negative.log`). Since then a ledger that is listed but
+not served is printed as `SKIP` and replaced by another random ledger. It never counts as a match,
+and if too few ledgers can be fetched the exit code is 2.
 
 **Tests.** `tests/test_txmix.py` runs a synthetic positive control: a hand-built window with a
 known type mix, result classes, fees (nearest-rank percentiles, share above 10× base), sender
 counts (known Gini and top-10 share), memos, multisig and created accounts. It also checks the
 collector's metadata classifiers, de-duplication and that a `REPORT.md` is written end to end.
+`TestResume` drives the real `collect_tx.main()` against a fake RPC. It covers a kill between the
+tx and ledger appends with torn lines in both files, and a restart before the first ledger row.
+`TestCrosscheckSkip` covers the `lgrNotFound` skip and the exit-2 path.
 
 ## Limits
 

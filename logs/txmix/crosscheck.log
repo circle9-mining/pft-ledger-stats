@@ -1,0 +1,29 @@
+OS: Ubuntu 22.04.5 LTS | 2026-10-23T17:14:32Z
+$ python3 -I txmix/crosscheck_tx.py --data data/txmix --count 5
+Traceback (most recent call last):
+  File "~/work/pft-ledger-stats/txmix/crosscheck_tx.py", line 28, in <module>
+    from collect_tx import Rpc
+ModuleNotFoundError: No module named 'collect_tx'
+exit 1
+== re-run without -I (-I removes the script dir from sys.path, so the sibling import failed) 2026-10-23T17:14:38Z
+$ python3 txmix/crosscheck_tx.py --data data/txmix --count 5
+node complete range 7418348-7419020; collected ledgers still held: 667 of 28561
+ledger_index,hash_match,csv_txn_count,fresh_txn_count,tx_rows,tx_hashes_match,result
+7418550,True,1,1,1,True,MATCH
+7418600,True,2,2,2,True,MATCH
+7418637,True,1,1,1,True,MATCH
+7418741,True,1,1,1,True,MATCH
+7418765,True,1,1,1,True,MATCH
+CROSSCHECK PASS: 5/5 ledgers match
+exit 0
+== re-run with the fixed crosscheck_tx.py 2026-10-23T17:15:27Z
+$ python3 txmix/crosscheck_tx.py --data data/txmix --count 5
+node complete range 7418349-7419036; collected ledgers still held: 666 of 28561
+ledger_index,hash_match,csv_txn_count,fresh_txn_count,tx_rows,tx_hashes_match,result
+7418991,True,3,3,3,True,MATCH
+7418957,True,1,1,1,True,MATCH
+7418900,True,1,1,1,True,MATCH
+7418837,True,4,4,4,True,MATCH
+7418651,True,4,4,4,True,MATCH
+CROSSCHECK PASS: 5/5 ledgers match
+exit 0

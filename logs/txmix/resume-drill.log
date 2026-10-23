@@ -1,0 +1,96 @@
+$ cat txmix/resume_drill.sh
+#!/usr/bin/env bash
+# Resume drill for collect_tx.py: a short real window on the local node, interrupted twice
+# (SIGTERM, then SIGKILL) and restarted with the same command each time. Checks afterwards that
+#   - there is 1 WINDOW START line and every restart logged RESUME with that same window,
+#   - rows written before each interrupt are a byte-identical prefix of the final CSVs
+#     (after the collector's own repair of a torn last line / orphan tx rows, which it logs),
+#   - there are no duplicate tx hashes or ledgers, and every CSV line has the right column count,
+#   - ledgers.csv is contiguous apart from the ledgers recorded in gaps.csv,
+#   - every ledger's txn_count equals its number of tx.csv rows,
+#   - no curl is left running inside the container.
+# Read-only against the node (server_info + ledger only). Usage: resume_drill.sh <outdir>
+set -euo pipefail
+OUT=${1:?usage: resume_drill.sh <outdir>}
+HERE=$(cd "$(dirname "$0")" && pwd)
+MINUTES=${MINUTES:-8}
+[ -e "$OUT" ] && { echo "refusing to reuse existing $OUT"; exit 2; }
+mkdir -p "$OUT"
+SNAP=$(mktemp -d)
+trap 'rm -rf "$SNAP"' EXIT
+
+# shellcheck disable=SC1091
+echo "OS: $(. /etc/os-release && echo "$PRETTY_NAME") | python: $(python3 -V 2>&1) | $(date -u +%FT%TZ)"
+HOURS=$(python3 -c "print($MINUTES/60)")
+run() { python3 -I "$HERE/collect_tx.py" --out "$OUT" --log "$OUT/collect.log" --hours "$HOURS" \
+          --sample-interval 60 >/dev/null & PID=$!; }
+counts() {
+  for f in tx ledgers gaps; do
+    if [ -f "$OUT/$f.csv" ]; then printf '%s=%s ' "$f" "$(($(wc -l <"$OUT/$f.csv") - 1))"
+    else printf '%s=0 ' "$f"; fi
+  done; echo
+}
+snap() { for f in tx ledgers gaps; do [ -f "$OUT/$f.csv" ] && cp "$OUT/$f.csv" "$SNAP/$1-$f.csv"; done; true; }
+
+echo "== start 1 (window ${MINUTES} min)"; run; sleep 120
+echo "== SIGTERM pid $PID after 120s"; kill -TERM "$PID"; wait "$PID" || echo "exit status $?"
+snap term; echo "rows at SIGTERM: $(counts)"
+sleep 30
+echo "== start 2 (same command, after 30s down)"; run; sleep 90
+echo "== SIGKILL pid $PID after 90s"; kill -KILL "$PID"; wait "$PID" || echo "exit status $?"
+snap kill; echo "rows at SIGKILL: $(counts)"
+sleep 30
+echo "== start 3 (same command, after 30s down), runs to window end"; run; wait "$PID"
+echo "rows at END: $(counts)"
+
+echo "== collect.log"
+cat "$OUT/collect.log"
+echo "== gaps.csv"; cat "$OUT/gaps.csv" 2>/dev/null || echo "(none)"
+echo "== checks"
+python3 -I "$HERE/resume_check.py" "$OUT" "$SNAP"
+echo "== curl processes left in container: $(sudo docker exec postfiatd pgrep -c curl || true)"
+$ txmix/resume_drill.sh <tmpdir>/drill
+OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-23T17:15:40Z
+== start 1 (window 8 min)
+== SIGTERM pid 3971570 after 120s
+rows at SIGTERM: tx=13 ledgers=40 gaps=0 
+== start 2 (same command, after 30s down)
+== SIGKILL pid 3975247 after 90s
+txmix/resume_drill.sh: line 39: 3975247 Killed                  python3 -I "$HERE/collect_tx.py" --out "$OUT" --log "$OUT/collect.log" --hours "$HOURS" --sample-interval 60 > /dev/null
+exit status 137
+rows at SIGKILL: tx=25 ledgers=79 gaps=0 
+== start 3 (same command, after 30s down), runs to window end
+rows at END: tx=52 ledgers=158 gaps=0 
+== collect.log
+2026-10-23T17:15:40Z OS: Ubuntu 22.04.5 LTS | kernel 5.15.0-198-generic | python 3.10.12
+2026-10-23T17:15:40Z node: build 1.0.9 state full complete_ledgers 7418349-7419040
+2026-10-23T17:15:40Z WINDOW START 2026-10-23T17:15:40Z -> 2026-10-23T17:23:40Z at ledger 7419040, rate <= 1.0 req/s
+2026-10-23T17:17:40Z STOP (signal) requests this run=103
+2026-10-23T17:17:40Z SUMMARY window 2026-10-23T17:15:40Z -> 2026-10-23T17:23:40Z ledgers 7419040-7419079 fetched=40 tx_rows=13 gaps=0
+2026-10-23T17:18:11Z OS: Ubuntu 22.04.5 LTS | kernel 5.15.0-198-generic | python 3.10.12
+2026-10-23T17:18:11Z node: build 1.0.9 state full complete_ledgers 7418349-7419089
+2026-10-23T17:18:11Z RESUME at ledger 7419080 (window 2026-10-23T17:15:40Z -> 2026-10-23T17:23:40Z, start seq 7419040, behind by 10)
+2026-10-23T17:20:10Z OS: Ubuntu 22.04.5 LTS | kernel 5.15.0-198-generic | python 3.10.12
+2026-10-23T17:20:11Z node: build 1.0.9 state full complete_ledgers 7418349-7419129
+2026-10-23T17:20:11Z RESUME at ledger 7419119 (window 2026-10-23T17:15:40Z -> 2026-10-23T17:23:40Z, start seq 7419040, behind by 11)
+2026-10-23T17:23:40Z STOP (window end reached) requests this run=197
+2026-10-23T17:23:40Z SUMMARY window 2026-10-23T17:15:40Z -> 2026-10-23T17:23:40Z ledgers 7419040-7419197 fetched=158 tx_rows=52 gaps=0
+== gaps.csv
+(none)
+== checks
+PASS 1 WINDOW START + 2 RESUME lines, same window: WINDOW=[('2026-10-23T17:15:40Z', '2026-10-23T17:23:40Z')] RESUME=[('2026-10-23T17:15:40Z', '2026-10-23T17:23:40Z'), ('2026-10-23T17:15:40Z', '2026-10-23T17:23:40Z')]
+INFO term snapshot: torn bytes {'tx': 0, 'ledgers': 0}, orphan tx rows after ledger 7419079: 0
+PASS tx.csv at term (13 rows) is a byte-identical prefix of final (52 rows)
+PASS ledgers.csv at term (40 rows) is a byte-identical prefix of final (158 rows)
+INFO kill snapshot: torn bytes {'tx': 0, 'ledgers': 0}, orphan tx rows after ledger 7419118: 0
+PASS tx.csv at kill (25 rows) is a byte-identical prefix of final (52 rows)
+PASS ledgers.csv at kill (79 rows) is a byte-identical prefix of final (158 rows)
+PASS tx.csv: all 53 lines have 13 columns (bad lines: [])
+PASS ledgers.csv: all 159 lines have 6 columns (bad lines: [])
+PASS tx: 52 rows, 52 unique tx_hash
+PASS ledgers: 158 rows, unique and increasing
+PASS ledgers 7419040-7419197: 0 missing, gaps.csv lists 0
+PASS txn_count matches tx.csv rows for all 158 ledgers, no tx rows outside ledgers.csv (bad: [])
+RESULT: PASS
+== curl processes left in container: 0
+exit 0

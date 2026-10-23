@@ -1,0 +1,41 @@
+OS: Ubuntu 22.04.5 LTS | 2026-10-23T17:14:52Z
+== negative control: copy with every ledger_hash altered (script below), same crosscheck must FAIL with exit 1
+"""Negative control: copy of the collected data with every ledger_hash's last hex digit changed."""
+import csv
+import sys
+src, dst = sys.argv[1], sys.argv[2]
+with open(f"{src}/ledgers.csv", newline="") as f:
+    rows = list(csv.DictReader(f))
+for r in rows:
+    h = r["ledger_hash"]
+    r["ledger_hash"] = h[:-1] + ("0" if h[-1] != "0" else "1")
+with open(f"{dst}/ledgers.csv", "w", newline="") as f:
+    w = csv.DictWriter(f, rows[0].keys())
+    w.writeheader()
+    w.writerows(rows)
+print(f"tampered {len(rows)} ledger hashes")
+tampered 28561 ledger hashes
+$ python3 txmix/crosscheck_tx.py --data <tampered copy> --count 5
+node complete range 7418348-7419024; collected ledgers still held: 667 of 28561
+ledger_index,hash_match,csv_txn_count,fresh_txn_count,tx_rows,tx_hashes_match,result
+Traceback (most recent call last):
+  File "~/work/pft-ledger-stats/txmix/crosscheck_tx.py", line 90, in <module>
+    sys.exit(main())
+  File "~/work/pft-ledger-stats/txmix/crosscheck_tx.py", line 75, in main
+    fresh = rpc.call("ledger", {"ledger_index": i, "transactions": True, "expand": True})["ledger"]
+  File "~/work/pft-ledger-stats/txmix/collect_tx.py", line 95, in call
+    raise LookupError(result.get("error", "unknown"))
+LookupError: lgrNotFound
+exit 1
+== re-run 2026-10-23T17:15:21Z after fix: crosscheck now skips (and logs) a ledger that complete_ledgers lists but the node no longer serves (lgrNotFound at the online_delete edge, see traceback above) and draws another
+tampered 28561 ledger hashes
+$ python3 txmix/crosscheck_tx.py --data <tampered copy> --count 5
+node complete range 7418349-7419034; collected ledgers still held: 666 of 28561
+ledger_index,hash_match,csv_txn_count,fresh_txn_count,tx_rows,tx_hashes_match,result
+7418405,False,1,1,1,True,MISMATCH
+7419001,False,3,3,3,True,MISMATCH
+7418558,False,1,1,1,True,MISMATCH
+7418513,False,2,2,2,True,MISMATCH
+7418518,False,5,5,5,True,MISMATCH
+CROSSCHECK FAIL: 0/5 ledgers match
+exit 1

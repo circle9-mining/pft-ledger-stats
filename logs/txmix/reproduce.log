@@ -1,0 +1,24 @@
+OS: Ubuntu 22.04.5 LTS | 2026-10-23T17:17:11Z
+$ cat reproduce_txmix.sh
+#!/usr/bin/env bash
+# Rebuild REPORT.md from the published .gz files only and compare with the committed report.
+set -euo pipefail
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+cp data/txmix/window.json "$T/state.json"
+for f in data/txmix/*.gz; do gunzip -c "$f" > "$T/$(basename "$f" .gz)"; echo "unpacked $f ($(wc -l < "$T/$(basename "$f" .gz)") lines)"; done
+.venv/bin/python txmix/analyze_tx.py --data "$T" --out "$T/report" --no-charts
+if diff <(grep -v '^!\[' txmix/report/REPORT.md) <(grep -v '^!\[' "$T/report/REPORT.md"); then
+  echo "REPORT.md identical (chart image lines excluded: --no-charts)"
+else
+  echo "REPORT.md DIFFERS"; exit 1
+fi
+$ bash reproduce_txmix.sh
+unpacked data/txmix/ledgers.csv.gz (28562 lines)
+unpacked data/txmix/samples.jsonl.gz (144 lines)
+unpacked data/txmix/tx.csv.gz (9891 lines)
+ledgers 28561 range 7390454-7419014 missing_in_range 0 gaps.csv 0
+tx 9890 (raw 9890, dupes 0) types 3 accounts 46 gini 0.266 top10 33.0%
+fees p50 10 p90 10 p99 10 max 12 above_10x 0 base 10
+wrote <tmp>/report/REPORT.md
+REPORT.md identical (chart image lines excluded: --no-charts)
+exit 0

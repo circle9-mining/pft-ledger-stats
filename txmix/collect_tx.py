@@ -182,6 +182,43 @@ def last_index(path):
     return last
 
 
+def drop_torn_tail(path):
+    """Cut a partial last line (a kill during an append) so resumed rows start on a fresh line.
+
+    Returns the number of bytes removed (0 if the file is missing, empty or ends with a newline).
+    """
+    if not os.path.exists(path) or os.path.getsize(path) == 0:
+        return 0
+    with open(path, "rb+") as fh:
+        data = fh.read()
+        if data.endswith(b"\n"):
+            return 0
+        keep = data.rfind(b"\n") + 1
+        fh.truncate(keep)
+        return len(data) - keep
+
+
+def drop_orphan_tx(path, done):
+    """Cut trailing tx.csv rows whose ledger_index > done (written before a kill, ledger row missing).
+
+    The collector appends a ledger's tx rows before its ledgers.csv row, so after a kill between
+    the two appends those rows would be written again on resume. Returns the number of rows removed.
+    """
+    if not os.path.exists(path):
+        return 0
+    with open(path, "rb+") as fh:
+        lines = fh.read().split(b"\n")
+        if lines and lines[-1] == b"":
+            lines.pop()
+        keep = len(lines)
+        while keep > 1 and int(lines[keep - 1].split(b",", 1)[0]) > done:
+            keep -= 1
+        if keep == len(lines):
+            return 0
+        fh.truncate(sum(len(x) + 1 for x in lines[:keep]))
+        return len(lines) - keep
+
+
 def count_rows(path):
     if not os.path.exists(path):
         return 0
@@ -240,8 +277,18 @@ def main(argv=None):
     if os.path.exists(state_path):
         with open(state_path) as fh:
             state = json.load(fh)
+    if state:
+        for path in (tx_csv, ledgers_csv, gaps_csv):
+            torn = drop_torn_tail(path)
+            if torn:
+                log(lf, f"RESUME dropped torn last line of {os.path.basename(path)} ({torn} bytes)")
     done = max(x for x in (last_index(ledgers_csv), last_index(gaps_csv), -1) if x is not None)
-    if state and done >= 0:
+    if state:
+        # a restart before the first ledger row resumes at the window's start seq, same window
+        done = max(done, state["start_seq"] - 1)
+        orphans = drop_orphan_tx(tx_csv, done)
+        if orphans:
+            log(lf, f"RESUME dropped {orphans} tx.csv rows after ledger {done} (no ledgers.csv row yet)")
         nxt = done + 1
         log(lf, f"RESUME at ledger {nxt} (window {state['start_utc']} -> {state['end_utc']}, "
                 f"start seq {state['start_seq']}, behind by {validated - nxt + 1})")

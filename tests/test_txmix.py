@@ -5,6 +5,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "txmix"))
 
+import collect_tx  # noqa: E402
 from analyze_tx import analyze, dedupe, gini, main, percentile  # noqa: E402
 from collect_tx import accounts_created, delivered_class  # noqa: E402
 
@@ -130,6 +131,126 @@ class TestEndToEnd(unittest.TestCase):
             self.assertIn("Gini of tx count per sender: **0.668**", report)
             for c in ("types_by_hour.png", "fees.png", "lorenz.png"):
                 self.assertGreater(os.path.getsize(os.path.join(out, "charts", c)), 1000)
+
+
+class FakeRpc:
+    """Serves server_info/ledger for ledgers 100..; stops the collector after ledger `stop_at`."""
+
+    def __init__(self, stop_at):
+        self.stop_at = stop_at
+        self.count = 0
+
+    def __call__(self, *_args):
+        return self
+
+    def call(self, method, params=None):
+        self.count += 1
+        if method == "server_info":
+            return {"info": {"validated_ledger": {"seq": 200}, "server_state": "full"}}
+        i = params["ledger_index"]
+        if i >= self.stop_at:
+            collect_tx._stop = True
+        txs = [{"hash": f"T{i}-{k}", "TransactionType": "Payment", "Fee": "10", "Account": f"r{k}",
+                "metaData": {"TransactionIndex": k, "TransactionResult": "tesSUCCESS"}} for k in range(2)]
+        return {"ledger": {"ledger_index": str(i), "ledger_hash": f"H{i}", "close_time": 1000 + i,
+                           "transactions": txs}}
+
+
+class TestResume(unittest.TestCase):
+    """Interrupt/resume of collect_tx.py on the same --out directory (transport-free)."""
+
+    def run_collector(self, out, stop_at, start=None):
+        collect_tx._stop = False
+        orig = collect_tx.Rpc
+        collect_tx.Rpc = FakeRpc(stop_at)
+        try:
+            argv = ["--out", out, "--log", os.path.join(out, "collect.log"), "--hours", "1"]
+            self.assertEqual(collect_tx.main(argv + (["--start", str(start)] if start else [])), 0)
+        finally:
+            collect_tx.Rpc = orig
+            collect_tx._stop = False
+
+    @staticmethod
+    def lines(out, name):
+        with open(os.path.join(out, name)) as f:
+            return f.read().splitlines()
+
+    def test_resume_after_kill_between_appends_and_torn_rows(self):
+        with tempfile.TemporaryDirectory() as out:
+            self.run_collector(out, stop_at=102, start=100)  # ledgers 100-102, 2 tx each
+            before_tx, before_led = self.lines(out, "tx.csv"), self.lines(out, "ledgers.csv")
+            self.assertEqual((len(before_tx), len(before_led)), (7, 4))
+            # killed after ledger 103's tx rows were appended (one torn) but before its ledgers.csv row,
+            # and with a torn ledgers.csv tail
+            with open(os.path.join(out, "tx.csv"), "a") as f:
+                f.write("103,1103,x,0,T103-0,Payment,tesSUCCESS,10,aa,n,0,none,0\n103,1103,x,1,T10")
+            with open(os.path.join(out, "ledgers.csv"), "a") as f:
+                f.write("103,H1")
+            self.run_collector(out, stop_at=104)
+            tx, led = self.lines(out, "tx.csv"), self.lines(out, "ledgers.csv")
+            self.assertEqual(tx[:7], before_tx)  # nothing lost or rewritten
+            self.assertEqual(led[:4], before_led)
+            hashes = [r.split(",")[4] for r in tx[1:]]
+            self.assertEqual(hashes, [f"T{i}-{k}" for i in range(100, 105) for k in range(2)])  # no dupes
+            self.assertEqual([int(r.split(",")[0]) for r in led[1:]], list(range(100, 105)))  # contiguous
+            log = "\n".join(self.lines(out, "collect.log"))
+            self.assertIn("RESUME dropped torn last line of tx.csv (16 bytes)", log)
+            self.assertIn("RESUME dropped torn last line of ledgers.csv (6 bytes)", log)
+            self.assertIn("RESUME dropped 1 tx.csv rows after ledger 102", log)
+            self.assertIn("RESUME at ledger 103", log)
+            self.assertEqual(log.count("WINDOW START"), 1)
+
+    def test_restart_before_first_ledger_keeps_window(self):
+        with tempfile.TemporaryDirectory() as out:
+            self.run_collector(out, stop_at=100, start=100)
+            os.remove(os.path.join(out, "ledgers.csv"))  # killed before the first ledgers.csv row
+            state = open(os.path.join(out, "state.json")).read()
+            self.run_collector(out, stop_at=101)
+            self.assertEqual(open(os.path.join(out, "state.json")).read(), state)
+            hashes = [r.split(",")[4] for r in self.lines(out, "tx.csv")[1:]]
+            self.assertEqual(hashes, ["T100-0", "T100-1", "T101-0", "T101-1"])
+
+
+class TestCrosscheckSkip(unittest.TestCase):
+    """A ledger listed in complete_ledgers but answered with lgrNotFound is skipped, not a mismatch."""
+
+    def test_unserved_ledger_skipped(self):
+        import contextlib
+        import io
+
+        import crosscheck_tx
+
+        class Rpc:
+            def __init__(self, *_args):
+                pass
+
+            def call(self, method, params=None):
+                if method == "server_info":
+                    return {"info": {"complete_ledgers": "100-110"}}
+                if params["ledger_index"] == 100:
+                    raise LookupError("lgrNotFound")
+                i = params["ledger_index"]
+                return {"ledger": {"ledger_hash": f"H{i}", "transactions": [{"hash": f"T{i}"}]}}
+
+        with tempfile.TemporaryDirectory() as d:
+            with open(os.path.join(d, "ledgers.csv"), "w") as f:
+                f.write("ledger_index,ledger_hash,txn_count\n")
+                f.writelines(f"{i},H{i},1\n" for i in range(100, 103))
+            with open(os.path.join(d, "tx.csv"), "w") as f:
+                f.write("ledger_index,tx_hash\n")
+                f.writelines(f"{i},T{i}\n" for i in range(100, 103))
+            orig, crosscheck_tx.Rpc = crosscheck_tx.Rpc, Rpc
+            try:
+                out = io.StringIO()
+                with contextlib.redirect_stdout(out):
+                    rc2 = crosscheck_tx.main(["--data", d, "--count", "2", "--seed", "1"])
+                with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                    rc3 = crosscheck_tx.main(["--data", d, "--count", "3", "--seed", "1"])
+            finally:
+                crosscheck_tx.Rpc = orig
+            self.assertEqual(rc2, 0)
+            self.assertIn("CROSSCHECK PASS: 2/2", out.getvalue())
+            self.assertEqual(rc3, 2)  # only 2 of 3 can be fetched -> "too few", never a false PASS
 
 
 if __name__ == "__main__":

@@ -1,0 +1,27 @@
+OS: Ubuntu 22.04.5 LTS | Python 3.10.12 | 2026-10-23T17:16:38Z
+$ .venv/bin/python -m pytest -v tests/test_txmix.py
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.1.1, pluggy-1.7.0 -- ~/work/pft-ledger-stats/.venv/bin/python
+rootdir: ~/work/pft-ledger-stats
+configfile: pyproject.toml
+collecting ... collected 13 items
+
+tests/test_txmix.py::TestPrimitives::test_collector_classifiers PASSED   [  7%]
+tests/test_txmix.py::TestPrimitives::test_dedupe_by_hash PASSED          [ 15%]
+tests/test_txmix.py::TestPrimitives::test_gini_known_values PASSED       [ 23%]
+tests/test_txmix.py::TestPrimitives::test_percentile_nearest_rank PASSED [ 30%]
+tests/test_txmix.py::TestPositiveControl::test_accounts_gini_top10 PASSED [ 38%]
+tests/test_txmix.py::TestPositiveControl::test_fees PASSED               [ 46%]
+tests/test_txmix.py::TestPositiveControl::test_memo_multisig_created PASSED [ 53%]
+tests/test_txmix.py::TestPositiveControl::test_mix PASSED                [ 61%]
+tests/test_txmix.py::TestPositiveControl::test_result_classes PASSED     [ 69%]
+tests/test_txmix.py::TestEndToEnd::test_report_written PASSED            [ 76%]
+tests/test_txmix.py::TestResume::test_restart_before_first_ledger_keeps_window PASSED [ 84%]
+tests/test_txmix.py::TestResume::test_resume_after_kill_between_appends_and_torn_rows PASSED [ 92%]
+tests/test_txmix.py::TestCrosscheckSkip::test_unserved_ledger_skipped PASSED [100%]
+
+============================== 13 passed in 2.95s ==============================
+$ .venv/bin/ruff check txmix tests
+All checks passed!
+$ shellcheck txmix/resume_drill.sh
+shellcheck clean

@@ -279,6 +279,9 @@ def render(a, meta):
             cells.append(str(sum(v for t, v in c.items() if t not in top)))
         w(f"| {h[5:]}h | {sum(c.values())} | " + " | ".join(cells) + " |")
     w("")
+    if any(t[14:19] != "00:00" for t in (meta["start"], meta["end"])):
+        w(f"The first and last rows are partial hours: the window runs {meta['start'][11:16]} to "
+          f"{meta['end'][11:16]} UTC, so compare per-hour counts only between the full hours in between.\n")
 
     w("## Result codes\n")
     fails = sum(v for t in a["classes"] for k, v in a["classes"][t].items() if k != "tes")

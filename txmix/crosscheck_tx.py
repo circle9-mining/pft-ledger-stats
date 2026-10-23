@@ -67,12 +67,21 @@ def main(argv=None):
     with_tx = [i for i in held if int(ledgers[i]["txn_count"]) > 0]
     pool = with_tx if len(with_tx) >= args.count else held
     rng = random.Random(args.seed)
-    sample = sorted(rng.sample(pool, args.count))
+    order = rng.sample(pool, len(pool))
 
-    bad = 0
+    bad = done = 0
     print("ledger_index,hash_match,csv_txn_count,fresh_txn_count,tx_rows,tx_hashes_match,result")
-    for i in sample:
-        fresh = rpc.call("ledger", {"ledger_index": i, "transactions": True, "expand": True})["ledger"]
+    for i in order:
+        if done == args.count:
+            break
+        try:
+            fresh = rpc.call("ledger", {"ledger_index": i, "transactions": True, "expand": True})["ledger"]
+        except LookupError as e:
+            # complete_ledgers can still list a ledger that online_delete is removing (seen at the
+            # low edge): not served is not a mismatch, so draw another ledger instead
+            print(f"{i},,,,,,SKIP ({e}: listed in complete_ledgers but not served)")
+            continue
+        done += 1
         fh = {t.get("hash") for t in fresh.get("transactions") or []}
         ok_hash = fresh["ledger_hash"] == ledgers[i]["ledger_hash"]
         ok_n = int(ledgers[i]["txn_count"]) == len(fh)
@@ -82,6 +91,9 @@ def main(argv=None):
         bad += not ok
         print(f"{i},{ok_hash},{ledgers[i]['txn_count']},{len(fh)},{len(tx_by[i])},{ok_set},"
               f"{'MATCH' if ok else 'MISMATCH'}")
+    if done < args.count:
+        print(f"only {done} ledgers could be fetched", file=sys.stderr)
+        return 2
     print(f"CROSSCHECK {'PASS' if not bad else 'FAIL'}: {args.count - bad}/{args.count} ledgers match")
     return 1 if bad else 0
 
