@@ -177,10 +177,27 @@ def snapshot_fields(command, res):
     return {}
 
 
+def drop_torn_tail(path):
+    """Cut a partial last line (a kill during a buffer flush) so resumed rows start on a fresh line.
+
+    Returns the number of bytes removed (0 if the file is missing, empty or ends with a newline).
+    """
+    if not os.path.exists(path) or os.path.getsize(path) == 0:
+        return 0
+    with open(path, "rb+") as f:
+        data = f.read()
+        if data.endswith(b"\n"):
+            return 0
+        keep = data.rfind(b"\n") + 1
+        f.truncate(keep)
+        return len(data) - keep
+
+
 class Csv:
     """Append-only CSV with a header written once."""
 
     def __init__(self, path, fields):
+        self.torn = drop_torn_tail(path)
         new = not os.path.exists(path) or os.path.getsize(path) == 0
         self.f = open(path, "a", newline="")
         self.w = csv.DictWriter(self.f, fieldnames=fields, extrasaction="ignore")
@@ -223,6 +240,9 @@ class Collector:
         self.led = Csv(os.path.join(out, "ledgers.csv"), LEDGER_FIELDS)
         self.man = Csv(os.path.join(out, "manifests.csv"), MANIFEST_FIELDS)
         self.gaps = Csv(os.path.join(out, "gaps.csv"), GAP_FIELDS)
+        for c in (self.val, self.led, self.man, self.gaps):
+            if c.torn:
+                self.log(f"RESUME dropped torn last line of {os.path.basename(c.f.name)} ({c.torn} bytes)")
         self.snap = open(os.path.join(out, "snapshots.jsonl"), "a")
         self.last_ledger = last_ledger_index(os.path.join(out, "ledgers.csv"))
         self.master_of = {}    # signing key -> master key (from stream or manifest)
@@ -301,9 +321,9 @@ class Collector:
                              "reason": reason})
             self.log(f"GAP ledgers {self.last_ledger + 1}-{idx - 1} ({idx - 1 - self.last_ledger}) {reason}")
             self.gaps.flush()
-        self.reconnected = False
         if self.last_ledger is not None and idx <= self.last_ledger:
             return  # already recorded (stream replays the current ledger on subscribe)
+        self.reconnected = False  # only after the first NEW ledger, so a replay can't relabel the gap
         self.last_ledger = idx
         self.led.write({"ledger_index": idx, "ledger_hash": m.get("ledger_hash", ""),
                         "ledger_time": m.get("ledger_time", ""),

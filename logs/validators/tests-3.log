@@ -1,0 +1,107 @@
+OS: Ubuntu 22.04.5 LTS | 2026-10-23T16:19:09Z
+== note: first run of the new TestResume test (not captured) failed on the gap label: 'GAP ledgers 4-5 (2) skipped in stream' -> fixed in collect_validations.py on_ledger (reconnected reset after the replay check)
+== .venv/bin/ruff check validators tests
+All checks passed!
+== .venv/bin/python -m pytest -v tests/
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.1.1, pluggy-1.7.0 -- ~/work/pft-ledger-stats/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: ~/work/pft-ledger-stats
+configfile: pyproject.toml
+collecting ... collected 39 items
+
+tests/test_crosscheck.py::TestRanges::test_held PASSED                   [  2%]
+tests/test_crosscheck.py::TestRanges::test_parse PASSED                  [  5%]
+tests/test_stats.py::TestPercentile::test_errors PASSED                  [  7%]
+tests/test_stats.py::TestPercentile::test_matches_linear_interpolation PASSED [ 10%]
+tests/test_stats.py::TestPercentile::test_summarize PASSED               [ 12%]
+tests/test_stats.py::TestPercentile::test_unsorted_and_single PASSED     [ 15%]
+tests/test_stats.py::TestIntervals::test_gaps PASSED                     [ 17%]
+tests/test_stats.py::TestIntervals::test_intervals_skip_gap PASSED       [ 20%]
+tests/test_stats.py::TestIntervals::test_stalls PASSED                   [ 23%]
+tests/test_stats.py::TestIntervals::test_stalls_empty PASSED             [ 25%]
+tests/test_stats.py::TestIntervals::test_stalls_floor PASSED             [ 28%]
+tests/test_stats.py::TestHourlyAndBurn::test_by_hour_and_burn PASSED     [ 30%]
+tests/test_stats.py::TestHourlyAndBurn::test_quorum_margin PASSED        [ 33%]
+tests/test_txmix.py::TestPrimitives::test_collector_classifiers PASSED   [ 35%]
+tests/test_txmix.py::TestPrimitives::test_dedupe_by_hash PASSED          [ 38%]
+tests/test_txmix.py::TestPrimitives::test_gini_known_values PASSED       [ 41%]
+tests/test_txmix.py::TestPrimitives::test_percentile_nearest_rank PASSED [ 43%]
+tests/test_txmix.py::TestPositiveControl::test_accounts_gini_top10 PASSED [ 46%]
+tests/test_txmix.py::TestPositiveControl::test_fees PASSED               [ 48%]
+tests/test_txmix.py::TestPositiveControl::test_memo_multisig_created PASSED [ 51%]
+tests/test_txmix.py::TestPositiveControl::test_mix PASSED                [ 53%]
+tests/test_txmix.py::TestPositiveControl::test_result_classes PASSED     [ 56%]
+tests/test_txmix.py::TestEndToEnd::test_report_written PASSED            [ 58%]
+tests/test_validators.py::TestParticipation::test_active_participation_late_joiner PASSED [ 61%]
+tests/test_validators.py::TestParticipation::test_churn PASSED           [ 64%]
+tests/test_validators.py::TestParticipation::test_delays PASSED          [ 66%]
+tests/test_validators.py::TestParticipation::test_full_participation_and_dedupe PASSED [ 69%]
+tests/test_validators.py::TestParticipation::test_longest_streak PASSED  [ 71%]
+tests/test_validators.py::TestParticipation::test_non_canonical_and_churn PASSED [ 74%]
+tests/test_validators.py::TestParticipation::test_positive_control_10_of_100 PASSED [ 76%]
+tests/test_validators.py::TestParticipation::test_quorum_per_ledger PASSED [ 79%]
+tests/test_validators.py::TestParticipation::test_report_render PASSED   [ 82%]
+tests/test_validators.py::TestParticipation::test_trusted_never_seen PASSED [ 84%]
+tests/test_validators.py::TestParticipation::test_unl_changes PASSED     [ 87%]
+tests/test_validators.py::TestParticipation::test_unl_split PASSED       [ 89%]
+tests/test_validators.py::TestParticipation::test_unl_split_order PASSED [ 92%]
+tests/test_validators.py::TestCrosscheckCompare::test_each_field_mismatch_fails PASSED [ 94%]
+tests/test_validators.py::TestCrosscheckCompare::test_match PASSED       [ 97%]
+tests/test_validators.py::TestResume::test_resume_keeps_rows_logs_gap_no_duplicates PASSED [100%]
+
+============================== 39 passed in 2.53s ==============================
+== TestResume source
+class TestResume(unittest.TestCase):
+    """Interrupt/resume of the collector on the same --out directory (transport-free)."""
+
+    @staticmethod
+    def session(out, msgs, logs):
+        col = Collector(out, lambda _obj: None, logs.append)
+        col.on_connect()
+        for m in msgs:
+            col.handle(m)
+        col.flush()
+        return col
+
+    @staticmethod
+    def led(i):
+        return {"type": "ledgerClosed", "ledger_index": i, "ledger_hash": f"H{i}",
+                "ledger_time": 1000 + 3 * i}
+
+    @staticmethod
+    def val(i, k):
+        return {"type": "validationReceived", "ledger_index": str(i), "ledger_hash": f"H{i}",
+                "validation_public_key": f"n9{k}", "master_key": f"nH{k}", "signing_time": 1001 + 3 * i}
+
+    def rows(self, out, name):
+        with open(os.path.join(out, name)) as f:
+            return f.read().splitlines()
+
+    def test_resume_keeps_rows_logs_gap_no_duplicates(self):
+        with tempfile.TemporaryDirectory() as out:
+            logs = []
+            first = [m for i in (1, 2, 3) for m in (self.led(i), self.val(i, "A"), self.val(i, "B"))]
+            self.session(out, first, logs)
+            before = {n: self.rows(out, n) for n in ("validations.csv", "ledgers.csv")}
+            # killed mid-flush: a torn half row at the end of validations.csv
+            with open(os.path.join(out, "validations.csv"), "a") as f:
+                f.write("4,H4,n9A,10")
+            # restart: the ledger stream replays ledger 3, then 4-5 were missed while down
+            second = [self.led(3), self.led(6), self.val(6, "A"), self.val(6, "B")]
+            col = self.session(out, second, logs)
+            self.assertEqual(col.last_ledger, 6)
+            val, led = self.rows(out, "validations.csv"), self.rows(out, "ledgers.csv")
+            self.assertEqual(val[:len(before["validations.csv"])], before["validations.csv"])  # nothing lost
+            self.assertEqual(led[:len(before["ledgers.csv"])], before["ledgers.csv"])
+            self.assertEqual([r.split(",")[0] for r in led[1:]], ["1", "2", "3", "6"])  # replay of 3 ignored
+            self.assertEqual(len(val) - 1, 8)  # 3x2 + 1x2, torn row dropped
+            self.assertEqual(len(set(val)), len(val))
+            self.assertFalse(any(r.startswith("4,") for r in val))
+            gaps = self.rows(out, "gaps.csv")
+            self.assertEqual(gaps[1].split(",")[:3], ["4", "5", "2"])
+            self.assertIn("RESUME dropped torn last line of validations.csv (11 bytes)", logs)
+            self.assertIn("GAP ledgers 4-5 (2) reconnect/restart", logs)
+
+
+if __name__ == "__main__":

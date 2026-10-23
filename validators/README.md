@@ -96,6 +96,28 @@ key that never appears, quorum shortfall per ledger, signing delay/receive lag, 
 order, UNL changes between snapshots, churn margins, a late joiner's active %, the rendered
 Markdown table row and the cross-check comparison (every field mismatch must fail).
 
+`TestResume` runs two collector sessions on one `--out` directory without a node: a torn half
+row is left after the first (as a kill during a flush would leave it), and the second session
+gets a replay of the last ledger and then a 2-ledger jump. It asserts the first session's rows
+are an unchanged prefix, the replayed ledger is not written twice, the torn row is dropped
+(`RESUME dropped torn last line ...` in the log), and the gap is written to `gaps.csv` with the reason
+`reconnect/restart`. The first run of this test found a labelling bug, now fixed: a replayed
+ledger reset the reconnect flag, so the gap was labelled `skipped in stream`.
+
+### Resume drill (live node)
+
+The published 24h run had no restart (0 gaps), so it doesn't exercise resume.
+`resume_drill.sh <new-dir>` does: it runs a real 8-minute window on the local node with the
+same allowlisted commands, sends SIGTERM after 120 s, restarts after 30 s down, sends SIGKILL
+90 s later, restarts again and lets the window finish. `resume_check.py` then checks:
+1 `WINDOW` + 2 `RESUME` lines for the same window; each CSV as saved at each interrupt is a
+byte-identical prefix of the final file; every line has the right column count; no duplicate
+`(ledger_index, ledger_hash, signing_key)` and no duplicate ledger; and every missing ledger
+falls in a `gaps.csv` range. Logs: `logs/validators/resume-drill-1.log` (collector before the
+two fixes above) and `resume-drill-2.log` (final code). Ledgers that close while the collector
+is down are **not** backfilled: the streams carry no history. They are recorded as
+`reconnect/restart` gaps, and the analyzer leaves them out of the observed set.
+
 ## Limits
 
 - **One node's view.** The node only sees validations that are relayed to it. A missed ledger

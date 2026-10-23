@@ -9,6 +9,7 @@ import json  # noqa: E402
 import tempfile  # noqa: E402
 
 from analyze_validations import analyze, churn, longest_streak, render, unl_changes, unl_split  # noqa: E402
+from collect_validations import Collector  # noqa: E402
 from crosscheck_validations import compare  # noqa: E402
 
 A, B, C = "nHvalidatorA", "nHvalidatorB", "nHvalidatorC"
@@ -143,6 +144,58 @@ class TestCrosscheckCompare(unittest.TestCase):
                     {**good, "transactions": ["t1"]}):
             self.assertFalse(compare(self.ROW, 30, bad)[0], bad)
         self.assertFalse(compare(self.ROW, 0, good)[0], "no canonical validation recorded")
+
+
+class TestResume(unittest.TestCase):
+    """Interrupt/resume of the collector on the same --out directory (transport-free)."""
+
+    @staticmethod
+    def session(out, msgs, logs):
+        col = Collector(out, lambda _obj: None, logs.append)
+        col.on_connect()
+        for m in msgs:
+            col.handle(m)
+        col.flush()
+        return col
+
+    @staticmethod
+    def led(i):
+        return {"type": "ledgerClosed", "ledger_index": i, "ledger_hash": f"H{i}",
+                "ledger_time": 1000 + 3 * i}
+
+    @staticmethod
+    def val(i, k):
+        return {"type": "validationReceived", "ledger_index": str(i), "ledger_hash": f"H{i}",
+                "validation_public_key": f"n9{k}", "master_key": f"nH{k}", "signing_time": 1001 + 3 * i}
+
+    def rows(self, out, name):
+        with open(os.path.join(out, name)) as f:
+            return f.read().splitlines()
+
+    def test_resume_keeps_rows_logs_gap_no_duplicates(self):
+        with tempfile.TemporaryDirectory() as out:
+            logs = []
+            first = [m for i in (1, 2, 3) for m in (self.led(i), self.val(i, "A"), self.val(i, "B"))]
+            self.session(out, first, logs)
+            before = {n: self.rows(out, n) for n in ("validations.csv", "ledgers.csv")}
+            # killed mid-flush: a torn half row at the end of validations.csv
+            with open(os.path.join(out, "validations.csv"), "a") as f:
+                f.write("4,H4,n9A,10")
+            # restart: the ledger stream replays ledger 3, then 4-5 were missed while down
+            second = [self.led(3), self.led(6), self.val(6, "A"), self.val(6, "B")]
+            col = self.session(out, second, logs)
+            self.assertEqual(col.last_ledger, 6)
+            val, led = self.rows(out, "validations.csv"), self.rows(out, "ledgers.csv")
+            self.assertEqual(val[:len(before["validations.csv"])], before["validations.csv"])  # nothing lost
+            self.assertEqual(led[:len(before["ledgers.csv"])], before["ledgers.csv"])
+            self.assertEqual([r.split(",")[0] for r in led[1:]], ["1", "2", "3", "6"])  # replay of 3 ignored
+            self.assertEqual(len(val) - 1, 8)  # 3x2 + 1x2, torn row dropped
+            self.assertEqual(len(set(val)), len(val))
+            self.assertFalse(any(r.startswith("4,") for r in val))
+            gaps = self.rows(out, "gaps.csv")
+            self.assertEqual(gaps[1].split(",")[:3], ["4", "5", "2"])
+            self.assertIn("RESUME dropped torn last line of validations.csv (11 bytes)", logs)
+            self.assertIn("GAP ledgers 4-5 (2) reconnect/restart", logs)
 
 
 if __name__ == "__main__":

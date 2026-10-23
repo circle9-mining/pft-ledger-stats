@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# Resume drill for collect_validations.py: a short real window on the local node, interrupted twice
+# (SIGTERM, then SIGKILL) and restarted with the same command each time. Checks afterwards that
+#   - the restart logged RESUME with the same window as the first WINDOW line,
+#   - rows written before each interrupt are a byte-identical prefix of the final CSVs (nothing lost/rewritten),
+#   - there are no duplicate validations (ledger_index, ledger_hash, signing_key) or ledgers,
+#   - every CSV line parses with the right column count (no torn row after SIGKILL),
+#   - ledgers.csv is contiguous apart from the ranges recorded in gaps.csv,
+#   - no relay process is left running inside the container.
+# Read-only against the node (same allowlisted commands as the 24h run). Usage: resume_drill.sh <outdir>
+set -euo pipefail
+OUT=${1:?usage: resume_drill.sh <outdir>}
+HERE=$(cd "$(dirname "$0")" && pwd)
+MINUTES=${MINUTES:-8}
+[ -e "$OUT" ] && { echo "refusing to reuse existing $OUT"; exit 2; }
+mkdir -p "$OUT"
+SNAP=$(mktemp -d)
+trap 'rm -rf "$SNAP"' EXIT
+
+# shellcheck disable=SC1091
+echo "OS: $(. /etc/os-release && echo "$PRETTY_NAME") | python: $(python3 -V 2>&1) | $(date -u +%FT%TZ)"
+HOURS=$(python3 -c "print($MINUTES/60)")
+run() { python3 -I "$HERE/collect_validations.py" --out "$OUT" --hours "$HOURS" & PID=$!; }
+counts() {
+  for f in validations ledgers manifests gaps; do
+    printf '%s=%s ' "$f" "$(($(wc -l <"$OUT/$f.csv") - 1))"
+  done; echo
+}
+snap() { for f in validations ledgers manifests gaps; do cp "$OUT/$f.csv" "$SNAP/$1-$f.csv"; done; }
+
+echo "== start 1 (window ${MINUTES} min)"; run; sleep 120
+echo "== SIGTERM pid $PID after 120s"; kill -TERM "$PID"; wait "$PID" || echo "exit status $?"
+snap term; echo "rows at SIGTERM: $(counts)"
+sleep 30
+echo "== start 2 (same command, after 30s down)"; run; sleep 90
+echo "== SIGKILL pid $PID after 90s"; kill -KILL "$PID"; wait "$PID" || echo "exit status $?"
+snap kill; echo "rows at SIGKILL: $(counts)"
+sleep 30
+echo "== start 3 (same command, after 30s down), runs to window end"; run; wait "$PID"
+echo "rows at END: $(counts)"
+
+echo "== collect.log"
+cat "$OUT/collect.log"
+echo "== gaps.csv"; cat "$OUT/gaps.csv"
+echo "== checks"
+python3 -I "$HERE/resume_check.py" "$OUT" "$SNAP"
+echo "== relay processes left in container: $(sudo docker exec postfiatd pgrep -fc 'relay 127.0.0.1' || true)"
+== run: validators/resume_drill.sh /tmp/resume-drill-1609
+OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-23T16:09:36Z
+== start 1 (window 8 min)
+== SIGTERM pid 3854860 after 120s
+signal 15
+exit status 1
+rows at SIGTERM: validations=2378 ledgers=39 manifests=61 gaps=0 
+== start 2 (same command, after 30s down)
+== SIGKILL pid 3859425 after 90s
+validators/resume_drill.sh: line 36: 3859425 Killed                  python3 -I "$HERE/collect_validations.py" --out "$OUT" --hours "$HOURS"
+exit status 137
+rows at SIGKILL: validations=4196 ledgers=69 manifests=61 gaps=1 
+== start 3 (same command, after 30s down), runs to window end
+rows at END: validations=8413 ledgers=138 manifests=61 gaps=2 
+== collect.log
+2026-10-23T16:09:36.892Z WINDOW start=2026-10-23T16:09:36Z end=2026-10-23T16:17:36Z container=postfiatd port=6006 commands=manifest,server_info,subscribe,validators
+2026-10-23T16:09:36.892Z connect (remaining 480s, last ledger None)
+2026-10-23T16:09:38.130Z subscribe status=success
+2026-10-23T16:11:36.837Z stopped (signal 15); rerun the same command to resume the window
+2026-10-23T16:12:06.955Z RESUME window 2026-10-23T16:09:36Z -> 2026-10-23T16:17:36Z
+2026-10-23T16:12:06.956Z connect (remaining 330s, last ledger 7417770)
+2026-10-23T16:12:07.150Z subscribe status=success
+2026-10-23T16:12:08.183Z GAP ledgers 7417771-7417780 (10) reconnect/restart
+2026-10-23T16:14:07.046Z RESUME window 2026-10-23T16:09:36Z -> 2026-10-23T16:17:36Z
+2026-10-23T16:14:07.047Z connect (remaining 209s, last ledger 7417810)
+2026-10-23T16:14:07.283Z subscribe status=success
+2026-10-23T16:14:08.829Z GAP ledgers 7417811-7417820 (10) reconnect/restart
+2026-10-23T16:17:36.300Z relay exited rc=124
+2026-10-23T16:17:36.351Z END window 2026-10-23T16:09:36Z -> 2026-10-23T16:17:36Z rows: validations.csv=8413 ledgers.csv=138 manifests.csv=61 gaps.csv=2
+== gaps.csv
+first_missing,last_missing,count,detected_utc,reason
+7417771,7417780,10,2026-10-23T16:12:08.179Z,reconnect/restart
+7417811,7417820,10,2026-10-23T16:14:08.829Z,reconnect/restart
+== checks
+PASS 1 WINDOW + 2 RESUME lines, same window: WINDOW=[('2026-10-23T16:09:36Z', '2026-10-23T16:17:36Z')] RESUME=[('2026-10-23T16:09:36Z', '2026-10-23T16:17:36Z'), ('2026-10-23T16:09:36Z', '2026-10-23T16:17:36Z')]
+PASS validations.csv at term (2378 rows) is a byte-identical prefix of final (8413 rows)
+PASS ledgers.csv at term (39 rows) is a byte-identical prefix of final (138 rows)
+PASS manifests.csv at term (61 rows) is a byte-identical prefix of final (61 rows)
+PASS gaps.csv at term (0 rows) is a byte-identical prefix of final (2 rows)
+PASS validations.csv at kill (4196 rows) is a byte-identical prefix of final (8413 rows)
+PASS ledgers.csv at kill (69 rows) is a byte-identical prefix of final (138 rows)
+PASS manifests.csv at kill (61 rows) is a byte-identical prefix of final (61 rows)
+PASS gaps.csv at kill (1 rows) is a byte-identical prefix of final (2 rows)
+PASS validations.csv: all 8414 lines have 9 columns (bad lines: [])
+PASS ledgers.csv: all 139 lines have 6 columns (bad lines: [])
+PASS manifests.csv: all 62 lines have 6 columns (bad lines: [])
+PASS gaps.csv: all 3 lines have 5 columns (bad lines: [])
+PASS validations: 8413 rows, 8413 unique (ledger_index, ledger_hash, signing_key)
+PASS ledgers: 138 rows, unique and increasing
+PASS ledgers 7417732-7417889: 20 missing, all recorded in gaps.csv (2 ranges, 20 ledgers)
+RESULT: PASS
+== relay processes left in container: 0
