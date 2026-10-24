@@ -1,0 +1,108 @@
+{
+ "accounts": 4331,
+ "balance_drops": {
+  "gini": 0.999685004751895,
+  "max": 96999999999999880,
+  "mean": 23089355799923.547,
+  "median": 14999990.0,
+  "min": 9999832,
+  "p90": 24999938.0,
+  "p99": 626470066010.683,
+  "top100_share": 0.9999900087081102,
+  "top10_share": 0.9948389241441576,
+  "total": 99999999969468888
+ },
+ "holders": {
+  "lines": {
+   "accounts_with_any": 5,
+   "buckets": {
+    "1": 4,
+    "10-49": 0,
+    "2-4": 1,
+    "5-9": 0,
+    "50+": 0
+   },
+   "max_per_account": 4,
+   "median_among_holders": 1.0,
+   "objects": 8
+  },
+  "offers": {
+   "accounts_with_any": 2,
+   "buckets": {
+    "1": 0,
+    "10-49": 1,
+    "2-4": 0,
+    "5-9": 1,
+    "50+": 0
+   },
+   "max_per_account": 41,
+   "median_among_holders": 24.0,
+   "objects": 48
+  },
+  "other": {
+   "accounts_with_any": 147,
+   "buckets": {
+    "1": 106,
+    "10-49": 3,
+    "2-4": 25,
+    "5-9": 13,
+    "50+": 0
+   },
+   "max_per_account": 16,
+   "median_among_holders": 1.0,
+   "objects": 305
+  }
+ },
+ "ledger": {
+  "account_hash": "B0375A49207F7F911234F64B18EF89D1E49A75B28E88CFB30669085339C0D4B6",
+  "close_time_iso": "2026-10-24T02:14:20Z",
+  "ledger_hash": "8317F239C503E9097A15B6651CCEA99CDEE1A8F35F6E6E599C30B8A4AF08F953",
+  "ledger_index": 7429722,
+  "objects_paged": 4850,
+  "total_coins": 99999999969468888
+ },
+ "object_count_check": {
+  "lines_in_file": 4850,
+  "objects_paged": 4850,
+  "ok": true,
+  "sum_of_types": 4850
+ },
+ "object_counts": {
+  "AccountRoot": 4331,
+  "Amendments": 1,
+  "DirectoryNode": 52,
+  "FeeSettings": 1,
+  "LedgerHashes": 115,
+  "NFTokenOffer": 45,
+  "NFTokenPage": 298,
+  "Offer": 3,
+  "RippleState": 4
+ },
+ "owner_count_buckets": {
+  "0": 4185,
+  "1": 105,
+  "10-24": 3,
+  "100+": 0,
+  "2-4": 24,
+  "25-99": 1,
+  "5-9": 13
+ },
+ "owner_keys_without_accountroot": 0,
+ "reserve": {
+  "accounts_below_reserve": 6,
+  "base_drops": 10000000,
+  "inc_drops": 2000000,
+  "locked_drops": 44009999768,
+  "matches_server_state": true,
+  "server_state_base_drops": 10000000,
+  "server_state_inc_drops": 2000000,
+  "source": "FeeSettings",
+  "spendable_drops": 99999955959469120
+ },
+ "total_coins_check": {
+  "difference": 0,
+  "header_total_coins": 99999999969468888,
+  "held_in_other_objects": {},
+  "sum_account_balances": 99999999969468888
+ }
+}

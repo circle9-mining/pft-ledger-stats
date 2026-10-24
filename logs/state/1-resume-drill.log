@@ -1,0 +1,112 @@
+OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-24T02:14:21Z
+== start 1: snapshot.py --limit 64 --page-delay 0.3
+== SIGTERM pid 4165081 after 15s
+exit status 4
+complete page lines at SIGTERM: 26
+== start 2 (same command)
+== SIGKILL pid 4165918 after 15s
+state/resume_drill.sh: line 30: 4165918 Killed                  python3 "$HERE/snapshot.py" --out "$OUT/drill" --log "$OUT/drill.log" --limit 64 --page-delay 0.3 > /dev/null
+exit status 137
+page lines at SIGKILL: 54 (last one may be torn)
+last byte of pages.jsonl:  \n
+== start 3 (same command), runs to the end
+exit status 0
+== reference: uninterrupted snapshot.py --ledger 7429722 --limit 2048
+== drill.log
+2026-10-24T02:14:21Z START ledger 7429722 8317F239C503E9097A15B6651CCEA99CDEE1A8F35F6E6E599C30B8A4AF08F953 total_coins 99999999969468888 close 2026-10-24T02:14:20Z limit 64 | host python 3.10.12
+2026-10-24T02:14:22Z page 0 +64 objects (total 64) marker 0309916A21F8D1EF
+2026-10-24T02:14:22Z page 1 +64 objects (total 128) marker 05AC06E39B65BA1B
+2026-10-24T02:14:23Z page 2 +64 objects (total 192) marker 0923B22FD0CD4E18
+2026-10-24T02:14:23Z page 3 +64 objects (total 256) marker 0CCFA07B65633516
+2026-10-24T02:14:24Z page 4 +64 objects (total 320) marker 101376507DE46004
+2026-10-24T02:14:24Z page 5 +64 objects (total 384) marker 1335814A05C69F27
+2026-10-24T02:14:25Z page 6 +64 objects (total 448) marker 16230206C20A5D7D
+2026-10-24T02:14:25Z page 7 +64 objects (total 512) marker 193DF585FD3D6DA2
+2026-10-24T02:14:26Z page 8 +64 objects (total 576) marker 1C504C5E7B97F4F9
+2026-10-24T02:14:26Z page 9 +64 objects (total 640) marker 1EAE27221BC038FB
+2026-10-24T02:14:27Z page 10 +64 objects (total 704) marker 216507B9FB93201D
+2026-10-24T02:14:27Z page 11 +64 objects (total 768) marker 24A2A02F475CAFE4
+2026-10-24T02:14:28Z page 12 +64 objects (total 832) marker 274E0D15BD0BE3EC
+2026-10-24T02:14:29Z page 13 +64 objects (total 896) marker 2C3454659C51A2D2
+2026-10-24T02:14:30Z page 14 +64 objects (total 960) marker 302323BA568D99BA
+2026-10-24T02:14:30Z page 15 +64 objects (total 1024) marker 338D31BC746B78DD
+2026-10-24T02:14:31Z page 16 +64 objects (total 1088) marker 36EA04032603C9D6
+2026-10-24T02:14:31Z page 17 +64 objects (total 1152) marker 3A8CB61CE5F75681
+2026-10-24T02:14:32Z page 18 +64 objects (total 1216) marker 3E3C6773778429CF
+2026-10-24T02:14:32Z page 19 +64 objects (total 1280) marker 41786DB972F89344
+2026-10-24T02:14:33Z page 20 +64 objects (total 1344) marker 44BA7BB081F381E1
+2026-10-24T02:14:33Z page 21 +64 objects (total 1408) marker 482E9ECB959386FF
+2026-10-24T02:14:34Z page 22 +64 objects (total 1472) marker 4AA67031C6B3433C
+2026-10-24T02:14:35Z page 23 +64 objects (total 1536) marker 4DBBDAFF67FCD400
+2026-10-24T02:14:35Z page 24 +64 objects (total 1600) marker 509F5504661B2372
+2026-10-24T02:14:36Z page 25 +64 objects (total 1664) marker 54660E3F241CE366
+2026-10-24T02:14:36Z STOP by signal after page 25; restart with the same command to resume
+2026-10-24T02:14:41Z RESUME ledger 7429722 8317F239C503E9097A15B6651CCEA99CDEE1A8F35F6E6E599C30B8A4AF08F953 after page 25 (1664 objects), marker 54660E3F241CE366D035F8BA28973CE55604A3A0D0492CB0FEB0039F06665EE8
+2026-10-24T02:14:42Z page 26 +64 objects (total 1728) marker 5805CA74DB3741E9
+2026-10-24T02:14:42Z page 27 +64 objects (total 1792) marker 5BF25545FE16F460
+2026-10-24T02:14:43Z page 28 +64 objects (total 1856) marker 6081AFEB2C1A61CC
+2026-10-24T02:14:43Z page 29 +64 objects (total 1920) marker 63CBBC52369F7C4D
+2026-10-24T02:14:44Z page 30 +64 objects (total 1984) marker 670EA2A3EDE4298E
+2026-10-24T02:14:44Z page 31 +64 objects (total 2048) marker 69EC0333453C9206
+2026-10-24T02:14:45Z page 32 +64 objects (total 2112) marker 6D3A74258CF25A8B
+2026-10-24T02:14:45Z page 33 +64 objects (total 2176) marker 6FEA3F57B893BD76
+2026-10-24T02:14:46Z page 34 +64 objects (total 2240) marker 737EF3FAADF9B5B5
+2026-10-24T02:14:46Z page 35 +64 objects (total 2304) marker 76CCE224BEC49832
+2026-10-24T02:14:47Z page 36 +64 objects (total 2368) marker 79BEF6C978CF109B
+2026-10-24T02:14:47Z page 37 +64 objects (total 2432) marker 7DB0788C020F0278
+2026-10-24T02:14:48Z page 38 +64 objects (total 2496) marker 8087E0561C8A221A
+2026-10-24T02:14:48Z page 39 +64 objects (total 2560) marker 84048A39333C7D35
+2026-10-24T02:14:49Z page 40 +64 objects (total 2624) marker 8790391058B1FEF7
+2026-10-24T02:14:49Z page 41 +64 objects (total 2688) marker 8AA2637F8E1F42B0
+2026-10-24T02:14:50Z page 42 +64 objects (total 2752) marker 8E3BECA81D3C6A0D
+2026-10-24T02:14:51Z page 43 +64 objects (total 2816) marker 917817A69309DF9C
+2026-10-24T02:14:51Z page 44 +64 objects (total 2880) marker 9487F4063DFCE66D
+2026-10-24T02:14:52Z page 45 +64 objects (total 2944) marker 984CCB7A16F30160
+2026-10-24T02:14:52Z page 46 +64 objects (total 3008) marker 9CD9F76E84A0B23A
+2026-10-24T02:14:53Z page 47 +64 objects (total 3072) marker A0D7D46EC68FABEB
+2026-10-24T02:14:53Z page 48 +64 objects (total 3136) marker A42A88B4B1854BF1
+2026-10-24T02:14:54Z page 49 +64 objects (total 3200) marker A6DB0E18B8496766
+2026-10-24T02:14:54Z page 50 +64 objects (total 3264) marker AA9077D628EB80A0
+2026-10-24T02:14:55Z page 51 +64 objects (total 3328) marker AE7DA415E87231C5
+2026-10-24T02:14:55Z page 52 +64 objects (total 3392) marker B1F6FC2A2EF99C70
+2026-10-24T02:14:56Z page 53 +64 objects (total 3456) marker B4B6CFC1EDDAC5FF
+2026-10-24T02:15:02Z RESUME ledger 7429722 8317F239C503E9097A15B6651CCEA99CDEE1A8F35F6E6E599C30B8A4AF08F953 after page 53 (3456 objects), marker B4B6CFC1EDDAC5FF3B190E4F7ED51AD28A34C65E14FE92EA0BAD3D485D5CF233
+2026-10-24T02:15:03Z page 54 +64 objects (total 3520) marker B859879255BFA0FE
+2026-10-24T02:15:04Z page 55 +64 objects (total 3584) marker BC2D1212035EB7E3
+2026-10-24T02:15:04Z page 56 +64 objects (total 3648) marker BFB6CE9F81A3525C
+2026-10-24T02:15:05Z page 57 +64 objects (total 3712) marker C2E21EDEF5B458A5
+2026-10-24T02:15:05Z page 58 +64 objects (total 3776) marker C69AD2FC9E052799
+2026-10-24T02:15:06Z page 59 +64 objects (total 3840) marker C9D48AC00BCC358A
+2026-10-24T02:15:06Z page 60 +64 objects (total 3904) marker CCE59F84DD7423A8
+2026-10-24T02:15:07Z page 61 +64 objects (total 3968) marker CF7D682840644911
+2026-10-24T02:15:08Z page 62 +64 objects (total 4032) marker D3BBEF1C47B5DB93
+2026-10-24T02:15:08Z page 63 +64 objects (total 4096) marker D73B53DE1859D6AE
+2026-10-24T02:15:09Z page 64 +64 objects (total 4160) marker DAC1FA7465EB3698
+2026-10-24T02:15:10Z page 65 +64 objects (total 4224) marker DDD3EDFD188754AA
+2026-10-24T02:15:10Z page 66 +64 objects (total 4288) marker E151D5B59AD32B5C
+2026-10-24T02:15:12Z page 67 +64 objects (total 4352) marker E5FA0021EBA1D025
+2026-10-24T02:15:12Z page 68 +64 objects (total 4416) marker E9A52674A27515F4
+2026-10-24T02:15:13Z page 69 +64 objects (total 4480) marker ECC07CC76E644E11
+2026-10-24T02:15:14Z page 70 +64 objects (total 4544) marker F009A1422B79AAF1
+2026-10-24T02:15:14Z page 71 +64 objects (total 4608) marker F38ACF463E6ADF65
+2026-10-24T02:15:15Z page 72 +64 objects (total 4672) marker F678D63F4346ECF3
+2026-10-24T02:15:15Z page 73 +64 objects (total 4736) marker F9D8E47B15E41499
+2026-10-24T02:15:16Z page 74 +64 objects (total 4800) marker FD2C068375D7B563
+2026-10-24T02:15:16Z page 75 +50 objects (total 4850) marker -
+2026-10-24T02:15:17Z DONE 4850 objects in 76 pages, 22 RPC calls this run -> snapshot-7429722.jsonl.gz
+== ref.log
+2026-10-24T02:15:18Z START ledger 7429722 8317F239C503E9097A15B6651CCEA99CDEE1A8F35F6E6E599C30B8A4AF08F953 total_coins 99999999969468888 close 2026-10-24T02:14:20Z limit 2048 | host python 3.10.12
+2026-10-24T02:15:18Z page 0 +2048 objects (total 2048) marker 69EC0333453C9206
+2026-10-24T02:15:19Z page 1 +2048 objects (total 4096) marker D73B53DE1859D6AE
+2026-10-24T02:15:20Z page 2 +754 objects (total 4850) marker -
+2026-10-24T02:15:20Z DONE 4850 objects in 3 pages, 5 RPC calls this run -> snapshot-7429722.jsonl.gz
+== checks
+[PASS] 1 START + 2 RESUME lines (got 1 + 2)
+[PASS] all on pinned ledger 7429722
+[PASS] pages.jsonl: 76 pages, contiguous marker chain, last has no marker
+[PASS] no duplicate object index (4850 objects, 4850 unique)
+[PASS] object count drill 4850 = reference 4850
+9ad849626776d168a523ca308d5a92d92a4df9f9fb5e56c6f2942e6728f8260e  drill/snapshot-7429722.jsonl.gz
+9ad849626776d168a523ca308d5a92d92a4df9f9fb5e56c6f2942e6728f8260e  ref/snapshot-7429722.jsonl.gz
+[PASS] drill snapshot (3 runs, 64/page) byte-identical to reference (1 run, 2048/page)
+== curl processes left in container: 0

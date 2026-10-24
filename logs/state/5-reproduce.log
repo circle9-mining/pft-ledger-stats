@@ -1,0 +1,30 @@
+OS: Ubuntu 22.04.5 LTS | 2026-10-24T02:17:13Z
+$ cat state/reproduce.sh
+#!/usr/bin/env bash
+# Rebuild state/report/REPORT.md + report.json from the published snapshot .gz only and compare
+# them byte-for-byte (sha256 + cmp) with the committed files. Run from the repo root.
+set -euo pipefail
+SNAP=${1:-data/state/snapshot-7429722.jsonl.gz}
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+echo "snapshot: $SNAP sha256 $(sha256sum < "$SNAP" | cut -d' ' -f1)"
+.venv/bin/python state/analyze.py "$SNAP" --out "$T/report" --no-charts | sed "s#$T#<tmp>#"
+rc=0
+for f in REPORT.md report.json; do
+  echo "sha256 committed state/report/$f: $(sha256sum < "state/report/$f" | cut -d' ' -f1)"
+  echo "sha256 rebuilt   <tmp>/report/$f: $(sha256sum < "$T/report/$f" | cut -d' ' -f1)"
+  if cmp -s "state/report/$f" "$T/report/$f"; then echo "$f byte-identical (cmp exit 0)"
+  else echo "$f DIFFERS"; rc=1; fi
+done
+echo "(PNG charts are not rebuilt: --no-charts; REPORT.md always links them)"
+exit "$rc"
+$ bash state/reproduce.sh
+snapshot: data/state/snapshot-7429722.jsonl.gz sha256 9ad849626776d168a523ca308d5a92d92a4df9f9fb5e56c6f2942e6728f8260e
+ledger 7429722: 4850 objects, 4331 accounts, gini 0.9997, count check OK, total_coins difference 0 drops -> <tmp>/report
+sha256 committed state/report/REPORT.md: 53aaaa6be06a241cc9b0aa4f5b823c54ec87518172770b3e2ffa39bf790aee70
+sha256 rebuilt   <tmp>/report/REPORT.md: 53aaaa6be06a241cc9b0aa4f5b823c54ec87518172770b3e2ffa39bf790aee70
+REPORT.md byte-identical (cmp exit 0)
+sha256 committed state/report/report.json: c0c25e0db64177ceb49f36a897d6c3425bf561e2d88890a52414e278371a8852
+sha256 rebuilt   <tmp>/report/report.json: c0c25e0db64177ceb49f36a897d6c3425bf561e2d88890a52414e278371a8852
+report.json byte-identical (cmp exit 0)
+(PNG charts are not rebuilt: --no-charts; REPORT.md always links them)
+exit=0

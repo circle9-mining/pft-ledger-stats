@@ -1,0 +1,4 @@
+OS: Ubuntu 22.04.5 LTS | Python 3.10.12 | 2026-10-24T02:17:05Z
+$ .venv/bin/python state/analyze.py data/state/snapshot-7429722.jsonl.gz --out state/report
+ledger 7429722: 4850 objects, 4331 accounts, gini 0.9997, count check OK, total_coins difference 0 drops -> state/report
+exit=0

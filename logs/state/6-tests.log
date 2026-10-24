@@ -1,0 +1,20 @@
+OS: Ubuntu 22.04.5 LTS | Python 3.10.12 | 2026-10-24T02:17:13Z
+$ .venv/bin/python -m pytest -v tests/test_state.py
+tests/test_state.py::TestStats::test_account_id_to_address PASSED        [  9%]
+tests/test_state.py::TestStats::test_analyze_synthetic PASSED            [ 18%]
+tests/test_state.py::TestStats::test_buckets PASSED                      [ 27%]
+tests/test_state.py::TestStats::test_count_mismatch_detected PASSED      [ 36%]
+tests/test_state.py::TestStats::test_gini_known_answers PASSED           [ 45%]
+tests/test_state.py::TestStats::test_top_share PASSED                    [ 54%]
+tests/test_state.py::TestSnapshotResume::test_foreign_page_rejected PASSED [ 63%]
+tests/test_state.py::TestSnapshotResume::test_marker_resume_after_interrupt_and_torn_line PASSED [ 72%]
+tests/test_state.py::TestSnapshotResume::test_page_size_does_not_change_bytes PASSED [ 81%]
+tests/test_state.py::TestSnapshotResume::test_pinned_ledger_gone_exits_3 PASSED [ 90%]
+tests/test_state.py::TestSnapshotResume::test_report_deterministic PASSED [100%]
+============================== 11 passed in 0.39s ==============================
+$ .venv/bin/python -m pytest -q tests/
+53 passed in 3.75s
+$ .venv/bin/ruff check state tests
+All checks passed!
+$ shellcheck state/*.sh
+shellcheck: clean
