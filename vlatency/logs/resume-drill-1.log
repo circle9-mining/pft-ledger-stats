@@ -1,0 +1,37 @@
+OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-25T16:09:30Z
+collect_vlatency.py sha256 2e54d9d513c68b19e6beea8f1867628a561c6759b67227ea976f5dc774357db5
+== start 1 (window 8 min)
+2026-10-25T16:09:30Z start window 2026-10-25T16:09:30Z -> 2026-10-25T16:17:30Z last_ledger=None vals=0 torn_bytes=0 bad_lines=0 pid=629876
+2026-10-25T16:09:30Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+collector python pid 629876
+== SIGTERM pid 629876 after 120s
+2026-10-25T16:11:30Z stop (SIGTERM) last_ledger=7474898 vals=2396 dups_dropped=0
+lines at SIGTERM: 2437
+== start 2 (same command, after 30s down)
+2026-10-25T16:12:00Z resume window 2026-10-25T16:09:30Z -> 2026-10-25T16:17:30Z last_ledger=7474898 vals=2396 torn_bytes=0 bad_lines=0 pid=630741
+2026-10-25T16:12:00Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+collector python pid 630741
+== SIGKILL pid 630741 after 90s
+vlatency/resume_drill.sh: line 35: 630733 Killed                  sudo RUN_UID="$(id -u)" RUN_GID="$(id -g)" bash "$HERE/run-collector.sh" --out "$OUT" --hours "$HOURS"
+exit status 137
+lines at SIGKILL: 4269, last byte newline: \n
+== start 3 (same command, after 30s down), runs to window end
+2026-10-25T16:14:01Z resume window 2026-10-25T16:09:30Z -> 2026-10-25T16:17:30Z last_ledger=7474938 vals=4196 torn_bytes=0 bad_lines=0 pid=631668
+2026-10-25T16:14:01Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+collector python pid 631668
+2026-10-25T16:17:30Z stop (window complete) last_ledger=7475017 vals=8439 dups_dropped=0
+lines at END: 8584
+== collect output above; checks
+  [PASS] SIGTERM snapshot ends with a newline (clean stop)
+  [PASS] SIGTERM snapshot is a byte-identical prefix of the final file - 805818 bytes
+  [PASS] SIGKILL snapshot (complete lines) is a byte-identical prefix of the final file - 1411355 bytes, torn tail 0 bytes
+  [PASS] every line parses as JSON - 8584 lines, 0 bad
+  [PASS] 3 sessions: resumed false, true, true - [False, True, True]
+  [PASS] same window_end in every session
+  [PASS] session 3 records the torn bytes cut after SIGKILL - torn_bytes=0
+  [PASS] stop events: SIGTERM then window complete - ['SIGTERM', 'window complete']
+  [PASS] no duplicate validation entries (key, ledger index, ledger hash) - 8439 entries, 0 dup
+  [PASS] no duplicate ledger entries - 138 entries
+  [PASS] ledgers contiguous apart from recorded gaps - 7474860-7475017, 138 ledgers, gaps 7474899-7474908 (10, restart), 7474939-7474948 (10, restart)
+  [PASS] two gaps, both labelled restart - ['restart', 'restart']
+RESULT: PASS (12/12)
