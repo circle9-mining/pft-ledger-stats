@@ -1,0 +1,40 @@
+== OS: Ubuntu 22.04.5 LTS | 2026-10-25T10:14:32Z | probe edge cases
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"tx","params":[{"transaction":"ED1388BCCCC7986CD1E61229654E44DCF8A999F9E711034711E20508500056D9","binary":false}]}'
+++ jq -c '{status:.result.status,error:.result.error,validated:.result.validated,ledger_index:.result.ledger_index,has_meta:(.result.meta!=null),meta_keys:(.result.meta|keys? // null)}'
+{"status":"success","error":null,"validated":true,"ledger_index":7400152,"has_meta":true,"meta_keys":["AffectedNodes","TransactionIndex","TransactionResult","delivered_amount"]}
+++ for li in 7400054 7400055 7400152 7417448 7417447 7417449 7467781
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"account_info","params":[{"account":"rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7","ledger_index":7400054}]}'
+++ jq -c --arg li 7400054 '{li:$li,status:.result.status,error:.result.error,msg:.result.error_message,bal:.result.account_data.Balance}'
+{"li":"7400054","status":"success","error":null,"msg":null,"bal":"488396612119524"}
+++ sleep 1
+++ for li in 7400054 7400055 7400152 7417448 7417447 7417449 7467781
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"account_info","params":[{"account":"rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7","ledger_index":7400055}]}'
+++ jq -c --arg li 7400055 '{li:$li,status:.result.status,error:.result.error,msg:.result.error_message,bal:.result.account_data.Balance}'
+{"li":"7400055","status":"error","error":"lgrNotFound","msg":"ledgerNotFound","bal":null}
+++ sleep 1
+++ for li in 7400054 7400055 7400152 7417448 7417447 7417449 7467781
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"account_info","params":[{"account":"rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7","ledger_index":7400152}]}'
+++ jq -c --arg li 7400152 '{li:$li,status:.result.status,error:.result.error,msg:.result.error_message,bal:.result.account_data.Balance}'
+{"li":"7400152","status":"success","error":null,"msg":null,"bal":"488396557119512"}
+++ sleep 1
+++ for li in 7400054 7400055 7400152 7417448 7417447 7417449 7467781
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"account_info","params":[{"account":"rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7","ledger_index":7417448}]}'
+++ jq -c --arg li 7417448 '{li:$li,status:.result.status,error:.result.error,msg:.result.error_message,bal:.result.account_data.Balance}'
+{"li":"7417448","status":"success","error":null,"msg":null,"bal":"488396469219188"}
+++ sleep 1
+++ for li in 7400054 7400055 7400152 7417448 7417447 7417449 7467781
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"account_info","params":[{"account":"rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7","ledger_index":7417447}]}'
+++ jq -c --arg li 7417447 '{li:$li,status:.result.status,error:.result.error,msg:.result.error_message,bal:.result.account_data.Balance}'
+{"li":"7417447","status":"success","error":null,"msg":null,"bal":"488396474219200"}
+++ sleep 1
+++ for li in 7400054 7400055 7400152 7417448 7417447 7417449 7467781
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"account_info","params":[{"account":"rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7","ledger_index":7417449}]}'
+++ jq -c --arg li 7417449 '{li:$li,status:.result.status,error:.result.error,msg:.result.error_message,bal:.result.account_data.Balance}'
+{"li":"7417449","status":"success","error":null,"msg":null,"bal":"488396469219188"}
+++ sleep 1
+++ for li in 7400054 7400055 7400152 7417448 7417447 7417449 7467781
+++ curl -s -m 30 https://rpc.testnet.postfiat.org -d '{"method":"account_info","params":[{"account":"rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7","ledger_index":7467781}]}'
+++ jq -c --arg li 7467781 '{li:$li,status:.result.status,error:.result.error,msg:.result.error_message,bal:.result.account_data.Balance}'
+{"li":"7467781","status":"success","error":null,"msg":null,"bal":"488371453968538"}
+++ sleep 1
+++ set +x

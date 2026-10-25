@@ -1,0 +1,41 @@
+== OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-25T10:17:24Z
+== sha256
+f5e0488baad2fbe5f92fb4651f1c8206505fd418c71c9f3d1e40ee3e5f313d6c  rewardflow/analyze_rewardflow.py
+b186e576d6f8633269967cd71e2896257d2343e30b2aa4a7fea71d225968c399  rewardflow/collect_rewardflow.py
+fd1d970bb40ef86a6e3882226be9a328a8f9bb8617a416c7722633767fc44ee6  rewardflow/crosscheck_rewardflow.py
+504c4d8405644c657edbf796f82ee58603194a34738da9616786ca53501df3ac  rewardflow/check.sh
+88136b974148a1e52a7fff763ab1c10de11d845366ebf9df7c5779262edc4cd3  rewardflow/run-live.sh
+828e0ed771d4a99250859ae8874e1cb3043dc43eff0d327d7ecc2fd2fe6ab733  tests/test_rewardflow.py
+== ruff
+All checks passed!
+== shellcheck
+shellcheck clean
+== unit tests
+RANGE (99,200] IMPOSSIBLE account_info failed: account_info: lgrNotFound:  (outside server history; not counted)
+RANGE (99,200] IMPOSSIBLE account_info failed: account_info: lgrNotFound:  (outside server history; not counted)
+RANGE (99,200] IMPOSSIBLE account_info failed: account_info: lgrNotFound:  (outside server history; not counted)
+PASSED tests/test_rewardflow.py::Collect::test_finished_file_is_not_recollected
+PASSED tests/test_rewardflow.py::Collect::test_non_retryable_error_raises
+PASSED tests/test_rewardflow.py::Collect::test_pagination_follows_marker_to_end
+PASSED tests/test_rewardflow.py::Collect::test_record_fields
+PASSED tests/test_rewardflow.py::Collect::test_refuses_write_methods
+PASSED tests/test_rewardflow.py::Collect::test_resume_after_stop_has_no_duplicates_and_same_content
+PASSED tests/test_rewardflow.py::Collect::test_retry_backoff_on_slowdown
+PASSED tests/test_rewardflow.py::Collect::test_torn_last_line_is_repaired
+PASSED tests/test_rewardflow.py::Analyze::test_concentration_metrics
+PASSED tests/test_rewardflow.py::Analyze::test_delivered_amount_not_amount_and_skips
+PASSED tests/test_rewardflow.py::Analyze::test_negative_control_no_success_payments
+PASSED tests/test_rewardflow.py::Analyze::test_report_truncates_addresses
+PASSED tests/test_rewardflow.py::Crosscheck::test_balance_mismatch_is_caught
+PASSED tests/test_rewardflow.py::Crosscheck::test_derived_delta
+PASSED tests/test_rewardflow.py::Crosscheck::test_pass_and_impossible_range_reported
+PASSED tests/test_rewardflow.py::Crosscheck::test_persistent_transient_is_impossible_or_mismatch
+PASSED tests/test_rewardflow.py::Crosscheck::test_tampered_field_is_caught
+PASSED tests/test_rewardflow.py::Crosscheck::test_transient_answers_are_retried_and_logged
+18 passed in 0.50s
+== mutants
+MUTANT M1-resume-after-last-ledger caught: 2 failing tests: test_resume_after_stop_has_no_duplicates_and_same_content test_torn_last_line_is_repaired 
+MUTANT M2-amount-not-delivered caught: 1 failing tests: test_delivered_amount_not_amount_and_skips 
+MUTANT M3-count-failed-as-paid caught: 2 failing tests: test_delivered_amount_not_amount_and_skips test_negative_control_no_success_payments 
+MUTANT M4-no-transient-retry caught: 1 failing tests: test_transient_answers_are_retried_and_logged 
+== RESULT PASS

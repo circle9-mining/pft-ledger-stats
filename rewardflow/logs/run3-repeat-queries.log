@@ -1,0 +1,5 @@
+== OS: Ubuntu 22.04.5 LTS | 2026-10-25T10:15:04Z | repeat identical queries 12x: are answers consistent?
+     12 account_info ledger=7400054 -> success 488396612119524
+     12 account_info ledger=7400055 -> success 488396612119524
+     12 server_info complete_ledgers=7400054-… pubkey_node=n9K4AomB
+      8 tx ED1388 -> status=success error=null validated=true meta=true result=tesSUCCESS

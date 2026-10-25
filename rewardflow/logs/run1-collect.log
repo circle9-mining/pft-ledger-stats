@@ -1,0 +1,27 @@
+== OS: Ubuntu 22.04.5 LTS | 2026-10-25T10:13:00Z | collect (paged, interrupted + resumed)
+f5e0488baad2fbe5f92fb4651f1c8206505fd418c71c9f3d1e40ee3e5f313d6c  rewardflow/analyze_rewardflow.py
+b186e576d6f8633269967cd71e2896257d2343e30b2aa4a7fea71d225968c399  rewardflow/collect_rewardflow.py
+0c894696d79ec9f518fcb902c1bbcff863e5fcf8f2cf8fa7e277902a60ffff7d  rewardflow/crosscheck_rewardflow.py
++ .venv/bin/python rewardflow/collect_rewardflow.py rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7 --out data/rewardflow/data.jsonl --limit 20 --max-pages 2
+2026-10-25T10:13:02Z START account=rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7 range 7400054-7467781 (server complete_ledgers 7400054-7467781)
+2026-10-25T10:13:04Z PAGE 1 +20 tx (new 20, dup-skipped 0) marker=yes
+2026-10-25T10:13:07Z PAGE 2 +20 tx (new 40, dup-skipped 0) marker=yes
+2026-10-25T10:13:07Z STOP after --max-pages 2 (resume with the same command)
++ .venv/bin/python rewardflow/collect_rewardflow.py rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7 --out data/rewardflow/data.jsonl --limit 20
+2026-10-25T10:13:07Z RESUME 40 tx stored, last ledger 7427522, pinned range 7400054-7467781
+2026-10-25T10:13:09Z PAGE 1 +20 tx (new 0, dup-skipped 20) marker=yes
+2026-10-25T10:13:11Z PAGE 2 +20 tx (new 0, dup-skipped 40) marker=yes
+2026-10-25T10:13:13Z PAGE 3 +20 tx (new 20, dup-skipped 40) marker=yes
+2026-10-25T10:13:15Z PAGE 4 +20 tx (new 40, dup-skipped 40) marker=yes
+2026-10-25T10:13:17Z PAGE 5 +3 tx (new 43, dup-skipped 40) marker=none
+2026-10-25T10:13:17Z DONE 83 tx over ledgers 7400054-7467781 pages=5 rpc_calls=5 retries=0
++ .venv/bin/python rewardflow/collect_rewardflow.py rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7 --out data/rewardflow/onepass.jsonl --limit 400
+2026-10-25T10:13:18Z START account=rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7 range 7400054-7467786 (server complete_ledgers 7400054-7467786)
+2026-10-25T10:13:21Z PAGE 1 +83 tx (new 83, dup-skipped 0) marker=none
+2026-10-25T10:13:21Z DONE 83 tx over ledgers 7400054-7467786 pages=1 rpc_calls=2 retries=0
++ set +x
+== compare paged+resumed vs one-pass
+paged+resumed tx=83 unique=83 | one-pass tx=83 unique=83
+pinned range 7400054-7467781 (server complete_ledgers 7400054-7467781)
+one-pass tx inside pinned range: 83; field-level differences: 0
+COMPARE PASS

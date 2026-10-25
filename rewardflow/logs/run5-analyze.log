@@ -1,0 +1,5 @@
+== OS: Ubuntu 22.04.5 LTS | 2026-10-25T10:20:37Z | analyze
+1a0abb5ef7a9877a39ba2ba522d6b0a06039dd4eadf96ff51dfa55179fb62255  rewardflow/analyze_rewardflow.py
+0d2f0ab498492b0156f9627298a4421f41ab84491e42d638d778bdcd4dcc410c  rewardflow/collect_rewardflow.py
+fd1d970bb40ef86a6e3882226be9a328a8f9bb8617a416c7722633767fc44ee6  rewardflow/crosscheck_rewardflow.py
+payments=82 pft=25158.150003 recipients=12 failed=0 partial=0 -> rewardflow/report/REPORT.md

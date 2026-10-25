@@ -19,6 +19,7 @@ window to plain CSV/JSONL, so the report can be rebuilt and audited later from c
 | `txmix/` | transaction-type mix analyzer, see [`txmix/README.md`](txmix/README.md) |
 | `state/` | ledger-state snapshot analyzer (balances, reserves, objects), see [`state/README.md`](state/README.md) |
 | `validators/` | per-validator participation analyzer, see [`validators/README.md`](validators/README.md) |
+| `rewardflow/` | reward-payer PFT outflow analyzer over the public RPC's history, see [`rewardflow/README.md`](rewardflow/README.md) |
 
 ## Requirements
 
