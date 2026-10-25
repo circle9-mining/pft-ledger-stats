@@ -1,0 +1,40 @@
+$ bash txflow/resume_drill.sh /tmp/txflow-drill-1
+OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-25T00:18:52Z
+collect_flow.py sha256 1fb21c66bc2559518784e36be0b2f0773ffcda37ea7ccf4fc6705070aab8f1ef
+== start 1 (window 8 min)
+2026-10-25T00:18:53Z start window 2026-10-25T00:18:53Z -> 2026-10-25T00:26:53Z last_ledger=None proposed=0 validated=0 torn_bytes=0 bad_lines=0 pid=300681
+2026-10-25T00:18:53Z connected (1) ws://127.0.0.1:6006/, subscribed ledger,transactions,transactions_proposed
+collector python pid 300681
+== SIGTERM pid 300681 after 120s
+2026-10-25T00:20:54Z stop (SIGTERM) last_ledger=7456038 proposed=12 validated=12
+lines at SIGTERM: 105
+== start 2 (same command, after 30s down)
+2026-10-25T00:21:24Z resume window 2026-10-25T00:18:53Z -> 2026-10-25T00:26:53Z last_ledger=7456038 proposed=12 validated=12 torn_bytes=0 bad_lines=0 pid=301368
+2026-10-25T00:21:24Z connected (1) ws://127.0.0.1:6006/, subscribed ledger,transactions,transactions_proposed
+collector python pid 301368
+== SIGKILL pid 301368 after 90s
+txflow/resume_drill.sh: line 35: 301360 Killed                  sudo RUN_UID="$(id -u)" RUN_GID="$(id -g)" bash "$HERE/run-collector.sh" --out "$OUT" --hours "$HOURS"
+exit status 137
+lines at SIGKILL: 189, last byte newline: \n
+== start 3 (same command, after 30s down), runs to window end
+collector python pid 301865
+2026-10-25T00:23:25Z resume window 2026-10-25T00:18:53Z -> 2026-10-25T00:26:53Z last_ledger=7456077 proposed=22 validated=24 torn_bytes=0 bad_lines=0 pid=301865
+2026-10-25T00:23:25Z connected (1) ws://127.0.0.1:6006/, subscribed ledger,transactions,transactions_proposed
+2026-10-25T00:26:53Z stop (window complete) last_ledger=7456157 proposed=44 validated=46
+lines at END: 375
+== collect output above; checks
+  [PASS] SIGTERM snapshot ends with a newline (clean stop)
+  [PASS] SIGTERM snapshot is a byte-identical prefix of the final file - 19766 bytes
+  [PASS] SIGKILL snapshot (complete lines) is a byte-identical prefix of the final file - 35590 bytes, torn tail 0 bytes
+  [PASS] every line parses as JSON - 375 lines, 0 bad
+  [PASS] 3 sessions: resumed false, true, true - [False, True, True]
+  [PASS] same window_end in every session
+  [PASS] session 3 records the torn bytes cut after SIGKILL - torn_bytes=0
+  [PASS] stop events: SIGTERM then window complete - ['SIGTERM', 'window complete']
+  [PASS] no duplicate ledger entries - 140 entries
+  [PASS] no duplicate proposed entries - 44 entries
+  [PASS] no duplicate validated entries - 46 entries
+  [PASS] ledgers contiguous apart from recorded gaps - 7455999-7456157, 140 ledgers, gaps 7456039-7456047 (9, restart), 7456078-7456087 (10, restart)
+  [PASS] both gaps labelled restart
+RESULT: PASS (13/13)
+exit 0

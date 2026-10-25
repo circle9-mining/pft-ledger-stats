@@ -144,3 +144,47 @@ class Resume(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DrillChecker(unittest.TestCase):
+    """resume_check.py against synthetic captures shaped like a real drill (positive + negatives)."""
+
+    def build(self, d, dup=False, torn=b'{"ev":"led'):
+        import resume_check  # noqa: F401
+
+        p = os.path.join(d, "final.jsonl")
+
+        def line(e):
+            return (json.dumps(e, separators=(",", ":")) + "\n").encode()
+
+        def sess(resumed, torn_bytes=0):
+            return line({"ev": "session", "resumed": resumed, "torn_bytes": torn_bytes, "window_end": 99})
+
+        part1 = sess(False) + b"".join(line({"ev": "ledger", "ledger_index": i}) for i in (10, 11))
+        part1 += line({"ev": "proposed", "hash": "A"}) + line({"ev": "stop", "reason": "SIGTERM"})
+        part2 = sess(True) + line({"ev": "gap", "from": 12, "to": 13, "count": 2, "reason": "restart"})
+        part2 += line({"ev": "ledger", "ledger_index": 14})
+        part3 = sess(True, len(torn)) + line(
+            {"ev": "gap", "from": 15, "to": 15, "count": 1, "reason": "restart"}
+        )
+        part3 += line({"ev": "ledger", "ledger_index": 16}) + line({"ev": "validated", "hash": "A"})
+        if dup:
+            part3 += line({"ev": "proposed", "hash": "A"})
+        part3 += line({"ev": "stop", "reason": "window complete"})
+        for name, body in (("term", part1), ("kill", part1 + part2 + torn), ("final", part1 + part2 + part3)):
+            with open(os.path.join(d, name + ".jsonl"), "wb") as fh:
+                fh.write(body)
+        return p, os.path.join(d, "term.jsonl"), os.path.join(d, "kill.jsonl")
+
+    def test_positive_and_negatives(self):
+        from resume_check import main
+
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(main(*self.build(d)), 0)
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(main(*self.build(d, dup=True)), 1)
+        with tempfile.TemporaryDirectory() as d:
+            f, t, k = self.build(d)
+            with open(t, "ab") as fh:
+                fh.write(b"rewritten\n")  # snapshot no longer a prefix
+            self.assertEqual(main(f, t, k), 1)
