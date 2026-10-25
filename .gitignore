@@ -16,3 +16,4 @@ data/txflow/flow.jsonl
 data/txflow/state.json
 data/txflow/collect.log
 data/rewardflow/
+data/vlatency/
