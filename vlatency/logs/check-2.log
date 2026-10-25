@@ -1,0 +1,63 @@
+== OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-25T22:15:49Z
+== sha256
+21e22096aa4153b918ec5da82e3a2803e30bafa8b0b83ff40e460cfaea3b59a7  vlatency/analyze_vlatency.py
+2e54d9d513c68b19e6beea8f1867628a561c6759b67227ea976f5dc774357db5  vlatency/collect_vlatency.py
+fdcef712c37b2400e70fe9362ede5169568b891056782e1842c6a42d9314b403  vlatency/crosscheck_vlatency.py
+0ff4ef40af08bab5430673c1e4ec4edfe906b251d3609874d93eacb5281065a7  vlatency/vl_resume_check.py
+d834dc4192814b0315a6db518460c457453f25e7c2f89eb76d3c3c82845dfe72  vlatency/check.sh
+225baab8773fb95f5a72b0ba310c25a904dc5d66767b1715604af956a1799277  vlatency/resume_drill.sh
+08d6a40169c68eb32406f7d3a44f0a95f300a8a72f44467389d609f8dfc30e1b  vlatency/run-collector.sh
+a45423272988402417652fec2c30ec12f0d3ae094a60329e694a28f832348dde  tests/test_vlatency_collect.py
+fbf6a051a1849c3275f3d5d0764486989629662a25e038be062048db2a56690f  tests/test_vlatency_analyze.py
+e910f89eba1fa78f71b0f4cd8ba1ae596f4fcf8e44bc607606b42f7249066688  tests/test_vlatency_resume.py
+== ruff
+All checks passed!
+== shellcheck
+shellcheck clean
+== unit tests
+PASSED tests/test_vlatency_collect.py::TestCollector::test_bad_lines_counted_on_load
+PASSED tests/test_vlatency_collect.py::TestCollector::test_bad_validation_ignored
+PASSED tests/test_vlatency_collect.py::TestCollector::test_duplicate_validation_dropped_but_other_hash_kept
+PASSED tests/test_vlatency_collect.py::TestCollector::test_gap_reasons
+PASSED tests/test_vlatency_collect.py::TestCollector::test_only_subscribe_allowed
+PASSED tests/test_vlatency_collect.py::TestCollector::test_prune_keeps_recent
+PASSED tests/test_vlatency_collect.py::TestCollector::test_resume_dedupe_and_restart_gap
+PASSED tests/test_vlatency_collect.py::TestCollector::test_torn_tail_repair
+PASSED tests/test_vlatency_collect.py::TestCollector::test_torn_tail_without_any_newline
+PASSED tests/test_vlatency_collect.py::TestCollector::test_validation_fields
+PASSED tests/test_vlatency_analyze.py::TestTime::test_ct_kinds
+PASSED tests/test_vlatency_analyze.py::TestTime::test_eff_close_time_bumps_to_prior_plus_one
+PASSED tests/test_vlatency_analyze.py::TestTime::test_epoch_conversion
+PASSED tests/test_vlatency_analyze.py::TestTime::test_round_close_time
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_active_span_coverage_skips_gaps
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_d_ct_only_on_rounded_ledgers
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_non_validated_and_unmatched
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_out_of_order_events_same_result
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_partial_counted
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_per_validator_latency_and_late
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_render_has_sections
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_resume_duplicates_dropped
+PASSED tests/test_vlatency_analyze.py::TestAnalyze::test_skew_uses_ripple_epoch
+PASSED tests/test_vlatency_analyze.py::TestCrosscheck::test_all_match
+PASSED tests/test_vlatency_analyze.py::TestCrosscheck::test_close_time_mismatch_fails
+PASSED tests/test_vlatency_analyze.py::TestCrosscheck::test_hash_mismatch_fails
+PASSED tests/test_vlatency_analyze.py::TestCrosscheck::test_persistent_error_fails
+PASSED tests/test_vlatency_analyze.py::TestCrosscheck::test_transient_retried_and_logged
+PASSED tests/test_vlatency_resume.py::TestResumeCheck::test_duplicate_validation_detected
+PASSED tests/test_vlatency_resume.py::TestResumeCheck::test_empty_file_fails
+PASSED tests/test_vlatency_resume.py::TestResumeCheck::test_missing_stop_detected
+PASSED tests/test_vlatency_resume.py::TestResumeCheck::test_positive_all_pass
+PASSED tests/test_vlatency_resume.py::TestResumeCheck::test_term_not_prefix_detected
+PASSED tests/test_vlatency_resume.py::TestResumeCheck::test_torn_bytes_mismatch_detected
+PASSED tests/test_vlatency_resume.py::TestResumeCheck::test_unrecorded_gap_detected
+35 passed in 0.55s
+== mutants
+MUTANT M1-no-ripple-epoch caught: 3 failing tests: test_epoch_conversion test_d_ct_only_on_rounded_ledgers test_skew_uses_ripple_epoch 
+MUTANT M2-floor-not-round caught: 2 failing tests: test_eff_close_time_bumps_to_prior_plus_one test_round_close_time 
+MUTANT M3-analyzer-no-dedupe caught: 1 failing tests: test_resume_duplicates_dropped 
+MUTANT M4-coverage-ignores-span caught: 1 failing tests: test_active_span_coverage_skips_gaps 
+MUTANT M5-collector-no-resume-dedupe caught: 7 failing tests: test_duplicate_validation_dropped_but_other_hash_kept test_resume_dedupe_and_restart_gap test_missing_stop_detected test_positive_all_pass test_term_not_prefix_detected test_torn_bytes_mismatch_detected test_unrecorded_gap_detected 
+MUTANT M6-no-torn-tail-cut caught: 8 failing tests: test_torn_tail_repair test_torn_tail_without_any_newline test_duplicate_validation_detected test_missing_stop_detected test_positive_all_pass test_term_not_prefix_detected test_torn_bytes_mismatch_detected test_unrecorded_gap_detected 
+MUTANT M7-crosscheck-no-retry caught: 1 failing tests: test_transient_retried_and_logged 
+MUTANT M8-checker-ignores-dup-vals caught: 1 failing tests: test_duplicate_validation_detected 
+== RESULT PASS

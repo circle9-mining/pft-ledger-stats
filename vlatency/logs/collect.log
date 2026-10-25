@@ -1,0 +1,9 @@
+2026-10-25T15:13:15Z start window 2026-10-25T15:13:15Z -> 2026-10-25T22:13:15Z last_ledger=None vals=0 torn_bytes=0 bad_lines=0 pid=608241
+2026-10-25T15:13:15Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+2026-10-25T16:13:17Z progress last_ledger=7474933 vals=72591 dups_dropped=0
+2026-10-25T17:13:16Z progress last_ledger=7476124 vals=145242 dups_dropped=0
+2026-10-25T18:13:16Z progress last_ledger=7477317 vals=218015 dups_dropped=0
+2026-10-25T19:13:16Z progress last_ledger=7478509 vals=290727 dups_dropped=0
+2026-10-25T20:13:16Z progress last_ledger=7479702 vals=363500 dups_dropped=0
+2026-10-25T21:13:16Z progress last_ledger=7480892 vals=436090 dups_dropped=0
+2026-10-25T22:13:15Z stop (window complete) last_ledger=7482080 vals=508589 dups_dropped=0

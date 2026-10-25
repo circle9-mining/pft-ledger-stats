@@ -88,6 +88,20 @@ clock, and the receive time comes later than the signing. A healthy validator th
 roughly -0.3 .. -1.0 s. What matters is the distance from the network median (`skew-net`), not
 the sign.
 
+## Results of the live window
+
+7 h on pft-agent-01 (2026-10-25T15:13Z..22:13Z), one collector session, 0 gaps, 8337 validated ledgers,
+508589 validations from 61 signing keys, 0 duplicates dropped ([report](report/REPORT.md)):
+
+- network `d_first` p50 0.62 s, p90 1.08 s, p99 1.60 s, max 3.04 s; late share (> 2 s) 0.07%;
+- per-validator `d_first` p50 ranges from 0.42 s to 1.07 s; the slowest validator has 0.90% late validations;
+- signing skew p50 -0.69 s network-wide; every validator's median is within 0.10 s of the network median
+  (no mis-clocked validator in this window);
+- 0 validations for a non-validated hash, 0 partial; 32 validations for a ledger not seen validated here (all for 7482081, the ledger after the last one closed before the window ended);
+- close_time_resolution 10 s on every crosschecked ledger; 5817 of 8337 ledgers are "bumped", so `d_ct` uses 2520;
+- crosschecks: 20/20 at 16:16Z ([log](logs/crosscheck-1.log)) and 20/20 right after the window ([log](logs/crosscheck-2.log));
+  resume drill 12/12 ([log](logs/resume-drill-1.log)); unit tests 35/35 + 8/8 mutants caught ([log](logs/check-2.log)); analyzer run [log](logs/analyze.log); collector [log](logs/collect.log).
+
 ## Limits
 
 - **Single vantage point.** Every `t` is when *this* node's stream delivered the message. A

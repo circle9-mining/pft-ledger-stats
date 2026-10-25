@@ -1,0 +1,26 @@
+OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-25T22:13:34Z
+crosscheck_vlatency.py sha256 fdcef712c37b2400e70fe9362ede5169568b891056782e1842c6a42d9314b403
+$ python3 vlatency/crosscheck_vlatency.py data/vlatency/vl.jsonl --count 20 --seed 20261026
+crosscheck 20 of 8337 collected ledgers (seed 20261026; pool 606 inside local complete_ledgers 7481473-7482088) against local admin RPC and https://rpc.testnet.postfiat.org `ledger`
+MATCH ledger 7481483 collected hash=548D46A8DD73D1881BAD08F3BC2FABC4D009995CF872B8C6F143E446140786AD ct=846279782 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481529 collected hash=02E1F66EE6AA51EA408EC518B6E70D814FFE92C47F6E3145B2961FE51B506277 ct=846279922 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481566 collected hash=E01EA35EB7B46F127BE59E9854E6221EDA409C7FE86F295FE22482AEF5CC229A ct=846280041 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481591 collected hash=D435195ED6AB9774E7BE4F578904FF469503EDF58FE602E33BF885A656E7533D ct=846280112 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481611 collected hash=A3A913B17A8C217EAFC4A06D3C0F5619948659B0433F5F847F5144156F0ACD53 ct=846280172 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481671 collected hash=C1ED7548AFC5079E2E7E56DA610A9A8AC7F781B6BE048D28526DBD869990183C ct=846280353 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481698 collected hash=4DA3F7CC817D58FA683990EBC9B716555C2CB2AED7DBF6395D4F6601D4BE9D79 ct=846280440 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481708 collected hash=7245E75BAC8354338B2856C84BC83B6882DE247CB94D02A82C8508E1BAE601C9 ct=846280470 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481752 collected hash=E4A80CEBA8723F74CD729DB81B039E1235EFC78D1F11A0AC5BD818599FF11F56 ct=846280600 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481813 collected hash=D9467435000EFC1AF597E8A032B26BEDA02087F1DBBD5F4077F40FA3C6668957 ct=846280782 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481824 collected hash=20DBBE73FC34DF07DF8208A08D77A4EF50DAEE4D3ED129C0C7A9AC46A9C65B74 ct=846280813 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481838 collected hash=CBBC34CE18A5C0200BC4D3E3A9BD690DE3C8B8DE65DA64666B5AB763EBC8E22D ct=846280860 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481856 collected hash=C93B5B238601294E6A7605E3FBCD4B21C479AA88006434FAA0D214C728842988 ct=846280911 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481857 collected hash=E7F7134BC25ADE219BC5B2202AB36AFD2FCADF3034E47A2D795A8F371B19468B ct=846280912 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481885 collected hash=E4D9973D9170D0E25DDC98A010D04677DE43EAEB78A3231C77EF52E5B236CA85 ct=846281001 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481889 collected hash=4CB66A32CD332CB10D4DF78604D2B3A6682B5C98B0FA2EFDCB61BEB0FEE333B2 ct=846281012 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481972 collected hash=8677E15762E1256E4061BD75BA5435E0803974D2D32BFEBDA1E4F2AB64D4F54A ct=846281262 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7481985 collected hash=91936FEC45FBC86DF4803334F63D3EE85FFE1CC6098D429851B21BE736403BA4 ct=846281302 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7482029 collected hash=ACF8A25AD45654092283C041EDA7EA54898FCFC02999B0BEBB1BAE6F53E50977 ct=846281440 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+MATCH ledger 7482069 collected hash=DFDCA5DA12679EAF78BAACDC35480386FB1C87FB9A3A4537A547FB465E29BC4D ct=846281560 | local hash== ct== res=10 flags=0 | public hash== ct== res=10 flags=0
+RESULT: PASS 20/20 match
+exit 0
