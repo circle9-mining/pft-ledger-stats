@@ -1,0 +1,27 @@
+2026-10-25T00:17:19Z start window 2026-10-25T00:17:19Z -> 2026-10-26T00:17:19Z last_ledger=None proposed=0 validated=0 torn_bytes=0 bad_lines=0 pid=298511
+2026-10-25T00:17:19Z connected (1) ws://127.0.0.1:6006/, subscribed ledger,transactions,transactions_proposed
+2026-10-25T01:17:19Z progress last_ledger=7457156 proposed=403 validated=402
+2026-10-25T02:17:19Z progress last_ledger=7458346 proposed=785 validated=785
+2026-10-25T03:17:21Z progress last_ledger=7459538 proposed=1211 validated=1211
+2026-10-25T04:17:21Z progress last_ledger=7460724 proposed=1656 validated=1655
+2026-10-25T05:17:21Z progress last_ledger=7461917 proposed=2047 validated=2047
+2026-10-25T06:17:20Z progress last_ledger=7463106 proposed=2448 validated=2448
+2026-10-25T07:17:19Z progress last_ledger=7464296 proposed=2857 validated=2857
+2026-10-25T08:17:20Z progress last_ledger=7465488 proposed=3259 validated=3258
+2026-10-25T09:17:20Z progress last_ledger=7466676 proposed=3650 validated=3650
+2026-10-25T10:17:20Z progress last_ledger=7467867 proposed=4076 validated=4076
+2026-10-25T11:17:21Z progress last_ledger=7469059 proposed=4485 validated=4485
+2026-10-25T12:17:21Z progress last_ledger=7470251 proposed=4902 validated=4901
+2026-10-25T13:17:20Z progress last_ledger=7471441 proposed=5291 validated=5291
+2026-10-25T14:17:21Z progress last_ledger=7472634 proposed=5720 validated=5720
+2026-10-25T15:17:19Z progress last_ledger=7473824 proposed=6119 validated=6118
+2026-10-25T16:17:21Z progress last_ledger=7475015 proposed=6521 validated=6521
+2026-10-25T17:17:20Z progress last_ledger=7476205 proposed=6918 validated=6917
+2026-10-25T18:17:21Z progress last_ledger=7477399 proposed=7338 validated=7338
+2026-10-25T19:17:19Z progress last_ledger=7478590 proposed=7758 validated=7757
+2026-10-25T20:17:20Z progress last_ledger=7479783 proposed=8168 validated=8166
+2026-10-25T21:17:22Z progress last_ledger=7480974 proposed=8572 validated=8572
+2026-10-25T22:17:19Z progress last_ledger=7482162 proposed=8981 validated=8981
+2026-10-25T23:17:21Z progress last_ledger=7483351 proposed=9376 validated=9376
+2026-10-26T00:17:20Z progress last_ledger=7484539 proposed=9772 validated=9772
+2026-10-26T00:17:20Z stop (window complete) last_ledger=7484539 proposed=9772 validated=9772

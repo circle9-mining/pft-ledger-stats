@@ -1,0 +1,27 @@
+# OS: Ubuntu 22.04.5 LTS | 2026-10-26T00:17:31Z
+$ systemctl status pft-txflow-collect --no-pager
+○ pft-txflow-collect.service - pft-ledger-stats txflow: 24h read-only transaction lifecycle collection (collect_flow.py)
+     Loaded: loaded (/etc/systemd/system/pft-txflow-collect.service; disabled; vendor preset: enabled)
+     Active: inactive (dead)
+
+Oct 25 17:17:21 <host> bash[298511]: 2026-10-25T16:17:21Z progress last_ledger=7475015 proposed=6521 validated=6521
+Oct 25 18:17:20 <host> bash[298511]: 2026-10-25T17:17:20Z progress last_ledger=7476205 proposed=6918 validated=6917
+Oct 25 19:17:21 <host> bash[298511]: 2026-10-25T18:17:21Z progress last_ledger=7477399 proposed=7338 validated=7338
+Oct 25 20:17:19 <host> bash[298511]: 2026-10-25T19:17:19Z progress last_ledger=7478590 proposed=7758 validated=7757
+Oct 25 21:17:20 <host> bash[298511]: 2026-10-25T20:17:20Z progress last_ledger=7479783 proposed=8168 validated=8166
+Oct 25 22:17:22 <host> bash[298511]: 2026-10-25T21:17:22Z progress last_ledger=7480974 proposed=8572 validated=8572
+Oct 25 23:17:19 <host> bash[298511]: 2026-10-25T22:17:19Z progress last_ledger=7482162 proposed=8981 validated=8981
+Oct 26 00:17:21 <host> bash[298511]: 2026-10-25T23:17:21Z progress last_ledger=7483351 proposed=9376 validated=9376
+Oct 26 01:17:20 <host> bash[298511]: 2026-10-26T00:17:20Z progress last_ledger=7484539 proposed=9772 validated=9772
+Oct 26 01:17:20 <host> bash[298511]: 2026-10-26T00:17:20Z stop (window complete) last_ledger=7484539 proposed=9772 validated=9772
+$ wc -l data/txflow/flow.jsonl
+76691 data/txflow/flow.jsonl
+$ jq -r .ev data/txflow/flow.jsonl | sort | uniq -c
+  28572 fee
+  28573 ledger
+   9772 proposed
+      1 session
+      1 stop
+   9772 validated
+$ cat data/txflow/state.json
+{"window_start": 1792887439, "window_end": 1792973839, "url": null}

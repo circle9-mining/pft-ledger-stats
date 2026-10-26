@@ -5,6 +5,11 @@ For each of --count random hashes (seeded) recorded as validated, asks the publi
 (read-only `tx`, >= 1 s between requests) and compares: validated == true, same ledger_index,
 same TransactionResult. Prints one line per hash and a summary. Exit 0 = all match, 1 = any mismatch.
 
+The public server sometimes gives transient incomplete or differing answers (lgrNotFound, "internal",
+a `tx` answer without validated/meta) that succeed seconds later. A non-matching answer is retried
+(--tries in total, exponential backoff 2, 4, 8 s ...), every retry is printed, and only the final
+answer counts: a mismatch that persists is still a MISMATCH.
+
 Usage: crosscheck_flow.py data/txflow/flow.jsonl [--count 20] [--seed N] [--rpc URL]
 """
 
@@ -29,6 +34,7 @@ def main(argv=None, fetch=rpc_tx, sleep=time.sleep):
     ap.add_argument("--count", type=int, default=20)
     ap.add_argument("--seed", type=int, default=20261025)
     ap.add_argument("--rpc", default="https://rpc.testnet.postfiat.org")
+    ap.add_argument("--tries", type=int, default=4)
     a = ap.parse_args(argv)
     val = {}
     with open(a.flow) as fh:
@@ -47,13 +53,27 @@ def main(argv=None, fetch=rpc_tx, sleep=time.sleep):
         if i:
             sleep(1.0)
         mine = val[h]
-        try:
-            r = fetch(a.rpc, h)
-            got = (r.get("validated"), r.get("ledger_index"), (r.get("meta") or {}).get("TransactionResult"))
-            err = r.get("error")
-        except Exception as ex:  # network errors count as mismatch, never skipped silently
-            got, err = (None, None, None), f"{type(ex).__name__}: {ex}"
-        match = got == (True, mine["ledger_index"], mine.get("result"))
+        want = (True, mine["ledger_index"], mine.get("result"))
+        for attempt in range(1, a.tries + 1):
+            try:
+                r = fetch(a.rpc, h)
+                got = (
+                    r.get("validated"),
+                    r.get("ledger_index"),
+                    (r.get("meta") or {}).get("TransactionResult"),
+                )
+                err = r.get("error")
+            except Exception as ex:  # network errors count as mismatch, never skipped silently
+                got, err = (None, None, None), f"{type(ex).__name__}: {ex}"
+            match = got == want
+            if match or attempt == a.tries:
+                break
+            wait = 2.0**attempt
+            print(
+                f"RETRY {attempt}/{a.tries - 1} {h} public validated={got[0]} ledger={got[1]} result={got[2]}"
+                f"{' error=' + err if err else ''} -> again in {wait:.0f}s"
+            )
+            sleep(wait)
         ok += match
         print(
             f"{'MATCH' if match else 'MISMATCH'} {h}"

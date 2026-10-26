@@ -1,0 +1,6 @@
+# OS: Ubuntu 22.04.5 LTS | 2026-10-26T00:18:12Z
+# re-run after the queue-axis fix (analyze-1 = first run, same data)
+$ .venv/bin/python txflow/analyze_flow.py data/txflow/flow.jsonl --report txflow/report --charts --title "txflow 24h report 2026-10-25T00:17:19Z -> 2026-10-26T00:17:19Z"
+exit 0
+eee514f6127ff78a447f8b2abe2fd87f7a6d2c40538d6049c54cec145683e7e7  txflow/report/REPORT.md
+fdc116f5643ad994e2e8e6b4c2c876aca6fbbe3af17a44c712afed261ea98771  txflow/report/summary.json

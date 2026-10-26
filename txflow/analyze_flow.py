@@ -328,9 +328,11 @@ def charts(evs, s, outdir):
             (a2, "open_ledger_fee", "open-ledger fee (drops)"),
         ):
             _axes(ax)
-            ax.step(ts, [f[key] for f in fees], where="post", color=SERIES, linewidth=2)
+            vals = [f[key] for f in fees]
+            ax.step(ts, vals, where="post", color=SERIES, linewidth=2)
             ax.set_ylabel(label, color=MUTED, fontsize=9)
-            ax.set_ylim(bottom=0)
+            top = max(vals)
+            ax.set_ylim(0, top * 1.1 if top > 0 else 1)  # an all-zero series would get a fractional autoscale
         a1.yaxis.set_major_locator(MaxNLocator(integer=True))
         a1.set_title(
             "Transaction queue and open-ledger fee, one sample per validated ledger (UTC)",

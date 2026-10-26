@@ -10,7 +10,7 @@ from crosscheck_flow import main  # noqa: E402
 
 
 class Crosscheck(unittest.TestCase):
-    def run_with(self, public):
+    def run_with(self, public, tries=None):
         with tempfile.TemporaryDirectory() as d:
             f = os.path.join(d, "flow.jsonl")
             with open(f, "w") as fh:
@@ -26,7 +26,8 @@ class Crosscheck(unittest.TestCase):
                         )
                         + "\n"
                     )
-            return main([f, "--count", "3"], fetch=lambda url, h: public(h), sleep=lambda s: None)
+            extra = ["--tries", str(tries)] if tries else []
+            return main([f, "--count", "3", *extra], fetch=lambda url, h: public(h), sleep=lambda s: None)
 
     def test_all_match(self):
         def ok(h):
@@ -55,6 +56,32 @@ class Crosscheck(unittest.TestCase):
             raise OSError("down")
 
         self.assertEqual(self.run_with(boom), 1)
+
+    def test_transient_error_is_retried_then_matches(self):
+        calls = {}
+
+        def flaky(h):
+            calls[h] = calls.get(h, 0) + 1
+            if calls[h] == 1:
+                return {"error": "lgrNotFound"}
+            return {
+                "validated": True,
+                "ledger_index": 100 + int(h[1]),
+                "meta": {"TransactionResult": "tesSUCCESS"},
+            }
+
+        self.assertEqual(self.run_with(flaky), 0)
+        self.assertEqual(sorted(calls.values()), [2, 2, 2])
+
+    def test_persistent_mismatch_fails_after_all_tries(self):
+        calls = []
+
+        def bad(h):
+            calls.append(h)
+            return {"validated": True, "ledger_index": 1, "meta": {"TransactionResult": "tesSUCCESS"}}
+
+        self.assertEqual(self.run_with(bad, tries=3), 1)
+        self.assertEqual(len(calls), 9)
 
 
 if __name__ == "__main__":

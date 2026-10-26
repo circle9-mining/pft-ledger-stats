@@ -1,0 +1,111 @@
+{
+ "bad_lines": 0,
+ "base_fee_values": [
+  10
+ ],
+ "by_engine_result_class": {
+  "tec": {
+   "validated": 13
+  },
+  "tes": {
+   "validated": 9759
+  }
+ },
+ "escalated_samples": 0,
+ "escalation_periods": [],
+ "fee_samples": 28572,
+ "gap_ledgers": 0,
+ "gaps": [],
+ "latency_l": {
+  "count": 9772,
+  "max": 2,
+  "p50": 1.0,
+  "p90": 1.0,
+  "p99": 1.0
+ },
+ "latency_l_by_type": {
+  "NFTokenBurn": {
+   "count": 693,
+   "max": 2,
+   "p50": 1.0,
+   "p90": 1.0,
+   "p99": 1.0
+  },
+  "NFTokenMint": {
+   "count": 783,
+   "max": 1,
+   "p50": 1.0,
+   "p90": 1.0,
+   "p99": 1.0
+  },
+  "Payment": {
+   "count": 8296,
+   "max": 2,
+   "p50": 1.0,
+   "p90": 1.0,
+   "p99": 1.0
+  }
+ },
+ "latency_l_counts": {
+  "0": 2183,
+  "1": 7585,
+  "2": 4
+ },
+ "latency_s": {
+  "count": 9772,
+  "max": 6.769999980926514,
+  "p50": 3.989500045776367,
+  "p90": 5.3470001220703125,
+  "p99": 6.083579971790315
+ },
+ "latency_s_by_type": {
+  "NFTokenBurn": {
+   "count": 693,
+   "max": 6.507000207901001,
+   "p50": 3.996000051498413,
+   "p90": 5.350799942016601,
+   "p99": 6.184480018615723
+  },
+  "NFTokenMint": {
+   "count": 783,
+   "max": 6.424999952316284,
+   "p50": 3.9739999771118164,
+   "p90": 5.338199996948242,
+   "p99": 6.088259887695312
+  },
+  "Payment": {
+   "count": 8296,
+   "max": 6.769999980926514,
+   "p50": 3.990000009536743,
+   "p90": 5.348999977111816,
+   "p99": 6.071149861812589
+  }
+ },
+ "ledger_range": [
+  7455967,
+  7484539
+ ],
+ "ledgers_observed": 28573,
+ "ledgers_with_queue": 0,
+ "max_open_ledger_fee": 10,
+ "n_ledgers": 20,
+ "never_hashes": [],
+ "never_share": {
+  "tec": 0.0,
+  "tes": 0.0
+ },
+ "outcomes": {
+  "validated": 9772
+ },
+ "proposed": 9772,
+ "queue": {
+  "count": 28572,
+  "max": 0,
+  "p50": 0.0,
+  "p90": 0.0,
+  "p99": 0.0
+ },
+ "sessions": 1,
+ "validated": 9772,
+ "validated_without_proposed": 0
+}

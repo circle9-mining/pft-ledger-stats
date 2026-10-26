@@ -1,0 +1,40 @@
+# txflow 24h report 2026-10-25T00:17:19Z -> 2026-10-26T00:17:19Z
+
+- ledgers observed: 28573 (range [7455967, 7484539]), gap ledgers: 0 in 0 gap(s), collector sessions: 1
+- proposed hashes: 9772, validated hashes: 9772 (validated without a proposed sighting: 0)
+- outcomes (N = 20 ledgers): validated 9772, late 0, never 0, unknown_gap 0, pending_end 0
+
+## Latency, proposed -> validated
+
+| scope | count | p50 | p90 | p99 | max |
+|---|---:|---:|---:|---:|---:|
+| all, seconds | 9772 | 3.99 | 5.35 | 6.08 | 6.77 |
+| all, ledgers | 9772 | 1 | 1 | 1 | 2 |
+| Payment, seconds | 8296 | 3.99 | 5.35 | 6.07 | 6.77 |
+| NFTokenMint, seconds | 783 | 3.97 | 5.34 | 6.09 | 6.42 |
+| NFTokenBurn, seconds | 693 | 4.00 | 5.35 | 6.18 | 6.51 |
+| Payment, ledgers | 8296 | 1 | 1 | 1 | 2 |
+| NFTokenMint, ledgers | 783 | 1 | 1 | 1 | 1 |
+| NFTokenBurn, ledgers | 693 | 1 | 1 | 1 | 2 |
+
+Ledgers to validation (count of txs): 0: 2183, 1: 7585, 2: 4
+
+## Outcome by engine_result class (at first proposed sighting)
+
+| class | validated | late | never | unknown_gap | pending_end | never-validated share |
+|---|---:|---:|---:|---:|---:|---:|
+| tec | 13 | 0 | 0 | 0 | 0 | 0.00% |
+| tes | 9759 | 0 | 0 | 0 | 0 | 0.00% |
+
+## Fee and queue (one fee sample per validated ledger)
+
+- fee samples: 28572, base_fee values: [10], max open_ledger_fee: 10
+- queue size p50/p90/p99/max: 0.00/0.00/0.00/0; samples with a non-empty queue: 0
+- escalated samples (open_ledger_fee > base_fee): 0 in 0 period(s)
+
+## Charts
+
+![latency.png](latency.png)
+
+![queue_fee.png](queue_fee.png)
+

@@ -1,0 +1,198 @@
+$ .venv/bin/ruff check txflow tests && .venv/bin/python -m pytest -q -rA -p no:cacheprovider tests/test_txflow_collect.py tests/test_txflow_analyze.py tests/test_txflow_crosscheck.py   (2026-10-26T00:19:13Z, Ubuntu 22.04.5 LTS, Python 3.10.12)
+All checks passed!
+....................                                                     [100%]
+==================================== PASSES ====================================
+___________________ DrillChecker.test_positive_and_negatives ___________________
+----------------------------- Captured stdout call -----------------------------
+  [PASS] SIGTERM snapshot ends with a newline (clean stop)
+  [PASS] SIGTERM snapshot is a byte-identical prefix of the final file - 194 bytes
+  [PASS] SIGKILL snapshot (complete lines) is a byte-identical prefix of the final file - 351 bytes, torn tail 10 bytes
+  [PASS] every line parses as JSON - 13 lines, 0 bad
+  [PASS] 3 sessions: resumed false, true, true - [False, True, True]
+  [PASS] same window_end in every session
+  [PASS] session 3 records the torn bytes cut after SIGKILL - torn_bytes=10
+  [PASS] stop events: SIGTERM then window complete - ['SIGTERM', 'window complete']
+  [PASS] no duplicate ledger entries - 4 entries
+  [PASS] no duplicate proposed entries - 1 entries
+  [PASS] no duplicate validated entries - 1 entries
+  [PASS] ledgers contiguous apart from recorded gaps - 10-16, 4 ledgers, gaps 12-13 (2, restart), 15-15 (1, restart)
+  [PASS] both gaps labelled restart
+RESULT: PASS (13/13)
+  [PASS] SIGTERM snapshot ends with a newline (clean stop)
+  [PASS] SIGTERM snapshot is a byte-identical prefix of the final file - 194 bytes
+  [PASS] SIGKILL snapshot (complete lines) is a byte-identical prefix of the final file - 351 bytes, torn tail 10 bytes
+  [PASS] every line parses as JSON - 14 lines, 0 bad
+  [PASS] 3 sessions: resumed false, true, true - [False, True, True]
+  [PASS] same window_end in every session
+  [PASS] session 3 records the torn bytes cut after SIGKILL - torn_bytes=10
+  [PASS] stop events: SIGTERM then window complete - ['SIGTERM', 'window complete']
+  [PASS] no duplicate ledger entries - 4 entries
+  [FAIL] no duplicate proposed entries - 2 entries
+  [PASS] no duplicate validated entries - 1 entries
+  [PASS] ledgers contiguous apart from recorded gaps - 10-16, 4 ledgers, gaps 12-13 (2, restart), 15-15 (1, restart)
+  [PASS] both gaps labelled restart
+RESULT: FAIL (12/13)
+  [PASS] SIGTERM snapshot ends with a newline (clean stop)
+  [FAIL] SIGTERM snapshot is a byte-identical prefix of the final file - 204 bytes
+  [PASS] SIGKILL snapshot (complete lines) is a byte-identical prefix of the final file - 351 bytes, torn tail 10 bytes
+  [PASS] every line parses as JSON - 13 lines, 0 bad
+  [PASS] 3 sessions: resumed false, true, true - [False, True, True]
+  [PASS] same window_end in every session
+  [PASS] session 3 records the torn bytes cut after SIGKILL - torn_bytes=10
+  [PASS] stop events: SIGTERM then window complete - ['SIGTERM', 'window complete']
+  [PASS] no duplicate ledger entries - 4 entries
+  [PASS] no duplicate proposed entries - 1 entries
+  [PASS] no duplicate validated entries - 1 entries
+  [PASS] ledgers contiguous apart from recorded gaps - 10-16, 4 ledgers, gaps 12-13 (2, restart), 15-15 (1, restart)
+  [PASS] both gaps labelled restart
+RESULT: FAIL (12/13)
+____________________________ Fees.test_report_files ____________________________
+----------------------------- Captured stdout call -----------------------------
+# txflow report
+
+- ledgers observed: 2 (range [1, 2]), gap ledgers: 0 in 0 gap(s), collector sessions: 0
+- proposed hashes: 1, validated hashes: 1 (validated without a proposed sighting: 0)
+- outcomes (N = 1 ledgers): validated 1, late 0, never 0, unknown_gap 0, pending_end 0
+
+## Latency, proposed -> validated
+
+| scope | count | p50 | p90 | p99 | max |
+|---|---:|---:|---:|---:|---:|
+| all, seconds | 1 | 3.00 | 3.00 | 3.00 | 3.00 |
+| all, ledgers | 1 | 1 | 1 | 1 | 1 |
+| Payment, seconds | 1 | 3.00 | 3.00 | 3.00 | 3.00 |
+| Payment, ledgers | 1 | 1 | 1 | 1 | 1 |
+
+Ledgers to validation (count of txs): 1: 1
+
+## Outcome by engine_result class (at first proposed sighting)
+
+| class | validated | late | never | unknown_gap | pending_end | never-validated share |
+|---|---:|---:|---:|---:|---:|---:|
+| tes | 1 | 0 | 0 | 0 | 0 | 0.00% |
+
+## Fee and queue (one fee sample per validated ledger)
+
+- fee samples: 1, base_fee values: [10], max open_ledger_fee: 300
+- queue size p50/p90/p99/max: 2.00/2.00/2.00/2; samples with a non-empty queue: 1
+- escalated samples (open_ledger_fee > base_fee): 1 in 1 period(s)
+
+| ledgers | samples | max open_ledger_fee | max queue |
+|---|---:|---:|---:|
+| 1-1 | 1 | 300 | 2 |
+
+__________________________ Crosscheck.test_all_match ___________________________
+----------------------------- Captured stdout call -----------------------------
+crosscheck 3 of 5 validated hashes (seed 20261025) against https://rpc.testnet.postfiat.org tx
+MATCH H3 collected ledger=103 result=tesSUCCESS | public validated=True ledger=103 result=tesSUCCESS
+MATCH H4 collected ledger=104 result=tesSUCCESS | public validated=True ledger=104 result=tesSUCCESS
+MATCH H0 collected ledger=100 result=tesSUCCESS | public validated=True ledger=100 result=tesSUCCESS
+RESULT: 3/3 match
+__________________ Crosscheck.test_network_error_is_mismatch ___________________
+----------------------------- Captured stdout call -----------------------------
+crosscheck 3 of 5 validated hashes (seed 20261025) against https://rpc.testnet.postfiat.org tx
+RETRY 1/3 H3 public validated=None ledger=None result=None error=OSError: down -> again in 2s
+RETRY 2/3 H3 public validated=None ledger=None result=None error=OSError: down -> again in 4s
+RETRY 3/3 H3 public validated=None ledger=None result=None error=OSError: down -> again in 8s
+MISMATCH H3 collected ledger=103 result=tesSUCCESS | public validated=None ledger=None result=None error=OSError: down
+RETRY 1/3 H4 public validated=None ledger=None result=None error=OSError: down -> again in 2s
+RETRY 2/3 H4 public validated=None ledger=None result=None error=OSError: down -> again in 4s
+RETRY 3/3 H4 public validated=None ledger=None result=None error=OSError: down -> again in 8s
+MISMATCH H4 collected ledger=104 result=tesSUCCESS | public validated=None ledger=None result=None error=OSError: down
+RETRY 1/3 H0 public validated=None ledger=None result=None error=OSError: down -> again in 2s
+RETRY 2/3 H0 public validated=None ledger=None result=None error=OSError: down -> again in 4s
+RETRY 3/3 H0 public validated=None ledger=None result=None error=OSError: down -> again in 8s
+MISMATCH H0 collected ledger=100 result=tesSUCCESS | public validated=None ledger=None result=None error=OSError: down
+RESULT: 0/3 match
+__________ Crosscheck.test_persistent_mismatch_fails_after_all_tries ___________
+----------------------------- Captured stdout call -----------------------------
+crosscheck 3 of 5 validated hashes (seed 20261025) against https://rpc.testnet.postfiat.org tx
+RETRY 1/2 H3 public validated=True ledger=1 result=tesSUCCESS -> again in 2s
+RETRY 2/2 H3 public validated=True ledger=1 result=tesSUCCESS -> again in 4s
+MISMATCH H3 collected ledger=103 result=tesSUCCESS | public validated=True ledger=1 result=tesSUCCESS
+RETRY 1/2 H4 public validated=True ledger=1 result=tesSUCCESS -> again in 2s
+RETRY 2/2 H4 public validated=True ledger=1 result=tesSUCCESS -> again in 4s
+MISMATCH H4 collected ledger=104 result=tesSUCCESS | public validated=True ledger=1 result=tesSUCCESS
+RETRY 1/2 H0 public validated=True ledger=1 result=tesSUCCESS -> again in 2s
+RETRY 2/2 H0 public validated=True ledger=1 result=tesSUCCESS -> again in 4s
+MISMATCH H0 collected ledger=100 result=tesSUCCESS | public validated=True ledger=1 result=tesSUCCESS
+RESULT: 0/3 match
+___________ Crosscheck.test_transient_error_is_retried_then_matches ____________
+----------------------------- Captured stdout call -----------------------------
+crosscheck 3 of 5 validated hashes (seed 20261025) against https://rpc.testnet.postfiat.org tx
+RETRY 1/3 H3 public validated=None ledger=None result=None error=lgrNotFound -> again in 2s
+MATCH H3 collected ledger=103 result=tesSUCCESS | public validated=True ledger=103 result=tesSUCCESS
+RETRY 1/3 H4 public validated=None ledger=None result=None error=lgrNotFound -> again in 2s
+MATCH H4 collected ledger=104 result=tesSUCCESS | public validated=True ledger=104 result=tesSUCCESS
+RETRY 1/3 H0 public validated=None ledger=None result=None error=lgrNotFound -> again in 2s
+MATCH H0 collected ledger=100 result=tesSUCCESS | public validated=True ledger=100 result=tesSUCCESS
+RESULT: 3/3 match
+__________ Crosscheck.test_wrong_ledger_or_unvalidated_or_error_fails __________
+----------------------------- Captured stdout call -----------------------------
+crosscheck 3 of 5 validated hashes (seed 20261025) against https://rpc.testnet.postfiat.org tx
+RETRY 1/3 H3 public validated=True ledger=1 result=tesSUCCESS -> again in 2s
+RETRY 2/3 H3 public validated=True ledger=1 result=tesSUCCESS -> again in 4s
+RETRY 3/3 H3 public validated=True ledger=1 result=tesSUCCESS -> again in 8s
+MISMATCH H3 collected ledger=103 result=tesSUCCESS | public validated=True ledger=1 result=tesSUCCESS
+RETRY 1/3 H4 public validated=True ledger=1 result=tesSUCCESS -> again in 2s
+RETRY 2/3 H4 public validated=True ledger=1 result=tesSUCCESS -> again in 4s
+RETRY 3/3 H4 public validated=True ledger=1 result=tesSUCCESS -> again in 8s
+MISMATCH H4 collected ledger=104 result=tesSUCCESS | public validated=True ledger=1 result=tesSUCCESS
+RETRY 1/3 H0 public validated=True ledger=1 result=tesSUCCESS -> again in 2s
+RETRY 2/3 H0 public validated=True ledger=1 result=tesSUCCESS -> again in 4s
+RETRY 3/3 H0 public validated=True ledger=1 result=tesSUCCESS -> again in 8s
+MISMATCH H0 collected ledger=100 result=tesSUCCESS | public validated=True ledger=1 result=tesSUCCESS
+RESULT: 0/3 match
+crosscheck 3 of 5 validated hashes (seed 20261025) against https://rpc.testnet.postfiat.org tx
+RETRY 1/3 H3 public validated=False ledger=103 result=tesSUCCESS -> again in 2s
+RETRY 2/3 H3 public validated=False ledger=103 result=tesSUCCESS -> again in 4s
+RETRY 3/3 H3 public validated=False ledger=103 result=tesSUCCESS -> again in 8s
+MISMATCH H3 collected ledger=103 result=tesSUCCESS | public validated=False ledger=103 result=tesSUCCESS
+RETRY 1/3 H4 public validated=False ledger=104 result=tesSUCCESS -> again in 2s
+RETRY 2/3 H4 public validated=False ledger=104 result=tesSUCCESS -> again in 4s
+RETRY 3/3 H4 public validated=False ledger=104 result=tesSUCCESS -> again in 8s
+MISMATCH H4 collected ledger=104 result=tesSUCCESS | public validated=False ledger=104 result=tesSUCCESS
+RETRY 1/3 H0 public validated=False ledger=100 result=tesSUCCESS -> again in 2s
+RETRY 2/3 H0 public validated=False ledger=100 result=tesSUCCESS -> again in 4s
+RETRY 3/3 H0 public validated=False ledger=100 result=tesSUCCESS -> again in 8s
+MISMATCH H0 collected ledger=100 result=tesSUCCESS | public validated=False ledger=100 result=tesSUCCESS
+RESULT: 0/3 match
+crosscheck 3 of 5 validated hashes (seed 20261025) against https://rpc.testnet.postfiat.org tx
+RETRY 1/3 H3 public validated=None ledger=None result=None error=txnNotFound -> again in 2s
+RETRY 2/3 H3 public validated=None ledger=None result=None error=txnNotFound -> again in 4s
+RETRY 3/3 H3 public validated=None ledger=None result=None error=txnNotFound -> again in 8s
+MISMATCH H3 collected ledger=103 result=tesSUCCESS | public validated=None ledger=None result=None error=txnNotFound
+RETRY 1/3 H4 public validated=None ledger=None result=None error=txnNotFound -> again in 2s
+RETRY 2/3 H4 public validated=None ledger=None result=None error=txnNotFound -> again in 4s
+RETRY 3/3 H4 public validated=None ledger=None result=None error=txnNotFound -> again in 8s
+MISMATCH H4 collected ledger=104 result=tesSUCCESS | public validated=None ledger=None result=None error=txnNotFound
+RETRY 1/3 H0 public validated=None ledger=None result=None error=txnNotFound -> again in 2s
+RETRY 2/3 H0 public validated=None ledger=None result=None error=txnNotFound -> again in 4s
+RETRY 3/3 H0 public validated=None ledger=None result=None error=txnNotFound -> again in 8s
+MISMATCH H0 collected ledger=100 result=tesSUCCESS | public validated=None ledger=None result=None error=txnNotFound
+RESULT: 0/3 match
+=========================== short test summary info ============================
+PASSED tests/test_txflow_collect.py::Collect::test_fee_event
+PASSED tests/test_txflow_collect.py::Collect::test_gap_reconnect_label_once
+PASSED tests/test_txflow_collect.py::Collect::test_gap_stream_skip
+PASSED tests/test_txflow_collect.py::Collect::test_no_hash_ignored
+PASSED tests/test_txflow_collect.py::Collect::test_proposed_validated_dedupe
+PASSED tests/test_txflow_collect.py::Collect::test_reconnect_without_missed_ledger_no_gap
+PASSED tests/test_txflow_collect.py::Resume::test_bad_middle_line_counted
+PASSED tests/test_txflow_collect.py::Resume::test_torn_tail_and_restart_gap
+PASSED tests/test_txflow_collect.py::DrillChecker::test_positive_and_negatives
+PASSED tests/test_txflow_analyze.py::Latency::test_seconds_and_ledgers
+PASSED tests/test_txflow_analyze.py::Latency::test_validated_without_proposed_counted_not_in_latency
+PASSED tests/test_txflow_analyze.py::Outcomes::test_boundary_exactly_n
+PASSED tests/test_txflow_analyze.py::Outcomes::test_five_classes
+PASSED tests/test_txflow_analyze.py::Fees::test_escalation_periods
+PASSED tests/test_txflow_analyze.py::Fees::test_report_files
+PASSED tests/test_txflow_crosscheck.py::Crosscheck::test_all_match
+PASSED tests/test_txflow_crosscheck.py::Crosscheck::test_network_error_is_mismatch
+PASSED tests/test_txflow_crosscheck.py::Crosscheck::test_persistent_mismatch_fails_after_all_tries
+PASSED tests/test_txflow_crosscheck.py::Crosscheck::test_transient_error_is_retried_then_matches
+PASSED tests/test_txflow_crosscheck.py::Crosscheck::test_wrong_ledger_or_unvalidated_or_error_fails
+20 passed in 0.17s
+exit 0
+$ shellcheck txflow/*.sh
+shellcheck: clean (exit 0)

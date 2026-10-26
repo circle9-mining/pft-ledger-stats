@@ -23,7 +23,7 @@ public RPC.
 | `wsclient.py` | minimal stdlib RFC 6455 client (ws:// only, for the loopback port) |
 | `run-collector.sh` | runs the collector inside the container's **network namespace** as an unprivileged user (see below) |
 | `analyze_flow.py` | latency / outcome / fee-queue report -> `REPORT.md`, `summary.json`, charts |
-| `crosscheck_flow.py` | N random validated hashes vs a public RPC `tx` call (validated, ledger_index, result) |
+| `crosscheck_flow.py` | N random validated hashes vs a public RPC `tx` call (validated, ledger_index, result); transient non-matching answers are retried with backoff and printed, only the final answer counts |
 | `resume_drill.sh`, `resume_check.py` | live SIGTERM + SIGKILL resume drill and its checks |
 
 Tests: `tests/test_txflow_collect.py`, `tests/test_txflow_analyze.py`, `tests/test_txflow_crosscheck.py`.
@@ -72,6 +72,32 @@ Outcome of each proposed hash, judged at `ledger_current_index + N`: `validated`
 `late` (validated after more than N), `never` (no validated message, and every ledger in the range
 observed), `unknown_gap` (a gap overlaps the range, so a validation may have been missed) and
 `pending_end` (the data ends too early). Never-validated share = never / (validated + late + never).
+
+## 24h results (2026-10-25T00:17:19Z -> 2026-10-26T00:17:19Z)
+
+Full report: [`report/REPORT.md`](report/REPORT.md) (charts `report/latency.png`, `report/queue_fee.png`,
+numbers in `report/summary.json`). One collector session, 28573 ledgers (7455967-7484539), **0 gaps**.
+
+- 9772 proposed hashes, 9772 validated, 0 validated without a proposed sighting.
+- Proposed -> validated latency: p50 3.99 s, p90 5.35 s, p99 6.08 s, max 6.77 s; 1 ledger at p50-p99, 2 at max.
+- Never-validated within N = 20 ledgers: 0 of 9772 (`tes` 9759, `tec` 13 at first sighting).
+- Fees: base fee 10 drops in every sample, open-ledger fee never above it, queue empty in all 28572
+  samples. There was no fee escalation in this window, so the escalation code path is covered only by unit tests.
+- Crosscheck: 20 random validated hashes against `rpc.testnet.postfiat.org` `tx`: 20/20 validated=true,
+  same ledger_index and TransactionResult ([`logs/crosscheck-20.log`](logs/crosscheck-20.log)).
+
+The dataset is published as `data/txflow/flow-24h.jsonl.gz` (byte-identical to the collected `flow.jsonl`
+after `zcat`). To reproduce the report:
+
+```sh
+zcat data/txflow/flow-24h.jsonl.gz > /tmp/flow.jsonl
+.venv/bin/python txflow/analyze_flow.py /tmp/flow.jsonl --report /tmp/txflow-report --charts
+```
+
+Logs: `logs/collect-24h.log` (collector), `logs/post-window.log` (unit state and event counts after the
+window), `logs/analyze-1.log` / `analyze-2.log` (first run, then a re-run after a chart fix: the all-zero
+queue panel had a fractional y-axis; same data, the report text is unchanged), `logs/resume-drill-1.log`,
+`logs/unit-tests.log` (at b43c411) and `logs/unit-tests-2.log` (after adding crosscheck retries).
 
 ## Limits
 
