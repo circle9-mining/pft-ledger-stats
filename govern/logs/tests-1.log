@@ -1,0 +1,18 @@
+$ .venv/bin/ruff check govern tests/test_govern_collect.py && .venv/bin/ruff format --check govern tests/test_govern_collect.py
+All checks passed!
+2 files already formatted
+$ shellcheck govern/run-collector.sh
+shellcheck clean
+$ .venv/bin/python -m pytest -q -rA tests/test_govern_collect.py
+........                                                                 [100%]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_govern_collect.py::TestFlagMath::test_voting_and_flag
+PASSED tests/test_govern_collect.py::TestRealFixture::test_flag_ledger_requests_both_objects
+PASSED tests/test_govern_collect.py::TestRealFixture::test_send_allows_only_read_commands
+PASSED tests/test_govern_collect.py::TestRealFixture::test_voting_validations_recorded_without_vote_fields
+PASSED tests/test_govern_collect.py::TestSyntheticVotes::test_amendment_and_fee_votes_kept
+PASSED tests/test_govern_collect.py::TestResume::test_duplicates_and_resume_overlap_dropped
+PASSED tests/test_govern_collect.py::TestResume::test_gap_reason_restart
+PASSED tests/test_govern_collect.py::TestResume::test_snapshot_retried_after_restart_if_missing
+8 passed in 0.04s

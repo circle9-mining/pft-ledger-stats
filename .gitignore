@@ -18,3 +18,4 @@ data/txflow/collect.log
 data/rewardflow/
 data/vlatency/
 data/vlatency-drill-*/
+data/govern/

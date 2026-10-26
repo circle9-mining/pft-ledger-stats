@@ -1,0 +1,22 @@
+OS: Ubuntu 22.04.5 LTS | govern collector live smoke on validator-host (read-only, admin WS in the container netns) | 2026-10-26T15:28:18Z
+collect_govern.py sha256 cbbda7973d389363
+== collector log (unit govern-smoke1 started 15:26:01Z, SIGTERM 15:27:41Z; govern-smoke2 resume, SIGTERM 15:28:04Z)
+2026-10-26T15:26:01Z start window 2026-10-26T15:26:01Z -> 2026-10-26T15:47:01Z last_ledger=None votes=0 snaps=0 torn_bytes=0 bad_lines=0 pid=1329053
+2026-10-26T15:26:01Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+2026-10-26T15:27:41Z stop (SIGTERM) last_ledger=7502595 votes=61 snaps=2 dups_dropped=0
+2026-10-26T15:27:41Z resume window 2026-10-26T15:26:01Z -> 2026-10-26T15:47:01Z last_ledger=7502595 votes=61 snaps=2 torn_bytes=0 bad_lines=0 pid=1329772
+2026-10-26T15:27:41Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+2026-10-26T15:28:04Z stop (SIGTERM) last_ledger=7502603 votes=61 snaps=2 dups_dropped=0
+== session/gap/stop events
+{"ev":"session","start":1793028361.63,"resumed":false,"last_ledger":null,"last_t":null,"torn_bytes":0,"bad_lines":0,"window_end":1793029621}
+{"ev":"stop","t":1793028461.153,"reason":"SIGTERM"}
+{"ev":"session","start":1793028461.401,"resumed":true,"last_ledger":7502595,"last_t":1793028461.153,"torn_bytes":0,"bad_lines":0,"window_end":1793029621}
+{"ev":"gap","from":7502596,"to":7502596,"count":1,"reason":"restart","t":1793028464.361}
+{"ev":"stop","t":1793028484.228,"reason":"SIGTERM"}
+== summary of govern.jsonl
+events {'session': 2, 'ledger': 40, 'vote': 61, 'snap': 2, 'stop': 2, 'gap': 1}
+ledgers 40 unique 40 range 7502563 7502603 span 41 gap ledgers 1
+voting ledgers [7502591] | validations recorded 61 | distinct validators 61 | full 61
+with amendment votes 0 | with fee votes 0 | unknown fields 0
+snap 7502592 Amendments error=None {'Amendments': 64, 'Flags': 0, 'LedgerEntryType': 'Amendments'}
+snap 7502592 FeeSettings error=None {'BaseFee': 'a', 'Flags': 0, 'LedgerEntryType': 'FeeSettings', 'ReferenceFeeUnits': 10, 'ReserveBase': 10000000, 'ReserveIncrement': 2000000}
