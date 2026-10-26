@@ -1,0 +1,45 @@
+OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-26T16:10:23Z
+collect_govern.py sha256 cbbda7973d389363ba4e663ee2b14a045ab72fe2f17f02c6869b11adee7194e7
+== start 1 (window 25 min)
+2026-10-26T16:10:23Z start window 2026-10-26T16:10:23Z -> 2026-10-26T16:35:23Z last_ledger=None votes=0 snaps=0 torn_bytes=0 bad_lines=0 pid=1349325
+2026-10-26T16:10:23Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+collector python pid 1349325
+== SIGTERM pid 1349325 after 120s
+2026-10-26T16:12:24Z stop (SIGTERM) last_ledger=7503482 votes=0 snaps=0 dups_dropped=0
+lines at SIGTERM: 42
+== start 2 (same command, after 30s down)
+2026-10-26T16:12:54Z resume window 2026-10-26T16:10:23Z -> 2026-10-26T16:35:23Z last_ledger=7503482 votes=0 snaps=0 torn_bytes=0 bad_lines=0 pid=1351764
+collector python pid 1351764
+2026-10-26T16:12:54Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+== SIGKILL pid 1351764 after 90s
+govern/resume_drill.sh: line 42: 1351756 Killed                  sudo RUN_UID="$(id -u)" RUN_GID="$(id -g)" bash "$HERE/run-collector.sh" --out "$OUT" --hours "$HOURS"
+exit status 137
+lines at SIGKILL: 74, last byte: \n
+INJECTED torn tail: the kill left complete lines, appended 20 bytes: {"ev":"ledger","li":
+== start 3 (same command, after 30s down), runs to window end
+2026-10-26T16:14:54Z resume window 2026-10-26T16:10:23Z -> 2026-10-26T16:35:23Z last_ledger=7503522 votes=0 snaps=0 torn_bytes=20 bad_lines=0 pid=1352558
+2026-10-26T16:14:54Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+collector python pid 1352558
+2026-10-26T16:35:24Z stop (window complete) last_ledger=7503938 votes=122 snaps=4 dups_dropped=0
+lines at END: 609
+== session events
+{"ev":"session","start":1793031023.686,"resumed":false,"last_ledger":null,"last_t":null,"torn_bytes":0,"bad_lines":0,"window_end":1793032523}
+{"ev":"session","start":1793031174.467,"resumed":true,"last_ledger":7503482,"last_t":1793031144.215,"torn_bytes":0,"bad_lines":0,"window_end":1793032523}
+{"ev":"session","start":1793031294.802,"resumed":true,"last_ledger":7503522,"last_t":1793031262.272,"torn_bytes":20,"bad_lines":0,"window_end":1793032523}
+== collect output above; checks
+  [PASS] SIGTERM snapshot ends with a newline (clean stop)
+  [PASS] SIGTERM snapshot is a byte-identical prefix of the final file - 5589 bytes
+  [PASS] SIGKILL snapshot (complete lines) is a byte-identical prefix of the final file - 9881 bytes, torn tail 20 bytes
+  [PASS] every line parses as JSON - 609 lines, 0 bad
+  [PASS] 3 sessions: resumed false, true, true - [False, True, True]
+  [PASS] same window_end in every session
+  [PASS] session 3 records the torn bytes cut after SIGKILL - torn_bytes=20, expected 20
+  [PASS] stop events: SIGTERM then window complete - ['SIGTERM', 'window complete']
+  [PASS] no duplicate vote entries (key, ledger index, ledger hash) - 122 entries, 0 dup
+  [PASS] every vote entry is for a voting ledger ((li+1) % 256 == 0) - off: []
+  [PASS] no duplicate ledger entries - 476 entries
+  [PASS] ledgers contiguous apart from recorded gaps - 7503443-7503938, 476 ledgers, gaps 7503483-7503492 (10, restart), 7503523-7503532 (10, restart)
+  [PASS] two gaps, both labelled restart - ['restart', 'restart']
+  [PASS] every delivered flag ledger has exactly one Amendments and one FeeSettings snapshot - flag ledgers [7503616, 7503872], 4 snapshots
+  [PASS] window covered a voting ledger and the flag ledger after it - voting ledgers with entries [7503615, 7503871]
+RESULT: PASS (15/15)
