@@ -1,0 +1,45 @@
+# govern 20-flag-ledger crosscheck vs public RPC (retry after RPC outage 16:11-16:47Z, see -13), 2026-10-27T16:47:22Z
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+$ python3 -u govern/crosscheck_govern.py data/govern --count 20
+crosscheck 20 of 110 eligible flag ledgers (seed 20261026), UNL 25, threshold 80%, against https://rpc.testnet.postfiat.org ledger_entry Amendments at F+256
+RETRY 1/3 flag 7503872 next 7504128: error=noNetwork -> again in 2s
+RETRY 2/3 flag 7503872 next 7504128: error=noNetwork -> again in 4s
+RETRY 3/3 flag 7503872 next 7504128: error=noNetwork -> again in 8s
+MISMATCH flag 7503872: voting ledger 7503871 UNL validations 25/25, recomputed majorities [] | public 7504128: majorities -, enabled - error=noNetwork
+RETRY 1/3 flag 7506432 next 7506688: error=noNetwork -> again in 2s
+RETRY 2/3 flag 7506432 next 7506688: error=noNetwork -> again in 4s
+RETRY 3/3 flag 7506432 next 7506688: error=noNetwork -> again in 8s
+MISMATCH flag 7506432: voting ledger 7506431 UNL validations 25/25, recomputed majorities [] | public 7506688: majorities -, enabled - error=noNetwork
+RETRY 1/3 flag 7507200 next 7507456: error=noNetwork -> again in 2s
+RETRY 2/3 flag 7507200 next 7507456: error=noNetwork -> again in 4s
+RETRY 3/3 flag 7507200 next 7507456: error=noNetwork -> again in 8s
+MISMATCH flag 7507200: voting ledger 7507199 UNL validations 25/25, recomputed majorities [] | public 7507456: majorities -, enabled - error=noNetwork
+RETRY 1/3 flag 7507968 next 7508224: error=noNetwork -> again in 2s
+RETRY 2/3 flag 7507968 next 7508224: error=noNetwork -> again in 4s
+RETRY 3/3 flag 7507968 next 7508224: error=noNetwork -> again in 8s
+MISMATCH flag 7507968: voting ledger 7507967 UNL validations 25/25, recomputed majorities [] | public 7508224: majorities -, enabled - error=noNetwork
+RETRY 1/3 flag 7509760 next 7510016: error=noNetwork -> again in 2s
+RETRY 2/3 flag 7509760 next 7510016: error=noNetwork -> again in 4s
+RETRY 3/3 flag 7509760 next 7510016: error=noNetwork -> again in 8s
+MISMATCH flag 7509760: voting ledger 7509759 UNL validations 25/25, recomputed majorities [] | public 7510016: majorities -, enabled - error=noNetwork
+RETRY 1/3 flag 7511040 next 7511296: error=noNetwork -> again in 2s
+RETRY 2/3 flag 7511040 next 7511296: error=noNetwork -> again in 4s
+RETRY 3/3 flag 7511040 next 7511296: error=noNetwork -> again in 8s
+MATCH flag 7511040: voting ledger 7511039 UNL validations 25/25, recomputed majorities [] | public 7511296: majorities [], enabled 64
+MATCH flag 7512320: voting ledger 7512319 UNL validations 25/25, recomputed majorities [] | public 7512576: majorities [], enabled 64
+MATCH flag 7514368: voting ledger 7514367 UNL validations 25/25, recomputed majorities [] | public 7514624: majorities [], enabled 64
+MATCH flag 7514624: voting ledger 7514623 UNL validations 25/25, recomputed majorities [] | public 7514880: majorities [], enabled 64
+MATCH flag 7515136: voting ledger 7515135 UNL validations 25/25, recomputed majorities [] | public 7515392: majorities [], enabled 64
+MATCH flag 7516672: voting ledger 7516671 UNL validations 25/25, recomputed majorities [] | public 7516928: majorities [], enabled 64
+MATCH flag 7519488: voting ledger 7519487 UNL validations 25/25, recomputed majorities [] | public 7519744: majorities [], enabled 64
+MATCH flag 7521280: voting ledger 7521279 UNL validations 25/25, recomputed majorities [] | public 7521536: majorities [], enabled 64
+MATCH flag 7522560: voting ledger 7522559 UNL validations 25/25, recomputed majorities [] | public 7522816: majorities [], enabled 64
+MATCH flag 7523328: voting ledger 7523327 UNL validations 25/25, recomputed majorities [] | public 7523584: majorities [], enabled 64
+MATCH flag 7524608: voting ledger 7524607 UNL validations 25/25, recomputed majorities [] | public 7524864: majorities [], enabled 64
+MATCH flag 7525632: voting ledger 7525631 UNL validations 25/25, recomputed majorities [] | public 7525888: majorities [], enabled 64
+MATCH flag 7529728: voting ledger 7529727 UNL validations 25/25, recomputed majorities [] | public 7529984: majorities [], enabled 64
+MATCH flag 7530496: voting ledger 7530495 UNL validations 25/25, recomputed majorities [] | public 7530752: majorities [], enabled 64
+MATCH flag 7530752: voting ledger 7530751 UNL validations 25/25, recomputed majorities [] | public 7531008: majorities [], enabled 64
+RESULT: 15/20 match
+rc=1
+# finished 2026-10-27T16:49:42Z

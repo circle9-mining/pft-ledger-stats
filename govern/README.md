@@ -114,6 +114,12 @@ plus `unl-start.json`, `unl-end.json` and `state.json`.
   newest UNL build (1.0.9) carry the `build-blocked-risk` flag.
 - One non-UNL validator (`nHBcLk5r1D…`) has the `missing-vote` flag: no validation seen on 8 of the 111
   voting ledgers in its active span.
+- Crosscheck: **20/20 MATCH** (`logs/crosscheck-20.log`, 2026-10-27T17:08Z). For 20 random flag ledgers
+  (seed 20261026) the majorities recomputed from the collected raw UNL votes (25/25 validations, none
+  voting) equal the public RPC's `Majorities` at the next flag ledger (none), with 64 enabled amendments
+  on both sides. Two earlier attempts are kept: the public RPC was down 16:11-16:47Z (`crosscheck-20-stopped.log`),
+  and right after it came back it answered the 5 oldest ledgers with `noNetwork` while it resynced
+  (`crosscheck-20-partial.log`: 15/20, rc=1; 18 retries printed, a 6th ledger, 7511040, matched after its 3rd retry). Neither was a data mismatch.
 
 ### Logs
 
@@ -125,3 +131,5 @@ plus `unl-start.json`, `unl-end.json` and `state.json`.
 | `logs/drill-1.log` | live SIGTERM + SIGKILL resume drill, torn tail repaired, 15/15 PASS |
 | `logs/smoke-1.log`, `logs/partial-smoke-1.log`, `logs/partial-smoke-2.log` | live collector smoke, and analyzer + 3-ledger crosscheck smoke on a copy of the partial window (not the 24h run) |
 | `logs/crosscheck-20-stopped.log` | first 20-ledger crosscheck after the window: stopped after 10 min because the public RPC did not answer at all (HTTP 000 from both hosts) |
+| `logs/crosscheck-20-partial.log` | second attempt right after the RPC came back: 15/20, the 5 oldest ledgers still answered `noNetwork` after 3 retries each (RPC resyncing; 7511040 matched after 3 retries), rc=1 |
+| `logs/crosscheck-20.log` | final crosscheck after the public RPC had resynced (complete_ledgers 7450054-...): **20/20 match**, 0 retries, rc=0 |
