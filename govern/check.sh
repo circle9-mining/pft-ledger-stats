@@ -55,5 +55,6 @@ mutant M7-crosscheck-ignores-enabled crosscheck_govern.py 's/want = want_all - e
 mutant M8-crosscheck-no-retry crosscheck_govern.py 's/default=4)/default=1)/'
 mutant M9-checker-ignores-dup-votes gov_resume_check.py 's/vk and len(vk) == len(set(vk))/bool(vk)/'
 mutant M10-checker-ignores-snapshots gov_resume_check.py 's/flags and set(snaps) == want and/bool(flags) and/'
+mutant M11-preview-mid-line-cut analyze_govern.py 's/    head = md\[: md.rfind("\\n", 0, limit) + 1\]/    head = md[:limit]/'
 echo "== RESULT $([ $fail = 0 ] && echo PASS || echo FAIL)"
 exit $fail

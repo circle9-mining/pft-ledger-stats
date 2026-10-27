@@ -549,6 +549,15 @@ def write_csv(s, path):
             )
 
 
+def preview(md, limit=4000):
+    """Stdout preview of the report: whole lines only, with a marker when lines were left out."""
+    if len(md) <= limit:
+        return md
+    head = md[: md.rfind("\n", 0, limit) + 1]
+    rest = md[len(head) :].count("\n") + (not md.endswith("\n"))
+    return f"{head}... ({rest} more lines in REPORT.md)\n"
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument(
@@ -575,7 +584,7 @@ def main(argv=None):
         md += "\n## Charts\n\n" + "".join(f"![{x}]({x})\n\n" for x in charts(s, a.report))
     with open(os.path.join(a.report, "REPORT.md"), "w") as fh:
         fh.write(md)
-    print(md[:4000])
+    print(preview(md))
     return 0
 
 

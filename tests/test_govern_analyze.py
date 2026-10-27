@@ -12,7 +12,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "govern"))
 
-from analyze_govern import RIPPLE_EPOCH, analyze, decode_sv, render  # noqa: E402
+from analyze_govern import RIPPLE_EPOCH, analyze, decode_sv, preview, render  # noqa: E402
 from collect_govern import GovState, Handler  # noqa: E402
 
 FIX = os.path.join(os.path.dirname(__file__), "fixtures", "govern", "probe-7501055.jsonl")
@@ -192,6 +192,19 @@ class TestSynthetic(unittest.TestCase):
         self.assertEqual(s["vote_entries_other_hash"], 1)
         self.assertEqual(row(s, "B")["voting_ledgers_validated"], 1)
         self.assertNotIn("A", [r["validator"] for r in s["per_validator"]])
+
+
+class TestPreview(unittest.TestCase):
+    def test_preview_cuts_on_line_boundary_with_marker(self):
+        md = "".join(f"| {i:07d} | 25/25 |\n" for i in range(400))
+        out = preview(md, limit=105)  # 20-char lines: 105 falls mid-line
+        body, marker = out.rsplit("... (", 1)
+        self.assertTrue(body.endswith("|\n"))
+        self.assertTrue(md.startswith(body))
+        self.assertEqual(marker, f"{400 - body.count(chr(10))} more lines in REPORT.md)\n")
+
+    def test_preview_short_report_unchanged(self):
+        self.assertEqual(preview("a\nb\n", limit=100), "a\nb\n")
 
 
 if __name__ == "__main__":
