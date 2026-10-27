@@ -1,0 +1,120 @@
+# govern post-window run (24h window 2026-10-26T16:10:36Z..2026-10-27T16:10:36Z), started 2026-10-27T16:10:50Z
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+$ timedatectl show -p NTPSynchronized
+NTPSynchronized=yes
+$ systemctl show pft-govern-collect -p Result -p ExecMainStatus
+Result=success
+ExecMainStatus=0
+$ sudo bash govern/unl_snapshot.sh data/govern/unl-end.json
+UNL snapshot 2026-10-27T16:10:51Z: 25 trusted keys, quorum 17
+rc=0
+$ wc -l data/govern/govern.jsonl; sha256sum data/govern/govern.jsonl
+35546 data/govern/govern.jsonl
+4a28b71a96398b6623f1fec197fd2deb8fd096639d899a1e45e5b0db81153ab8  data/govern/govern.jsonl
+$ .venv/bin/python govern/analyze_govern.py data/govern --report govern/report --charts
+# govern report
+
+- OS: Ubuntu 22.04.5 LTS; NTP synchronized: yes
+- Window (UTC): 2026-10-26T16:10:36Z .. 2026-10-27T16:10:36Z
+- Ledgers 28559 (7503448-7532006), collector sessions 1, gaps 0 (0 ledgers)
+- Flag ledgers seen / expected: 111 / 111; voting ledgers seen / expected: 111 / 111
+- Validators (master keys) with a validation on a voting ledger: 61; UNL size 25 (quorum 17), UNL members seen 25; UNL changed during window: False
+- Vote entries 6763 (for a non-validated hash: 0; partial: 0); amendments voted for by anyone: 0; validators sending fee votes: 0
+
+Single vantage point: a vote counts only if this node received the validation.
+
+## Network
+
+- Enabled amendments: 64 at the first flag ledger, 64 at the last
+- Majorities at the last flag ledger: 0; appear/disappear events in window: 0
+- UNL yes-share >= 80.0% on 0 of 111 voting ledgers
+- FeeSettings states in window: from 7503616: BaseFee=a, ReferenceFeeUnits=10, ReserveBase=10000000, ReserveIncrement=2000000
+
+## UNL tally per voting ledger
+
+| voting ledger | UNL validations | amendments with yes votes | max UNL yes-share | >= 80% |
+|---:|---:|---:|---:|---|
+| 7503615 | 25/25 | 0 | 0.0% | - |
+| 7503871 | 25/25 | 0 | 0.0% | - |
+| 7504127 | 25/25 | 0 | 0.0% | - |
+| 7504383 | 25/25 | 0 | 0.0% | - |
+| 7504639 | 25/25 | 0 | 0.0% | - |
+| 7504895 | 25/25 | 0 | 0.0% | - |
+| 7505151 | 25/25 | 0 | 0.0% | - |
+| 7505407 | 25/25 | 0 | 0.0% | - |
+| 7505663 | 25/25 | 0 | 0.0% | - |
+| 7505919 | 25/25 | 0 | 0.0% | - |
+| 7506175 | 25/25 | 0 | 0.0% | - |
+| 7506431 | 25/25 | 0 | 0.0% | - |
+| 7506687 | 25/25 | 0 | 0.0% | - |
+| 7506943 | 25/25 | 0 | 0.0% | - |
+| 7507199 | 25/25 | 0 | 0.0% | - |
+| 7507455 | 25/25 | 0 | 0.0% | - |
+| 7507711 | 25/25 | 0 | 0.0% | - |
+| 7507967 | 25/25 | 0 | 0.0% | - |
+| 7508223 | 25/25 | 0 | 0.0% | - |
+| 7508479 | 25/25 | 0 | 0.0% | - |
+| 7508735 | 25/25 | 0 | 0.0% | - |
+| 7508991 | 25/25 | 0 | 0.0% | - |
+| 7509247 | 25/25 | 0 | 0.0% | - |
+| 7509503 | 25/25 | 0 | 0.0% | - |
+| 7509759 | 25/25 | 0 | 0.0% | - |
+| 7510015 | 25/25 | 0 | 0.0% | - |
+| 7510271 | 25/25 | 0 | 0.0% | - |
+| 7510527 | 25/25 | 0 | 0.0% | - |
+| 7510783 | 25/25 | 0 | 0.0% | - |
+| 7511039 | 25/25 | 0 | 0.0% | - |
+| 7511295 | 25/25 | 0 | 0.0% | - |
+| 7511551 | 25/25 | 0 | 0.0% | - |
+| 7511807 | 25/25 | 0 | 0.0% | - |
+| 7512063 | 25/25 | 0 | 0.0% | - |
+| 7512319 | 25/25 | 0 | 0.0% | - |
+| 7512575 | 25/25 | 0 | 0.0% | - |
+| 7512831 | 25/25 | 0 | 0.0% | - |
+| 7513087 | 25/25 | 0 | 0.0% | - |
+| 7513343 | 25/25 | 0 | 0.0% | - |
+| 7513599 | 25/25 | 0 | 0.0% | - |
+| 7513855 | 25/25 | 0 | 0.0% | - |
+| 7514111 | 25/25 | 0 | 0.0% | - |
+| 7514367 | 25/25 | 0 | 0.0% | - |
+| 7514623 | 25/25 | 0 | 0.0% | - |
+| 7514879 | 25/25 | 0 | 0.0% | - |
+| 7515135 | 25/25 | 0 | 0.0% | - |
+| 7515391 | 25/25 | 0 | 0.0% | - |
+| 7515647 | 25/25 | 0 | 0.0% | - |
+| 7515903 | 25/25 | 0 | 0.0% | - |
+| 7516159 | 25/25 | 0 | 0.0% | - |
+| 7516415 | 25/25 | 0 | 0.0% | - |
+| 7516671 | 25/25 | 0 | 0.0% | - |
+| 7516927 | 25/25 | 0 | 0.0% | - |
+| 7517183 | 25/25 | 0 | 0.0% | - |
+| 7517439 | 25/25 | 0 | 0.0% | - |
+| 7517695 | 25/25 | 0 | 0.0% | - |
+| 7517951 | 25/25 | 0 | 0.0% | - |
+| 7518207 | 25/25 | 0 | 0.0% | - |
+| 7518463 | 25/25 | 0 | 0.0% | - |
+| 7518719 | 25/25 | 0 | 0.0% | - |
+| 7518975 | 25/25 | 0 | 0.0% | - |
+| 7519231 | 25/25 | 0 | 0.0% | - |
+| 7519487 | 25/25 | 0 | 0.0% | - |
+| 7519743 | 25/25 | 0 | 0.0% | - |
+| 7519999 | 25/25 | 0 | 0.0% | - |
+| 7520255 | 25/25 | 0 | 0.0% | - |
+| 7520511 | 25/25 | 0 | 0.0% | - |
+| 7520767 | 25/25 | 0 | 0.0% | - |
+| 7521023 | 25/25 | 0 | 0.0% | - |
+| 7521279 | 25/25 | 0 | 0.0% | - |
+| 7521535 | 25/25 | 0 | 0.0% | - |
+| 7521791 | 25/25 | 0 | 0.0% | - |
+| 7522047 | 25/25 | 0 | 0.0% | - |
+| 7522303 | 25/25 | 0 | 0.0% | - |
+| 7522559 | 25/25 | 0 | 0.0% | - |
+| 7522815 | 25/25 | 0 | 0.0% | - |
+| 7523071 | 25/25 | 0 | 0.0% | - |
+| 7523327 | 25/25 | 0 | 0.0% | - |
+| 7523583 | 25/25 | 0 | 0.0% | - |
+| 7523839 | 25/25 | 0 | 0.0% | - |
+| 7524095 | 25/25 | 0 | 0.0% | - |
+... (107 more lines in REPORT.md)
+
+rc=0

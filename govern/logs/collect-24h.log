@@ -1,0 +1,27 @@
+2026-10-26T16:10:36Z start window 2026-10-26T16:10:36Z -> 2026-10-27T16:10:36Z last_ledger=None votes=0 snaps=0 torn_bytes=0 bad_lines=0 pid=1349586
+2026-10-26T16:10:36Z connected (1) ws://127.0.0.1:6006/, subscribed validations,ledger
+2026-10-26T17:10:36Z progress last_ledger=7504636 votes=244 snaps=8 dups_dropped=0
+2026-10-26T18:10:36Z progress last_ledger=7505826 votes=549 snaps=18 dups_dropped=0
+2026-10-26T19:10:38Z progress last_ledger=7507015 votes=854 snaps=28 dups_dropped=0
+2026-10-26T20:10:37Z progress last_ledger=7508206 votes=1098 snaps=36 dups_dropped=0
+2026-10-26T21:10:36Z progress last_ledger=7509397 votes=1403 snaps=46 dups_dropped=0
+2026-10-26T22:10:36Z progress last_ledger=7510587 votes=1708 snaps=56 dups_dropped=0
+2026-10-26T23:10:36Z progress last_ledger=7511779 votes=1952 snaps=64 dups_dropped=0
+2026-10-27T00:10:36Z progress last_ledger=7512969 votes=2257 snaps=74 dups_dropped=0
+2026-10-27T01:10:37Z progress last_ledger=7514160 votes=2562 snaps=84 dups_dropped=0
+2026-10-27T02:10:37Z progress last_ledger=7515350 votes=2806 snaps=92 dups_dropped=0
+2026-10-27T03:10:37Z progress last_ledger=7516537 votes=3111 snaps=102 dups_dropped=0
+2026-10-27T04:10:37Z progress last_ledger=7517729 votes=3416 snaps=112 dups_dropped=0
+2026-10-27T05:10:36Z progress last_ledger=7518918 votes=3660 snaps=120 dups_dropped=0
+2026-10-27T06:10:36Z progress last_ledger=7520110 votes=3965 snaps=130 dups_dropped=0
+2026-10-27T07:10:36Z progress last_ledger=7521301 votes=4270 snaps=140 dups_dropped=0
+2026-10-27T08:10:36Z progress last_ledger=7522485 votes=4514 snaps=148 dups_dropped=0
+2026-10-27T09:10:38Z progress last_ledger=7523677 votes=4819 snaps=158 dups_dropped=0
+2026-10-27T10:10:36Z progress last_ledger=7524870 votes=5120 snaps=168 dups_dropped=0
+2026-10-27T11:10:36Z progress last_ledger=7526061 votes=5360 snaps=176 dups_dropped=0
+2026-10-27T12:10:37Z progress last_ledger=7527250 votes=5665 snaps=186 dups_dropped=0
+2026-10-27T13:10:36Z progress last_ledger=7528440 votes=5909 snaps=194 dups_dropped=0
+2026-10-27T14:10:36Z progress last_ledger=7529625 votes=6214 snaps=204 dups_dropped=0
+2026-10-27T15:10:36Z progress last_ledger=7530816 votes=6519 snaps=214 dups_dropped=0
+2026-10-27T16:10:37Z progress last_ledger=7532006 votes=6763 snaps=222 dups_dropped=0
+2026-10-27T16:10:37Z stop (window complete) last_ledger=7532006 votes=6763 snaps=222 dups_dropped=0

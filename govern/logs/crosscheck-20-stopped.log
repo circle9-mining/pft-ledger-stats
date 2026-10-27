@@ -1,0 +1,6 @@
+# govern 20-flag-ledger crosscheck vs public RPC, 2026-10-27T16:11:07Z
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+$ python3 govern/crosscheck_govern.py data/govern --count 20
+Terminated
+rc=143
+# STOPPED 2026-10-27T16:21:54Z by SIGTERM after ~10 min: public RPC not answering (curl server_info to rpc.testnet.postfiat.org timed out after 20 s, HTTP 000 at ~16:21Z); python stdout was block-buffered (redirected), so per-ledger lines were lost. Superseded by a later run with python3 -u.

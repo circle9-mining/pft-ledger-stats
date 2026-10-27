@@ -36,7 +36,7 @@ At each flag ledger it reads both ledger objects with `ledger_entry`.
 | `analyze_govern.py` | per-validator vote matrix, UNL tally per voting ledger, Majorities, fee settings -> `REPORT.md`, `summary.json`, `matrix.csv`, `yes-share.png` |
 | `crosscheck_govern.py` | 20 random flag ledgers: majorities recomputed from raw votes vs public-RPC `Majorities` at the next flag ledger |
 | `resume_drill.sh`, `gov_resume_check.py` | live SIGTERM + SIGKILL resume drill (with torn-tail repair) and its checks |
-| `check.sh` | ruff, shellcheck, unit tests and 10 mutants the tests must catch |
+| `check.sh` | ruff, shellcheck, unit tests and 11 mutants the tests must catch |
 
 Tests: `tests/test_govern_collect.py`, `tests/test_govern_analyze.py`, `tests/test_govern_crosscheck.py`,
 `tests/test_govern_resume.py`. The real fixture `tests/fixtures/govern/probe-7501055.jsonl` is a
@@ -86,3 +86,42 @@ newer build supports would leave it amendment-blocked once enabled.
   during a window; the report says whether `unl-end.json` differs.
 - The local node keeps only ~512-1024 ledgers (`online_delete=512`), so the crosscheck uses the
   public RPC for ledger objects and the collected raw votes for the tally.
+
+## 24h results (2026-10-26T16:10:36Z .. 2026-10-27T16:10:36Z)
+
+Full report: [`report/REPORT.md`](report/REPORT.md) (header with OS, NTP state, window, flag-ledger and
+validator/UNL counts; UNL tally per voting ledger; per-validator vote matrix), chart
+[`report/yes-share.png`](report/yes-share.png), machine-readable [`report/summary.json`](report/summary.json)
+and [`report/matrix.csv`](report/matrix.csv). Dataset: `data/govern-24h/govern-24h.jsonl.gz` (the raw
+`govern.jsonl`, 35546 lines, sha256 of the uncompressed file `4a28b71a…` in full in `logs/post-window.log`)
+plus `unl-start.json`, `unl-end.json` and `state.json`.
+
+- Collection: one collector session, 0 resumes, 0 gaps, 28559 ledgers (7503448-7532006), 111/111 flag
+  ledgers and 111/111 voting ledgers, 222 `ledger_entry` snapshots (Amendments + FeeSettings at each flag
+  ledger), 0 snapshot errors, 0 bad lines, 0 duplicates dropped. No node restart (read-only).
+- 61 validators (master keys) validated voting ledgers; 60 of them validated every one of the 111. 6763
+  vote entries, all for the hash this node saw validated, 0 partial validations.
+- **Nobody voted.** No validator, on or off the UNL, put an `amendments` or fee field in any voting-ledger
+  validation, so UNL yes-share was 0% on all 111 voting ledgers, no Majorities appeared or disappeared,
+  and the Amendments object held the same 64 enabled amendments from the first flag ledger to the last.
+  FeeSettings stayed on the legacy fields (BaseFee `a`, ReferenceFeeUnits 10, ReserveBase 10000000,
+  ReserveIncrement 2000000) all window. This is the real state of the testnet in this window, not a
+  collector gap: the vote-field parsing, yes-share, vote-change and Majority logic is covered by the
+  synthetic, labelled test cases above.
+- UNL: 25 keys, quorum 17, identical at window start and end; all 25 validated all 111 voting ledgers
+  and all run 1.0.9.
+- Builds off the UNL: 19 x 1.0.4, 2 x 1.0.0, 1 x 1.0.8, 14 x 1.0.9. The 22 validators older than the
+  newest UNL build (1.0.9) carry the `build-blocked-risk` flag.
+- One non-UNL validator (`nHBcLk5r1D…`) has the `missing-vote` flag: no validation seen on 8 of the 111
+  voting ledgers in its active span.
+
+### Logs
+
+| log | what |
+|---|---|
+| `logs/collect-24h.log` | the 24h collector log (start, hourly progress, stop at window end) |
+| `logs/unl-start.log`, `logs/post-window.log` | UNL snapshots at start and end; post-window run: OS, NTP, unit result, dataset sha256, analyzer output |
+| `logs/check-1.log` .. `logs/check-4.log` | lint + pytest + mutants; check-2 and check-3 are failed runs kept as evidence (their fix is noted at the end), check-4 is the final run: 39 passed, 11/11 mutants caught |
+| `logs/drill-1.log` | live SIGTERM + SIGKILL resume drill, torn tail repaired, 15/15 PASS |
+| `logs/smoke-1.log`, `logs/partial-smoke-1.log`, `logs/partial-smoke-2.log` | live collector smoke, and analyzer + 3-ledger crosscheck smoke on a copy of the partial window (not the 24h run) |
+| `logs/crosscheck-20-stopped.log` | first 20-ledger crosscheck after the window: stopped after 10 min because the public RPC did not answer at all (HTTP 000 from both hosts) |

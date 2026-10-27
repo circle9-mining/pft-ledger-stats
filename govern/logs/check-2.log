@@ -1,0 +1,74 @@
+== OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-27T12:08:59Z
+== sha256
+2a85204683088297b83e8930dcc0a0d781290d43021940b5221eb6330b527e7c  govern/analyze_govern.py
+cbbda7973d389363ba4e663ee2b14a045ab72fe2f17f02c6869b11adee7194e7  govern/collect_govern.py
+fa933639bf87844496c5778587994b87d3816f2ba2e5f6e92a45d8d77f5ced1e  govern/crosscheck_govern.py
+be0cce89f7ff35a46e464cb6f3059fd8a1b378cf8764380bc486337b2cb914e2  govern/gov_resume_check.py
+1fb6d5970fcc255911858ee568f23e89c4040fa21a8571ac571a79c4d65384df  govern/check.sh
+df44d839db6f36211d22f272588606b027cf89b0d89ec16b0707822bd15c37b8  govern/resume_drill.sh
+8e18fd9d3b9811c8ae5d65d471375a75854f26c8abeabc9feb040aef4909f10f  govern/run-collector.sh
+4a7068a2b11f24ee064dbd9f8fadd0d420fb31ac41c73c27747c20210279e81b  govern/unl_snapshot.sh
+61ec1227260fe2305ba901c0e6abcfbeb10bd96b2154b655f139bb80d36484a6  tests/test_govern_collect.py
+a9d68dc2752e79737865bae4775c296d3b2134d7baf709cb2c16d4acdfef1c01  tests/test_govern_analyze.py
+f08a415e7bdbed4328c27639bb3787a4ba3f1e430f77de5e6e71b2afe955cc2d  tests/test_govern_crosscheck.py
+a23d42eee2586b540c06aa875549969a070611caffc971b59bfe9f5268cc031e  tests/test_govern_resume.py
+== ruff
+All checks passed!
+9 files already formatted
+== shellcheck
+shellcheck clean
+== unit tests
+PASSED tests/test_govern_collect.py::TestFlagMath::test_voting_and_flag
+PASSED tests/test_govern_collect.py::TestRealFixture::test_flag_ledger_requests_both_objects
+PASSED tests/test_govern_collect.py::TestRealFixture::test_send_allows_only_read_commands
+PASSED tests/test_govern_collect.py::TestRealFixture::test_voting_validations_recorded_without_vote_fields
+PASSED tests/test_govern_collect.py::TestSyntheticVotes::test_amendment_and_fee_votes_kept
+PASSED tests/test_govern_collect.py::TestResume::test_duplicates_and_resume_overlap_dropped
+PASSED tests/test_govern_collect.py::TestResume::test_gap_reason_restart
+PASSED tests/test_govern_collect.py::TestResume::test_snapshot_retried_after_restart_if_missing
+PASSED tests/test_govern_analyze.py::TestReal::test_decode_sv
+PASSED tests/test_govern_analyze.py::TestReal::test_real_fixture_no_votes
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_active_span_vs_window
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_build_blocked_risk
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_fee_votes_and_fee_settings
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_majority_appear_disappear_and_projection
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_missing_vote_ignores_undelivered_ledgers
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_unl_missing_vote
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_unl_threshold
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_vote_change_and_yes_share
+PASSED tests/test_govern_analyze.py::TestSynthetic::test_vote_for_non_validated_hash_not_counted
+PASSED tests/test_govern_analyze.py::TestPreview::test_preview_cuts_on_line_boundary_with_marker
+PASSED tests/test_govern_analyze.py::TestPreview::test_preview_short_report_unchanged
+PASSED tests/test_govern_crosscheck.py::TestCrosscheck::test_enabled_amendment_not_expected_in_majorities
+PASSED tests/test_govern_crosscheck.py::TestCrosscheck::test_majority_recomputed_and_found
+PASSED tests/test_govern_crosscheck.py::TestCrosscheck::test_missing_majority_is_mismatch
+PASSED tests/test_govern_crosscheck.py::TestCrosscheck::test_no_votes_matches_empty_majorities
+PASSED tests/test_govern_crosscheck.py::TestCrosscheck::test_persistent_error_fails
+PASSED tests/test_govern_crosscheck.py::TestCrosscheck::test_transient_error_retried_and_printed
+PASSED tests/test_govern_crosscheck.py::TestCrosscheck::test_unvalidated_answer_not_trusted
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_duplicate_vote_detected
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_empty_file_fails
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_missing_snapshot_detected
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_missing_stop_detected
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_no_torn_tail_fails_torn_check
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_positive_all_pass
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_term_not_prefix_detected
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_torn_bytes_mismatch_detected
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_unrecorded_gap_detected
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_vote_on_non_voting_ledger_detected
+PASSED tests/test_govern_resume.py::TestGovernResumeCheck::test_window_without_boundary_detected
+39 passed in 1.95s
+== mutants
+MUTANT M1-wrong-voting-ledger caught: 14 failing tests: test_real_fixture_no_votes test_voting_and_flag test_voting_validations_recorded_without_vote_fields test_amendment_and_fee_votes_kept test_duplicates_and_resume_overlap_dropped test_duplicate_vote_detected test_missing_snapshot_detected test_missing_stop_detected test_no_torn_tail_fails_torn_check test_positive_all_pass test_term_not_prefix_detected test_torn_bytes_mismatch_detected test_unrecorded_gap_detected test_vote_on_non_voting_ledger_detected 
+MUTANT M2-collector-no-dedupe caught: 9 failing tests: test_duplicates_and_resume_overlap_dropped test_missing_snapshot_detected test_missing_stop_detected test_no_torn_tail_fails_torn_check test_positive_all_pass test_term_not_prefix_detected test_torn_bytes_mismatch_detected test_unrecorded_gap_detected test_vote_on_non_voting_ledger_detected 
+MUTANT M3-threshold-strict caught: 1 failing tests: test_unl_threshold 
+MUTANT M4-no-vote-changes caught: 1 failing tests: test_vote_change_and_yes_share 
+MUTANT M5-counts-losing-hash caught: 1 failing tests: test_vote_for_non_validated_hash_not_counted 
+MUTANT M6-no-build-flag caught: 1 failing tests: test_build_blocked_risk 
+MUTANT M7-crosscheck-ignores-enabled caught: 1 failing tests: test_enabled_amendment_not_expected_in_majorities 
+MUTANT M8-crosscheck-no-retry caught: 2 failing tests: test_persistent_error_fails test_transient_error_retried_and_printed 
+MUTANT M9-checker-ignores-dup-votes caught: 1 failing tests: test_duplicate_vote_detected 
+MUTANT M10-checker-ignores-snapshots caught: 1 failing tests: test_missing_snapshot_detected 
+MUTANT M11-preview-mid-line-cut NOT APPLIED (sed matched nothing)
+== RESULT FAIL
+# run -8 FAILED: M11 NOT APPLIED (sed 'a' stripped regex escapes from the added check.sh line); fixed check.sh line, superseded by -9
