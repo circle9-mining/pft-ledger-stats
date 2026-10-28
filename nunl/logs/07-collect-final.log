@@ -1,0 +1,15 @@
+# nunl FINAL full-history collection (fresh out dir, final code) - 2026-10-28T12:25:31Z - Ubuntu 22.04.5 LTS
+$ sha256sum nunl/collect_nunl.py
+15f2d89cfddfa493b24a300d3a7182ddecf593a5dddbd0d3343c3e51f6860013  nunl/collect_nunl.py
+$ python3 -u nunl/collect_nunl.py --out data/nunl/final --log data/nunl/final/collect.log
+2026-10-28T12:25:32Z start rpc=https://rpc.testnet.postfiat.org complete_ledgers=7500055-7556112 range=7500055-7556112 flags_in_range=219 already=0 todo=219 torn_bytes=0 bad_lines=0 pid=947826
+2026-10-28T12:27:01Z progress 25/219 last=7506432 calls=76 retried=0
+2026-10-28T12:28:30Z progress 50/219 last=7512832 calls=151 retried=0
+2026-10-28T12:29:57Z progress 75/219 last=7519232 calls=226 retried=0
+2026-10-28T12:31:28Z progress 100/219 last=7525632 calls=301 retried=0
+2026-10-28T12:32:55Z progress 125/219 last=7532032 calls=376 retried=0
+2026-10-28T12:34:21Z progress 150/219 last=7538432 calls=451 retried=0
+2026-10-28T12:35:49Z progress 175/219 last=7544832 calls=526 retried=0
+2026-10-28T12:37:15Z progress 200/219 last=7551232 calls=601 retried=0
+2026-10-28T12:38:20Z stop (range complete) collected=219 errors=0 total_in_file=219 calls=658 retried=0
+exit=0

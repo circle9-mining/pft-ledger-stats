@@ -1,0 +1,19 @@
+# nunl crosscheck NEGATIVE CONTROL (same seed as run 9, first 2 picked records corrupted; must exit 1) - 2026-10-28T12:42:09Z - code at 7e82be94e7e924967a390171493d163974da7a81
+$ python3 -u nunl/crosscheck_nunl.py --hist data/nunl/final/nunl.jsonl -n 10 --seed 1793191115 --corrupt 2
+2026-10-28T12:42:09Z crosscheck seed=1793191115 scanned_flags=219 range=7500288-7556096 picked=[7502080, 7504896, 7515392, 7518464, 7523584, 7524864, 7526144, 7528192, 7543808, 7545856] corrupt=2
+2026-10-28T12:42:09Z NEGATIVE CONTROL flag 7502080: corrupted dataset record (fake disabled validator)
+2026-10-28T12:42:30Z MISMATCH flag 7502080 (21s)
+2026-10-28T12:42:30Z    nunl: dataset={"disabled": ["EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"], "to_disable": null, "to_reenable": null} local=null
+2026-10-28T12:42:30Z NEGATIVE CONTROL flag 7504896: corrupted dataset record (ledger hash reversed)
+2026-10-28T12:42:51Z MISMATCH flag 7504896 (21s)
+2026-10-28T12:42:51Z    lh: dataset="C30FADED65656CEF4137E23A7AAD5C08377127CFF9EEC6C1F32601E71062B184" local="481B26017E10623F1C6CEE9FFC72177380C5DAA7A32E7314FEC65656DEDAF03C"
+2026-10-28T12:43:12Z OK flag 7515392 hash=E8100B4BFD858140... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T12:43:33Z OK flag 7518464 hash=9177F6578F510CCD... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T12:43:54Z OK flag 7523584 hash=5B55EE43D493BF93... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T12:44:13Z OK flag 7524864 hash=7AF5D5EA5C02EE21... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (19s)
+2026-10-28T12:44:34Z OK flag 7526144 hash=5F17FFB5B31ABD4E... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T12:44:54Z OK flag 7528192 hash=6586AA1D71AC2773... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T12:45:15Z OK flag 7543808 hash=D6EB9D66030ADDF8... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T12:45:38Z OK flag 7545856 hash=A88ABC2F974FD38F... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (22s)
+2026-10-28T12:45:38Z result 8/10 OK local_calls=176 -> FAIL
+exit=1

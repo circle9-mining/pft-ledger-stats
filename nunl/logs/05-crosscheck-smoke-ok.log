@@ -1,0 +1,6 @@
+# nunl crosscheck smoke 3 (log-line fix, partial dataset, n=2, seed 1) 2026-10-28T12:22:16Z
+2026-10-28T12:22:17Z crosscheck seed=1 scanned_flags=177 range=7500288-7545344 picked=[7508992, 7537408] corrupt=0
+2026-10-28T12:22:34Z OK flag 7508992 hash=0FD1576CC33F3B38... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=1 F+1=not acquirable locally (not compared) (18s)
+2026-10-28T12:22:55Z OK flag 7537408 hash=78841744F291E29A... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T12:22:55Z result 2/2 OK local_calls=34 -> PASS
+exit=0

@@ -1,0 +1,7 @@
+# nunl full-history collection RESUME after run -1 was killed by the agent tool's 10-min background limit at 163/217 - 2026-10-28T12:21:25Z - Ubuntu 22.04.5 LTS - code sha256 170ee99a929e073972a9348715d7324ae15b7b14e6c4cf99abeb52231dc8a009
+$ python3 -u nunl/collect_nunl.py --out data/nunl/hist --log data/nunl/hist/collect.log
+2026-10-28T12:21:26Z start rpc=https://rpc.testnet.postfiat.org complete_ledgers=7500054-7556031 range=7500054-7556031 flags_in_range=218 already=163 todo=55 torn_bytes=0 bad_lines=0 pid=943296
+2026-10-28T12:22:53Z progress 25/55 last=7548160 calls=76 retried=0
+2026-10-28T12:24:22Z progress 50/55 last=7554560 calls=151 retried=0
+2026-10-28T12:24:39Z stop (range complete) collected=55 errors=0 total_in_file=218 calls=166 retried=0
+exit=0

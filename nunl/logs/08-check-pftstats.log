@@ -1,0 +1,64 @@
+$ bash nunl/check.sh
+== OS: Ubuntu 22.04.5 LTS | python: Python 3.10.12 | 2026-10-28T12:26:06Z
+== sha256
+7edee6ee25ef15577c2de858af09ecbab6442557fda01411c21228efb1884537  nunl/analyze_nunl.py
+15f2d89cfddfa493b24a300d3a7182ddecf593a5dddbd0d3343c3e51f6860013  nunl/collect_nunl.py
+4a46d30dafa9bd4458ea4705cb5a44a8b046cb54d7c77a96391541d6538ec92c  nunl/crosscheck_nunl.py
+be3f4fb3c8fc4be95ae1ae11b20f31c496e54938b21a7eb95aa90462b8816316  nunl/check.sh
+4924f8eac2b5c48625344a9ba3f7d7fa07cbb2788db69d1168887d92bae7a807  tests/test_nunl.py
+== ruff
+All checks passed!
+4 files already formatted
+== shellcheck
+shellcheck clean
+== unit tests
+PASSED tests/test_nunl.py::test_threshold_constants_match_postfiatd
+PASSED tests/test_nunl.py::test_classify_boundaries[0-False-DISABLE_CANDIDATE]
+PASSED tests/test_nunl.py::test_classify_boundaries[127-False-DISABLE_CANDIDATE]
+PASSED tests/test_nunl.py::test_classify_boundaries[128-False-WATCH]
+PASSED tests/test_nunl.py::test_classify_boundaries[152-False-WATCH]
+PASSED tests/test_nunl.py::test_classify_boundaries[153-False-OK]
+PASSED tests/test_nunl.py::test_classify_boundaries[256-False-OK]
+PASSED tests/test_nunl.py::test_classify_boundaries[204-True-STAYS_LISTED]
+PASSED tests/test_nunl.py::test_classify_boundaries[205-True-REENABLE]
+PASSED tests/test_nunl.py::test_classify_boundaries[0-True-STAYS_LISTED]
+PASSED tests/test_nunl.py::test_node_key_roundtrip_real_unl_key
+PASSED tests/test_nunl.py::test_lifecycle_timeline_and_spans
+PASSED tests/test_nunl.py::test_open_span_and_current_state
+PASSED tests/test_nunl.py::test_corrupted_list_fails_check3
+PASSED tests/test_nunl.py::test_mod_without_pending_fails_check2
+PASSED tests/test_nunl.py::test_change_between_flag_and_next_fails_check1
+PASSED tests/test_nunl.py::test_missing_flag_detected
+PASSED tests/test_nunl.py::test_main_exits_1_on_missing_flag
+PASSED tests/test_nunl.py::test_empty_history_report_states_scanned_range
+PASSED tests/test_nunl.py::test_main_exits_1_on_corrupted_reconstruction
+PASSED tests/test_nunl.py::test_risk_scores_and_status
+PASSED tests/test_nunl.py::test_risk_skips_incomplete_windows_and_maps_signing_keys
+PASSED tests/test_nunl.py::test_rpc_retries_with_backoff_and_logs
+PASSED tests/test_nunl.py::test_rpc_gives_up_and_refuses_writes
+PASSED tests/test_nunl.py::test_fetch_flag_parses_unlmodify_and_object
+PASSED tests/test_nunl.py::test_fetch_flag_rejects_incomplete_answer
+PASSED tests/test_nunl.py::test_flags_in_range
+PASSED tests/test_nunl.py::test_drop_torn_tail_and_resume_set
+PASSED tests/test_nunl.py::test_crosscheck_compare_and_corruption
+PASSED tests/test_nunl.py::test_crosscheck_local_refuses_other_commands
+30 passed in 0.14s
+== mutants (thresholds)
+MUTANT T1-low-50-to-51pct caught: 3 failing tests: test_threshold_constants_match_postfiatd test_classify_boundaries[128-False-WATCH] test_risk_scores_and_status 
+MUTANT T2-high-80-to-79pct caught: 2 failing tests: test_threshold_constants_match_postfiatd test_classify_boundaries[204-True-STAYS_LISTED] 
+MUTANT T3-disable-lt-to-le caught: 2 failing tests: test_classify_boundaries[128-False-WATCH] test_risk_scores_and_status 
+MUTANT T4-reenable-gt-to-ge caught: 1 failing tests: test_classify_boundaries[204-True-STAYS_LISTED] 
+MUTANT T5-flag-interval-255 caught: 10 failing tests: test_threshold_constants_match_postfiatd test_classify_boundaries[127-False-DISABLE_CANDIDATE] test_lifecycle_timeline_and_spans test_open_span_and_current_state test_corrupted_list_fails_check3 test_missing_flag_detected test_empty_history_report_states_scanned_range test_main_exits_1_on_corrupted_reconstruction test_risk_scores_and_status test_risk_skips_incomplete_windows_and_maps_signing_keys 
+MUTANT T6-min-local-85pct caught: 1 failing tests: test_threshold_constants_match_postfiatd 
+== mutants (logic)
+MUTANT L1-no-list-transition-check caught: 2 failing tests: test_corrupted_list_fails_check3 test_main_exits_1_on_corrupted_reconstruction 
+MUTANT L2-no-next-ledger-check caught: 1 failing tests: test_change_between_flag_and_next_fails_check1 
+MUTANT L3-risk-counts-wrong-hash caught: 1 failing tests: test_risk_scores_and_status 
+MUTANT L4-risk-allows-incomplete-window caught: 2 failing tests: test_risk_scores_and_status test_risk_skips_incomplete_windows_and_maps_signing_keys 
+MUTANT L5-collector-no-retry-lgrNotFound caught: 1 failing tests: test_rpc_retries_with_backoff_and_logs 
+MUTANT L6-flags-include-last caught: 1 failing tests: test_flags_in_range 
+MUTANT L7-crosscheck-ignores-nunl caught: 1 failing tests: test_crosscheck_compare_and_corruption 
+MUTANT L8-crosscheck-no-positive-control caught: 1 failing tests: test_crosscheck_compare_and_corruption 
+MUTANT L9-main-ignores-missing-flags caught: 1 failing tests: test_main_exits_1_on_missing_flag 
+== RESULT PASS
+exit=0

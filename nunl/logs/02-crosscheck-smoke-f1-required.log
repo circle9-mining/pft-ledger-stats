@@ -1,0 +1,6 @@
+# nunl crosscheck smoke (partial dataset, n=2) 2026-10-28T12:14:23Z
+2026-10-28T12:14:24Z crosscheck seed=1 scanned_flags=57 range=7500288-7514624 picked=[7502336, 7509504] corrupt=0
+2026-10-28T12:17:30Z UNAVAILABLE flag 7502336: local node could not acquire F/F+1 within 180s (acquired=[True, False] attempts=[2, 51])
+2026-10-28T12:20:36Z UNAVAILABLE flag 7509504: local node could not acquire F/F+1 within 180s (acquired=[True, False] attempts=[2, 52])
+2026-10-28T12:20:36Z result 0/2 OK local_calls=212 -> FAIL
+exit=1

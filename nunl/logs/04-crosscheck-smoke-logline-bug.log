@@ -1,0 +1,9 @@
+# nunl crosscheck smoke 2 (F+1 best effort, partial dataset, n=2, seed 1) 2026-10-28T12:21:49Z
+2026-10-28T12:21:49Z crosscheck seed=1 scanned_flags=169 range=7500288-7543296 picked=[7508992, 7537408] corrupt=0
+Traceback (most recent call last):
+  File "~/work/pft-ledger-stats/nunl/crosscheck_nunl.py", line 175, in <module>
+    sys.exit(main())
+  File "~/work/pft-ledger-stats/nunl/crosscheck_nunl.py", line 167, in main
+    log(f"OK flag {li} hash={loc['lh'][:16]}... mods={len(loc['mods'])} nunl={loc['nunl']} next={loc['next']}"
+KeyError: 'next'
+exit=1

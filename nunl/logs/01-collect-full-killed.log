@@ -1,0 +1,11 @@
+# nunl full-history collection - 2026-10-28T12:10:50Z - Ubuntu 22.04.5 LTS - code sha256 170ee99a929e073972a9348715d7324ae15b7b14e6c4cf99abeb52231dc8a009
+$ python3 -u nunl/collect_nunl.py --out data/nunl/hist --log data/nunl/hist/collect.log
+2026-10-28T12:10:51Z start rpc=https://rpc.testnet.postfiat.org complete_ledgers=7500054-7555821 range=7500054-7555821 flags_in_range=217 already=0 todo=217 torn_bytes=0 bad_lines=0 pid=930438
+2026-10-28T12:10:52Z RETRY ledger 7500288 attempt 1/6 error=lgrNotFound backoff=2.0s
+2026-10-28T12:10:55Z RETRY ledger 7500288 attempt 2/6 error=lgrNotFound backoff=4.0s
+2026-10-28T12:12:28Z progress 25/217 last=7506432 calls=78 retried=2
+2026-10-28T12:13:55Z progress 50/217 last=7512832 calls=153 retried=2
+2026-10-28T12:15:25Z progress 75/217 last=7519232 calls=228 retried=2
+2026-10-28T12:16:53Z progress 100/217 last=7525632 calls=303 retried=2
+2026-10-28T12:18:26Z progress 125/217 last=7532032 calls=378 retried=2
+2026-10-28T12:19:54Z progress 150/217 last=7538432 calls=453 retried=2

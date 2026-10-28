@@ -41,6 +41,7 @@ The `NegativeUNL` amendment is enabled on the testnet (`feature NegativeUNL` →
 | `collect_nunl.py` | walks every flag ledger F in the RPC's `complete_ledgers`. For each F it records the UNLModify txs in F, the NegativeUNL object at F and the object at F+1 (the following ledger). Output is resumable `nunl.jsonl`: each line is fsynced, a torn tail is cut on restart, and done flags are skipped. Retries use logged exponential backoff (`RETRY ... backoff=`) |
 | `analyze_nunl.py` | builds per-validator event timelines, listed durations, the current state, 3 consistency checks, and 256-ledger risk tables. Writes `REPORT.md`, `summary.json` and `risk.csv`, and exits 1 if any check fails or a flag is missing |
 | `crosscheck_nunl.py` | re-reads N random collected flag ledgers from your own node and compares hash, UNLModify txs, the NegativeUNL object and a positive control. `--corrupt K` is the negative control |
+| `negative_control.sh` | corrupted-reconstruction negative control. It injects a fake `DisabledValidator` at one random flag ledger of a temp copy; the analyzer must exit 1 and name that ledger, and the unmodified copy must exit 0 |
 | `check.sh` | runs ruff, shellcheck, 30 unit tests (synthetic fixtures, no network) and 15 mutants (6 threshold + 9 logic) that the tests must catch |
 | `report/` | the published `REPORT.md`, `summary.json` and `risk.csv` |
 | `logs/` | raw run logs (sanitized: home path → `~`) |
@@ -105,6 +106,7 @@ python3 nunl/analyze_nunl.py --hist data/nunl/final/nunl.jsonl --vals data/nunl/
 # crosscheck 10 random flag ledgers against your node (needs sudo for docker exec), then the negative control
 python3 -u nunl/crosscheck_nunl.py --hist data/nunl/final/nunl.jsonl -n 10
 python3 -u nunl/crosscheck_nunl.py --hist data/nunl/final/nunl.jsonl -n 10 --corrupt 2   # must exit 1
+bash nunl/negative_control.sh data/nunl/final/nunl.jsonl                             # analyzer must exit 1
 
 # offline tests + mutants
 bash nunl/check.sh
