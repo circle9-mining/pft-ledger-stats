@@ -1,0 +1,73 @@
+# nunl independent jq recount of the last risk window (ledgers 7558912-7559167) 2026-10-28T15:12:32Z
+$ jq -nr '[inputs] as $a | ($a|map(select(.ev=="ledger" and .li>=7558912 and .li<=7559167))|map({key:(.li|tostring),value:.lh})|from_entries) as $L | "ledgers_in_stream=\($L|length)", ($a|map(select(.ev=="val" and .li>=7558912 and .li<=7559167))|group_by(.mk)|map({mk:.[0].mk, matched:(map(select($L[.li|tostring]==.lh))|map(.li)|unique|length), wrong_hash:(map(select($L[.li|tostring]!=.lh))|length)})|.[]|"\(.mk) matched=\(.matched) wrong_hash=\(.wrong_hash)")' data/nunl/vals/vl.jsonl
+ledgers_in_stream=256
+null matched=256 wrong_hash=0
+nHB28WprRtLAhV9H6mvhsUH181K3HGgYjoKaEKq3BdtJCUxYLGUU matched=256 wrong_hash=0
+nHB6Zc7mhr7swksEgpwTE7Hw7SvZ9cz22T2MECMSXjBeMTeHXQB7 matched=256 wrong_hash=0
+nHB81SsiwsituuAUrSx2j6kho5YdY5AwQ6SZLSqEiAKhzUQVHq53 matched=256 wrong_hash=0
+nHBAToXoTH6eZtC1cMJDvjG7eRb7ufZ3GUpeisvNVT4ofruRdVvd matched=256 wrong_hash=0
+nHBM2nzq3pZUg8JsxvEt3G7gAAtc5Sukaef6YmvVx64uAoRK4QWM matched=256 wrong_hash=0
+nHBPPh2sRYnJVRLud9mTp4292VNiFWYRkGTaE4AsqVUFLxZxMtxN matched=256 wrong_hash=0
+nHBRLUW3tRVq1LyvSV6atV3xYbdnw6rigRi6rNwSGFCBnkTAyj3o matched=256 wrong_hash=0
+nHBTv4UpxUn2TWcLQHkKPWtycNXkbFeggFmbXtQYRd6kq5XH2J4B matched=256 wrong_hash=0
+nHBVTAUpHEoEctXcAWyC7nJhxUYULWKz1WZCuC1tSm2VnCxDshVS matched=256 wrong_hash=0
+nHBWFVzxVYAVQNUFHoqnHw2SWhXKy1kKRr7oYAMFeu22rqsCLYCN matched=256 wrong_hash=0
+nHBYKjxjbzxRzrS3XkhpgM7KXJ25jbgPHkbAjjSCQPm8PaPS5y4v matched=256 wrong_hash=0
+nHBb2uHHY8V78qWQT3P6ADkFz4pRyEgJpA2pEqmQyTHuxXHccBzM matched=256 wrong_hash=0
+nHBcLEB4S6moQGrhMjJo1jbp58WL5psHY9EMDWNAtdqykUYiA1rF matched=256 wrong_hash=0
+nHBcLk5r1DVTpAGK8BkBtL7DPpGgp6mmB5MfkzB23MhcAEQHKCf1 matched=256 wrong_hash=0
+nHBcnQZ9a9UjZ7hbj9zWVXZ9kTcqheUkui32YdBTpQeAsE6BxWNG matched=256 wrong_hash=0
+nHBgZupJspDsrg7mex4Z2vBQXqoN2aTHaLgf8jGxMDPw4MWLh3J6 matched=256 wrong_hash=0
+nHBmj7zUY2yMc9f5wgNcCuWj79BUieNmc1GG8PqiEP1tgNZZWLVM matched=256 wrong_hash=0
+nHBoG3rHafA3U3Yfs388GTA9z8t5ocE67qjhgb8aXkfYnDCM5CNE matched=256 wrong_hash=0
+nHBtS3cC2UDzoSANr9nz6HrLYaDY9uYJD2zs649dkLxN6pBfLFiu matched=256 wrong_hash=0
+nHBxQ3srN8ErMvfMgsJ3jycSSaMFyHMk5WbrJVUTXPZgNh1VdbHH matched=256 wrong_hash=0
+nHBxxNuWsJXkzLk332ADxt1T18N1e9BSYjekjGNVCPfV813tSdvx matched=256 wrong_hash=0
+nHByMXejvHJgjcGJ1f9bhcAGcFeNR6ecsDmzN4t3HkhyRHZtM6Lj matched=256 wrong_hash=0
+nHD3ChJfpjf9SwNxiWhUG6VKGyWLHcGaU6WKZR4JHZFWxYoLNyf2 matched=256 wrong_hash=0
+nHD3sPmhNtVXTXrZAGhsfHRhxhzFXKHNNxemTtGFr69SRd9q88dZ matched=256 wrong_hash=0
+nHDBj6Mq1DSpTRS4s2MKDfCEUk3iLa5JyS5JFZQUPpUcUy2m2fpk matched=256 wrong_hash=0
+nHDDmWaS6iP8HNJ6rMGL2LupMVkVaCv3C9yaKnoQ39eQR79EUj48 matched=256 wrong_hash=0
+nHDHCvsJi8UwHMAbkinuJhPYsG5ZR9rtmGAjJZwo8uibf8N1tz3e matched=256 wrong_hash=0
+nHDUqGoM7KR1pgbdYBRgKpGKdFLhpnMzVbECs8RE73RGZm3Va6MJ matched=256 wrong_hash=0
+nHDfSHLutR7QqttAkx3AiYG2bukCdfAa3P9hrYL4yNJZQpvEpW1A matched=256 wrong_hash=0
+nHDw5erSdzhtZ7khjHeotRywM6WyPgJp6sUSewscoqLgC6LGATzn matched=256 wrong_hash=0
+nHU187ZGFcGHbLPbpdTgQyN3Ehp7dJJzr8huvEpeF3EziSsWhJuR matched=256 wrong_hash=0
+nHU3TeyW4FPHxjoP1PoF4Ak5VMc8ABwrrzKjBww7rYA9PKdPoSCN matched=253 wrong_hash=0
+nHU5tRRbniyStcsTe8HbCnyREyQ9Es5KpVGvfyub6haQ5eC9hqr5 matched=256 wrong_hash=0
+nHU74qX4tCQDSpE6zBS5PB3jybuGZJ7QMbeyLWDQRy3Lhb4DYDSR matched=256 wrong_hash=0
+nHU8mFbfVTh1yTD5h6uyXkLSk6E9UjBqiUtXQ2tFXmPDeUv9HwLo matched=256 wrong_hash=0
+nHUCEXpC5LhFAm1Mmf8TqrzVGt3QCuwWoW2V8PYynDpjZe8m8mHj matched=256 wrong_hash=0
+nHUSghNbHJoUbgAHsWHNb5Vu3E6YWrzGw1tYWtyTbP8WAf5v6Et1 matched=256 wrong_hash=0
+nHUT8QPaTEVw7hmQiKr7XTvgzrLMvGPGgv2xfdfLvRYpdyRJt5XE matched=256 wrong_hash=0
+nHUUTCL2PRuNsRfcbtsSL6z4DJx4fvHNciiVcqeP1fLK8LCEf5C2 matched=253 wrong_hash=0
+nHUUXMXfPEdnKAT8u2AB89LxTWT1tWsTecDPQURoMw2XJ2WP85MK matched=256 wrong_hash=0
+nHUUz9WsyGPkNgEyLkuQGofh4PP2kXTq9XBjS1JiNRfFaZL8HnkH matched=256 wrong_hash=0
+nHUVxTi8XfXjaaJppw7mLSrYDRpkDpf8H9ypzgVKxfSXShcWwAoK matched=256 wrong_hash=0
+nHUW82415dUNULY4juLTFzoWpqZSPbrXv2uPRnijX8vuJCjNs3eY matched=256 wrong_hash=0
+nHUWciHX8W9PgM3sQmgkRiKpkuaJjTxFSyvZce4bP4WeMz81HefX matched=256 wrong_hash=0
+nHUWhB3aXkJxWeRhPzBeE1Vqhz3FiGHGHfnCkJ7Ak5vrrYWaeqZh matched=256 wrong_hash=0
+nHUXzRZk3CYqATxqjBdaKSvcmNDJLiYxkUcFiK4yVLSnzrZMBGdP matched=256 wrong_hash=0
+nHUYXnP4KJ8nSdKkbQFfzUZrQyxbzwCUrxmW1uLmoD8XYzCYY5Qr matched=256 wrong_hash=0
+nHUatddiVB2GN6zHHCk1gtepjANF8BdjPKuVcN6jwG2JwBYPea3k matched=256 wrong_hash=0
+nHUc7VSYA6xvFakSvuTojJQucBNukKwmtguUG2HMT9Xp9dKzkpvJ matched=256 wrong_hash=0
+nHUdwzTWTQJzebbxcanZG2ERXikMLU9aAZa8cHtxosfiKq5N7Vd5 matched=256 wrong_hash=0
+nHUganJh2fSS4QxYnsAUphNo3ZKHLQ15ExX29QpAGkvu6vFajnuQ matched=256 wrong_hash=0
+nHUhL4QzULuXt2WK5v5mvzEMZSo6wM9ZWUaaQC1eYw2qa1ATFw1c matched=256 wrong_hash=0
+nHUif4sukXu9pJGyyBaeVMwmE8L1fJ5KJj4X4ksgTKhgjG6k96s2 matched=256 wrong_hash=0
+nHUkhbZe9ncdmhn6dbd5x7391ymwCS3YZEMWjysP9fSiDtau9YEe matched=256 wrong_hash=0
+nHUmoQrfBrSE3yjCtk5ZrCUTqwKCLv6t6SgK9oCuuMkoExEYxc8i matched=256 wrong_hash=0
+nHUqwEgubPGfXqAdqLaU6xqrfcN2hSQ8YKVJu2pHraq1h7NXj1SP matched=256 wrong_hash=0
+nHUso5gdgQnewAsk5QT1aFr897g6YLaL697iyuknmSqd7pbqz5Td matched=256 wrong_hash=0
+nHUudksKNfoJ9mLFPkw3aYLYoTYPxwjjAmTgAxqoLsQRASk8St8d matched=256 wrong_hash=0
+nHUus5vM4463rd82Ws3YpcrREVrjHTBdoYgA6BdwDR3YcBiwG6hN matched=256 wrong_hash=0
+nHUvKQbxx14GFyMaRB4vgu11x6pXrwMwX9yP5Ltgk4jp4SHbbgWA matched=256 wrong_hash=0
+nHUwdHGzvTM93oV38tMPSWZAWQ2Q6hVDS3XLQ32HPTUtcRASpayQ matched=256 wrong_hash=0
+nHUzc5XzsmweRV6aNyUQJD5eRUM4TT4tVCBv5DKx6T7Buq4gn9Lr matched=256 wrong_hash=0
+exit=0
+$ whole stream: validations total / with a hash differing from the ledger stream
+vals=224661 wrong_or_unknown_hash=2 distinct_mk=63
+$ UNL-only (data/nunl/unl-start.json trusted_validator_keys) matched counts, last window, vs nunl/report/risk.csv window_end=7559167
+     25 matched=256
+unl_keys=25
+     25 score=256

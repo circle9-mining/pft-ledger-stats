@@ -1,0 +1,15 @@
+# 2026-10-28T15:10:41Z code 9eb35a5faa25cab54754c551b3d824cde077615c
+$ python3 -u nunl/crosscheck_nunl.py --hist data/nunl/final/nunl.jsonl -n 10
+2026-10-28T15:10:42Z crosscheck seed=1793200242 scanned_flags=231 range=7500288-7559168 picked=[7503104, 7506944, 7514368, 7525888, 7527424, 7529472, 7536896, 7542272, 7545600, 7553280] corrupt=0
+2026-10-28T15:11:03Z OK flag 7503104 hash=3EADAB1D5A569716... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (22s)
+2026-10-28T15:11:25Z OK flag 7506944 hash=F24C29D7A6CD8694... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (22s)
+2026-10-28T15:11:46Z OK flag 7514368 hash=9BE7AB1A3F4E5FB8... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T15:12:10Z OK flag 7525888 hash=2D0595211042E94E... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (24s)
+2026-10-28T15:12:31Z OK flag 7527424 hash=9D0ADE5E192EB8BC... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T15:12:56Z OK flag 7529472 hash=2E4C6AC382E4950B... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=3 F+1=not acquirable locally (not compared) (25s)
+2026-10-28T15:13:17Z OK flag 7536896 hash=53D0010AD3D4F321... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T15:13:38Z OK flag 7542272 hash=D51DC6AD94B6CD38... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (21s)
+2026-10-28T15:14:05Z OK flag 7545600 hash=DA656422E3183BC3... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=3 F+1=not acquirable locally (not compared) (27s)
+2026-10-28T15:14:27Z OK flag 7553280 hash=3557600B5E514EC5... mods=0 nunl=None next=n/a amendments=64 acquire_attempts=2 F+1=not acquirable locally (not compared) (22s)
+2026-10-28T15:14:27Z result 10/10 OK local_calls=178 -> PASS
+exit=0

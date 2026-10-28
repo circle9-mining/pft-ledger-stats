@@ -1,0 +1,4 @@
+# nunl analysis 2026-10-28T15:10:25Z code 9eb35a5faa25cab54754c551b3d824cde077615c
+$ python3 -u nunl/analyze_nunl.py --hist data/nunl/final/nunl.jsonl --vals data/nunl/vals/vl.jsonl --unl data/nunl/unl-start.json --out nunl/report
+scanned_flags=231/231 range=7500055-7559367 missing=0 errors=0 bad_lines=0 unlmodify=0 objects=0 current_disabled=0 check_failures=0 risk_windows=13 -> PASS
+exit=0

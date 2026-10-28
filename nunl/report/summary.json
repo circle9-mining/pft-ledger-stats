@@ -1,0 +1,348 @@
+{
+ "history": {
+  "check_failures": [],
+  "current": {
+   "disabled": [],
+   "to_disable": null,
+   "to_reenable": null
+  },
+  "errors_unresolved": [],
+  "events": [],
+  "expected_flags": 231,
+  "first_flag": 7500288,
+  "first_time": "2026-10-26T13:31:21Z",
+  "flags_with_object": 0,
+  "last_flag": 7559168,
+  "last_time": "2026-10-28T14:59:31Z",
+  "missing": [],
+  "range": [
+   7500055,
+   7559367
+  ],
+  "scanned_flags": 231,
+  "spans": {},
+  "unlmodify_txs": 0
+ },
+ "ok": true,
+ "risk": {
+  "ledger_range": [
+   7555792,
+   7559362
+  ],
+  "score_stats": {
+   "count": 325,
+   "max": 256,
+   "mean": 256.0,
+   "median": 256.0,
+   "min": 256,
+   "p95": 256.0,
+   "p99": 256.0
+  },
+  "validators": [
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHB6Zc7mhr7swksEgpwTE7Hw7SvZ9cz22T2MECMSXjBeMTeHXQB7",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBAToXoTH6eZtC1cMJDvjG7eRb7ufZ3GUpeisvNVT4ofruRdVvd",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBM2nzq3pZUg8JsxvEt3G7gAAtc5Sukaef6YmvVx64uAoRK4QWM",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBVTAUpHEoEctXcAWyC7nJhxUYULWKz1WZCuC1tSm2VnCxDshVS",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBWFVzxVYAVQNUFHoqnHw2SWhXKy1kKRr7oYAMFeu22rqsCLYCN",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBYKjxjbzxRzrS3XkhpgM7KXJ25jbgPHkbAjjSCQPm8PaPS5y4v",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBb2uHHY8V78qWQT3P6ADkFz4pRyEgJpA2pEqmQyTHuxXHccBzM",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBcLEB4S6moQGrhMjJo1jbp58WL5psHY9EMDWNAtdqykUYiA1rF",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBgZupJspDsrg7mex4Z2vBQXqoN2aTHaLgf8jGxMDPw4MWLh3J6",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBmj7zUY2yMc9f5wgNcCuWj79BUieNmc1GG8PqiEP1tgNZZWLVM",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBxQ3srN8ErMvfMgsJ3jycSSaMFyHMk5WbrJVUTXPZgNh1VdbHH",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHBxxNuWsJXkzLk332ADxt1T18N1e9BSYjekjGNVCPfV813tSdvx",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHByMXejvHJgjcGJ1f9bhcAGcFeNR6ecsDmzN4t3HkhyRHZtM6Lj",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHD3sPmhNtVXTXrZAGhsfHRhxhzFXKHNNxemTtGFr69SRd9q88dZ",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHDfSHLutR7QqttAkx3AiYG2bukCdfAa3P9hrYL4yNJZQpvEpW1A",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHDw5erSdzhtZ7khjHeotRywM6WyPgJp6sUSewscoqLgC6LGATzn",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHU74qX4tCQDSpE6zBS5PB3jybuGZJ7QMbeyLWDQRy3Lhb4DYDSR",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUCEXpC5LhFAm1Mmf8TqrzVGt3QCuwWoW2V8PYynDpjZe8m8mHj",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUUXMXfPEdnKAT8u2AB89LxTWT1tWsTecDPQURoMw2XJ2WP85MK",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUWciHX8W9PgM3sQmgkRiKpkuaJjTxFSyvZce4bP4WeMz81HefX",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUatddiVB2GN6zHHCk1gtepjANF8BdjPKuVcN6jwG2JwBYPea3k",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUdwzTWTQJzebbxcanZG2ERXikMLU9aAZa8cHtxosfiKq5N7Vd5",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUvKQbxx14GFyMaRB4vgu11x6pXrwMwX9yP5Ltgk4jp4SHbbgWA",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUwdHGzvTM93oV38tMPSWZAWQ2Q6hVDS3XLQ32HPTUtcRASpayQ",
+    "windows": 13,
+    "worst_status": "OK"
+   },
+   {
+    "last_score": 256,
+    "last_share": 1.0,
+    "last_status": "OK",
+    "margin_to_disable": 128,
+    "min_score": 256,
+    "min_window": 7556095,
+    "validator": "nHUzc5XzsmweRV6aNyUQJD5eRUM4TT4tVCBv5DKx6T7Buq4gn9Lr",
+    "windows": 13,
+    "worst_status": "OK"
+   }
+  ],
+  "windows": [
+   7556095,
+   7556351,
+   7556607,
+   7556863,
+   7557119,
+   7557375,
+   7557631,
+   7557887,
+   7558143,
+   7558399,
+   7558655,
+   7558911,
+   7559167
+  ]
+ },
+ "thresholds": {
+  "flag_interval": 256,
+  "high_reenable_gt": 204,
+  "low_disable_lt": 128,
+  "max_listed_frac": 0.25,
+  "min_local_votes_gt": 230,
+  "watch_lt": 153
+ },
+ "unl": {
+  "max_listed": 7,
+  "quorum": 17,
+  "size": 25,
+  "t": "2026-10-28T12:11:03Z"
+ }
+}

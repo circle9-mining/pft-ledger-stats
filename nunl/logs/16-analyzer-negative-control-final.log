@@ -1,0 +1,14 @@
+# 2026-10-28T15:18:10Z code 9eb35a5faa25cab54754c551b3d824cde077615c
+$ bash nunl/negative_control.sh data/nunl/final/nunl.jsonl
+== control: unmodified copy (seed 1793200690)
+scanned_flags=231/231 range=7500055-7559367 missing=0 errors=0 bad_lines=0 unlmodify=0 objects=0 current_disabled=0 check_failures=0 risk_windows=0 -> PASS
+control exit=0
+== corrupt: fake DisabledValidator at one random flag ledger
+corrupted flag ledger: 7505408
+scanned_flags=231/231 range=7500055-7559367 missing=0 errors=0 bad_lines=0 unlmodify=0 objects=1 current_disabled=0 check_failures=2 risk_windows=0 -> FAIL
+  CHECK FAIL F7505408: DisabledValidators ['EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB'] != expected []
+  CHECK FAIL F7505664: DisabledValidators [] != expected ['EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB']
+corrupt exit=1
+expected failure message present (F7505408 DisabledValidators)
+== RESULT PASS
+exit=0

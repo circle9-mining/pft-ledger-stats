@@ -111,3 +111,23 @@ bash nunl/negative_control.sh data/nunl/final/nunl.jsonl                        
 # offline tests + mutants
 bash nunl/check.sh
 ```
+
+## Results (published run, 2026-10-28)
+
+Full report: [`report/REPORT.md`](report/REPORT.md) (`summary.json`, `risk.csv` next to it).
+
+| check | result | log |
+|---|---|---|
+| full-history collection, public RPC | 231/231 flag ledgers in 7500055-7559367 (first 219 in a fresh run, then 12 new ones on resume), 0 errors, 0 retries | `logs/07-collect-final.log`, `logs/12-collect-topup-final.log` |
+| nUNL history | **no events**: 0 UNLModify txs and no NegativeUNL object at any of the 231 flag ledgers; 3 consistency checks pass | `logs/13-analyze-final.log` |
+| risk, 256-ledger windows | 13 complete windows (voting ledgers 7556095-7559167, 3 h validation stream); all 25 UNL validators scored 256/256 in every window (status OK, margin 128 to the disable threshold) | `logs/13-analyze-final.log` |
+| independent recount | a separate jq count over the raw stream gives 256 for all 25 UNL keys in the last window, the same as `risk.csv`; 63 keys were seen in total, and the only one below 256 (253) is not on the UNL | `logs/19-jq-recount-last-window.log` |
+| crosscheck vs own node | 10/10 random flag ledgers OK (hash, UNLModify, NegativeUNL, Amendments positive control) | `logs/14-crosscheck-10-final.log` |
+| crosscheck negative control | `--corrupt 2`: 8/10 OK, 2 MISMATCH, exit 1 | `logs/15-crosscheck-negative-control-final.log` |
+| analyzer negative control | fake DisabledValidator at flag 7505408: exit 1, names F7505408 and F7505664; control copy exit 0 | `logs/16-analyzer-negative-control-final.log` |
+| offline tests | ruff clean, shellcheck clean, 30/30 unit tests, 15/15 mutants caught | `logs/17-check-final.log` |
+| code digests | sha256 of every script used in the runs above | `logs/18-digests-final.log` |
+
+A testnet where every UNL validator signs every ledger is the expected healthy case, so the risk table
+shows no candidates. The boundary cases (127/128 and 204/205 scores, listed validators, missing
+ledgers in a window) are covered by the synthetic-fixture tests and the threshold mutants in `check.sh`.

@@ -1,0 +1,13 @@
+# nunl code digests 2026-10-28T15:11:24Z at 9eb35a5faa25cab54754c551b3d824cde077615c
+$ sha256sum nunl/*.py nunl/*.sh pftstats/*.py
+7edee6ee25ef15577c2de858af09ecbab6442557fda01411c21228efb1884537  nunl/analyze_nunl.py
+15f2d89cfddfa493b24a300d3a7182ddecf593a5dddbd0d3343c3e51f6860013  nunl/collect_nunl.py
+4a46d30dafa9bd4458ea4705cb5a44a8b046cb54d7c77a96391541d6538ec92c  nunl/crosscheck_nunl.py
+be3f4fb3c8fc4be95ae1ae11b20f31c496e54938b21a7eb95aa90462b8816316  nunl/check.sh
+935a3c7389027f982da201e1d20ca9e938ae05bd97c1daae8a226f046dccc0f0  nunl/negative_control.sh
+dfb7a2a61caa2daac6dedfc2650ff2819ade443ed4656e096f9eb56eb07dba91  pftstats/__init__.py
+6ef82674ae978da8656abe5b2cba637c06e10a9f7de80da61be70d0a42cca8cb  pftstats/stats.py
+$ wc -l data/nunl/final/nunl.jsonl data/nunl/vals/vl.jsonl
+     235 data/nunl/final/nunl.jsonl
+  228234 data/nunl/vals/vl.jsonl
+  228469 total
