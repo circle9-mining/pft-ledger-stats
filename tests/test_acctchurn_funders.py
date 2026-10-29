@@ -106,3 +106,29 @@ def test_creation_after_window_stops_paging():
 def test_retries_are_counted():
     r = funders.build(DIFF, rpc(FakeServer(HISTORY, fail_first=2)), reserve_base=10_000_000)
     assert r["rpc"]["retries"] == 2 and r["not_found"] == []
+
+
+def test_report_end_to_end(tmp_path):
+    import diff_churn
+    import report_churn
+    from test_acctchurn_diff import acct, write
+
+    full = [
+        "rFunderAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "rNewBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+        "rGoneCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    ]
+    pa = write(tmp_path / "a.jsonl.gz", 100, 1500, [acct(1, full[0], 1000), acct(3, full[2], 500)])
+    pb = write(tmp_path / "b.jsonl.gz", 200, 1488, [acct(1, full[0], 1448), acct(2, full[1], 40, seq=150)])
+    ha, a = diff_churn.load(pa)
+    hb, b = diff_churn.load(pb)
+    d = diff_churn.diff(ha, a, hb, b, fees_sum=12)
+    assert d["ok"]
+    hist = {full[1]: [entry(150, full[0], created=full[1], balance="40")]}
+    f = funders.build(json.loads(json.dumps(d)), rpc(FakeServer(hist)), reserve_base=10)
+    text = report_churn.render(d, f)
+    assert "| burned_eq_fee_sum | PASS |" in text and "Never active in the window" in text
+    assert "rFunderA…" in text and "rGoneCCC…" in text
+    for addr in full:
+        assert addr not in text  # addresses are only ever printed truncated
+    assert report_churn.render(d, f) == text
