@@ -146,12 +146,22 @@ if __name__ == "__main__":
     unittest.main()
 
 
+def _txflow_resume_check():
+    """txflow/resume_check.py by path: txmix/ and validators/ have a module of the same name, and
+    whichever test imports first owns sys.modules["resume_check"] (order-dependent failure)."""
+    import importlib.util
+
+    path = os.path.join(os.path.dirname(__file__), "..", "txflow", "resume_check.py")
+    spec = importlib.util.spec_from_file_location("txflow_resume_check", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 class DrillChecker(unittest.TestCase):
     """resume_check.py against synthetic captures shaped like a real drill (positive + negatives)."""
 
     def build(self, d, dup=False, torn=b'{"ev":"led'):
-        import resume_check  # noqa: F401
-
         p = os.path.join(d, "final.jsonl")
 
         def line(e):
@@ -177,7 +187,7 @@ class DrillChecker(unittest.TestCase):
         return p, os.path.join(d, "term.jsonl"), os.path.join(d, "kill.jsonl")
 
     def test_positive_and_negatives(self):
-        from resume_check import main
+        main = _txflow_resume_check().main
 
         with tempfile.TemporaryDirectory() as d:
             self.assertEqual(main(*self.build(d)), 0)

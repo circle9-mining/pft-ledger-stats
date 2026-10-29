@@ -2,7 +2,7 @@
 """Find the creating transaction of every account created between snapshots A and B, and
 build the funding graph (read-only public RPC: account_tx, account_info only).
 
-Input is the diff.json written by diff.py. For each created AccountRoot, account_tx
+Input is the diff.json written by diff_churn.py. For each created AccountRoot, account_tx
 (forward, ledgers A+1..B) is paged until the transaction whose metadata holds a CreatedNode
 AccountRoot for that address. That transaction gives: funder (tx Account), tx type, ledger,
 hash, and the native amount the new account received (its Balance in the CreatedNode).
@@ -19,7 +19,7 @@ Graph output (JSON, sorted keys, deterministic for the same RPC answers):
 Exit 0 when every created account was resolved, 1 if any is in not_found, 2 on RPC failure.
 
 Usage:
-  ./funders.py diff.json --reserve-base 10000000 [--rpc URL] [--out funders.json]
+  ./funders_churn.py diff.json --reserve-base 10000000 [--rpc URL] [--out funders.json]
 """
 
 import argparse

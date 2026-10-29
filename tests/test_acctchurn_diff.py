@@ -6,7 +6,7 @@ import sys
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "acctchurn"))
-import diff  # noqa: E402
+import diff_churn as diff  # noqa: E402
 
 
 def idx(n):

@@ -3,10 +3,9 @@ import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "acctchurn"))
-from funders import Rpc  # noqa: E402
+import crosscheck_churn as crosscheck  # noqa: E402
+from funders_churn import Rpc  # noqa: E402
 from test_acctchurn_diff import acct, write  # noqa: E402
-
-import crosscheck  # noqa: E402
 
 # ledger -> address -> (Balance, OwnerCount); absent = actNotFound
 STATE = {100: {"r1": (1000, 0), "r3": (200, 0)}, 200: {"r1": (1190, 0), "r4": (40, 0)}}

@@ -20,7 +20,7 @@ Output (JSON on stdout, or --out FILE), keys sorted so the same inputs give the 
   Exit 1 if any conservation check fails, 0 otherwise.
 
 Usage:
-  ./diff.py snapA.jsonl.gz snapB.jsonl.gz [--fees-sum N] [--out diff.json]
+  ./diff_churn.py snapA.jsonl.gz snapB.jsonl.gz [--fees-sum N] [--out diff.json]
 """
 
 import argparse

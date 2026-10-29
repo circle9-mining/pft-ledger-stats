@@ -16,7 +16,7 @@ MISMATCH and the run must exit 1.
 Exit 0 all OK, 1 any mismatch, 2 RPC failure.
 
 Usage:
-  ./crosscheck.py diff.json funders.json snapB.jsonl.gz --count 20 --seed 1 [--negative] [--rpc URL]
+  ./crosscheck_churn.py diff.json funders.json snapB.jsonl.gz --count 20 --seed 1 [--negative] [--rpc URL]
 """
 
 import argparse
@@ -26,8 +26,8 @@ import random
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from diff import load  # noqa: E402
-from funders import Rpc, RpcError, created_node  # noqa: E402
+from diff_churn import load  # noqa: E402
+from funders_churn import Rpc, RpcError, created_node  # noqa: E402
 
 
 def short(a):
