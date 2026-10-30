@@ -12,7 +12,7 @@ import reconcile_key as R  # noqa: E402
 from test_keyposture_reconcile import A0, A1, A2, A4, A5, LINES, SNAP_A, SNAP_B, write_snap, write_tx  # noqa: E402
 
 
-def server(snaps, txs, fail_first=0, v2=False):
+def server(snaps, txs, fail_first=0, v2=False, tx_result="tesSUCCESS"):
     """Fake public RPC answering from {ledger: [objects]}; first `fail_first` calls answer lgrNotFound."""
     calls = {"n": 0}
 
@@ -46,7 +46,7 @@ def server(snaps, txs, fail_first=0, v2=False):
                     "validated": True,
                     "ledger_index": t["ledger_index"],
                     "TransactionType": t["tx"]["TransactionType"],
-                    "meta": {"TransactionResult": "tesSUCCESS"},
+                    "meta": {"TransactionResult": tx_result},
                 }
             }
         raise AssertionError(m)
@@ -133,3 +133,21 @@ def test_main_refuses_failed_reconcile(setup, tmp_path):
 def test_read_only_allowlist():
     with pytest.raises(ValueError, match="read-only"):
         rpc(lambda b: {}).call("submit", {})
+
+
+def test_failed_tx_result_mismatches(setup):
+    res, pa, pb, *_ = setup
+    out = []
+    assert (
+        X.run(
+            res,
+            pa,
+            pb,
+            rpc(server({10: SNAP_A, 15: SNAP_B}, TXS, tx_result="tecNO_PERMISSION")),
+            3,
+            1,
+            out=out.append,
+        )
+        == 1
+    )
+    assert all(x.startswith("MISMATCH K3") for x in out if x.startswith("MISMATCH"))

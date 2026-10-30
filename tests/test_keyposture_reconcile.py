@@ -401,3 +401,76 @@ def test_decode_address_errors():
 def test_signer_summary_sorted():
     s = P.signer_summary(sl(A0, 3, [(A2, 1), (A1, 2)]))
     assert s == {"quorum": 3, "entries": sorted([(A1, 2), (A2, 1)])}
+
+
+def test_signerlist_keylet_matches_source_definition():
+    # postfiatd src/libxrpl/protocol/Indexes.cpp: signers(account, 0) =
+    # indexHash(LedgerNameSpace::SIGNER_LIST ('S', as uint16), account, uint32 page 0)
+    import hashlib
+
+    for a in (ONE, A0, A5):
+        want = (
+            hashlib.sha512(b"\x00S" + P.decode_address(a) + (0).to_bytes(4, "big"))
+            .digest()[:32]
+            .hex()
+            .upper()
+        )
+        assert P.signerlist_keylet(a) == want
+    want = hashlib.sha512(b"\x00a" + P.decode_address(A0)).digest()[:32].hex().upper()
+    assert P.account_keylet(A0) == want
+
+
+def test_signerlist_deleted_on_live_account(world):
+    a_objs = SNAP_A + [sl(A0, 1, [(A1, 1)])]
+    lines = [
+        line(
+            11,
+            0,
+            "D1",
+            "SignerListSet",
+            [
+                mod_acct(A0, {"OwnerCount": 1}, {"Flags": 0}),
+                {
+                    "DeletedNode": {
+                        "LedgerEntryType": "SignerList",
+                        "LedgerIndex": P.signerlist_keylet(A0),
+                        "FinalFields": {},
+                    }
+                },
+            ],
+        )
+    ]
+    b_objs = [o for o in SNAP_A if o["LedgerEntryType"] != "Offer"] + [
+        {"LedgerEntryType": "Offer", "index": "O"}
+    ]
+
+    def mk(tmp):
+        return (
+            write_snap(tmp / "a2.gz", 10, a_objs),
+            write_snap(tmp / "b2.gz", 15, b_objs),
+            write_tx(tmp / "tx2", 10, 15, lines),
+        )
+
+    import tempfile
+    from pathlib import Path
+
+    with tempfile.TemporaryDirectory() as d:
+        r = R.reconcile(*mk(Path(d)))
+    assert r["result"] == "PASS", r["residuals"]
+    assert r["per_class"]["master+multisig"]["out"] == 1
+
+
+def test_unchanged_regularkey_must_match_replay(world):
+    # A3 has RegularKey A0 at A; a tx whose FinalFields show RegularKey A1 without PreviousFields
+    # is inconsistent (the field would be in PreviousFields if it had changed)
+    extra = [line(13, 1, "U1", "AccountSet", [mod_acct(A3, {"Sequence": 1}, {"Flags": 0, "RegularKey": A1})])]
+    r = R.reconcile(*world(lines=LINES + extra))
+    assert any("unchanged RegularKey" in x for x in r["residuals"])
+
+
+def test_gap_row_even_with_ledger_row(world):
+    a, b, t = world()
+    with open(os.path.join(t, "gaps.csv"), "w") as fh:
+        fh.write("ledger_index,error,logged_at\n12,x,\n")
+    with pytest.raises(R.Incomplete, match="gaps.csv"):
+        R.reconcile(a, b, t)
