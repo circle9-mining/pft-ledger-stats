@@ -4,7 +4,6 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "acctchurn"))
 import funders_churn as funders  # noqa: E402
-from collect_rewardflow import Rpc  # noqa: E402  (path added by funders)
 
 
 def entry(ledger, account, created=None, balance="0", seq=None):
@@ -37,13 +36,13 @@ def entry(ledger, account, created=None, balance="0", seq=None):
 class FakeServer:
     """Pages account_tx 2 entries at a time and, like the real public RPC, ignores the ledger window."""
 
-    def __init__(self, history, fail_first=0):
-        self.history, self.fail_first, self.seen = history, fail_first, 0
+    def __init__(self, history, fail_first=0, error="slowDown"):
+        self.history, self.fail_first, self.error, self.seen = history, fail_first, error, 0
 
     def __call__(self, body):
         self.seen += 1
         if self.seen <= self.fail_first:
-            return {"result": {"status": "error", "error": "slowDown"}}
+            return {"result": {"status": "error", "error": self.error}}
         p = json.loads(body)["params"][0]
         txs = self.history.get(p["account"], [])
         start = p.get("marker", 0)
@@ -55,7 +54,7 @@ class FakeServer:
 
 
 def rpc(server):
-    return Rpc("https://fake", gap=0, post=server, sleep=lambda s: None)
+    return funders.churn_rpc("https://fake", gap=0, post=server, sleep=lambda s: None)
 
 
 DIFF = {
@@ -106,6 +105,22 @@ def test_creation_after_window_stops_paging():
 def test_retries_are_counted():
     r = funders.build(DIFF, rpc(FakeServer(HISTORY, fail_first=2)), reserve_base=10_000_000)
     assert r["rpc"]["retries"] == 2 and r["not_found"] == []
+    assert r["rpc"]["retries_by_error"] == {"slowDown": 2}
+
+
+def test_lgrnotfound_and_internal_are_retried_and_counted_separately():
+    for err in ("lgrNotFound", "internal"):
+        r = funders.build(DIFF, rpc(FakeServer(HISTORY, fail_first=3, error=err)), reserve_base=10_000_000)
+        assert r["rpc"]["retries_by_error"] == {err: 3} and r["not_found"] == []
+
+
+def test_actnotfound_is_not_retried():
+    import pytest
+
+    srv = FakeServer(HISTORY, fail_first=1, error="actNotFound")
+    with pytest.raises(funders.RpcError, match="actNotFound"):
+        funders.build(DIFF, rpc(srv), reserve_base=10_000_000)
+    assert srv.seen == 1
 
 
 def test_report_end_to_end(tmp_path):

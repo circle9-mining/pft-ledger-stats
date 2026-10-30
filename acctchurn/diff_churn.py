@@ -10,11 +10,15 @@ Each file is checked before use (exit 2 if not):
 Output (JSON on stdout, or --out FILE), keys sorted so the same inputs give the same bytes:
   - per LedgerEntryType: count in A, count in B, created, deleted, changed (same index,
     different content), unchanged
-  - created / deleted AccountRoot lists (address, balance, sequence, OwnerCount)
+  - created / deleted AccountRoot lists (address, balance, sequence, OwnerCount), and a changed
+    list (address, balance and sequence/OwnerCount in A and B, delta_drops)
+  - balance_changes over every AccountRoot that differs (created counts from 0, deleted to 0):
+    net_drops, gross_increase_drops, gross_decrease_drops, accounts_up/down/same_balance
   - native (PFT drops) conservation, exact to the drop:
         native(S) = sum AccountRoot.Balance + sum Escrow.Amount + sum (PayChannel.Amount - Balance)
-    checks  native(A) == total_coins(A), native(B) == total_coins(B), and
-            delta_native == delta_total_coins == -burned  (burned = total_coins(A) - total_coins(B))
+    checks  native(A) == total_coins(A), native(B) == total_coins(B),
+            delta_native == delta_total_coins == -burned  (burned = total_coins(A) - total_coins(B)),
+            balance_changes.net_drops == delta of the AccountRoot part of native, and
     and, with --fees-sum N (sum of fee_drops over ledgers A+1..B, from feesum_churn.py),
             burned == fees
   Exit 1 if any conservation check fails, 0 otherwise.
@@ -90,6 +94,36 @@ def account_row(o):
     }
 
 
+def changed_row(oa, ob):
+    ba, bb = int(oa["Balance"]), int(ob["Balance"])
+    return {
+        "address": ob["Account"],
+        "balance_a_drops": ba,
+        "balance_b_drops": bb,
+        "delta_drops": bb - ba,
+        "sequence_a": oa.get("Sequence"),
+        "sequence_b": ob.get("Sequence"),
+        "owner_count_a": oa.get("OwnerCount", 0),
+        "owner_count_b": ob.get("OwnerCount", 0),
+    }
+
+
+def balance_changes(created, deleted, changed):
+    deltas = (
+        [r["balance_drops"] for r in created]
+        + [-r["balance_drops"] for r in deleted]
+        + [r["delta_drops"] for r in changed]
+    )
+    return {
+        "net_drops": sum(deltas),
+        "gross_increase_drops": sum(x for x in deltas if x > 0),
+        "gross_decrease_drops": -sum(x for x in deltas if x < 0),
+        "accounts_up": sum(1 for x in deltas if x > 0),
+        "accounts_down": sum(1 for x in deltas if x < 0),
+        "accounts_same_balance": sum(1 for x in deltas if x == 0),
+    }
+
+
 def diff(ha, a, hb, b, fees_sum=None):
     if hb["ledger_index"] <= ha["ledger_index"]:
         raise SnapshotError("snapshot B must be a later ledger than A")
@@ -98,7 +132,7 @@ def diff(ha, a, hb, b, fees_sum=None):
         | {o.get("LedgerEntryType", "?") for o in b.values()}
     )
     per = {t: Counter() for t in types}
-    created_acct, deleted_acct, changed_acct = [], [], 0
+    created_acct, deleted_acct, changed_acct = [], [], []
     for idx, o in a.items():
         t = o.get("LedgerEntryType", "?")
         per[t]["in_a"] += 1
@@ -108,7 +142,8 @@ def diff(ha, a, hb, b, fees_sum=None):
                 deleted_acct.append(account_row(o))
         elif b[idx] != o:
             per[t]["changed"] += 1
-            changed_acct += t == "AccountRoot"
+            if t == "AccountRoot":
+                changed_acct.append(changed_row(o, b[idx]))
         else:
             per[t]["unchanged"] += 1
     for idx, o in b.items():
@@ -121,10 +156,13 @@ def diff(ha, a, hb, b, fees_sum=None):
 
     na, nb = native_held(a), native_held(b)
     burned = ha["total_coins"] - hb["total_coins"]
+    bal = balance_changes(created_acct, deleted_acct, changed_acct)
     checks = {
         "native_a_eq_total_coins_a": na["total"] == ha["total_coins"],
         "native_b_eq_total_coins_b": nb["total"] == hb["total_coins"],
         "delta_native_eq_minus_burned": nb["total"] - na["total"] == -burned,
+        "net_balance_change_eq_delta_account_root": bal["net_drops"]
+        == nb["account_root"] - na["account_root"],
     }
     if fees_sum is not None:
         checks["burned_eq_fee_sum"] = burned == fees_sum
@@ -144,8 +182,9 @@ def diff(ha, a, hb, b, fees_sum=None):
         "accounts": {
             "created": sorted(created_acct, key=lambda r: r["address"]),
             "deleted": sorted(deleted_acct, key=lambda r: r["address"]),
-            "changed": changed_acct,
+            "changed": sorted(changed_acct, key=lambda r: r["address"]),
         },
+        "balance_changes": bal,
         "native": {"a": na, "b": nb, "burned_drops": burned, "fee_sum_drops": fees_sum},
         "checks": checks,
         "ok": all(checks.values()),

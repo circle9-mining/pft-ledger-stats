@@ -94,6 +94,38 @@ def test_counts_and_accounts(pair):
     assert r["ok"] and all(r["checks"].values())
 
 
+def test_changed_rows_and_balance_aggregates(pair):
+    r = run(pair[0], pair[1], fees=12)
+    ch = {x["address"]: x for x in r["accounts"]["changed"]}
+    assert sorted(ch) == ["r1", "r2"]
+    assert (ch["r1"]["balance_a_drops"], ch["r1"]["balance_b_drops"], ch["r1"]["delta_drops"]) == (
+        1000,
+        1190,
+        190,
+    )
+    assert (ch["r2"]["delta_drops"], ch["r2"]["sequence_a"], ch["r2"]["sequence_b"]) == (-42, 1, 3)
+    # r1 +190, r4 created +40, r2 -42, r3 deleted -200
+    assert r["balance_changes"] == {
+        "net_drops": -12,
+        "gross_increase_drops": 230,
+        "gross_decrease_drops": 242,
+        "accounts_up": 2,
+        "accounts_down": 2,
+        "accounts_same_balance": 0,
+    }
+    assert r["checks"]["net_balance_change_eq_delta_account_root"]
+
+
+def test_owner_count_only_change_is_same_balance(pair, tmp_path):
+    ha, a = diff.load(pair[0])
+    objs = [dict(o, OwnerCount=1) if o.get("Account") == "r1" else o for o in a.values()]
+    b = write(tmp_path / "oc.jsonl.gz", 101, ha["total_coins"], objs)
+    r = run(pair[0], b, fees=0)
+    assert [x["address"] for x in r["accounts"]["changed"]] == ["r1"]
+    assert r["balance_changes"]["accounts_same_balance"] == 1 and r["balance_changes"]["net_drops"] == 0
+    assert r["ok"]
+
+
 def test_fee_sum_mismatch_fails(pair):
     r = run(pair[0], pair[1], fees=11)
     assert r["checks"]["burned_eq_fee_sum"] is False and not r["ok"]

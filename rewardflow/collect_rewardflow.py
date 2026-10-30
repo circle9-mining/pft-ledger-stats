@@ -56,8 +56,11 @@ class RpcError(Exception):
 class Rpc:
     """JSON-RPC over HTTPS with a minimum gap between requests and retry/backoff."""
 
-    def __init__(self, url, gap=0.5, retries=6, backoff=2.0, post=None, sleep=time.sleep):
+    def __init__(self, url, gap=0.5, retries=6, backoff=2.0, post=None, sleep=time.sleep,
+                 retry_errors=None):
         self.url, self.gap, self.retries, self.backoff = url, gap, retries, backoff
+        self.retry_errors = RETRY_ERRORS if retry_errors is None else set(retry_errors)
+        self.retry_kinds = {}  # retried error -> count; transport errors count as "transport"
         self.post = post or self._post
         self.sleep = sleep
         self.last = None
@@ -83,15 +86,18 @@ class Rpc:
                 res = self.post(body)["result"]
             except (urllib.error.URLError, TimeoutError, OSError, ValueError, KeyError) as ex:
                 err = f"{type(ex).__name__}: {ex}"
+                kind = "transport"
             else:
                 if res.get("status") == "success" or "error" not in res:
                     return res
                 err = res.get("error")
-                if err not in RETRY_ERRORS:
+                kind = err
+                if err not in self.retry_errors:
                     raise RpcError(f"{method}: {err}: {res.get('error_message', '')}")
             if attempt == self.retries:
                 raise RpcError(f"{method}: giving up after {attempt} attempts: {err}")
             self.retried += 1
+            self.retry_kinds[kind] = self.retry_kinds.get(kind, 0) + 1
             log(f"RETRY {method} attempt {attempt}/{self.retries} error={err} backoff={delay:.1f}s")
             self.sleep(delay)
             delay *= 2

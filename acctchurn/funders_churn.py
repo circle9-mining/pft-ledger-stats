@@ -14,7 +14,8 @@ Graph output (JSON, sorted keys, deterministic for the same RPC answers):
   - funders[]: funder, accounts funded, total drops, share of all created accounts
   - chains[]: created accounts that themselves funded another created account (depth >= 2)
   - not_found[]: addresses whose creating tx was not found in the window (should be empty)
-  - rpc: calls, retries
+  - rpc: calls, retries, retries_by_error (lgrNotFound / internal answers of the public RPC are
+    retried with backoff and counted here, never treated as a result; persistent ones exit 2)
 
 Exit 0 when every created account was resolved, 1 if any is in not_found, 2 on RPC failure.
 
@@ -29,7 +30,23 @@ import sys
 from collections import defaultdict
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "rewardflow"))
-from collect_rewardflow import Rpc, RpcError  # noqa: E402
+from collect_rewardflow import RETRY_ERRORS, Rpc, RpcError  # noqa: E402
+
+# The public RPC sometimes answers lgrNotFound or internal for ledgers inside its own
+# complete_ledgers and the same query succeeds seconds later (rewardflow run 1).
+CHURN_RETRY_ERRORS = RETRY_ERRORS | {"lgrNotFound", "internal"}
+
+
+def churn_rpc(url, gap=0.5, **kw):
+    return Rpc(url, gap=gap, retry_errors=CHURN_RETRY_ERRORS, **kw)
+
+
+def rpc_stats(rpc):
+    return {
+        "calls": rpc.calls,
+        "retries": rpc.retried,
+        "retries_by_error": dict(sorted(rpc.retry_kinds.items())),
+    }
 
 
 def created_node(meta, address):
@@ -138,7 +155,7 @@ def build(diffdoc, rpc, reserve_base):
         "chains": chains,
         "not_found": sorted(not_found),
         "never_active": sum(1 for r in created if not r["active"]),
-        "rpc": {"calls": rpc.calls, "retries": rpc.retried},
+        "rpc": rpc_stats(rpc),
     }
 
 
@@ -153,7 +170,7 @@ def main(argv=None):
     with open(args.diff_json) as fh:
         diffdoc = json.load(fh)
     try:
-        result = build(diffdoc, Rpc(args.rpc, gap=args.gap), args.reserve_base)
+        result = build(diffdoc, churn_rpc(args.rpc, gap=args.gap), args.reserve_base)
     except RpcError as e:
         print(f"ERROR {e}", file=sys.stderr)
         return 2
