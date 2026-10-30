@@ -57,8 +57,9 @@ class Rpc:
     """JSON-RPC over HTTPS with a minimum gap between requests and retry/backoff."""
 
     def __init__(self, url, gap=0.5, retries=6, backoff=2.0, post=None, sleep=time.sleep,
-                 retry_errors=None):
+                 retry_errors=None, methods=None):
         self.url, self.gap, self.retries, self.backoff = url, gap, retries, backoff
+        self.methods = READ_ONLY_METHODS if methods is None else frozenset(methods)
         self.retry_errors = RETRY_ERRORS if retry_errors is None else set(retry_errors)
         self.retry_kinds = {}  # retried error -> count; transport errors count as "transport"
         self.post = post or self._post
@@ -73,7 +74,7 @@ class Rpc:
             return json.load(r)
 
     def call(self, method, params):
-        if method not in READ_ONLY_METHODS:
+        if method not in self.methods:
             raise ValueError(f"refusing non read-only method {method}")
         body = json.dumps({"method": method, "params": [params]}).encode()
         delay = self.backoff
