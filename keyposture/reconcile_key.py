@@ -312,6 +312,14 @@ def reconcile(snap_a, snap_b, txdir, negative=False, count_a=None, count_b=None)
         "key_tx": len(lines),
         "key_tx_with_effect": len(eff),
         "tx_types": dict(Counter(x["tx"]["TransactionType"] for x in lines)),
+        "effect_txs": [
+            {
+                "hash": lines[i]["tx"]["hash"],
+                "ledger_index": int(lines[i]["ledger_index"]),
+                "type": lines[i]["tx"]["TransactionType"],
+            }
+            for i in eff
+        ],
         "created": sum(n for (f, _), n in trans.items() if f == "(new)"),
         "deleted": sum(n for (_, t), n in trans.items() if t == "(deleted)"),
         "changed_accounts": changed,
