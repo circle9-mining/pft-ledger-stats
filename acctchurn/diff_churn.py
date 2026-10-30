@@ -15,7 +15,7 @@ Output (JSON on stdout, or --out FILE), keys sorted so the same inputs give the 
         native(S) = sum AccountRoot.Balance + sum Escrow.Amount + sum (PayChannel.Amount - Balance)
     checks  native(A) == total_coins(A), native(B) == total_coins(B), and
             delta_native == delta_total_coins == -burned  (burned = total_coins(A) - total_coins(B))
-    and, with --fees FILE (sum of fee_drops over ledgers A+1..B from the tx collector),
+    and, with --fees-sum N (sum of fee_drops over ledgers A+1..B, from feesum_churn.py),
             burned == fees
   Exit 1 if any conservation check fails, 0 otherwise.
 
