@@ -52,12 +52,12 @@ def acct(addr, n, minted=None, burned=None):
 OFFER = "0F" * 32
 
 
-def write_snap(path, ledger, objs, paged=None):
+def write_snap(path, ledger, objs, paged=None, close_iso="2026-10-30T00:00:00Z"):
     header = {
         "format": "pft-state-snapshot/1",
         "ledger_index": ledger,
         "ledger_hash": "AB" * 32,
-        "close_time_iso": "2026-10-30T00:00:00Z",
+        "close_time_iso": close_iso,
         "total_coins": 1,
         "objects_paged": len(objs) if paged is None else paged,
     }
