@@ -1,0 +1,10 @@
+# acctchurn runlog 2 - public RPC account_tx window probe - 2026-10-29T10:11:17Z
+$ grep PRETTY /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+(exit 0)
+$ curl -s https://rpc.testnet.postfiat.org -H 'Content-Type: application/json' -d '{"method":"account_tx","params":[{"account":"r9k51cJFVaYRST5vMUsdokiYcwdpQdUJGR","ledger_index_min":7569990,"ledger_index_max":7570000,"forward":true,"limit":3}]}' | jq -c '.result | {ledger_index_min,ledger_index_max,marker,returned_ledgers:[.transactions[].tx.ledger_index]}'
+{"ledger_index_min":7569990,"ledger_index_max":7570000,"marker":{"ledger":7501350,"seq":0},"returned_ledgers":[7500711,7500978,7500983]}
+(exit 0)
+$ curl -s https://rpc.testnet.postfiat.org -H 'Content-Type: application/json' -d '{"method":"server_info","params":[{}]}' | jq -c '.result.info | {build_version,complete_ledgers}'
+{"build_version":"1.0.9","complete_ledgers":"7500055-7582006"}
+(exit 0)

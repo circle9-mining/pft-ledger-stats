@@ -1,0 +1,13 @@
+# 2026-10-30T00:15:49Z acctchurn funders (final code) | "Ubuntu 22.04.5 LTS" | commit ae137c9b616904625d0ddaa2dfea6a21e747f50a | funders_churn.py sha256 eca1601f2a399a6d198c5406af143203855de4a93fd1c7d57aac5b3bd4f177ca | collect_rewardflow.py sha256 9e6b36dc04af77780c913c32bf5670bf46102d74d4f37d81b7948d4079ba1ca9 | 
+$ curl -s -m 20 -H 'Content-Type: application/json' -d '{"method":"server_info"}' https://rpc.testnet.postfiat.org | jq -c '.result.info | {server_state, build_version, complete_ledgers}'
+{"server_state":"full","build_version":"1.0.9","complete_ledgers":"7500055-7598753"}
+(exit 0)
+$ zcat acctchurn/data/snapshot-7598607.jsonl.gz | jq -c 'select(.LedgerEntryType=="FeeSettings") | {ReserveBase, ReserveIncrement}'
+{"ReserveBase":10000000,"ReserveIncrement":2000000}
+(exit 0)
+$ timeout 1200 .venv/bin/python -u acctchurn/funders_churn.py acctchurn/data/diff.json --reserve-base 10000000 --out acctchurn/data/funders.json
+created=15 not_found=0 funders=1 chains=0 rpc={'calls': 15, 'retries': 0, 'retries_by_error': {}}
+(exit 0)
+$ jq -c '{window, rpc, never_active, chains: (.chains|length), not_found, funders: [.funders[] | {funder: (.funder[0:8]+"…"), accounts, drops, share}]}' acctchurn/data/funders.json
+{"window":{"ledger_max":7598607,"ledger_min":7570043},"rpc":{"calls":15,"retries":0,"retries_by_error":{}},"never_active":0,"chains":0,"not_found":[],"funders":[{"funder":"r9k51cJF…","accounts":15,"drops":1500000000,"share":1}]}
+(exit 0)

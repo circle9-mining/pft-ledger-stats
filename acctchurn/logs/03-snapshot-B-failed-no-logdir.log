@@ -1,0 +1,17 @@
+# 2026-10-30T00:08:21Z acctchurn snapshot B | "Ubuntu 22.04.5 LTS" | commit 794e558efee9226a5b5c26e6c077889f81a02471 | snapshot.py sha256 0aac883bded3612f6b8b139f9d17b9b7cb92f5609815b17b5f435e80fb460f2b
+$ python3 -u state/snapshot.py --out data/acctchurn/snapB --log data/acctchurn/snapB/snapshot.log
+Traceback (most recent call last):
+  File "~/work/pft-ledger-stats/state/snapshot.py", line 291, in <module>
+    sys.exit(main())
+  File "~/work/pft-ledger-stats/state/snapshot.py", line 281, in main
+    logfh = open(args.log, "a") if args.log else None
+FileNotFoundError: [Errno 2] No such file or directory: 'data/acctchurn/snapB/snapshot.log'
+(exit 1)
+$ python3 -c 'import json;d=json.load(open("data/acctchurn/snapB/state.json"));print(json.dumps({k:d[k] for k in d if k!="server_state"},indent=1,sort_keys=True)[:1500])'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'data/acctchurn/snapB/state.json'
+(exit 1)
+$ ls -l data/acctchurn/snapB | awk '{print $5, $9}'
+ls: cannot access 'data/acctchurn/snapB': No such file or directory
+(exit 0)

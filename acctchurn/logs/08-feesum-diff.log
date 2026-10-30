@@ -1,0 +1,29 @@
+# 2026-10-30T00:15:48Z acctchurn fee sum + diff (final code) | "Ubuntu 22.04.5 LTS" | commit ae137c9b616904625d0ddaa2dfea6a21e747f50a | feesum_churn.py sha256 b57f8a386fa45c3bb8c5d9835af93525a944f5902edaea1a4e627aef882a1a43 | diff_churn.py sha256 841ab4f0bf5a585228ce370647774f8473c454c6388c8aaa080cddd13d1aa5a1 | 
+$ sha256sum acctchurn/data/snapshot-7570042.jsonl.gz acctchurn/data/snapshot-7598607.jsonl.gz
+191889c4af080c837bd9fe418b567149b38fcbf30d229b084395c32395677e3f  acctchurn/data/snapshot-7570042.jsonl.gz
+113bdd54928cd8aa5c3de9f2254869b993a77ae9b44d5647d55b6364e126dbaa  acctchurn/data/snapshot-7598607.jsonl.gz
+(exit 0)
+$ .venv/bin/python -u acctchurn/feesum_churn.py data/acctchurn/txwin/ledgers.csv data/acctchurn/txwin/tx.csv --from 7570043 --to 7598607 --out-dir acctchurn/data
+{"duplicate_tx_rows_dropped": 0, "fee_sum_drops": 98456, "from": 7570043, "ledgers": 28565, "to": 7598607, "txs": 9827}
+(exit 0)
+$ .venv/bin/python -u acctchurn/diff_churn.py acctchurn/data/snapshot-7570042.jsonl.gz acctchurn/data/snapshot-7598607.jsonl.gz --fees-sum 98456 --out acctchurn/data/diff.json
+PASS burned_eq_fee_sum
+PASS delta_native_eq_minus_burned
+PASS native_a_eq_total_coins_a
+PASS native_b_eq_total_coins_b
+PASS net_balance_change_eq_delta_account_root
+(exit 0)
+$ jq -c '{native: .native, checks: .checks, balance_changes: .balance_changes, accounts: {created: (.accounts.created|length), deleted: (.accounts.deleted|length), changed: (.accounts.changed|length)}}' acctchurn/data/diff.json
+{"native":{"a":{"account_root":99999999968988540,"escrow":0,"paychannel":0,"total":99999999968988540},"b":{"account_root":99999999968890100,"escrow":0,"paychannel":0,"total":99999999968890100},"burned_drops":98456,"fee_sum_drops":98456},"checks":{"burned_eq_fee_sum":true,"delta_native_eq_minus_burned":true,"native_a_eq_total_coins_a":true,"native_b_eq_total_coins_b":true,"net_balance_change_eq_delta_account_root":true},"balance_changes":{"accounts_down":28,"accounts_same_balance":0,"accounts_up":36,"gross_decrease_drops":16844753822,"gross_increase_drops":16844655366,"net_drops":-98456},"accounts":{"created":15,"deleted":0,"changed":49}}
+(exit 0)
+$ jq -r '.by_type | to_entries[] | [.key, .value.in_a, .value.in_b, .value.created, .value.deleted, .value.changed, .value.unchanged] | @tsv' acctchurn/data/diff.json
+AccountRoot	4408	4423	15	0	49	4359
+Amendments	1	1	0	0	0	1
+DirectoryNode	52	52	0	0	0	52
+FeeSettings	1	1	0	0	0	1
+LedgerHashes	117	117	0	0	2	115
+NFTokenOffer	45	45	0	0	0	45
+NFTokenPage	295	298	24	21	19	255
+Offer	3	3	0	0	0	3
+RippleState	4	4	0	0	0	4
+(exit 0)

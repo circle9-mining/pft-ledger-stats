@@ -1,0 +1,28 @@
+# 2026-10-29T00:08:13Z acctchurn snapshot A | "Ubuntu 22.04.5 LTS" | commit 400caf3d1cbae14ac2200791ab05c2888c7e8bee | snapshot.py sha256 0aac883bded3612f6b8b139f9d17b9b7cb92f5609815b17b5f435e80fb460f2b
+$ python3 -u state/snapshot.py --out data/acctchurn/snapA --log data/acctchurn/snapA/snapshot.log
+2026-10-29T00:08:14Z START ledger 7570042 02B1C39C14DE70C39B401DB8EA968CCF4AF6CCEC381E5877BDDF4C249CF98BEE total_coins 99999999968988550 close 2026-10-29T00:08:11Z limit 2048 | host python 3.10.12
+2026-10-29T00:08:15Z page 0 +2048 objects (total 2048) marker 6832619EB2388DE5
+2026-10-29T00:08:15Z page 1 +2048 objects (total 4096) marker D3A5945B36A85835
+2026-10-29T00:08:15Z page 2 +830 objects (total 4926) marker -
+2026-10-29T00:08:16Z DONE 4926 objects in 3 pages, 5 RPC calls this run -> snapshot-7570042.jsonl.gz
+(exit 0)
+$ python3 -c 'import json;d=json.load(open("data/acctchurn/snapA/state.json"));print(json.dumps({k:d[k] for k in d if k!="server_state"},indent=1,sort_keys=True)[:1500])'
+{
+ "account_hash": "A9F145BC264A9BD9495CF3F90900320A4B16E1D3A3326C634C496646A123D67A",
+ "close_time": 846547691,
+ "close_time_iso": "2026-10-29T00:08:11Z",
+ "ledger_hash": "02B1C39C14DE70C39B401DB8EA968CCF4AF6CCEC381E5877BDDF4C249CF98BEE",
+ "ledger_index": 7570042,
+ "server_state_reserve_base": 10000000,
+ "server_state_reserve_inc": 2000000,
+ "server_state_validated_seq": 7570042,
+ "total_coins": 99999999968988550
+}
+(exit 0)
+$ ls -l data/acctchurn/snapA | awk '{print $5, $9}'
+ 
+4994254 pages.jsonl
+2138298 snapshot-7570042.jsonl.gz
+519 snapshot.log
+420 state.json
+(exit 0)

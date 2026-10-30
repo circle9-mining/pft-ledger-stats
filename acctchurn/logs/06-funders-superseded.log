@@ -1,0 +1,10 @@
+# 2026-10-30T00:10:11Z acctchurn funders | "Ubuntu 22.04.5 LTS" | commit 1a6ed24e702ac677afb1a20ba6fbf135425a0fe1 | funders_churn.py sha256 8c9ef104cd08f4f39ed7eb911a547642d8029cd138636c1c08fcbee0d3efbd2c
+$ curl -s -m 20 -H 'Content-Type: application/json' -d '{"method":"server_info"}' https://rpc.testnet.postfiat.org | jq -c '.result.info | {server_state, build_version, complete_ledgers, validated_ledger: .validated_ledger.seq}'
+{"server_state":"full","build_version":"1.0.9","complete_ledgers":"7500055-7598642","validated_ledger":7598642}
+(exit 0)
+$ zcat acctchurn/data/snapshot-7598607.jsonl.gz | jq -c 'select(.LedgerEntryType=="FeeSettings") | {ReserveBase, ReserveIncrement}'
+{"ReserveBase":10000000,"ReserveIncrement":2000000}
+(exit 0)
+$ timeout 1200 .venv/bin/python -u acctchurn/funders_churn.py acctchurn/data/diff.json --reserve-base 10000000 --out acctchurn/data/funders.json
+created=15 not_found=0 funders=1 chains=0 rpc={'calls': 15, 'retries': 0}
+(exit 0)

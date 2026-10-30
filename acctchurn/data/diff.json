@@ -1,0 +1,739 @@
+{
+ "a": {
+  "close_time_iso": "2026-10-29T00:08:11Z",
+  "ledger_hash": "02B1C39C14DE70C39B401DB8EA968CCF4AF6CCEC381E5877BDDF4C249CF98BEE",
+  "ledger_index": 7570042,
+  "objects_paged": 4926,
+  "total_coins": 99999999968988550
+ },
+ "accounts": {
+  "changed": [
+   {
+    "address": "r3E72tL7uESn6KWdbweNFCpwgUWCyPNgDo",
+    "balance_a_drops": 206944983,
+    "balance_b_drops": 82584688,
+    "delta_drops": -124360295,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7535388,
+    "sequence_b": 7535704
+   },
+   {
+    "address": "r3F4NYif2Lt4qWCXQxELrTuaeenGmgpXPc",
+    "balance_a_drops": 622899987,
+    "balance_b_drops": 708899987,
+    "delta_drops": 86000000,
+    "owner_count_a": 0,
+    "owner_count_b": 0,
+    "sequence_a": 7180610,
+    "sequence_b": 7180610
+   },
+   {
+    "address": "r3FhsJPD8ja5jgPUKLgqZUBKsEHw54Y5us",
+    "balance_a_drops": 135819444,
+    "balance_b_drops": 120026414,
+    "delta_drops": -15793030,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7531503,
+    "sequence_b": 7531792
+   },
+   {
+    "address": "r3ctUDEU53L89t1mWh26BhZxLHS2FDkLX5",
+    "balance_a_drops": 83108080,
+    "balance_b_drops": 14999990,
+    "delta_drops": -68108090,
+    "owner_count_a": 2,
+    "owner_count_b": 0,
+    "sequence_a": 7500421,
+    "sequence_b": 7500484
+   },
+   {
+    "address": "r4RPpeS2kUE8BjY9LvKbptW8PQVHhVWghS",
+    "balance_a_drops": 2531417464207,
+    "balance_b_drops": 2531456464195,
+    "delta_drops": 38999988,
+    "owner_count_a": 5,
+    "owner_count_b": 5,
+    "sequence_a": 798,
+    "sequence_b": 799
+   },
+   {
+    "address": "r4gQj9LrECWWQb9W8LLZdbcmvJAr8vC2jt",
+    "balance_a_drops": 153908990,
+    "balance_b_drops": 14999990,
+    "delta_drops": -138909000,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7539916,
+    "sequence_b": 7540060
+   },
+   {
+    "address": "r991NVgpcfCnMyyWEsA3qTUcN4hoEfwkCB",
+    "balance_a_drops": 63407997,
+    "balance_b_drops": 171369909,
+    "delta_drops": 107961912,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7563629,
+    "sequence_b": 7563934
+   },
+   {
+    "address": "r9LEgT8kckTVDyGgVGWB5tY3SP7ByGkqur",
+    "balance_a_drops": 82174586,
+    "balance_b_drops": 14999990,
+    "delta_drops": -67174596,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7517254,
+    "sequence_b": 7517298
+   },
+   {
+    "address": "r9esqPFV57QftVoT6fgagXRXpQA7tVQc9d",
+    "balance_a_drops": 45632851,
+    "balance_b_drops": 14999990,
+    "delta_drops": -30632861,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7553835,
+    "sequence_b": 7554055
+   },
+   {
+    "address": "r9k51cJFVaYRST5vMUsdokiYcwdpQdUJGR",
+    "balance_a_drops": 25026853448,
+    "balance_b_drops": 24211625336,
+    "delta_drops": -815228112,
+    "owner_count_a": 0,
+    "owner_count_b": 0,
+    "sequence_a": 322473,
+    "sequence_b": 322505
+   },
+   {
+    "address": "rB5BJu5FDeJP7HGMS6ZMRMEkYSJ2ANxgWc",
+    "balance_a_drops": 130368414,
+    "balance_b_drops": 71014089,
+    "delta_drops": -59354325,
+    "owner_count_a": 0,
+    "owner_count_b": 1,
+    "sequence_a": 7566683,
+    "sequence_b": 7566969
+   },
+   {
+    "address": "rBFgSXA5CB9ME9xhkLESV5FQ919PMahoy1",
+    "balance_a_drops": 268969706,
+    "balance_b_drops": 14999990,
+    "delta_drops": -253969716,
+    "owner_count_a": 4,
+    "owner_count_b": 0,
+    "sequence_a": 7537397,
+    "sequence_b": 7537762
+   },
+   {
+    "address": "rBTPP39ZZVE5yenC8P73Mc74iWXvoUaXDX",
+    "balance_a_drops": 164763678,
+    "balance_b_drops": 14999990,
+    "delta_drops": -149763688,
+    "owner_count_a": 2,
+    "owner_count_b": 0,
+    "sequence_a": 7501745,
+    "sequence_b": 7501851
+   },
+   {
+    "address": "rDTjfpTQuPZRfcv9UeTXBweg6Ywph1uXdj",
+    "balance_a_drops": 98171202,
+    "balance_b_drops": 14999990,
+    "delta_drops": -83171212,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7540395,
+    "sequence_b": 7540599
+   },
+   {
+    "address": "rDep8SDqobEKGG8VxFYh9cx3W7wwP7EQKu",
+    "balance_a_drops": 1215632009352,
+    "balance_b_drops": 1215677009352,
+    "delta_drops": 45000000,
+    "owner_count_a": 4,
+    "owner_count_b": 4,
+    "sequence_a": 364,
+    "sequence_b": 364
+   },
+   {
+    "address": "rEQx87cFuuGaW7PCHHMgzYTtv6h2NxaQgZ",
+    "balance_a_drops": 217802355,
+    "balance_b_drops": 14999990,
+    "delta_drops": -202802365,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7511769,
+    "sequence_b": 7511873
+   },
+   {
+    "address": "rEjvpJa37XBUEz5m5ERfBPrTdDJiwKPkr3",
+    "balance_a_drops": 110769652,
+    "balance_b_drops": 14999990,
+    "delta_drops": -95769662,
+    "owner_count_a": 2,
+    "owner_count_b": 0,
+    "sequence_a": 7530451,
+    "sequence_b": 7530660
+   },
+   {
+    "address": "rEnqVWwJCziZSawAktWxyfpn1pfLLEq9ub",
+    "balance_a_drops": 367640159,
+    "balance_b_drops": 14999990,
+    "delta_drops": -352640169,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7516345,
+    "sequence_b": 7516463
+   },
+   {
+    "address": "rEwpiKwCgy1Umd2Wgk22fuaZrUzxNznKU2",
+    "balance_a_drops": 140422124,
+    "balance_b_drops": 14999990,
+    "delta_drops": -125422134,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7554284,
+    "sequence_b": 7554526
+   },
+   {
+    "address": "rGLK7QNg3rbpsbSqVVgMEcAz6pQ8it1Wnb",
+    "balance_a_drops": 116998166,
+    "balance_b_drops": 14999990,
+    "delta_drops": -101998176,
+    "owner_count_a": 0,
+    "owner_count_b": 0,
+    "sequence_a": 7542214,
+    "sequence_b": 7542381
+   },
+   {
+    "address": "rGXWvRL2eeHQ9oHqCiumURbvHUBDWCjzzj",
+    "balance_a_drops": 191132183,
+    "balance_b_drops": 142559468,
+    "delta_drops": -48572715,
+    "owner_count_a": 1,
+    "owner_count_b": 2,
+    "sequence_a": 7551194,
+    "sequence_b": 7551512
+   },
+   {
+    "address": "rHQLLP4jZcMhgE4n4EFd1oh7XUNJ92SZRc",
+    "balance_a_drops": 43574269,
+    "balance_b_drops": 57998890,
+    "delta_drops": 14424621,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7552330,
+    "sequence_b": 7552619
+   },
+   {
+    "address": "rHv6jSGsuZnfqBHGnpWkMueRbnXXNdZJG3",
+    "balance_a_drops": 11266249963,
+    "balance_b_drops": 16280249963,
+    "delta_drops": 5014000000,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7325976,
+    "sequence_b": 7325976
+   },
+   {
+    "address": "rKF7zToDECjwtYZAM3JLrdQDto9fvTbQSf",
+    "balance_a_drops": 1102870325637,
+    "balance_b_drops": 1106423325613,
+    "delta_drops": 3552999976,
+    "owner_count_a": 7,
+    "owner_count_b": 7,
+    "sequence_a": 327391,
+    "sequence_b": 327393
+   },
+   {
+    "address": "rKZ9SVg1z764ABrLQ3Q1Dh5PPR7gM1z4Df",
+    "balance_a_drops": 477657937886,
+    "balance_b_drops": 477657937874,
+    "delta_drops": -12,
+    "owner_count_a": 4,
+    "owner_count_b": 4,
+    "sequence_a": 196,
+    "sequence_b": 197
+   },
+   {
+    "address": "rKgWTTN6WcCcGQEUEnPtZkmr8uYpANXha6",
+    "balance_a_drops": 225919892,
+    "balance_b_drops": 483245858,
+    "delta_drops": 257325966,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7558948,
+    "sequence_b": 7559222
+   },
+   {
+    "address": "rLTwfjmN7m1WV86Lkd3KbaRq1SpXfEpuvn",
+    "balance_a_drops": 165657349,
+    "balance_b_drops": 114275628,
+    "delta_drops": -51381721,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7545054,
+    "sequence_b": 7545366
+   },
+   {
+    "address": "rLX16bukN7MWjbxfs57uAr1EpDV9UWza4s",
+    "balance_a_drops": 107094759,
+    "balance_b_drops": 255499360,
+    "delta_drops": 148404601,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7568954,
+    "sequence_b": 7569258
+   },
+   {
+    "address": "rLh87XpndQ3V8ikk6tNycMWhtPczB2LHdp",
+    "balance_a_drops": 164000000,
+    "balance_b_drops": 187989976,
+    "delta_drops": 23989976,
+    "owner_count_a": 0,
+    "owner_count_b": 0,
+    "sequence_a": 7542923,
+    "sequence_b": 7542925
+   },
+   {
+    "address": "rPExxzu9ULk8yuGDkfAJb4xYgPSgSesnSk",
+    "balance_a_drops": 68015650003,
+    "balance_b_drops": 71529149991,
+    "delta_drops": 3513499988,
+    "owner_count_a": 0,
+    "owner_count_b": 1,
+    "sequence_a": 6993496,
+    "sequence_b": 6993497
+   },
+   {
+    "address": "rPbzrGZ3HTNgpJH8UCs63vd2jPDKSxikM",
+    "balance_a_drops": 263851283,
+    "balance_b_drops": 336208292,
+    "delta_drops": 72357009,
+    "owner_count_a": 2,
+    "owner_count_b": 4,
+    "sequence_a": 7553999,
+    "sequence_b": 7554337
+   },
+   {
+    "address": "rPo8GkCA9YMKzuJGTHbj11kdVfPqSJHxNx",
+    "balance_a_drops": 1518005720966,
+    "balance_b_drops": 1518459720966,
+    "delta_drops": 454000000,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 407,
+    "sequence_b": 407
+   },
+   {
+    "address": "ra1ViaGum6dNgRqgrkhxYw2G2YrWm4x8iB",
+    "balance_a_drops": 298384853,
+    "balance_b_drops": 330817922,
+    "delta_drops": 32433069,
+    "owner_count_a": 1,
+    "owner_count_b": 3,
+    "sequence_a": 7557148,
+    "sequence_b": 7557464
+   },
+   {
+    "address": "raWprqkCmyJTaisHW7ryLpZNGxFNHmoxDW",
+    "balance_a_drops": 149904347,
+    "balance_b_drops": 175183004,
+    "delta_drops": 25278657,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7537447,
+    "sequence_b": 7537772
+   },
+   {
+    "address": "rfLJ4ZRnqmGFLAcMvCD56nKGbjpdTJmMqo",
+    "balance_a_drops": 1498697993344,
+    "balance_b_drops": 1499097993344,
+    "delta_drops": 400000000,
+    "owner_count_a": 4,
+    "owner_count_b": 4,
+    "sequence_a": 601977,
+    "sequence_b": 601977
+   },
+   {
+    "address": "rhBrpvL8ugSVG67VojBVseN59d51rt1dnD",
+    "balance_a_drops": 91692269,
+    "balance_b_drops": 80324700,
+    "delta_drops": -11367569,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7550110,
+    "sequence_b": 7550411
+   },
+   {
+    "address": "rhtHsFFpnxpdHb2VwjDtMw1v51LPdigeA7",
+    "balance_a_drops": 63244875,
+    "balance_b_drops": 14999990,
+    "delta_drops": -48244885,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7528369,
+    "sequence_b": 7528516
+   },
+   {
+    "address": "rnFdpnRgnfRZTsEK98QRhDQF1Ycu5mVvNW",
+    "balance_a_drops": 62752472,
+    "balance_b_drops": 14999990,
+    "delta_drops": -47752482,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7556297,
+    "sequence_b": 7556488
+   },
+   {
+    "address": "rpHvzMCKZ7JrzGfRseXohC3RsMWqcnEKkA",
+    "balance_a_drops": 20618149988,
+    "balance_b_drops": 20918829988,
+    "delta_drops": 300680000,
+    "owner_count_a": 0,
+    "owner_count_b": 0,
+    "sequence_a": 5620846,
+    "sequence_b": 5620846
+   },
+   {
+    "address": "rpyTMcAKiCxqY7VXenD5ercGGzGWNV9xpg",
+    "balance_a_drops": 1662550684987,
+    "balance_b_drops": 1662650684987,
+    "delta_drops": 100000000,
+    "owner_count_a": 8,
+    "owner_count_b": 8,
+    "sequence_a": 643,
+    "sequence_b": 643
+   },
+   {
+    "address": "rsS2Y6CK9dz9dVFjJvRyD2gBdoLPqjaXRZ",
+    "balance_a_drops": 2700472727537,
+    "balance_b_drops": 2700472727525,
+    "delta_drops": -12,
+    "owner_count_a": 4,
+    "owner_count_b": 4,
+    "sequence_a": 549451,
+    "sequence_b": 549452
+   },
+   {
+    "address": "rsVf8gQufj4X8WFB4FFtAXVAJPF2pE7e43",
+    "balance_a_drops": 24824999837,
+    "balance_b_drops": 25124999837,
+    "delta_drops": 300000000,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 1728647,
+    "sequence_b": 1728647
+   },
+   {
+    "address": "rsWJ3BJfD5R7hJ9WqJiwGnawZxRxRsMtGG",
+    "balance_a_drops": 101999360,
+    "balance_b_drops": 101999070,
+    "delta_drops": -290,
+    "owner_count_a": 0,
+    "owner_count_b": 0,
+    "sequence_a": 7542985,
+    "sequence_b": 7543014
+   },
+   {
+    "address": "rsYuy9f3m9kUuhewXRKBmYSDA8Wc8XBsGo",
+    "balance_a_drops": 96933921,
+    "balance_b_drops": 169679566,
+    "delta_drops": 72745645,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7568870,
+    "sequence_b": 7569190
+   },
+   {
+    "address": "rsguMYm4ip77XUGUChzZhxByqQt2kAQvw3",
+    "balance_a_drops": 33999208,
+    "balance_b_drops": 10008860,
+    "delta_drops": -23990348,
+    "owner_count_a": 0,
+    "owner_count_b": 0,
+    "sequence_a": 7542991,
+    "sequence_b": 7543020
+   },
+   {
+    "address": "rsqZiJ6vnmWtaymWh7EW8EK1oEeXrLWvLC",
+    "balance_a_drops": 1040421717241,
+    "balance_b_drops": 1040446717241,
+    "delta_drops": 25000000,
+    "owner_count_a": 8,
+    "owner_count_b": 8,
+    "sequence_a": 403,
+    "sequence_b": 403
+   },
+   {
+    "address": "rwCFpe2p28376eybDP1zJDQH4LL2PPfHVJ",
+    "balance_a_drops": 113072684,
+    "balance_b_drops": 35208856,
+    "delta_drops": -77863828,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 7527293,
+    "sequence_b": 7527596
+   },
+   {
+    "address": "rwQqaxEbtvoT9TCUPebVMy4RboxTkqp9Y8",
+    "balance_a_drops": 35301847,
+    "balance_b_drops": 14999990,
+    "delta_drops": -20301857,
+    "owner_count_a": 1,
+    "owner_count_b": 0,
+    "sequence_a": 7509776,
+    "sequence_b": 7509806
+   },
+   {
+    "address": "rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7",
+    "balance_a_drops": 488330802356242,
+    "balance_b_drops": 488316972175570,
+    "delta_drops": -13830180672,
+    "owner_count_a": 1,
+    "owner_count_b": 1,
+    "sequence_a": 6696,
+    "sequence_b": 6752
+   }
+  ],
+  "created": [
+   {
+    "address": "r3beGYCmAE6kxxZ1G3KuZCh2AR7sLkUJwS",
+    "balance_drops": 53212209,
+    "owner_count": 1,
+    "previous_txn_id": "A6D769A2B477272F25F700A6D0CF3E79CE44BB4C3B1383640006102DDEEB33D6",
+    "previous_txn_lgr_seq": 7598557,
+    "sequence": 7586515
+   },
+   {
+    "address": "r473b62PN5JevTU6Jo9FMK8fDXmjhaJVb9",
+    "balance_drops": 112022504,
+    "owner_count": 1,
+    "previous_txn_id": "05B6D805414B4F93BC3D2F75D8F94CDACB7D69369F16CD4CB1830E77B0BAA4D4",
+    "previous_txn_lgr_seq": 7598568,
+    "sequence": 7580996
+   },
+   {
+    "address": "r9Hh3573HrHcaoLSjRotJosC5DX4jnPnd6",
+    "balance_drops": 145464296,
+    "owner_count": 1,
+    "previous_txn_id": "20F281F02681976440E9EF657E9F00AF245B3067CB80E4471F04B8B6A68386BD",
+    "previous_txn_lgr_seq": 7598590,
+    "sequence": 7572479
+   },
+   {
+    "address": "rEHAJNSuFwUEeH3GHCJwL2x7ZGLNbL6ce6",
+    "balance_drops": 303809313,
+    "owner_count": 1,
+    "previous_txn_id": "F0B8695712B394F0AE187D8D0F96FE7C3E8BC1B3E50A4F6BA243F08AACD5B434",
+    "previous_txn_lgr_seq": 7598478,
+    "sequence": 7576311
+   },
+   {
+    "address": "rEofoVFSqtht2wPzeSg1PFR7GKQV6k7C4E",
+    "balance_drops": 91475792,
+    "owner_count": 1,
+    "previous_txn_id": "4907256E7778F2E29E6485F0FEE71EE69345AF4720AA1B57F39871708EB31206",
+    "previous_txn_lgr_seq": 7598576,
+    "sequence": 7590871
+   },
+   {
+    "address": "rGmwPep21oTNoj9bdmue3meUnL6oUwcWCM",
+    "balance_drops": 81447396,
+    "owner_count": 1,
+    "previous_txn_id": "B21234F59F7F2876076BAC9B6B9D6FA568F5485D817EBF1B6588BBF1B735A342",
+    "previous_txn_lgr_seq": 7598539,
+    "sequence": 7582853
+   },
+   {
+    "address": "rKDvz3vr8ZTgGqcL9grxYudvEfiAXk9RA4",
+    "balance_drops": 193925883,
+    "owner_count": 1,
+    "previous_txn_id": "836059EF4D5872E64933D3638D007D96A4CFCD1F5F7B5DD85F77286D81422DA7",
+    "previous_txn_lgr_seq": 7598462,
+    "sequence": 7572176
+   },
+   {
+    "address": "rLx6cHbmgeVS2yGLkX3vpJw5m6rEqu454U",
+    "balance_drops": 191034302,
+    "owner_count": 1,
+    "previous_txn_id": "B762BD61F66E59A8A0D6D060E5B1BADB7F07B9127527D5545BCB179D98BF43CD",
+    "previous_txn_lgr_seq": 7598493,
+    "sequence": 7580081
+   },
+   {
+    "address": "rPYq5XghAACC9Zn4h44Ds3EVKKgQ8e2Zum",
+    "balance_drops": 111313123,
+    "owner_count": 1,
+    "previous_txn_id": "86BFB48AD9C3EB28388C9BB58C48DD1E1F621C023F204659178DB16FDF48576A",
+    "previous_txn_lgr_seq": 7598600,
+    "sequence": 7594496
+   },
+   {
+    "address": "rPZq4TTxW6TeWK3H9CjPeEqTZKceRTXrxZ",
+    "balance_drops": 76270931,
+    "owner_count": 1,
+    "previous_txn_id": "8E03F92C3C218A9D9DF120BDFABF036EAD2F5D180507FE7027588D9EB83BD547",
+    "previous_txn_lgr_seq": 7598590,
+    "sequence": 7586688
+   },
+   {
+    "address": "ra24GWzNKi9iKHt4yEPjyKtjeR5qrP5W2w",
+    "balance_drops": 322293699,
+    "owner_count": 1,
+    "previous_txn_id": "A6D769A2B477272F25F700A6D0CF3E79CE44BB4C3B1383640006102DDEEB33D6",
+    "previous_txn_lgr_seq": 7598557,
+    "sequence": 7572444
+   },
+   {
+    "address": "rhdkuDxLeESE3DQAkk3ygQefBdtQHyK9AU",
+    "balance_drops": 126008225,
+    "owner_count": 1,
+    "previous_txn_id": "6BA369FB8D3C3EF5ED62E4840C44EBC5DEF47BD05ED1A7ACB4DC444022C61064",
+    "previous_txn_lgr_seq": 7598606,
+    "sequence": 7588702
+   },
+   {
+    "address": "rnsrVj65fZHev3Qf6XosNddW1mUYykHwMF",
+    "balance_drops": 39410000,
+    "owner_count": 1,
+    "previous_txn_id": "6CA4C0E82F5D45B8DE0990D9FE77320D2AA22B90B42C3D9C83C758B647DFD062",
+    "previous_txn_lgr_seq": 7598474,
+    "sequence": 7585111
+   },
+   {
+    "address": "rrsL2Dzw3f2j2YebruV1UPPVmadqH2ijaz",
+    "balance_drops": 110982852,
+    "owner_count": 1,
+    "previous_txn_id": "86BFB48AD9C3EB28388C9BB58C48DD1E1F621C023F204659178DB16FDF48576A",
+    "previous_txn_lgr_seq": 7598600,
+    "sequence": 7587856
+   },
+   {
+    "address": "rwiEkARGqyXQh5C4q8bKkegL5oZ5eX3A9d",
+    "balance_drops": 300883433,
+    "owner_count": 3,
+    "previous_txn_id": "7F1AB6DED7B8278324DA112ABBC743B0619EB513F6D49DA116BB9DE91A6EE6E9",
+    "previous_txn_lgr_seq": 7598560,
+    "sequence": 7578244
+   }
+  ],
+  "deleted": []
+ },
+ "b": {
+  "close_time_iso": "2026-10-30T00:08:22Z",
+  "ledger_hash": "1A50B2D0F3BA590DCE08CDE0E7F67693FE37551B6FAE2C4C7F9C6FA186C229D3",
+  "ledger_index": 7598607,
+  "objects_paged": 4944,
+  "total_coins": 99999999968890094
+ },
+ "balance_changes": {
+  "accounts_down": 28,
+  "accounts_same_balance": 0,
+  "accounts_up": 36,
+  "gross_decrease_drops": 16844753822,
+  "gross_increase_drops": 16844655366,
+  "net_drops": -98456
+ },
+ "by_type": {
+  "AccountRoot": {
+   "changed": 49,
+   "created": 15,
+   "deleted": 0,
+   "in_a": 4408,
+   "in_b": 4423,
+   "unchanged": 4359
+  },
+  "Amendments": {
+   "changed": 0,
+   "created": 0,
+   "deleted": 0,
+   "in_a": 1,
+   "in_b": 1,
+   "unchanged": 1
+  },
+  "DirectoryNode": {
+   "changed": 0,
+   "created": 0,
+   "deleted": 0,
+   "in_a": 52,
+   "in_b": 52,
+   "unchanged": 52
+  },
+  "FeeSettings": {
+   "changed": 0,
+   "created": 0,
+   "deleted": 0,
+   "in_a": 1,
+   "in_b": 1,
+   "unchanged": 1
+  },
+  "LedgerHashes": {
+   "changed": 2,
+   "created": 0,
+   "deleted": 0,
+   "in_a": 117,
+   "in_b": 117,
+   "unchanged": 115
+  },
+  "NFTokenOffer": {
+   "changed": 0,
+   "created": 0,
+   "deleted": 0,
+   "in_a": 45,
+   "in_b": 45,
+   "unchanged": 45
+  },
+  "NFTokenPage": {
+   "changed": 19,
+   "created": 24,
+   "deleted": 21,
+   "in_a": 295,
+   "in_b": 298,
+   "unchanged": 255
+  },
+  "Offer": {
+   "changed": 0,
+   "created": 0,
+   "deleted": 0,
+   "in_a": 3,
+   "in_b": 3,
+   "unchanged": 3
+  },
+  "RippleState": {
+   "changed": 0,
+   "created": 0,
+   "deleted": 0,
+   "in_a": 4,
+   "in_b": 4,
+   "unchanged": 4
+  }
+ },
+ "checks": {
+  "burned_eq_fee_sum": true,
+  "delta_native_eq_minus_burned": true,
+  "native_a_eq_total_coins_a": true,
+  "native_b_eq_total_coins_b": true,
+  "net_balance_change_eq_delta_account_root": true
+ },
+ "native": {
+  "a": {
+   "account_root": 99999999968988550,
+   "escrow": 0,
+   "paychannel": 0,
+   "total": 99999999968988550
+  },
+  "b": {
+   "account_root": 99999999968890094,
+   "escrow": 0,
+   "paychannel": 0,
+   "total": 99999999968890094
+  },
+  "burned_drops": 98456,
+  "fee_sum_drops": 98456
+ },
+ "ok": true
+}
