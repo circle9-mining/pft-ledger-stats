@@ -361,3 +361,58 @@ def test_collector_selects_nft_txs_only():
     lines, n = col.nft_lines(led)
     assert n == 3 and [x["tx"]["hash"] for x in lines] == ["D", "N"]
     assert "metaData" not in lines[0]["tx"]
+
+
+def _objs(*objs):
+    return {o["index"]: o for o in objs}
+
+
+def _hdr(ledger):
+    return {"ledger_index": ledger, "close_time_iso": "x"}
+
+
+def test_mint_of_live_id_is_a_residual():
+    # ID 1 is live on the issuer's page at A; a tx "mints" it again onto another owner's new page
+    objs_a = _objs(page(ISS, 1), acct(ISS_ADDR, 1, 1, 0))
+    objs_b = _objs(page(OWN, 1), acct(ISS_ADDR, 1, 2, 0))
+    created = {
+        "CreatedNode": {
+            "LedgerEntryType": "NFTokenPage",
+            "LedgerIndex": page_index(OWN),
+            "NewFields": {"NFTokens": toks(1)},
+        }
+    }
+    res = rec.reconcile(_hdr(A), objs_a, _hdr(B), objs_b, [txrec(101, 0, "NFTokenMint", [created], "HX")])
+    assert any(s.startswith("R1 mint of live " + nid(1)) for s in res["residuals"])
+
+
+def test_burn_by_wrong_owner_is_a_residual():
+    # ID 1 is live with the issuer, but the burn removes it from OWN's page
+    objs_a = _objs(page(ISS, 1, 2), acct(ISS_ADDR, 1, 2, 0))
+    objs_b = _objs(page(ISS, 1, 2), acct(ISS_ADDR, 1, 2, 1))
+    burn = txrec(101, 0, "NFTokenBurn", [mod_page(OWN, [1], [])], "HX")
+    res = rec.reconcile(_hdr(A), objs_a, _hdr(B), objs_b, [burn])
+    assert any(s.startswith(f"R1 burn of {nid(1)} not live with owner {OWN}") for s in res["residuals"])
+
+
+def test_replay_uses_transaction_index_order(tmp_path, capsys):
+    # mint (index 0) and burn (index 1) of ID 3 in one ledger, written to the file in reverse order
+    sa = write_snap(tmp_path / "a.jsonl.gz", A, [page(ISS, 1, 2), acct(ISS_ADDR, 1, 2, 0)])
+    sb = write_snap(tmp_path / "b.jsonl.gz", B, [page(ISS, 1, 2), acct(ISS_ADDR, 1, 3, 1)])
+    mint = txrec(101, 0, "NFTokenMint", [mod_page(ISS, [1, 2], [1, 2, 3])], "HM")
+    burn = txrec(101, 1, "NFTokenBurn", [mod_page(ISS, [1, 2, 3], [1, 2])], "HB")
+    tx = write_tx(tmp_path / "tx", [burn, mint])
+    assert run(sa, sb, tx) == 0, capsys.readouterr().out
+
+
+def test_remint_of_an_id_live_at_a_fails_r5(tmp_path, capsys):
+    # ID 1 burned and then minted again: owner map, supply and counters all balance, only R5 sees it
+    sa = write_snap(tmp_path / "a.jsonl.gz", A, [page(ISS, 1, 2), acct(ISS_ADDR, 1, 2, 0)])
+    sb = write_snap(tmp_path / "b.jsonl.gz", B, [page(ISS, 1, 2), acct(ISS_ADDR, 1, 3, 1)])
+    burn = txrec(101, 0, "NFTokenBurn", [mod_page(ISS, [1, 2], [2])], "HB")
+    mint = txrec(102, 0, "NFTokenMint", [mod_page(ISS, [2], [1, 2])], "HM")
+    tx = write_tx(tmp_path / "tx", [burn, mint])
+    assert run(sa, sb, tx) == 1
+    out = capsys.readouterr().out
+    assert "FAIL R5" in out and f"RESIDUAL R5 NFTokenID {nid(1)} minted more than once" in out
+    assert "PASS R1" in out and "PASS R2" in out and "PASS R3" in out
