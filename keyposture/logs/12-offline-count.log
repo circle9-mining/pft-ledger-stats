@@ -1,0 +1,106 @@
+# 2026-10-31T15:13:12Z Ubuntu 22.04.5 LTS | verification evt_75893a7b: offline count re-check from clean checkouts (no RPC)
+## part 1: pinned commit eb5bda99 (as asked)
+$ git checkout -q eb5bda99c47fcd567c8f19c231699858fbfacba7
+exit=0
+$ git rev-parse HEAD
+eb5bda99c47fcd567c8f19c231699858fbfacba7
+exit=0
+$ git status --porcelain | wc -l
+0
+exit=0
+$ sha256sum keyposture/data/snapshot-7614111.jsonl.gz keyposture/data/snapA-count.json
+4b4702834adc5ed219d19c55db8c91765e730a3e2f9a6701605dcaa02033a065  keyposture/data/snapshot-7614111.jsonl.gz
+917f6e6f71a344ae90f098006f04872d4e9d65d28a7ed084b589ffd73bf81eaf  keyposture/data/snapA-count.json
+exit=0
+$ grep -c -- '--offline' keyposture/count_key.py
+0
+exit=1
+$ python3 -I keyposture/count_key.py keyposture/data/snapshot-7614111.jsonl.gz --json /tmp/kp-a.json --no-sudo --container no-such-container
+ERROR paging ledger 7614111: docker exec rc=1: Error response from daemon: No such container: no-such-container
+exit=2
+## part 2: commit 325dab2a (adds --offline; data files unchanged)
+$ git checkout -q 325dab2a507c8c75fd56466ab57d984f5f65225f
+exit=0
+$ git rev-parse HEAD
+325dab2a507c8c75fd56466ab57d984f5f65225f
+exit=0
+$ git status --porcelain | wc -l
+0
+exit=0
+$ git diff --stat eb5bda99c47fcd567c8f19c231699858fbfacba7 HEAD
+ keyposture/README.md             |  18 ++++++-
+ keyposture/count_key.py          |  62 +++++++++++++++++++++-
+ keyposture/mutants_key.py        |  24 +++++++++
+ tests/test_keyposture_collect.py | 109 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 211 insertions(+), 2 deletions(-)
+exit=0
+$ sha256sum keyposture/data/snapshot-7614111.jsonl.gz keyposture/data/snapA-count.json keyposture/data/snapshot-7643241.jsonl.gz keyposture/data/snapB-count.json
+4b4702834adc5ed219d19c55db8c91765e730a3e2f9a6701605dcaa02033a065  keyposture/data/snapshot-7614111.jsonl.gz
+917f6e6f71a344ae90f098006f04872d4e9d65d28a7ed084b589ffd73bf81eaf  keyposture/data/snapA-count.json
+289600728368edcdae8fa59c5b17df51453f680588ce3b73e84eeffa861079e4  keyposture/data/snapshot-7643241.jsonl.gz
+7c2c513a4ee6fe07004d894caceb08d91fb7ba4bf753de53daca822dedecbc02  keyposture/data/snapB-count.json
+exit=0
+$ docker ps >/dev/null 2>&1 && echo docker-accessible || echo docker-not-accessible-to-this-user
+docker-accessible
+exit=0
+$ python3 -I keyposture/count_key.py keyposture/data/snapshot-7614111.jsonl.gz --offline keyposture/data/snapA-count.json
+AccountRoot: snapshot file 4433 recorded paged 4433 (pages 5, chain continuous) recorded differences 0 -> OK
+SignerList: snapshot file 0 recorded paged 0 (pages 5, chain continuous) recorded differences 0 -> OK
+RESULT PASS ledger 7614111 offline
+exit=0
+$ python3 -I keyposture/count_key.py keyposture/data/snapshot-7643241.jsonl.gz --offline keyposture/data/snapB-count.json
+AccountRoot: snapshot file 4448 recorded paged 4448 (pages 5, chain continuous) recorded differences 0 -> OK
+SignerList: snapshot file 0 recorded paged 0 (pages 5, chain continuous) recorded differences 0 -> OK
+RESULT PASS ledger 7643241 offline
+exit=0
+## negative: snapshot A against snapshot B's count file must fail
+$ python3 -I keyposture/count_key.py keyposture/data/snapshot-7614111.jsonl.gz --offline keyposture/data/snapB-count.json
+ERROR bad count file: count file is for ledger 7643241 8938DBEF41C8AEAE6134BDF9D2A45BF18783D65AAC281C6C0838DA9E42C75A1F, snapshot is 7614111 F727010F3F388DBF1DA10EB24F46C68A52ED58F4404FCFB501633E4AC761B2B6
+exit=2
+## tests, ruff, mutants at 325dab2a
+$ ~/work/pft-ledger-stats/.venv/bin/python -m pytest -q -p no:cacheprovider 2>&1 | tail -1
+365 passed in 17.22s
+exit=0
+$ ~/work/pft-ledger-stats/.venv/bin/python -m pytest -q -p no:cacheprovider tests/test_keyposture_*.py 2>&1 | tail -1
+62 passed in 2.32s
+exit=0
+$ ~/work/pft-ledger-stats/.venv/bin/ruff check . && ~/work/pft-ledger-stats/.venv/bin/ruff format --check keyposture tests/test_keyposture_*.py
+All checks passed!
+15 files already formatted
+exit=0
+$ timeout 1500 ~/work/pft-ledger-stats/.venv/bin/python -u keyposture/mutants_key.py
+CONTROL unmutated: rc=0 62 passed in 2.32s
+CAUGHT K1 created AccountRoot already live not flagged: 1 failed, 61 passed in 2.40s
+CAUGHT K2 previous RegularKey not compared: 1 failed, 61 passed in 2.30s
+CAUGHT K3 previous master flag not compared: 1 failed, 61 passed in 2.37s
+CAUGHT K4 unchanged-field RegularKey check dropped: 1 failed, 61 passed in 2.45s
+CAUGHT K5 deleted account kept in replay: 7 failed, 47 passed, 8 errors in 0.91s
+CAUGHT K6 SignerList deletion not applied: 1 failed, 61 passed in 2.71s
+CAUGHT K7 metadata node order not fixed (AccountDelete): 7 failed, 47 passed, 8 errors in 0.92s
+CAUGHT K8 replay in file order, not (ledger, TransactionIndex): 2 failed, 60 passed in 2.74s
+CAUGHT K9 R1 posture comparison dropped: 2 failed, 60 passed in 4.54s
+CAUGHT K10 R2 outflow not subtracted: 8 failed, 46 passed, 8 errors in 1.57s
+CAUGHT K11 R3 SignerList set not compared: 1 failed, 61 passed in 3.09s
+CAUGHT K12 gaps.csv ignored: 1 failed, 61 passed in 2.19s
+CAUGHT K13 key_tx_count mismatch ignored: 1 failed, 61 passed in 2.84s
+CAUGHT K14 duplicate tx hash not rejected: 1 failed, 61 passed in 2.84s
+CAUGHT K15 AccountRoot keylet self-test dropped: 1 failed, 61 passed in 2.88s
+CAUGHT K16 count file ok flag ignored: 1 failed, 61 passed in 3.41s
+CAUGHT K17 SignerList keylet space byte wrong: 1 failed, 61 passed in 3.53s
+CAUGHT K18 single-signer-quorum uses > instead of >=: 2 failed, 60 passed in 2.81s
+CAUGHT K19 blackhole regular key treated as usable: 1 failed, 61 passed in 3.13s
+CAUGHT K20 collector ignores lsfDisableMaster flips: 1 failed, 61 passed in 2.98s
+CAUGHT K21 collector ignores RegularKey changes: 1 failed, 61 passed in 2.44s
+CAUGHT K22 count_key misses only-in-snapshot indexes: 1 failed, 61 passed in 2.61s
+CAUGHT K23 crosscheck tx result not checked: 1 failed, 61 passed in 2.40s
+CAUGHT K24 crosscheck posture comparison always OK: 2 failed, 60 passed in 5.94s
+CAUGHT K25 stats accepts a --negative reconciliation: 1 failed, 61 passed in 2.91s
+CAUGHT K26 count_key --offline ignores the snapshot file count: 1 failed, 61 passed in 2.56s
+CAUGHT K27 count_key --offline ignores recorded differences: 1 failed, 61 passed in 3.57s
+CAUGHT K28 count_key --offline accepts a broken marker chain: 1 failed, 61 passed in 2.96s
+CAUGHT K29 count_key --offline accepts a count file for another ledger: 1 failed, 61 passed in 3.31s
+MUTANTS 29 caught=29 failed=0
+exit=0
+$ git status --porcelain | wc -l
+0
+exit=0
