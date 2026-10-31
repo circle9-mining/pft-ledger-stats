@@ -1,0 +1,28 @@
+2026-10-30T01:11:25Z node: build 1.0.9 state full complete_ledgers 7599233-7599851
+2026-10-30T01:11:25Z WINDOW START 2026-10-30T01:11:25Z -> 2026-10-31T01:41:25Z at ledger 7599849, stop_at None, rate <= 1.0 req/s
+2026-10-30T02:11:25Z PROGRESS last=7601037 lag=1 ledgers=1189 nft_tx=107 gaps=0 requests=3358
+2026-10-30T03:11:26Z PROGRESS last=7602225 lag=0 ledgers=2377 nft_tx=260 gaps=0 requests=6688
+2026-10-30T04:11:27Z PROGRESS last=7603413 lag=0 ledgers=3565 nft_tx=343 gaps=0 requests=10024
+2026-10-30T05:11:27Z PROGRESS last=7604601 lag=0 ledgers=4753 nft_tx=422 gaps=0 requests=13349
+2026-10-30T06:11:29Z PROGRESS last=7605793 lag=0 ledgers=5945 nft_tx=513 gaps=0 requests=16697
+2026-10-30T07:11:30Z PROGRESS last=7606987 lag=0 ledgers=7139 nft_tx=610 gaps=0 requests=20066
+2026-10-30T08:11:30Z PROGRESS last=7608179 lag=0 ledgers=8331 nft_tx=681 gaps=0 requests=23473
+2026-10-30T09:11:32Z PROGRESS last=7609368 lag=0 ledgers=9520 nft_tx=809 gaps=0 requests=26843
+2026-10-30T10:11:32Z PROGRESS last=7610556 lag=0 ledgers=10708 nft_tx=901 gaps=0 requests=30202
+2026-10-30T11:11:32Z PROGRESS last=7611746 lag=1 ledgers=11898 nft_tx=1003 gaps=0 requests=33515
+2026-10-30T12:11:33Z PROGRESS last=7612935 lag=0 ledgers=13087 nft_tx=1106 gaps=0 requests=36800
+2026-10-30T13:11:33Z PROGRESS last=7614125 lag=0 ledgers=14277 nft_tx=1203 gaps=0 requests=40090
+2026-10-30T14:11:34Z PROGRESS last=7615313 lag=0 ledgers=15465 nft_tx=1290 gaps=0 requests=43350
+2026-10-30T15:11:34Z PROGRESS last=7616505 lag=0 ledgers=16657 nft_tx=1473 gaps=0 requests=46662
+2026-10-30T16:11:35Z PROGRESS last=7617696 lag=0 ledgers=17848 nft_tx=1551 gaps=0 requests=49994
+2026-10-30T17:11:37Z PROGRESS last=7618887 lag=0 ledgers=19039 nft_tx=1626 gaps=0 requests=53294
+2026-10-30T18:11:39Z PROGRESS last=7620077 lag=0 ledgers=20229 nft_tx=1696 gaps=0 requests=56587
+2026-10-30T19:11:40Z PROGRESS last=7621265 lag=0 ledgers=21417 nft_tx=1787 gaps=0 requests=59902
+2026-10-30T20:11:42Z PROGRESS last=7622456 lag=0 ledgers=22608 nft_tx=1887 gaps=0 requests=63245
+2026-10-30T21:11:43Z PROGRESS last=7623645 lag=0 ledgers=23797 nft_tx=1995 gaps=0 requests=66603
+2026-10-30T22:11:43Z PROGRESS last=7624837 lag=0 ledgers=24989 nft_tx=2096 gaps=0 requests=69929
+2026-10-30T23:11:44Z PROGRESS last=7626028 lag=0 ledgers=26180 nft_tx=2192 gaps=0 requests=73230
+2026-10-31T00:11:46Z PROGRESS last=7627218 lag=0 ledgers=27370 nft_tx=2310 gaps=0 requests=76512
+2026-10-31T01:11:47Z PROGRESS last=7628399 lag=0 ledgers=28551 nft_tx=2418 gaps=0 requests=79792
+2026-10-31T01:41:25Z STOP (window end reached) requests this run=81363
+2026-10-31T01:41:26Z SUMMARY window 2026-10-30T01:11:25Z -> 2026-10-31T01:41:25Z ledgers 7599849-7628988 fetched=29140 nft_tx=2474 gaps=0

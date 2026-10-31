@@ -1,0 +1,10 @@
+2026-10-30T01:14:36Z node: build 1.0.9 state full complete_ledgers 7599233-7599914
+2026-10-30T01:14:36Z WINDOW START 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z at ledger 7599754, stop_at 7599873, rate <= 1.0 req/s
+2026-10-30T01:15:02Z STOP (signal) requests this run=26
+2026-10-30T01:15:02Z SUMMARY window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z ledgers 7599754-7599778 fetched=25 nft_tx=2 gaps=0
+2026-10-30T01:15:03Z node: build 1.0.9 state full complete_ledgers 7599233-7599923
+2026-10-30T01:15:03Z RESUME at ledger 7599779 (window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z, start seq 7599754, behind by 145)
+2026-10-30T01:15:28Z node: build 1.0.9 state full complete_ledgers 7599233-7599931
+2026-10-30T01:15:28Z RESUME at ledger 7599803 (window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z, start seq 7599754, behind by 129)
+2026-10-30T01:16:39Z STOP (stop_at reached) requests this run=72
+2026-10-30T01:16:39Z SUMMARY window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z ledgers 7599754-7599873 fetched=120 nft_tx=9 gaps=0
