@@ -1,0 +1,4 @@
+2026-10-31T14:43:30Z node: build 1.0.9 state full complete_ledgers 7643777-7644473
+2026-10-31T14:43:30Z WINDOW START 2026-10-31T14:43:30Z -> 2026-11-01T14:43:30Z at ledger 7644362, stop_at 7644472, rate <= 1.0 req/s
+2026-10-31T14:45:23Z STOP (stop_at reached) requests this run=112
+2026-10-31T14:45:23Z SUMMARY window 2026-10-31T14:43:30Z -> 2026-11-01T14:43:30Z ledgers 7644362-7644472 fetched=111 key_tx=1 gaps=0

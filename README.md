@@ -23,6 +23,7 @@ window to plain CSV/JSONL, so the report can be rebuilt and audited later from c
 | `nunl/` | NegativeUNL history (UNLModify + NegativeUNL object at every flag ledger) and disable/re-enable risk per 256-ledger window, see [`nunl/README.md`](nunl/README.md) |
 | `acctchurn/` | account churn between two state snapshots ~24 h apart: per-type diff, exact native-PFT conservation vs `total_coins` and the fee burn, funding graph of new accounts, see [`acctchurn/README.md`](acctchurn/README.md) |
 | `nftflow/` | NFT lifecycle between two state snapshots ~24 h apart: exact supply, owner and issuer-counter reconciliation from a gap-free NFToken* collection, lifecycle stats, public-RPC crosscheck, see [`nftflow/README.md`](nftflow/README.md) |
+| `keyposture/` | signing-key posture (master / regular key / multisig / black-holed) of every account at two state snapshots ~24 h apart: exact per-account and per-class reconciliation from a gap-free key-tx collection, weak-config flags, public-RPC crosscheck, see [`keyposture/README.md`](keyposture/README.md) |
 
 ## Requirements
 

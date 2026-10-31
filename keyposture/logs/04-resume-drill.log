@@ -1,0 +1,32 @@
+# Ubuntu 22.04.5 LTS | 2026-10-31T14:10:59Z | git cdf9d494b30c4e7778fcadd33d082e2ca89ce81e
+e7c375fbe040828e72165f7ea38bbb8d4be5e03de469cf2e83b6d56104662c03  keyposture/drill_next_key.sh
+5dd9610571e05f844ef861ff7cfc2a2c91ed561d017006865af78f14c2099a29  keyposture/resume_drill_key.sh
+be1c4aff86a38e96a6990e1b595f690fdb6157ec895972e9c547669a28ba4cc3  keyposture/collect_key.py
+$ keyposture/drill_next_key.sh data/keyposture/drill-1 6
+2026-10-31T14:10:59Z watching from the current validated ledger for up to 6 h (pid 1448131)
+2026-10-31T14:43:04Z first key-relevant tx: ledger 7644462 Payment AD50E3A57684524D65406F51BD9DDD36305ACBF44FEFC6D66B84442DA7564F7F
+2026-10-31T14:43:29Z watcher stopped at ledger 7644473; drill range 7644362..7644472
+== reference run 7644362..7644472
+== drill run: SIGTERM after 25s
+after SIGTERM: ledgers 25, last 7644386
+== resume 1, SIGKILL after 25s
+~/work/pft-ledger-stats/keyposture/resume_drill_key.sh: line 44: 1590429 Killed                  "${col[@]}" --out "$drl" --log "$work/drill.log" > /dev/null
+after SIGKILL: ledgers 48, last 7644409
+== resume 2 to the end
+2026-10-31T14:45:49Z STOP (signal) requests this run=26
+2026-10-31T14:45:49Z SUMMARY window 2026-10-31T14:45:24Z -> 2026-11-01T14:45:24Z ledgers 7644362-7644386 fetched=25 key_tx=0 gaps=0
+2026-10-31T14:45:49Z RESUME at ledger 7644387 (window 2026-10-31T14:45:24Z -> 2026-11-01T14:45:24Z, start seq 7644362, behind by 133)
+2026-10-31T14:46:14Z RESUME at ledger 7644410 (window 2026-10-31T14:45:24Z -> 2026-11-01T14:45:24Z, start seq 7644362, behind by 118)
+2026-10-31T14:47:17Z STOP (stop_at reached) requests this run=64
+2026-10-31T14:47:17Z SUMMARY window 2026-10-31T14:45:24Z -> 2026-11-01T14:45:24Z ledgers 7644362-7644472 fetched=111 key_tx=1 gaps=0
+PASS reference key-tx.jsonl non-empty (1 lines)
+PASS key-tx.jsonl identical (1 lines)
+PASS ledgers.csv identical without fetched_utc
+PASS every ledger 7644362..7644472 exactly once
+PASS no gaps
+PASS key_tx_count sum == jsonl lines
+sha256 ref   9bf8da4fe4de3b668211b43bae4a81e8cd270d0725f85085d81a183eb1283439
+sha256 drill 9bf8da4fe4de3b668211b43bae4a81e8cd270d0725f85085d81a183eb1283439
+RESULT: PASS
+(exit 0)
+# 2026-10-31T14:47:17Z end
