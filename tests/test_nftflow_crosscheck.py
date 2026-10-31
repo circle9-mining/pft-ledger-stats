@@ -139,10 +139,10 @@ def server(body):
     raise AssertionError(m)
 
 
-def go(negative=False, res=RES, objs_b=OBJS_B):
+def go(negative=False, res=RES, objs_b=OBJS_B, objs_a=OBJS_A):
     lines = []
     rpc = cx.churn_rpc("https://fake", gap=0, post=server, sleep=lambda s: None, methods=cx.READ_ONLY_METHODS)
-    rc = cx.run(res, OBJS_A, objs_b, rpc, count=5, owners=3, seed=1, negative=negative, out=lines.append)
+    rc = cx.run(res, objs_a, objs_b, rpc, count=5, owners=3, seed=1, negative=negative, out=lines.append)
     return rc, lines
 
 
@@ -161,6 +161,20 @@ def test_negative_every_check_mismatches():
     assert rc == 1
     checks = [x for x in lines if x.startswith(("OK", "MISMATCH"))]
     assert checks and all(x.startswith("MISMATCH") for x in checks)
+
+
+def test_issuer_absent_at_a(monkeypatch):
+    # an issuer account created in the window: no AccountRoot at A, account_info says actNotFound;
+    # the negative control must still alter that expectation (live run 10 had 14 such X4 lines OK)
+    monkeypatch.setitem(LEDGER[100], "roots", {})
+    objs_a = objs([(ISS, [N1, NB])], [])
+    rc, lines = go(objs_a=objs_a)
+    assert rc == 0, lines
+    assert any(x.startswith("OK X4") and "@A" in x and "expected=None got=None" in x for x in lines)
+    rc, lines = go(negative=True, objs_a=objs_a)
+    assert rc == 1
+    checks = [x for x in lines if x.startswith(("OK", "MISMATCH"))]
+    assert checks and all(x.startswith("MISMATCH") for x in checks), [x for x in checks if x.startswith("OK")]
 
 
 def test_wrong_owner_set_detected():

@@ -121,6 +121,12 @@ MUTANTS = [
         '    return (a or "?")[:8] + "…"\n',
         '    return (a or "?") + "…"\n',
     ),
+    (
+        "M19 crosscheck --negative leaves an issuer absent at A unaltered",
+        "nftflow/crosscheck_nft.py",
+        "exp = (1, 0) if exp is None else (exp[0] + 1, exp[1])",
+        "exp = None if exp is None else (exp[0] + 1, exp[1])",
+    ),
 ]
 TESTS = ["tests/" + p.name for p in sorted(Path("tests").glob("test_nftflow_*.py"))]
 

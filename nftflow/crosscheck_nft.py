@@ -13,13 +13,14 @@ Checks, each printed as one OK/MISMATCH line (accounts and IDs truncated):
      (all marker pages) is exactly snapshot B's NFTokenID set for that owner.
   X3 every sampled burn: the burned ID is absent from its last owner's `account_nfts` at B.
   X4 every issuer with a mint or burn in the window: `account_info` at A and at B gives the
-     snapshot's MintedNFTokens / BurnedNFTokens (absent = 0).
+     snapshot's MintedNFTokens / BurnedNFTokens (absent field = 0; an account absent from the
+     snapshot must answer actNotFound).
   X5 --count seeded NFTokenOffers live at B: `ledger_entry` at B returns the same object;
      every offer deleted in the window answers entryNotFound at B (up to --count).
 
 --negative is the control: every expected value is altered (last hex digit of each ID flipped,
-one ID removed from each owner set, counters +1, offer owner changed), so every check must
-MISMATCH and the run must exit 1.
+one ID removed from each owner set, counters +1 (an absent account is expected as (1, 0)),
+offer owner changed), so every check must MISMATCH and the run must exit 1.
 
 lgrNotFound / internal / slowDown answers are retried with backoff and counted per error in the
 SUMMARY line (retries_by_error); they are never counted as mismatches. If they persist, exit 2.
@@ -194,8 +195,8 @@ def run(res, objs_a, objs_b, rpc, count, owners, seed, negative=False, out=print
         for led, accs, tag in ((la, acc_a, "A"), (lb, acc_b, "B")):
             o = accs.get(addr)
             exp = None if o is None else (int(o.get("MintedNFTokens", 0)), int(o.get("BurnedNFTokens", 0)))
-            if negative and exp is not None:
-                exp = (exp[0] + 1, exp[1])
+            if negative:
+                exp = (1, 0) if exp is None else (exp[0] + 1, exp[1])
             got = counters(rpc, addr, led)
             report(got == exp, f"X4 issuer {short(addr)} @{tag} Minted/Burned expected={exp} got={got}")
 

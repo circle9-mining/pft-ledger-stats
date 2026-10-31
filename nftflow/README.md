@@ -25,7 +25,7 @@ methods only). `crosscheck_nft.py` sends only `tx`, `account_nfts`, `account_inf
 | `stats_nft.py` | lifecycle statistics + hourly mint/burn chart from a passing reconciliation (refuses a failed or `--negative` one, exit 2); mint field check: every minted ID's flags, fee, issuer and taxon must equal the mint tx's fields (exit 1) |
 | `crosscheck_nft.py` | public-RPC sampling checks X1-X5 (below); `--negative` alters every expected value and must exit 1 |
 | `report_nft.py` | writes `REPORT.md` from the reconcile and stats JSON (every number comes from them; accounts truncated to 8 characters); refuses a failed, `--negative` or other-window input (exit 2) |
-| `mutants_nft.py` | mutation check: puts one broken line in at a time (in a temp copy of the repo) and requires the nftflow tests to fail (18 mutants) |
+| `mutants_nft.py` | mutation check: puts one broken line in at a time (in a temp copy of the repo) and requires the nftflow tests to fail (19 mutants) |
 
 ## Run it
 
