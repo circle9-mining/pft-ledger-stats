@@ -22,6 +22,7 @@ window to plain CSV/JSONL, so the report can be rebuilt and audited later from c
 | `rewardflow/` | reward-payer PFT outflow analyzer over the public RPC's history, see [`rewardflow/README.md`](rewardflow/README.md) |
 | `nunl/` | NegativeUNL history (UNLModify + NegativeUNL object at every flag ledger) and disable/re-enable risk per 256-ledger window, see [`nunl/README.md`](nunl/README.md) |
 | `acctchurn/` | account churn between two state snapshots ~24 h apart: per-type diff, exact native-PFT conservation vs `total_coins` and the fee burn, funding graph of new accounts, see [`acctchurn/README.md`](acctchurn/README.md) |
+| `nftflow/` | NFT lifecycle between two state snapshots ~24 h apart: exact supply, owner and issuer-counter reconciliation from a gap-free NFToken* collection, lifecycle stats, public-RPC crosscheck, see [`nftflow/README.md`](nftflow/README.md) |
 
 ## Requirements
 
