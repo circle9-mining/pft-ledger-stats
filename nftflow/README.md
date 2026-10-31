@@ -24,7 +24,8 @@ methods only). `crosscheck_nft.py` sends only `tx`, `account_nfts`, `account_inf
 | `reconcile_nft.py` | completeness checks (every ledger A+1..B exactly once, `gaps.csv` empty, `nft_tx_count` = jsonl lines per ledger, no duplicate tx hash, both snapshots intact; exit 2 otherwise), then replays each tx's NFTokenPage diffs onto snapshot A and runs R1-R5 (below); exit 1 with every residual listed; `--negative` drops the first mint and must exit 1 |
 | `stats_nft.py` | lifecycle statistics + hourly mint/burn chart from a passing reconciliation (refuses a failed or `--negative` one, exit 2); mint field check: every minted ID's flags, fee, issuer and taxon must equal the mint tx's fields (exit 1) |
 | `crosscheck_nft.py` | public-RPC sampling checks X1-X5 (below); `--negative` alters every expected value and must exit 1 |
-| `mutants_nft.py` | mutation check: puts one broken line in at a time (in a temp copy of the repo) and requires the nftflow tests to fail (15 mutants) |
+| `report_nft.py` | writes `REPORT.md` from the reconcile and stats JSON (every number comes from them; accounts truncated to 8 characters); refuses a failed, `--negative` or other-window input (exit 2) |
+| `mutants_nft.py` | mutation check: puts one broken line in at a time (in a temp copy of the repo) and requires the nftflow tests to fail (18 mutants) |
 
 ## Run it
 
@@ -54,7 +55,8 @@ nftflow/crosscheck_nft.py reconcile.json A.jsonl.gz B.jsonl.gz --count 20 --owne
   NFTokenPage it created, modified or deleted are compared before and after (the page owner is
   the first 20 bytes of the page index). An ID that appears is a *mint*, one that disappears is a
   *burn*, one whose owner changes is a *transfer*, and one that only moves to another page of the
-  same owner (a page split or merge) is a *move*, which changes nothing. This catches NFT changes
+  same owner (a page split or merge) is a *move*, which changes nothing. A token that stays on a
+  page the tx modified (it is listed before and after) is no effect at all. This catches NFT changes
   made by any tx type, and the crosscheck then compares the derived ID with the server's own
   `nftoken_id` for sampled txs (X1).
 - **Replay order** is `(ledger_index, TransactionIndex)`, whatever the order of lines in the file.
@@ -85,7 +87,8 @@ the negative control, a tampered owner / counter / offer set in B, a damaged sna
 duplicated and gap ledgers, count mismatches, duplicate tx hashes, page splits, deleted pages,
 a mint of a live ID, a burn by the wrong owner, replay order, re-mint of an ID live at A, collector
 torn/orphan-line repair, stats refusal of failed or negative runs, the mint field check, crosscheck
-mismatch detection per check, retry accounting and the read-only method allowlist.
+mismatch detection per check, retry accounting, the read-only method allowlist, untouched tokens on a
+modified page (not moves), and the report's truncation, determinism and refusals (`tests/test_nftflow_report.py`).
 
 ## Results
 
