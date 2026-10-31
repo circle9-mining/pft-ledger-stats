@@ -124,10 +124,16 @@ def test_main_exit_codes(tmp_path, capsys):
     assert (tmp_path / "r.json").exists()
     write_csv(tmp_path / "tx.csv", list(tx[0]), tx[:4])  # one tx row missing vs txn_count
     assert an.main(["--data", str(tmp_path)]) == 1
-    write_csv(tmp_path / "tx.csv", list(tx[0]), tx)
-    write_csv(tmp_path / "ledgers.csv", list(led[0]), led[:2] + led[3:])  # unlisted hole
+    capsys.readouterr()
+    # unlisted hole at ledger 3 (its tx row gone too, so rows == txn_count and only the hole check fires)
+    write_csv(tmp_path / "tx.csv", list(tx[0]), tx[:2] + tx[3:])
+    write_csv(tmp_path / "ledgers.csv", list(led[0]), led[:2] + led[3:])
     assert an.main(["--data", str(tmp_path)]) == 1
-    assert "INCOMPLETE" in capsys.readouterr().out
+    assert "INCOMPLETE: 1 unlisted holes" in capsys.readouterr().out
+    # the same ledger listed in gaps.csv is a recorded gap, not a hole
+    gap = {"ledger_index": 3, "error": "x", "logged_at": ""}
+    write_csv(tmp_path / "gaps.csv", list(gap), [gap])
+    assert an.main(["--data", str(tmp_path)]) == 0
 
 
 def test_controls_pass_and_are_deterministic():
@@ -152,3 +158,16 @@ def test_negative_control_destroys_schedule(tmp_path):
 def test_controls_fail_when_rule_broken(monkeypatch):
     monkeypatch.setattr(ctl, "classify", lambda st: "sporadic")
     assert ctl.main(["--n", "20"]) == 1
+
+
+def test_negative_control_fails_when_schedule_survives(tmp_path):
+    # every ledger of the window is on a 600 s clock, so any sample of it stays periodic
+    pool = list(range(0, 72 * 3600, 600))
+    led = [{"ledger_index": i, "close_time": t, "txn_count": 0} for i, t in enumerate(pool)]
+    tx = [{"ledger_index": i, "close_time": t, "account": "P", "result": "tesSUCCESS", "fee_drops": 10,
+           "tx_type": "Payment"} for i, t in enumerate(pool)]
+    write_csv(tmp_path / "ledgers.csv", list(led[0]), led)
+    write_csv(tmp_path / "tx.csv", list(tx[0]), tx)
+    r = ctl.run_negative(str(tmp_path), "t")
+    assert r["real_periodic"] == 1 and r["shuffled_periodic"] == 1
+    assert ctl.main(["--n", "20", "--data", str(tmp_path)]) == 1

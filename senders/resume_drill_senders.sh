@@ -8,7 +8,8 @@
 #    resume, run to the end
 # 3. compare: tx.csv byte-identical, ledgers.csv identical without fetched_utc,
 #    every ledger FIRST..LAST exactly once, gaps.csv absent/empty in both, tx.csv rows ==
-#    txn_count sum, restarts.csv records start,resume,resume (SIGKILL resume after a torn/orphan cut)
+#    txn_count sum, restarts.csv records start,resume,resume (torn_bytes / orphan_rows show whether
+#    the SIGKILL landed mid-ledger; the repair itself is unit-tested in tests/test_senders_collect.py)
 # Exit 0 only if every check passes. Read-only RPC (server_info, ledger) on your own node.
 # shellcheck disable=SC2016  # check() bodies are eval'd on purpose, expanded at check time
 set -euo pipefail

@@ -128,7 +128,7 @@ def test_resume_after_kill_with_orphans_and_torn_line(monkeypatch, tmp_path):
 def test_window_end_enforced_client_side(monkeypatch, tmp_path):
     monkeypatch.setattr(cs.time, "time", lambda: BASE_CT + cs.RIPPLE_EPOCH - 3600 + 20)
     # 1h window ending at BASE_CT+20 (ripple): ledgers 100..105 close at +0..+20, 106 at +24
-    run(monkeypatch, tmp_path, FakeRpc(120), "--start", "100", "--hours", "1")
+    run(monkeypatch, tmp_path, FakeRpc(120), "--start", "100", "--hours", "1", "--stop-at", "120")
     led = [int(r["ledger_index"]) for r in read(tmp_path / "ledgers.csv")]
     assert led == list(range(100, 106))
 
