@@ -144,6 +144,30 @@ MUTANTS = [
         'if res.get("result") != "PASS" or res.get("negative"):',
         'if res.get("result") != "PASS":',
     ),
+    (
+        "K26 count_key --offline ignores the snapshot file count",
+        "keyposture/count_key.py",
+        'good = n == r["snapshot"] == r["paged"] and diffs == 0',
+        'good = r["snapshot"] == r["paged"] and diffs == 0',
+    ),
+    (
+        "K27 count_key --offline ignores recorded differences",
+        "keyposture/count_key.py",
+        'and diffs == 0 and r["ok"] is True',
+        'and r["ok"] is True',
+    ),
+    (
+        "K28 count_key --offline accepts a broken marker chain",
+        "keyposture/count_key.py",
+        '        if page["marker_in"] != prev:\n',
+        "        if False:\n",
+    ),
+    (
+        "K29 count_key --offline accepts a count file for another ledger",
+        "keyposture/count_key.py",
+        'if (rec["ledger_index"], rec["ledger_hash"]) != (',
+        'if False and (rec["ledger_index"], rec["ledger_hash"]) != (',
+    ),
 ]
 TESTS = ["tests/" + p.name for p in sorted(Path("tests").glob("test_keyposture_*.py"))]
 

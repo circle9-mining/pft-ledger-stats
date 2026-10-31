@@ -10,6 +10,13 @@ few hundred ledgers. Writes --json with counts, marker chains and set difference
 
 Exit codes: 0 = both index sets equal the snapshot's; 1 = a difference (listed);
 2 = paging failed (marker chain broken, ledger hash changed, ledger gone) or bad snapshot.
+
+--offline COUNT_JSON makes no RPC call: it re-reads the published snapshot and checks it against a
+recorded --json result (same ledger index and hash, continuous marker chains whose page sizes sum
+to the recorded paged count, no recorded differences, and snapshot count = recorded paged count).
+The recorded file holds counts and marker chains, not the paged index lists, so offline mode
+reproduces the counts; the set equality itself was checked at collection time. Same exit codes
+(2 = bad snapshot, bad count file or broken recorded chain).
 """
 
 import argparse
@@ -80,10 +87,51 @@ def compare(snap_sets, paged):
     return res, ok
 
 
+def check_chain(chain):
+    """Recorded marker chain is continuous: starts at None, each marker_in = previous marker_out,
+    ends at None. Returns the summed page sizes. Raises ValueError otherwise."""
+    if not chain:
+        raise ValueError("empty marker chain")
+    prev = None
+    for i, page in enumerate(chain):
+        if page["marker_in"] != prev:
+            raise ValueError(f"marker chain broken at page {i}")
+        prev = page["marker_out"]
+    if prev is not None:
+        raise ValueError("marker chain does not end")
+    return sum(page["n"] for page in chain)
+
+
+def offline(header, sets, rec):
+    """Compare snapshot index sets with a recorded count_key --json result. Returns (lines, ok);
+    raises ValueError/KeyError/TypeError on a bad count file."""
+    if (rec["ledger_index"], rec["ledger_hash"]) != (header["ledger_index"], header["ledger_hash"]):
+        raise ValueError(
+            f"count file is for ledger {rec['ledger_index']} {rec['ledger_hash']}, snapshot is "
+            f"{header['ledger_index']} {header['ledger_hash']}"
+        )
+    lines, ok = [], True
+    for typ, let in TYPES.items():
+        r = rec["result"][let]
+        chained = check_chain(rec["marker_chains"][typ])
+        if chained != r["paged"]:
+            raise ValueError(f"{typ} marker chain pages sum to {chained}, recorded paged {r['paged']}")
+        n = len(sets[let])
+        diffs = r["paged_duplicates"] + len(r["only_in_snapshot"]) + len(r["only_in_paging"])
+        good = n == r["snapshot"] == r["paged"] and diffs == 0 and r["ok"] is True
+        ok &= good
+        lines.append(
+            f"{let}: snapshot file {n} recorded paged {r['paged']} (pages {len(rec['marker_chains'][typ])}, "
+            f"chain continuous) recorded differences {diffs} -> {'OK' if good else 'MISMATCH'}"
+        )
+    return lines, ok
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("snapshot", help="snapshot-<ledger>.jsonl.gz from state/snapshot.py")
-    p.add_argument("--json", required=True, help="write the result here")
+    p.add_argument("--json", help="write the result here (required unless --offline)")
+    p.add_argument("--offline", metavar="COUNT_JSON", help="no RPC: check against a recorded --json result")
     p.add_argument("--limit", type=int, default=1024)
     p.add_argument("--container", default="postfiatd")
     p.add_argument("--port", type=int, default=5005)
@@ -94,6 +142,18 @@ def main(argv=None):
     except (OSError, ValueError, KeyError) as e:
         print(f"ERROR bad snapshot: {e}")
         return 2
+    if a.offline:
+        try:
+            with open(a.offline) as fh:
+                lines, ok = offline(header, sets, json.load(fh))
+        except (OSError, ValueError, KeyError, TypeError) as e:
+            print(f"ERROR bad count file: {e}")
+            return 2
+        print("\n".join(lines))
+        print(f"RESULT {'PASS' if ok else 'FAIL'} ledger {header['ledger_index']} offline")
+        return 0 if ok else 1
+    if not a.json:
+        p.error("--json is required unless --offline")
     rpc = Rpc(a.container, a.port, 2.0, ["docker"] if a.no_sudo else ["sudo", "docker"])
     paged, chains = {}, {}
     try:

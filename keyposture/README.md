@@ -39,7 +39,7 @@ signer list exists but the master key can still sign alone), `single_signer_meet
 | file | what it does |
 |---|---|
 | `posture_key.py` | posture model: classes, weak flags, base58 address decoding, AccountRoot and SignerList keylets |
-| `count_key.py` | completeness check of a snapshot: pages the same ledger again with `ledger_data` type filters `account` and `signer_list`, records the marker chain, and requires the index sets to equal the snapshot's (exit 0/1/2) |
+| `count_key.py` | completeness check of a snapshot: pages the same ledger again with `ledger_data` type filters `account` and `signer_list`, records the marker chain, and requires the index sets to equal the snapshot's (exit 0/1/2); `--offline COUNT_JSON` makes no RPC call and re-checks a published snapshot against a recorded result (below) |
 | `collect_key.py` | resumable collector: follows validated ledgers from `--start`, writes every key-relevant tx (below) with full tx JSON and metadata to `key-tx.jsonl`, one `ledgers.csv` row per ledger (with `key_tx_count`), `gaps.csv` for ledgers it could not fetch; a torn or orphan line is repaired on resume |
 | `resume_drill_key.sh` | resume drill on a fixed ledger range: uninterrupted reference run vs a run that gets SIGTERM, then SIGKILL, resumed each time; `key-tx.jsonl` must be non-empty and byte-identical, every ledger present once, no gaps |
 | `reconcile_key.py` | completeness checks C1-C5 (exit 2), replay A -> B and residual checks R1-R5 (exit 1, every residual listed); `--negative` must exit 1 |
@@ -154,6 +154,21 @@ Window: snapshot A ledger 7614111 (closed 2026-10-30T13:10:43Z) -> snapshot B le
 - **Tests / lint / mutants:** `358 passed` (full suite; 55 keyposture tests), ruff and ruff format
   clean, shellcheck clean, `MUTANTS 25 caught=25 failed=0` (`logs/10-tests-ruff-mutants.log`).
 
+### Offline re-check of the snapshot counts
+
+The node prunes old ledgers, so `count_key.py`'s paging cannot be repeated later. `--offline`
+re-reads the committed snapshot and checks it against the committed `count_key.py` result, with no
+RPC call: same ledger index and hash, continuous marker chains whose page sizes sum to the recorded
+paged count, no recorded differences, and the snapshot file's AccountRoot/SignerList count equal to
+the recorded paged count. The recorded file holds counts and marker chains, not the paged index
+lists, so this reproduces the counts; index-set equality was checked when the ledger was paged
+(logs 02/03). Exit 0 / 1 (count differs) / 2 (bad file, other ledger, broken chain).
+
+```bash
+keyposture/count_key.py keyposture/data/snapshot-7614111.jsonl.gz --offline keyposture/data/snapA-count.json
+keyposture/count_key.py keyposture/data/snapshot-7643241.jsonl.gz --offline keyposture/data/snapB-count.json
+```
+
 ### Data (`data/`)
 
 | file | what |
@@ -179,6 +194,7 @@ Window: snapshot A ledger 7614111 (closed 2026-10-30T13:10:43Z) -> snapshot B le
 | 09 | crosscheck `--negative` (every check MISMATCH, exit 1) |
 | 10 | full test suite, keyposture tests, ruff, shellcheck, 25 mutants |
 | 11 | `REPORT.md` generation, re-run byte-identical |
+| 12 | offline count re-check from clean checkouts: `count_key.py` at eb5bda9 has no offline mode (exit 2 without a node); with `--offline`, snapshots A and B PASS, wrong count file exit 2; tests, ruff, 29 mutants |
 
 The collector itself was started as a transient systemd unit on 2026-10-30 without a separate
 tee'd launch log; its own `tx/collect.log` records the start (`WINDOW START ... at ledger 7614112`),
