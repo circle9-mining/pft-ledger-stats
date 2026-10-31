@@ -92,4 +92,51 @@ modified page (not moves), and the report's truncation, determinism and refusals
 
 ## Results
 
-(Filled in after snapshot B; see `REPORT.md`.)
+Window: snapshot A ledger 7599848 (2026-10-30T01:11:12Z) -> snapshot B ledger 7628391 (2026-10-31T01:11:20Z),
+2417 NFT transactions. Full tables in [`REPORT.md`](REPORT.md); chart [`hourly.png`](hourly.png).
+
+- **Exact reconciliation, 0 residuals:** live NFTs 4898 + 1339 mints - 1078 burns =
+  5159, R1-R5 PASS (`logs/07-reconcile-and-negative.log`). The `--negative` control (first mint
+  dropped) fails with 4 residuals, exit 1.
+- **Collection:** `SUMMARY window 2026-10-30T01:11:25Z -> 2026-10-31T01:41:25Z ledgers 7599849-7628988 fetched=29140 nft_tx=2474 gaps=0` (`logs/06-...`); no `gaps.csv`. Resume drill (SIGTERM + SIGKILL,
+  byte-identical output): `RESULT: PASS` (`logs/04-resume-drill.log`).
+- **Activity:** 49 of 160 issuers minted or burned; the top 3 made 20.5% of all
+  mints + burns. 0 transfers and 0 offers created in the window (45 offers at A and B,
+  all untouched): NFT activity here is mint/burn churn, not trading. Every mint carried a URI and
+  every TransferFee is 0.
+  Busiest hour: 13 (43 mints, 140 burns).
+- **Lifetime:** 674 NFTs were minted and burned inside the window (median 8459 s, p90 41931 s);
+  404 burns were of NFTs minted before A (left-censored).
+- **Pages:** mean fill 16.38 -> 16.43 tokens of 32
+  (314 pages at B); 798 page moves (split/merge), no ownership change.
+- **Crosscheck (public RPC):** `SUMMARY checked=181 mismatches=0 ledgers=7599848->7628391 mints=20/1339 burns=20/1078 transfers=0/0 owners=3/147 issuers=49 offers_live=20/45 offers_deleted=0/0 negative=False rpc_calls=177 retries=0 retries_by_error={}` (`logs/12-crosscheck.log`); `--negative`: `SUMMARY checked=181 mismatches=181 ledgers=7599848->7628391 mints=20/1339 burns=20/1078 transfers=0/0 owners=3/147 issuers=49 offers_live=20/45 offers_deleted=0/0 negative=True rpc_calls=177 retries=0 retries_by_error={}`, exit 1 (`logs/13-...`).
+- **Tests / mutants:** `327 passed in 11.11s`, ruff clean, shellcheck clean; `MUTANTS 19 caught=19 failed=0` (`logs/14-tests-ruff-mutants.log`).
+
+### Data (`data/`)
+
+| file | what |
+|---|---|
+| `snapshot-7599848.jsonl.gz`, `snapshot-7628391.jsonl.gz` | full state snapshots A and B (`state/snapshot.py`) |
+| `snapA-state.json`, `snapB-state.json`, `snap*-snapshot.log` | snapshot headers (ledger hash, close time, total_coins) and paging logs |
+| `tx/nft-tx.jsonl`, `tx/ledgers.csv`, `tx/collect.log`, `tx/state.json` | collector output for ledgers 7599849..7628988 (it ran 30 min past B; reconcile uses A+1..B) |
+| `drill-1/` | resume drill reference and drill outputs + their collector logs |
+| `reconcile.json`, `stats.json` | `reconcile_nft.py --json` and `stats_nft.py --json` for the window |
+
+### Logs (`logs/`, redacted: home directory -> `~`, username -> `<user>`; the redactor also wrote the CRLF
+CSV rows quoted in log 03 with LF line endings)
+
+| log | what |
+|---|---|
+| 01 | snapshot A, **failed**: the `--log` directory did not exist (kept as run) |
+| 02 | snapshot A |
+| 03 | collector launch (transient systemd unit, 24.5 h from A+1) |
+| 04 | resume drill: SIGTERM, then SIGKILL, resumed each time; byte-identical to the reference |
+| 05 | snapshot B |
+| 06 | collector end (exit 0, 0 gaps) and copy of the data into `nftflow/data` with sha256 of source and copy |
+| 07 | reconcile (PASS) and `--negative` (FAIL, exit 1) |
+| 08 | stats + chart, re-run byte-identical |
+| 09, 10, 11 | **superseded**: first crosscheck, crosscheck `--negative` and test runs. Run 10 left 14 X4 checks OK (issuers with no AccountRoot at A kept the expectation "absent" under `--negative`); fixed in `crosscheck_nft.py`, test + mutant M19 added, re-run as 12-14 |
+| 12 | crosscheck, public RPC (0 mismatches, 0 retries) |
+| 13 | crosscheck `--negative` (every check MISMATCH, exit 1) |
+| 14 | full test suite, nftflow tests, ruff, shellcheck, 19 mutants |
+| 15 | `REPORT.md` generation |

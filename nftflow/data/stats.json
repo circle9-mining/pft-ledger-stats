@@ -1,0 +1,1761 @@
+{
+ "flags": {
+  "burnable+transferable": 4006,
+  "none": 1696,
+  "transferable": 131
+ },
+ "hourly": [
+  {
+   "burn": 38,
+   "hour": 0,
+   "mint": 68,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 103,
+   "hour": 1,
+   "mint": 51,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 30,
+   "hour": 2,
+   "mint": 53,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 28,
+   "hour": 3,
+   "mint": 51,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 31,
+   "hour": 4,
+   "mint": 60,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 38,
+   "hour": 5,
+   "mint": 59,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 22,
+   "hour": 6,
+   "mint": 48,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 73,
+   "hour": 7,
+   "mint": 54,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 47,
+   "hour": 8,
+   "mint": 47,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 46,
+   "hour": 9,
+   "mint": 56,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 37,
+   "hour": 10,
+   "mint": 66,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 35,
+   "hour": 11,
+   "mint": 61,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 34,
+   "hour": 12,
+   "mint": 53,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 140,
+   "hour": 13,
+   "mint": 43,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 37,
+   "hour": 14,
+   "mint": 42,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 29,
+   "hour": 15,
+   "mint": 46,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 29,
+   "hour": 16,
+   "mint": 41,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 26,
+   "hour": 17,
+   "mint": 64,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 33,
+   "hour": 18,
+   "mint": 67,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 54,
+   "hour": 19,
+   "mint": 55,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 40,
+   "hour": 20,
+   "mint": 61,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 35,
+   "hour": 21,
+   "mint": 59,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 60,
+   "hour": 22,
+   "mint": 60,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 33,
+   "hour": 23,
+   "mint": 74,
+   "offer_create": 0,
+   "transfer": 0
+  },
+  {
+   "burn": 0,
+   "hour": 24,
+   "mint": 0,
+   "offer_create": 0,
+   "transfer": 0
+  }
+ ],
+ "issuers": [
+  {
+   "burned_delta": 54,
+   "burns": 54,
+   "issuer": "rwiEkARGqyXQh5C4q8bKkegL5oZ5eX3A9d",
+   "live_a": 70,
+   "live_b": 134,
+   "minted_delta": 118,
+   "mints": 118
+  },
+  {
+   "burned_delta": 52,
+   "burns": 52,
+   "issuer": "rPYq5XghAACC9Zn4h44Ds3EVKKgQ8e2Zum",
+   "live_a": 19,
+   "live_b": 82,
+   "minted_delta": 115,
+   "mints": 115
+  },
+  {
+   "burned_delta": 47,
+   "burns": 47,
+   "issuer": "rPbzrGZ3HTNgpJH8UCs63vd2jPDKSxikM",
+   "live_a": 109,
+   "live_b": 171,
+   "minted_delta": 109,
+   "mints": 109
+  },
+  {
+   "burned_delta": 68,
+   "burns": 68,
+   "issuer": "rEHAJNSuFwUEeH3GHCJwL2x7ZGLNbL6ce6",
+   "live_a": 3,
+   "live_b": 1,
+   "minted_delta": 66,
+   "mints": 66
+  },
+  {
+   "burned_delta": 57,
+   "burns": 57,
+   "issuer": "ra24GWzNKi9iKHt4yEPjyKtjeR5qrP5W2w",
+   "live_a": 3,
+   "live_b": 1,
+   "minted_delta": 55,
+   "mints": 55
+  },
+  {
+   "burned_delta": 33,
+   "burns": 33,
+   "issuer": "rDDkjGGDwz6ytWR4Y9NXtcFd1NN9E58F7X",
+   "live_a": 0,
+   "live_b": 37,
+   "minted_delta": 70,
+   "mints": 70
+  },
+  {
+   "burned_delta": 32,
+   "burns": 32,
+   "issuer": "rmJPH8chn3tvv3dtHvo7xxsjK4m35i1HH",
+   "live_a": 0,
+   "live_b": 36,
+   "minted_delta": 68,
+   "mints": 68
+  },
+  {
+   "burned_delta": 88,
+   "burns": 88,
+   "issuer": "ra1ViaGum6dNgRqgrkhxYw2G2YrWm4x8iB",
+   "live_a": 78,
+   "live_b": 0,
+   "minted_delta": 10,
+   "mints": 10
+  },
+  {
+   "burned_delta": 71,
+   "burns": 71,
+   "issuer": "rGXWvRL2eeHQ9oHqCiumURbvHUBDWCjzzj",
+   "live_a": 47,
+   "live_b": 0,
+   "minted_delta": 24,
+   "mints": 24
+  },
+  {
+   "burned_delta": 47,
+   "burns": 47,
+   "issuer": "rrsL2Dzw3f2j2YebruV1UPPVmadqH2ijaz",
+   "live_a": 5,
+   "live_b": 0,
+   "minted_delta": 42,
+   "mints": 42
+  },
+  {
+   "burned_delta": 26,
+   "burns": 26,
+   "issuer": "rKgWTTN6WcCcGQEUEnPtZkmr8uYpANXha6",
+   "live_a": 32,
+   "live_b": 68,
+   "minted_delta": 62,
+   "mints": 62
+  },
+  {
+   "burned_delta": 31,
+   "burns": 31,
+   "issuer": "r991NVgpcfCnMyyWEsA3qTUcN4hoEfwkCB",
+   "live_a": 10,
+   "live_b": 27,
+   "minted_delta": 48,
+   "mints": 48
+  },
+  {
+   "burned_delta": 17,
+   "burns": 17,
+   "issuer": "rwjdDQZ3hYaqHnq3W23bSXdmdgtHEwDhq9",
+   "live_a": 0,
+   "live_b": 37,
+   "minted_delta": 54,
+   "mints": 54
+  },
+  {
+   "burned_delta": 49,
+   "burns": 49,
+   "issuer": "raWprqkCmyJTaisHW7ryLpZNGxFNHmoxDW",
+   "live_a": 31,
+   "live_b": 0,
+   "minted_delta": 18,
+   "mints": 18
+  },
+  {
+   "burned_delta": 38,
+   "burns": 38,
+   "issuer": "rhdkuDxLeESE3DQAkk3ygQefBdtQHyK9AU",
+   "live_a": 11,
+   "live_b": 0,
+   "minted_delta": 27,
+   "mints": 27
+  },
+  {
+   "burned_delta": 25,
+   "burns": 25,
+   "issuer": "rsYuy9f3m9kUuhewXRKBmYSDA8Wc8XBsGo",
+   "live_a": 10,
+   "live_b": 12,
+   "minted_delta": 27,
+   "mints": 27
+  },
+  {
+   "burned_delta": 20,
+   "burns": 20,
+   "issuer": "rnsrVj65fZHev3Qf6XosNddW1mUYykHwMF",
+   "live_a": 7,
+   "live_b": 18,
+   "minted_delta": 31,
+   "mints": 31
+  },
+  {
+   "burned_delta": 19,
+   "burns": 19,
+   "issuer": "rbhaMmzWrvgp5pHNbZFjgmWLU1up6VRuz",
+   "live_a": 0,
+   "live_b": 12,
+   "minted_delta": 31,
+   "mints": 31
+  },
+  {
+   "burned_delta": 10,
+   "burns": 10,
+   "issuer": "rKDvz3vr8ZTgGqcL9grxYudvEfiAXk9RA4",
+   "live_a": 19,
+   "live_b": 48,
+   "minted_delta": 39,
+   "mints": 39
+  },
+  {
+   "burned_delta": 25,
+   "burns": 25,
+   "issuer": "rLX16bukN7MWjbxfs57uAr1EpDV9UWza4s",
+   "live_a": 2,
+   "live_b": 0,
+   "minted_delta": 23,
+   "mints": 23
+  },
+  {
+   "burned_delta": 12,
+   "burns": 12,
+   "issuer": "r3beGYCmAE6kxxZ1G3KuZCh2AR7sLkUJwS",
+   "live_a": 9,
+   "live_b": 31,
+   "minted_delta": 34,
+   "mints": 34
+  },
+  {
+   "burned_delta": 32,
+   "burns": 32,
+   "issuer": "rLTwfjmN7m1WV86Lkd3KbaRq1SpXfEpuvn",
+   "live_a": 21,
+   "live_b": 0,
+   "minted_delta": 11,
+   "mints": 11
+  },
+  {
+   "burned_delta": 17,
+   "burns": 17,
+   "issuer": "rPZq4TTxW6TeWK3H9CjPeEqTZKceRTXrxZ",
+   "live_a": 13,
+   "live_b": 18,
+   "minted_delta": 22,
+   "mints": 22
+  },
+  {
+   "burned_delta": 12,
+   "burns": 12,
+   "issuer": "rsgDA2CufMpXcV8mtA6WdxKvPVTtgnoqar",
+   "live_a": 0,
+   "live_b": 15,
+   "minted_delta": 27,
+   "mints": 27
+  },
+  {
+   "burned_delta": 25,
+   "burns": 25,
+   "issuer": "rLx6cHbmgeVS2yGLkX3vpJw5m6rEqu454U",
+   "live_a": 11,
+   "live_b": 0,
+   "minted_delta": 14,
+   "mints": 14
+  },
+  {
+   "burned_delta": 25,
+   "burns": 25,
+   "issuer": "r473b62PN5JevTU6Jo9FMK8fDXmjhaJVb9",
+   "live_a": 13,
+   "live_b": 0,
+   "minted_delta": 12,
+   "mints": 12
+  },
+  {
+   "burned_delta": 6,
+   "burns": 6,
+   "issuer": "rs2sEUSnANq8cgofEwoAmxRfSf5pt4pkQa",
+   "live_a": 0,
+   "live_b": 18,
+   "minted_delta": 24,
+   "mints": 24
+  },
+  {
+   "burned_delta": 9,
+   "burns": 9,
+   "issuer": "rhUyVqix3KXb7kC9naSjVYhuADYN5kf8RL",
+   "live_a": 0,
+   "live_b": 11,
+   "minted_delta": 20,
+   "mints": 20
+  },
+  {
+   "burned_delta": 6,
+   "burns": 6,
+   "issuer": "rwAMciVMErJ8mndfH22vjNV746KQCrE3TL",
+   "live_a": 0,
+   "live_b": 15,
+   "minted_delta": 21,
+   "mints": 21
+  },
+  {
+   "burned_delta": 10,
+   "burns": 10,
+   "issuer": "rHQLLP4jZcMhgE4n4EFd1oh7XUNJ92SZRc",
+   "live_a": 9,
+   "live_b": 15,
+   "minted_delta": 16,
+   "mints": 16
+  },
+  {
+   "burned_delta": 17,
+   "burns": 17,
+   "issuer": "r3E72tL7uESn6KWdbweNFCpwgUWCyPNgDo",
+   "live_a": 12,
+   "live_b": 0,
+   "minted_delta": 5,
+   "mints": 5
+  },
+  {
+   "burned_delta": 16,
+   "burns": 16,
+   "issuer": "r9Hh3573HrHcaoLSjRotJosC5DX4jnPnd6",
+   "live_a": 10,
+   "live_b": 0,
+   "minted_delta": 6,
+   "mints": 6
+  },
+  {
+   "burned_delta": 9,
+   "burns": 9,
+   "issuer": "r944gFf2FxZcyhMgVUMBx4bGvJmdKtFG7U",
+   "live_a": 0,
+   "live_b": 2,
+   "minted_delta": 11,
+   "mints": 11
+  },
+  {
+   "burned_delta": 14,
+   "burns": 14,
+   "issuer": "rwCFpe2p28376eybDP1zJDQH4LL2PPfHVJ",
+   "live_a": 8,
+   "live_b": 0,
+   "minted_delta": 6,
+   "mints": 6
+  },
+  {
+   "burned_delta": 10,
+   "burns": 10,
+   "issuer": "rGmwPep21oTNoj9bdmue3meUnL6oUwcWCM",
+   "live_a": 3,
+   "live_b": 2,
+   "minted_delta": 9,
+   "mints": 9
+  },
+  {
+   "burned_delta": 7,
+   "burns": 7,
+   "issuer": "rJ9gWhdzfkMz5owHWC3quUGJJ3awG2zdNv",
+   "live_a": 0,
+   "live_b": 3,
+   "minted_delta": 10,
+   "mints": 10
+  },
+  {
+   "burned_delta": 5,
+   "burns": 5,
+   "issuer": "rEofoVFSqtht2wPzeSg1PFR7GKQV6k7C4E",
+   "live_a": 1,
+   "live_b": 7,
+   "minted_delta": 11,
+   "mints": 11
+  },
+  {
+   "burned_delta": 6,
+   "burns": 6,
+   "issuer": "rpCzwYfxo1Fu67iuWJV58hZuUPjH6hfEfn",
+   "live_a": 0,
+   "live_b": 4,
+   "minted_delta": 10,
+   "mints": 10
+  },
+  {
+   "burned_delta": 11,
+   "burns": 11,
+   "issuer": "rhBrpvL8ugSVG67VojBVseN59d51rt1dnD",
+   "live_a": 8,
+   "live_b": 0,
+   "minted_delta": 3,
+   "mints": 3
+  },
+  {
+   "burned_delta": 5,
+   "burns": 5,
+   "issuer": "rHJ95easSDRSVeDCmaVu7KzJUEo2kFu9j6",
+   "live_a": 0,
+   "live_b": 1,
+   "minted_delta": 6,
+   "mints": 6
+  },
+  {
+   "burned_delta": 10,
+   "burns": 10,
+   "issuer": "r3FhsJPD8ja5jgPUKLgqZUBKsEHw54Y5us",
+   "live_a": 9,
+   "live_b": 0,
+   "minted_delta": 1,
+   "mints": 1
+  },
+  {
+   "burned_delta": 4,
+   "burns": 4,
+   "issuer": "rH1EdQx17h9TpeZ9JteVivd924DJUxAtG6",
+   "live_a": 0,
+   "live_b": 2,
+   "minted_delta": 6,
+   "mints": 6
+  },
+  {
+   "burned_delta": 1,
+   "burns": 1,
+   "issuer": "rwFjPVuBtnH5BoCycbW2utFkGoxU6BEZWL",
+   "live_a": 0,
+   "live_b": 6,
+   "minted_delta": 7,
+   "mints": 7
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rDMWGci1WikuFCBhJgQvpPU4MvAsW8eiQV",
+   "live_a": 0,
+   "live_b": 4,
+   "minted_delta": 4,
+   "mints": 4
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKF7zToDECjwtYZAM3JLrdQDto9fvTbQSf",
+   "live_a": 141,
+   "live_b": 143,
+   "minted_delta": 2,
+   "mints": 2
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r4RPpeS2kUE8BjY9LvKbptW8PQVHhVWghS",
+   "live_a": 128,
+   "live_b": 129,
+   "minted_delta": 1,
+   "mints": 1
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsS2Y6CK9dz9dVFjJvRyD2gBdoLPqjaXRZ",
+   "live_a": 105,
+   "live_b": 106,
+   "minted_delta": 1,
+   "mints": 1
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r4XLZKYK63z4zW8ttKzgy8NVW1Noa1pRwj",
+   "live_a": 86,
+   "live_b": 87,
+   "minted_delta": 1,
+   "mints": 1
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKZ9SVg1z764ABrLQ3Q1Dh5PPR7gM1z4Df",
+   "live_a": 76,
+   "live_b": 77,
+   "minted_delta": 1,
+   "mints": 1
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rfo5PXejjp6xA4H8cNhodhkfz9tHLMCVNx",
+   "live_a": 386,
+   "live_b": 386,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rH3dfGifdXzghxKXS74WRA3WtdKLKGj5Um",
+   "live_a": 258,
+   "live_b": 258,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rnmLkDT2SBeaFA5z2ogdUCbJ2GMzn2sLLu",
+   "live_a": 249,
+   "live_b": 249,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsqZiJ6vnmWtaymWh7EW8EK1oEeXrLWvLC",
+   "live_a": 236,
+   "live_b": 236,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rpyTMcAKiCxqY7VXenD5ercGGzGWNV9xpg",
+   "live_a": 186,
+   "live_b": 186,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rpc9FcxtaNVdWonAXv3rABecNLx7kcA3sY",
+   "live_a": 173,
+   "live_b": 173,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rs5gToNMtNDsbTdpj85tdrtGukXzc2VF97",
+   "live_a": 156,
+   "live_b": 156,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rHTgM9rZBZkuqF5H8DQxFWTR7biXmMvPLm",
+   "live_a": 152,
+   "live_b": 152,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rQhV9rE7cs5zgFZohjVjjbwqcMkwpLb9rE",
+   "live_a": 149,
+   "live_b": 149,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r4r2Kfe7hH72gb1owkkrWa9miHE9n3xJi4",
+   "live_a": 129,
+   "live_b": 129,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rDxG2EXUmQThZJtZcq4cp18obb8gU7oxuR",
+   "live_a": 129,
+   "live_b": 129,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rpFgT43r6geDRAsNFZjUY25j7mSTNh6pmd",
+   "live_a": 121,
+   "live_b": 121,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r9qvRA5zt1TkHiRM6pcduHZe9pqWJHoR8t",
+   "live_a": 108,
+   "live_b": 108,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r4WS8fhYgpvnV5j4qkb7yvbt96Bvx9gMZH",
+   "live_a": 107,
+   "live_b": 107,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rUjqjrb1rH6jESDvTzjYbLbd3ZUcDrPFdn",
+   "live_a": 107,
+   "live_b": 107,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsZ8Si5t3TzEdnBfcRny6ydfnQvgjxspqq",
+   "live_a": 97,
+   "live_b": 97,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rfLJ4ZRnqmGFLAcMvCD56nKGbjpdTJmMqo",
+   "live_a": 85,
+   "live_b": 85,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rDep8SDqobEKGG8VxFYh9cx3W7wwP7EQKu",
+   "live_a": 77,
+   "live_b": 77,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r9oHNN143VkaVeQ5kfQnRyc9gwL8HhSa32",
+   "live_a": 76,
+   "live_b": 76,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rBTYXwQofjJraScghrzt9CUHCa1gzUxknC",
+   "live_a": 70,
+   "live_b": 70,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rGGodJFqgreLgXKVGspkZ68dqBH8RBGCJr",
+   "live_a": 69,
+   "live_b": 69,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "raL2kvboRVC7Q1pm7C9VvhJuXK4M1FGwzd",
+   "live_a": 47,
+   "live_b": 47,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rExmSZKn1NkU1KA3HHxYW3LvpEWqmfu7ZU",
+   "live_a": 44,
+   "live_b": 44,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKZAv7namwdt6RGK3cZ31KpV997sB5D6xU",
+   "live_a": 42,
+   "live_b": 42,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r4KJsXArTmVMpeumNMESZGMKYs9z1w8oj3",
+   "live_a": 40,
+   "live_b": 40,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rJ8SuRSZYQtP4xnii2mjHrLy1Xxdxi7XUq",
+   "live_a": 40,
+   "live_b": 40,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rDVKRNp3kWE1ykryU8ta6bBZWrFjFetyjB",
+   "live_a": 39,
+   "live_b": 39,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rNNrKGJuFTLTp64b9DVugJ8VTrAjL4M6Lg",
+   "live_a": 27,
+   "live_b": 27,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rJLXZVdGZNecWvLEhjJBkdZmu9EZsDZBjd",
+   "live_a": 24,
+   "live_b": 24,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rPo8GkCA9YMKzuJGTHbj11kdVfPqSJHxNx",
+   "live_a": 23,
+   "live_b": 23,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rBpbBMEDqqD1q3qhuLvwDtig2RTjT9jk5L",
+   "live_a": 20,
+   "live_b": 20,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rMDeEK6SHXGJbuHQSKQq2aTkKCJ9ErsQTP",
+   "live_a": 20,
+   "live_b": 20,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rQhVPGNXPCfWC7B7zdcJgSJuVsnpUFLvNt",
+   "live_a": 20,
+   "live_b": 20,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rDqf4nowC2PAZgn1UGHDn46mcUMREYJrsr",
+   "live_a": 17,
+   "live_b": 17,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKkycHfNG95GdBp7Rfp5hvw8mrWRVJVR7u",
+   "live_a": 17,
+   "live_b": 17,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rJ8St5nxBZzbXzG7p6BxTPEbp1broH4DvX",
+   "live_a": 14,
+   "live_b": 14,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r3rQBCn1i7w1rsG5n8djyV76bGNZR48SUd",
+   "live_a": 13,
+   "live_b": 13,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rfmdkPTQSXnu3qVW7ib85BE6ixkfeXEgMB",
+   "live_a": 13,
+   "live_b": 13,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rGu432jQ34PcCUZyDkujpQPByVCA4LDcw9",
+   "live_a": 12,
+   "live_b": 12,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rhaQYQ11ckRQmg9axsE1SBjqgWXPKhgteE",
+   "live_a": 10,
+   "live_b": 10,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rUfBPjQnVQcmav2SVZapSesufjaWdWKePw",
+   "live_a": 9,
+   "live_b": 9,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsjZzCCagWVeD6fDnJt4YYHjzxJvfexTAm",
+   "live_a": 9,
+   "live_b": 9,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r4ahFvpMuDHfjsc8kuECSTTQNbFPaw5XyU",
+   "live_a": 8,
+   "live_b": 8,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rPTCS8SJr17SbMVSoro1vHF13iFQAXPN5w",
+   "live_a": 8,
+   "live_b": 8,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rJoXbqLJtsjA7HSEP1KaGEfcKiS8Vv2zsb",
+   "live_a": 7,
+   "live_b": 7,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r36cMjofhESkEUrZCdvqrot4y6PMj1qmS8",
+   "live_a": 6,
+   "live_b": 6,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rEHJkDT6PY19gPVMj7eoXHF6WbpoEiYwXF",
+   "live_a": 6,
+   "live_b": 6,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rHWKHD9XSireMipJDuVfKqona5LtFVu2yC",
+   "live_a": 6,
+   "live_b": 6,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rs5hbB6HCiYSonfz5Dtxi6yKQupZLMwcZQ",
+   "live_a": 6,
+   "live_b": 6,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rDT8rfj8c4P59psBwmJoYQVniKNSjwQCBi",
+   "live_a": 5,
+   "live_b": 5,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKjozZiA9Yi97eHefiKZppxCcX3wEDkf4u",
+   "live_a": 5,
+   "live_b": 5,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rhwwZ4CRURPoMRm2Tk3fYvknE9dbTcMsv5",
+   "live_a": 5,
+   "live_b": 5,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rnxaDuUPsWbxXF3J8DB2jjUTmxNJerfUS8",
+   "live_a": 5,
+   "live_b": 5,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r3Qo4jrKhJn2uEb2xQ1CbyzYdFeq8Yenai",
+   "live_a": 4,
+   "live_b": 4,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKPoW95tMpPHRgAcSxbvjgNUg8LefhiXp3",
+   "live_a": 4,
+   "live_b": 4,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rMA69kTJR6vat3LUANkPy3oDCcwjj3rcQK",
+   "live_a": 4,
+   "live_b": 4,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rh7eykJ99XnGTm2iNBzeD5A9MLqnb7kXCp",
+   "live_a": 4,
+   "live_b": 4,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r4cXmecbLNdBe7dTuzSA9ZM113xHBvaNou",
+   "live_a": 3,
+   "live_b": 3,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rNyttpVo8S1wFceyVdiXyU5Tgbb78TNmzn",
+   "live_a": 3,
+   "live_b": 3,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rQ3E9gbdEeyVvvvG9xHscqcSdLvAKjeSKe",
+   "live_a": 3,
+   "live_b": 3,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rhDzA4b4DoeaS6csNCDj1MgVyg7Bhjft8f",
+   "live_a": 3,
+   "live_b": 3,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rhwiJxkiTkxTC65MrmLG7WiUkbiCyw2TaE",
+   "live_a": 3,
+   "live_b": 3,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsVf8gQufj4X8WFB4FFtAXVAJPF2pE7e43",
+   "live_a": 3,
+   "live_b": 3,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rwhNUV2bWSUT56K2eTzkUusaabAGuKpvEP",
+   "live_a": 3,
+   "live_b": 3,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r33kyxcTytBLvs6RPCDzMfxGGBTL9T3vFC",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r9iMgX4eaYRaTuR8dfccwoLJXdS8iMM2SB",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rLFNG7ds1W1kJ6e9aoUGvAEv2pYQv72jLx",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rPJ3VzY3jiKk2FwGMSYYzshwVC7AL41jE2",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rU5dXavyFKRQR7Vwo1ySpzU9R84YyYp3qu",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rU963xqwHomc9Z1FAX8EbeSWyiDkCefyUj",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rnzG62usqhnVekGBWbKHPx8TA9ihrrhQYq",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsUoigxr5JLLny5hPVi5N5eZ4ybroTQbNr",
+   "live_a": 2,
+   "live_b": 2,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r38dLg6U9FKVHUhPXeAXnqCVG8oMd3bkTT",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r3Lb56fpJYSivyVoggZyZ6vJ8A4rmZnQ8L",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "r3XxbbyM1iYAhaXSHiQbNGkmZmqs5h4h8g",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rBguS1AAQXprfASB5LUU7t6MeEVKCp5mBz",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rDA6k3fKGjd9gPuwig7P7QHM2Z2pSwA8Te",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rE5hmYxot7x7zy75oz1ASi296SZeXDv9FG",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rEXycdSCrStdEAKKGisvga7f4hMjw8knik",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rEjZfeBSDkzFufxFXJyi7TaaQnyjv4MRKx",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rGMY3xc1QVxMqD2C7jNqPEywVp3V41KdeE",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rGgGtrMRB1vdN1tkje71sSNniFBpBrFsZU",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rHFcuPVVVEajfmJNcHU6NSF8BbkteubvXp",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rHR5WT6pYXQVpBxhoZn4XDD3rGwEiBE16F",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rHWH2SKD26diefDondXPkNqxS4Xuv5DV6C",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rHv6jSGsuZnfqBHGnpWkMueRbnXXNdZJG3",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rJ3kWrv2jyzaNGLskDP4aiaAb3yavup9Eu",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKTbxK4DRZii5hFmvqJ5z5nxvD6uYCgot3",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rKenSzAiaD3jodC73v9YJVye7sgKxj39dP",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rL1ntbEdV2bx5vK741bgMASET8gCEESvLf",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rL1rSkrZBnR2jqo4hAvKToSqbsDLRaY3tY",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rMLYoLk1AZ9pGANm53JB3EKkpnPcaymTiN",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rMMKYEp5wn9Rcbz6UfG5WV1jeZZk3gLkWx",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rNgDXNgPQAoawwLNxAYnA5iktaWrNaDCHx",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rPEaqjNqvTNeDpCzmLUfx9WmS6dDLPZ3Hn",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rPExxzu9ULk8yuGDkfAJb4xYgPSgSesnSk",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rPzm7ST2GYneHjjxtnkAmCAnoPA2qrqRNT",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rUHsXY7Y9yJ5xTKe8g7T6XTpnnhF3xBTak",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rUdtbML3zkUxyPtZ6dYDkGZBHUmBxqpe6c",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rUwGYeZGZqf2uWqCvzcnuUqT75fBeBtfaV",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "raCc4bkPYi5Bb3Qfrc6i6RvwQ7siDzCdrA",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rafKdjSLd4WojmaQPt6RPmzCmhJ2dwtmrq",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rfXRE9mPGcW4yD6JAziRxUqjqjThSNu2H",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rh9DH61J9wDRUVoBLqxnbwRyz84Vp4WUnS",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rn6dU8B2yCwyiwPMhZbqCw6mCk8dgF97Pb",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rn9b7fmmUZTRauTRmRagaZ6rVNomRrwPH2",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rp5qqz7NmReLAbdat9HMQ5g8z4if1mGEev",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsTCotFgBzAFFnD8wBPL5CsbMAtsiM55nN",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rsUqpa1RxVeyfctuW523tWiz6LBGSERrUd",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  },
+  {
+   "burned_delta": 0,
+   "burns": 0,
+   "issuer": "rwwuYnnm5pouV5FCF24bU7c98dvg4skbyf",
+   "live_a": 1,
+   "live_b": 1,
+   "minted_delta": 0,
+   "mints": 0
+  }
+ ],
+ "lifetime": {
+  "burned_minted_before_a": 404,
+  "minted_and_burned": {
+   "max": 81662,
+   "mean": 15816.2,
+   "min": 20,
+   "n": 674,
+   "p50": 8459,
+   "p90": 41931
+  },
+  "minted_still_live_at_b": 665
+ },
+ "mint_field_check": {
+  "checked": 1339,
+  "mismatches": []
+ },
+ "offers": {
+  "at_a": 45,
+  "at_b": 45,
+  "create_to_accept_s": null,
+  "created": 0,
+  "created_buy": 0,
+  "created_sell": 0,
+  "fates": {},
+  "pre_window_offers_deleted": {}
+ },
+ "pages": {
+  "a": {
+   "buckets": {
+    "1-8": 79,
+    "17-24": 132,
+    "25-32": 59,
+    "9-16": 29
+   },
+   "fill_ratio": 0.5119,
+   "full_pages": 8,
+   "mean_fill": 16.38,
+   "owners": 146,
+   "owners_multi_page": 36,
+   "pages": 299,
+   "tokens": 4898
+  },
+  "b": {
+   "buckets": {
+    "1-8": 81,
+    "17-24": 148,
+    "25-32": 57,
+    "9-16": 28
+   },
+   "fill_ratio": 0.5134,
+   "full_pages": 7,
+   "mean_fill": 16.43,
+   "owners": 147,
+   "owners_multi_page": 40,
+   "pages": 314,
+   "tokens": 5159
+  }
+ },
+ "taxons": {
+  "distinct_issuer_taxon": 1779,
+  "population": 5833,
+  "top": [
+   {
+    "issuer": "rfo5PXejjp6xA4H8cNhodhkfz9tHLMCVNx",
+    "nfts": 386,
+    "taxon": 0
+   },
+   {
+    "issuer": "rH3dfGifdXzghxKXS74WRA3WtdKLKGj5Um",
+    "nfts": 258,
+    "taxon": 0
+   },
+   {
+    "issuer": "rnmLkDT2SBeaFA5z2ogdUCbJ2GMzn2sLLu",
+    "nfts": 249,
+    "taxon": 0
+   },
+   {
+    "issuer": "rsqZiJ6vnmWtaymWh7EW8EK1oEeXrLWvLC",
+    "nfts": 236,
+    "taxon": 0
+   },
+   {
+    "issuer": "rpyTMcAKiCxqY7VXenD5ercGGzGWNV9xpg",
+    "nfts": 186,
+    "taxon": 0
+   },
+   {
+    "issuer": "rpc9FcxtaNVdWonAXv3rABecNLx7kcA3sY",
+    "nfts": 173,
+    "taxon": 0
+   },
+   {
+    "issuer": "rs5gToNMtNDsbTdpj85tdrtGukXzc2VF97",
+    "nfts": 156,
+    "taxon": 0
+   },
+   {
+    "issuer": "rHTgM9rZBZkuqF5H8DQxFWTR7biXmMvPLm",
+    "nfts": 152,
+    "taxon": 0
+   },
+   {
+    "issuer": "rQhV9rE7cs5zgFZohjVjjbwqcMkwpLb9rE",
+    "nfts": 149,
+    "taxon": 0
+   },
+   {
+    "issuer": "rKF7zToDECjwtYZAM3JLrdQDto9fvTbQSf",
+    "nfts": 143,
+    "taxon": 0
+   }
+  ]
+ },
+ "transfer_fees": [
+  {
+   "fee": 0,
+   "nfts": 5833,
+   "pct": "0.000%"
+  }
+ ],
+ "window": {
+  "burns": 1078,
+  "close_a": "2026-10-30T01:11:12Z",
+  "close_b": "2026-10-31T01:11:20Z",
+  "ledger_a": 7599848,
+  "ledger_b": 7628391,
+  "live_a": 4898,
+  "live_b": 5159,
+  "mints": 1339,
+  "mints_with_uri": 1339,
+  "nft_txs": 2417,
+  "page_moves": 798,
+  "transfers": 0
+ }
+}

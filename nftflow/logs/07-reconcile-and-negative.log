@@ -1,0 +1,31 @@
+# 2026-10-31T01:42:06Z nftflow reconcile | "Ubuntu 22.04.5 LTS" | commit a8c1cb789ae53465de070e557a19f64b6c325146 | reconcile_nft.py sha256 d6c01219395e30424350400def42ded86960937364f7c632f3470b98905eb8d2
+$ .venv/bin/python nftflow/reconcile_nft.py --snap-a nftflow/data/snapshot-7599848.jsonl.gz --snap-b nftflow/data/snapshot-7628391.jsonl.gz --tx nftflow/data/tx --json nftflow/data/reconcile.json
+window ledgers 7599848 (2026-10-30T01:11:12Z) -> 7628391 (2026-10-31T01:11:20Z), 2417 NFT txs, completeness OK (every ledger once, 0 gaps, counts match, 0 dup hashes)
+live NFTs 4898 -> 5159: mints 1339, burns 1078, transfers 0, page moves 798; offers 45 -> 45
+PASS R1 replayed A == B NFTokenID->owner map: 5159 live at B, 0 differences
+PASS R2 per-issuer and total supply: 4898 + 1339 - 1078 = 5159 over 160 issuers
+PASS R3 AccountRoot MintedNFTokens/BurnedNFTokens deltas: 3943 issuer accounts
+PASS R4 replayed A offers == B offers: 45 at A, 45 at B
+PASS R5 every minted NFTokenID is new: 1339 mints
+residuals: 0
+RESULT: PASS
+(exit 0)
+$ sha256sum nftflow/data/reconcile.json
+f378428204d77f909db9916006f849c775950f0867979522808ca308ec853b4b  nftflow/data/reconcile.json
+(exit 0)
+$ .venv/bin/python nftflow/reconcile_nft.py --snap-a nftflow/data/snapshot-7599848.jsonl.gz --snap-b nftflow/data/snapshot-7628391.jsonl.gz --tx nftflow/data/tx --negative
+window ledgers 7599848 (2026-10-30T01:11:12Z) -> 7628391 (2026-10-31T01:11:20Z), 2417 NFT txs, completeness OK (every ledger once, 0 gaps, counts match, 0 dup hashes)
+live NFTs 4898 -> 5159: mints 1338, burns 1078, transfers 0, page moves 798; offers 45 -> 45
+NEGATIVE CONTROL: dropped mint 00000000406581BB7530319ACFBC48CD5D5FEAF95F127896917D741200735020
+FAIL R1 replayed A == B NFTokenID->owner map: 5159 live at B, 0 differences
+FAIL R2 per-issuer and total supply: 4898 + 1338 - 1078 = 5159 over 160 issuers
+FAIL R3 AccountRoot MintedNFTokens/BurnedNFTokens deltas: 3943 issuer accounts
+PASS R4 replayed A offers == B offers: 45 at A, 45 at B
+PASS R5 every minted NFTokenID is new: 1338 mints
+RESIDUAL R1 burn of 00000000406581BB7530319ACFBC48CD5D5FEAF95F127896917D741200735020 not live with owner 406581BB7530319ACFBC48CD5D5FEAF95F127896 in C5385A1B028803E8C536391CB0AE507E811E5A09976824D32A454EEC8FEFC174
+RESIDUAL R2 issuer 406581BB7530319ACFBC48CD5D5FEAF95F127896: 78 + 9 - 88 != 0
+RESIDUAL R2 total: 4898 + 1338 - 1078 != 5159
+RESIDUAL R3 issuer 406581BB7530319ACFBC48CD5D5FEAF95F127896: MintedNFTokens delta 10 != mints 9
+residuals: 4
+RESULT: FAIL
+(exit 1)

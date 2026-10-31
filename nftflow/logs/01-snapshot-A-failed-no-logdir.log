@@ -1,0 +1,14 @@
+# 2026-10-30T01:11:08Z nftflow snapshot A | "Ubuntu 22.04.5 LTS" | commit bea8e3f38b399070cbd587f12f6d5bb7e62758a1 | snapshot.py sha256 0aac883bded3612f6b8b139f9d17b9b7cb92f5609815b17b5f435e80fb460f2b | collect_nft.py sha256 fe6217ca97807430bad3e3daf556535ce6fce33f5146f2d05b43773ddab1b57b
+$ python3 -u state/snapshot.py --out data/nftflow/snapA --log data/nftflow/snapA/snapshot.log
+Traceback (most recent call last):
+  File "~/work/pft-ledger-stats/state/snapshot.py", line 291, in <module>
+    sys.exit(main())
+  File "~/work/pft-ledger-stats/state/snapshot.py", line 281, in main
+    logfh = open(args.log, "a") if args.log else None
+FileNotFoundError: [Errno 2] No such file or directory: 'data/nftflow/snapA/snapshot.log'
+(exit 1)
+$ python3 -c 'import json;d=json.load(open("data/nftflow/snapA/state.json"));print(json.dumps({k:d[k] for k in d if k!="server_state"},indent=1,sort_keys=True)[:1500])'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'data/nftflow/snapA/state.json'
+(exit 1)

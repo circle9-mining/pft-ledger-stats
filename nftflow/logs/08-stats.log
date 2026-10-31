@@ -1,0 +1,27 @@
+# 2026-10-31T01:42:18Z nftflow stats | "Ubuntu 22.04.5 LTS" | commit a8c1cb789ae53465de070e557a19f64b6c325146 | stats_nft.py sha256 203a9a8653e6bb19a1d51f46074594181190762dd118cac71cbf701e7e98b8fa
+$ .venv/bin/python nftflow/stats_nft.py --reconcile nftflow/data/reconcile.json --snap-a nftflow/data/snapshot-7599848.jsonl.gz --snap-b nftflow/data/snapshot-7628391.jsonl.gz --tx nftflow/data/tx --json nftflow/data/stats.json --chart nftflow/hourly.png
+window 7599848 -> 7628391: 2417 NFT txs, live 4898 -> 5159, mints 1339 (1339 with URI), burns 1078, transfers 0
+issuers 160, distinct issuer/taxon 1779, flags {'burnable+transferable': 4006, 'none': 1696, 'transferable': 131}
+lifetime {'minted_and_burned': {'n': 674, 'min': 20, 'p50': 8459, 'p90': 41931, 'max': 81662, 'mean': 15816.2}, 'burned_minted_before_a': 404, 'minted_still_live_at_b': 665}
+offers {'at_a': 45, 'at_b': 45, 'created': 0, 'created_sell': 0, 'created_buy': 0, 'fates': {}, 'pre_window_offers_deleted': {}, 'create_to_accept_s': None}
+pages A: 299 pages, 4898 tokens, mean fill 16.38/32
+pages B: 314 pages, 5159 tokens, mean fill 16.43/32
+mint field check: 1339 mints, 0 mismatches
+chart hourly.png
+RESULT: PASS
+(exit 0)
+$ .venv/bin/python nftflow/stats_nft.py --reconcile nftflow/data/reconcile.json --snap-a nftflow/data/snapshot-7599848.jsonl.gz --snap-b nftflow/data/snapshot-7628391.jsonl.gz --tx nftflow/data/tx --json /tmp/nftflow-stats-rerun.json && cmp nftflow/data/stats.json /tmp/nftflow-stats-rerun.json && echo stats-deterministic
+window 7599848 -> 7628391: 2417 NFT txs, live 4898 -> 5159, mints 1339 (1339 with URI), burns 1078, transfers 0
+issuers 160, distinct issuer/taxon 1779, flags {'burnable+transferable': 4006, 'none': 1696, 'transferable': 131}
+lifetime {'minted_and_burned': {'n': 674, 'min': 20, 'p50': 8459, 'p90': 41931, 'max': 81662, 'mean': 15816.2}, 'burned_minted_before_a': 404, 'minted_still_live_at_b': 665}
+offers {'at_a': 45, 'at_b': 45, 'created': 0, 'created_sell': 0, 'created_buy': 0, 'fates': {}, 'pre_window_offers_deleted': {}, 'create_to_accept_s': None}
+pages A: 299 pages, 4898 tokens, mean fill 16.38/32
+pages B: 314 pages, 5159 tokens, mean fill 16.43/32
+mint field check: 1339 mints, 0 mismatches
+RESULT: PASS
+stats-deterministic
+(exit 0)
+$ sha256sum nftflow/data/stats.json nftflow/hourly.png
+996cf4d1cea490b0423c94af379b31c4c307545886b6994496c1771260faf673  nftflow/data/stats.json
+9c5d24d883b98e3fabe42607ac167f39d6c610e85b7a5e8efeb8950c8acf5db3  nftflow/hourly.png
+(exit 0)

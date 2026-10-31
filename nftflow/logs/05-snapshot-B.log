@@ -1,0 +1,24 @@
+# 2026-10-31T01:11:20Z nftflow snapshot B | "Ubuntu 22.04.5 LTS" | commit 4825a087429e95575eddf9b8bf68c16bf8bd4e57 | snapshot.py sha256 0aac883bded3612f6b8b139f9d17b9b7cb92f5609815b17b5f435e80fb460f2b
+$ mkdir -p data/nftflow/snapB && test -d data/nftflow/snapB && echo dir-present
+dir-present
+(exit 0)
+$ python3 -u state/snapshot.py --out data/nftflow/snapB --log data/nftflow/snapB/snapshot.log
+2026-10-31T01:11:21Z START ledger 7628391 4B92062A3F364BED01889EB7F237157217314EA160B53F65628035A7763C8361 total_coins 99999999968786208 close 2026-10-31T01:11:20Z limit 2048 | host python 3.10.12
+2026-10-31T01:11:22Z page 0 +2048 objects (total 2048) marker 67466D204D6D5AFD
+2026-10-31T01:11:24Z page 1 +2048 objects (total 4096) marker D0F84170B71F3040
+2026-10-31T01:11:24Z page 2 +881 objects (total 4977) marker -
+2026-10-31T01:11:25Z DONE 4977 objects in 3 pages, 5 RPC calls this run -> snapshot-7628391.jsonl.gz
+(exit 0)
+$ python3 -c 'import json;d=json.load(open("data/nftflow/snapB/state.json"));print(json.dumps({k:d[k] for k in d if k!="server_state"},indent=1,sort_keys=True)[:1500])'
+{
+ "account_hash": "BAC7C0F65E25C04341448F4439C1FAFF709F6831294C41E460201C454A2D89A6",
+ "close_time": 846724280,
+ "close_time_iso": "2026-10-31T01:11:20Z",
+ "ledger_hash": "4B92062A3F364BED01889EB7F237157217314EA160B53F65628035A7763C8361",
+ "ledger_index": 7628391,
+ "server_state_reserve_base": 10000000,
+ "server_state_reserve_inc": 2000000,
+ "server_state_validated_seq": 7628391,
+ "total_coins": 99999999968786208
+}
+(exit 0)

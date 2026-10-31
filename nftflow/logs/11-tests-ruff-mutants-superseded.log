@@ -1,0 +1,42 @@
+# 2026-10-31T01:51:42Z nftflow tests + ruff + mutants | "Ubuntu 22.04.5 LTS" | commit a8c1cb789ae53465de070e557a19f64b6c325146 | collect_nft.py sha256 fe6217ca97807430bad3e3daf556535ce6fce33f5146f2d05b43773ddab1b57b | crosscheck_nft.py sha256 7311f07039ef564843b5b6200f6a4f6c1f4d9c4a67deaf93e321098bdcc9ce72 | mutants_nft.py sha256 699efb6a76180cd0326a8fea543afc738ab7b449e9f7a4d2721511c79a5a4f5f | reconcile_nft.py sha256 d6c01219395e30424350400def42ded86960937364f7c632f3470b98905eb8d2 | report_nft.py sha256 1df52958e60a25f4551cb784f3617fc883529bfcfa7a3ded36b0b2c520774354 | stats_nft.py sha256 203a9a8653e6bb19a1d51f46074594181190762dd118cac71cbf701e7e98b8fa | test_nftflow_crosscheck.py sha256 f2217edffdf6ef25c36756c4c3efc657174a66ae2369ffde3bf7d23af453f082 | test_nftflow_reconcile.py sha256 b365f4f09d45db9bdd44e7fb05f7f364ef21ad2bc7c4940515ee6204cde1b88e | test_nftflow_report.py sha256 765321c0a19f10eaedeb3d6dd56728d34456d50865717e026f4ea87d314abb2c | test_nftflow_stats.py sha256 3ae2cb4c44ff428511c6cad3423a43f0185b55a77bc97ca27a266333e4a5c4d2
+$ .venv/bin/python -m pytest -q
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+........................................................................ [ 66%]
+........................................................................ [ 88%]
+......................................                                   [100%]
+326 passed in 9.55s
+(exit 0)
+$ .venv/bin/python -m pytest -q tests/test_nftflow_*.py
+...........................................                              [100%]
+43 passed in 1.49s
+(exit 0)
+$ .venv/bin/ruff check . && .venv/bin/ruff format --check nftflow tests/test_nftflow_*.py
+All checks passed!
+11 files already formatted
+(exit 0)
+$ shellcheck nftflow/resume_drill_nft.sh && echo shellcheck-clean
+shellcheck-clean
+(exit 0)
+$ .venv/bin/python nftflow/mutants_nft.py
+CONTROL unmutated: rc=0 43 passed in 1.26s
+CAUGHT M1 mint of an already-live ID not flagged: 1 failed, 42 passed in 2.06s
+CAUGHT M2 burn owner not checked: 1 failed, 42 passed in 2.58s
+CAUGHT M3 transfer leaves the old owner in the replay: 2 failed, 34 passed, 7 errors in 0.67s
+CAUGHT M4 burns not subtracted in R2 issuer supply: 3 failed, 33 passed, 7 errors in 1.02s
+CAUGHT M5 R3 ignores BurnedNFTokens: 1 failed, 42 passed in 1.65s
+CAUGHT M6 page split (same owner, other page) counted as transfer: 1 failed, 42 passed in 1.66s
+CAUGHT M7 gaps.csv ignored: 2 failed, 41 passed in 2.25s
+CAUGHT M8 duplicate tx hash (resume replay) not rejected: 1 failed, 42 passed in 1.77s
+CAUGHT M9 missing ledger in A+1..B not rejected: 1 failed, 42 passed in 1.59s
+CAUGHT M10 replay not in TransactionIndex order: 1 failed, 42 passed in 1.54s
+CAUGHT M11 deleted offers stay live in the replay: 2 failed, 34 passed, 7 errors in 0.74s
+CAUGHT M12 R5 misses an ID re-minted after A: 1 failed, 42 passed in 1.82s
+CAUGHT M13 crosscheck X2 owner set check always passes: 2 failed, 41 passed in 1.76s
+CAUGHT M14 crosscheck X1 ignores the server's NFTokenID: 2 failed, 41 passed in 2.20s
+CAUGHT M15 crosscheck X4 checks only ledger B: 1 failed, 42 passed in 1.81s
+CAUGHT M16 untouched tokens on a modified page counted as page moves: 2 failed, 41 passed in 1.97s
+CAUGHT M17 report accepts a failed or --negative reconciliation: 1 failed, 42 passed in 1.64s
+CAUGHT M18 report prints full addresses: 1 failed, 42 passed in 1.64s
+MUTANTS 18 caught=18 failed=0
+(exit 0)

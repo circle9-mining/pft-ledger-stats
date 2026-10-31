@@ -1,0 +1,24 @@
+# 2026-10-30T01:12:35Z nftflow resume drill | commit e4f509918e04ebac0fa82f3b5596ffc115f815f9 | collect_nft.py sha256 fe6217ca97807430bad3e3daf556535ce6fce33f5146f2d05b43773ddab1b57b | resume_drill_nft.sh sha256 f7834f48ed1a6b3e89506ea4f77aa465dc2d837d5d6e30bec9f478f558dee38c
+$ nftflow/resume_drill_nft.sh 7599754 7599873 data/nftflow/drill-1
+== reference run 7599754..7599873
+== drill run: SIGTERM after 25s
+after SIGTERM: ledgers 25, last 7599778
+== resume 1, SIGKILL after 25s
+nftflow/resume_drill_nft.sh: line 43: 1158829 Killed                  "${col[@]}" --out "$drl" --log "$work/drill.log" > /dev/null
+after SIGKILL: ledgers 49, last 7599802
+== resume 2 to the end
+2026-10-30T01:15:02Z STOP (signal) requests this run=26
+2026-10-30T01:15:02Z SUMMARY window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z ledgers 7599754-7599778 fetched=25 nft_tx=2 gaps=0
+2026-10-30T01:15:03Z RESUME at ledger 7599779 (window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z, start seq 7599754, behind by 145)
+2026-10-30T01:15:28Z RESUME at ledger 7599803 (window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z, start seq 7599754, behind by 129)
+2026-10-30T01:16:39Z STOP (stop_at reached) requests this run=72
+2026-10-30T01:16:39Z SUMMARY window 2026-10-30T01:14:36Z -> 2026-10-31T01:14:36Z ledgers 7599754-7599873 fetched=120 nft_tx=9 gaps=0
+PASS nft-tx.jsonl identical (9 lines)
+PASS ledgers.csv identical without fetched_utc
+PASS every ledger 7599754..7599873 exactly once
+PASS no gaps
+PASS nft_tx_count sum == jsonl lines
+sha256 ref   c51961c1b0d42ebc6f9172f9303deb18d0cd5241b9eeb1293d0d3cbf5dea8b85
+sha256 drill c51961c1b0d42ebc6f9172f9303deb18d0cd5241b9eeb1293d0d3cbf5dea8b85
+RESULT: PASS
+(exit 0)

@@ -1,0 +1,10 @@
+# 2026-10-31T02:05:37Z nftflow report | "Ubuntu 22.04.5 LTS" | commit cea8bdd96976dba52dee0fbd1ed8228459ae69aa | report_nft.py sha256 1df52958e60a25f4551cb784f3617fc883529bfcfa7a3ded36b0b2c520774354
+$ .venv/bin/python nftflow/report_nft.py nftflow/data/reconcile.json nftflow/data/stats.json --out nftflow/REPORT.md --chart hourly.png --crosscheck nftflow/logs/12-crosscheck.log --crosscheck nftflow/logs/13-crosscheck-negative.log --tests '327 passed in 11.11s (full suite; nftflow 44)' --mutants 'MUTANTS 19 caught=19 failed=0'
+wrote nftflow/REPORT.md: 132 lines
+(exit 0)
+$ sha256sum nftflow/REPORT.md nftflow/data/reconcile.json nftflow/data/stats.json nftflow/hourly.png
+7685986a88b2d62a2e844e2c012e408f8d24fa05fdfdd34246888e431307b8a8  nftflow/REPORT.md
+f378428204d77f909db9916006f849c775950f0867979522808ca308ec853b4b  nftflow/data/reconcile.json
+996cf4d1cea490b0423c94af379b31c4c307545886b6994496c1771260faf673  nftflow/data/stats.json
+9c5d24d883b98e3fabe42607ac167f39d6c610e85b7a5e8efeb8950c8acf5db3  nftflow/hourly.png
+(exit 0)

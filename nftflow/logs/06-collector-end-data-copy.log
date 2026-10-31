@@ -1,0 +1,65 @@
+# 2026-10-31T01:41:35Z nftflow collector end + data copy | "Ubuntu 22.04.5 LTS" | commit a5b521e151c2ab38e97e8d2d41611a3472c71101 | collect_nft.py sha256 fe6217ca97807430bad3e3daf556535ce6fce33f5146f2d05b43773ddab1b57b
+$ systemctl is-active pft-nftflow-tx; systemctl show pft-nftflow-tx -p ExecMainStatus -p Result
+inactive
+Result=success
+ExecMainStatus=0
+(exit 0)
+$ tail -4 data/nftflow/tx/collect.log
+2026-10-31T00:11:46Z PROGRESS last=7627218 lag=0 ledgers=27370 nft_tx=2310 gaps=0 requests=76512
+2026-10-31T01:11:47Z PROGRESS last=7628399 lag=0 ledgers=28551 nft_tx=2418 gaps=0 requests=79792
+2026-10-31T01:41:25Z STOP (window end reached) requests this run=81363
+2026-10-31T01:41:26Z SUMMARY window 2026-10-30T01:11:25Z -> 2026-10-31T01:41:25Z ledgers 7599849-7628988 fetched=29140 nft_tx=2474 gaps=0
+(exit 0)
+$ test -e data/nftflow/tx/gaps.csv && wc -l data/nftflow/tx/gaps.csv || echo 'no gaps.csv'
+no gaps.csv
+(exit 0)
+$ awk -F, 'NR==1{print "header: " $0} NR==2{print "first: " $1} END{print "last: " $1 " rows: " NR-1}' data/nftflow/tx/ledgers.csv
+header: ledger_index,ledger_hash,close_time,close_time_iso,txn_count,nft_tx_count,fetched_utc
+first: 7599849
+last: 7628988 rows: 29140
+(exit 0)
+$ wc -l < data/nftflow/tx/nft-tx.jsonl
+2474
+(exit 0)
+$ mkdir -p nftflow/data/drill-1/ref nftflow/data/drill-1/drill && cp data/nftflow/snapA/snapshot-7599848.jsonl.gz data/nftflow/snapB/snapshot-7628391.jsonl.gz nftflow/data/ && cp data/nftflow/snapA/state.json nftflow/data/snapA-state.json && cp data/nftflow/snapB/state.json nftflow/data/snapB-state.json && cp data/nftflow/snapA/snapshot.log nftflow/data/snapA-snapshot.log && cp data/nftflow/snapB/snapshot.log nftflow/data/snapB-snapshot.log && mkdir -p nftflow/data/tx && cp data/nftflow/tx/nft-tx.jsonl data/nftflow/tx/ledgers.csv data/nftflow/tx/collect.log data/nftflow/tx/state.json nftflow/data/tx/ && cp data/nftflow/drill-1/ref/* nftflow/data/drill-1/ref/ && cp data/nftflow/drill-1/drill/* nftflow/data/drill-1/drill/ && cp data/nftflow/drill-1/ref.log data/nftflow/drill-1/drill.log nftflow/data/drill-1/
+(exit 0)
+$ cd data/nftflow && find snapA snapB tx drill-1 -type f ! -name pages.jsonl | sort | xargs sha256sum
+19010e43b5df7b8513a789c9e4f91cfd8721ea08bcc9a1ed6da9050de1515989  drill-1/drill.log
+01b924e501a8675c9cda91567691f12d4f9b3c3d99cc13ad65d1609d5437a474  drill-1/drill/ledgers.csv
+c51961c1b0d42ebc6f9172f9303deb18d0cd5241b9eeb1293d0d3cbf5dea8b85  drill-1/drill/nft-tx.jsonl
+7d5861d7939b6e0f283d71abc77736bfa664d209929829762a1c2b0b985e19d5  drill-1/drill/state.json
+001c737e51d80a012e540c7fa43708ce95f1f9ef688dcc4ea54b24d21cb1eac5  drill-1/ref.log
+58e866d957fa900aa55378ce61ca09f924913fe4a5fcec08c38450a95c6149da  drill-1/ref/ledgers.csv
+c51961c1b0d42ebc6f9172f9303deb18d0cd5241b9eeb1293d0d3cbf5dea8b85  drill-1/ref/nft-tx.jsonl
+850b14a900a643743693d82000ec9d265e401df2a56189cf2502cfef8faa2fd0  drill-1/ref/state.json
+a08a43fe82c55c7e2ab66ed52d6f478c7ace1146b11b3957c1ad8e16a040fb5d  snapA/snapshot-7599848.jsonl.gz
+a5883881e2369625b31cf107a33e628bfa1952b05c9282644c7af90f0b9df2ed  snapA/snapshot.log
+f6addf4f9b4bedee8c7f308de7d755f66ab8577d6d96246512828d66d0cf1359  snapA/state.json
+ec264f611fa5c07ab08d6fa1702a0fe075667deee6ace4aeb2170492419f06f5  snapB/snapshot-7628391.jsonl.gz
+71881c182006631dfb66caa93eb534fd3fcf21f2fb002d03ab59060a72befe46  snapB/snapshot.log
+eaa3198e9750d711f773ea77577433e4dee2e9b5a85797b0b8245654638dc165  snapB/state.json
+4ba76e9408d12d5e761b43c96eb660addb85bdbae4d64321be484d1916d8b9ab  tx/collect.log
+280f4a5211c097bdc96aaeb4d253bc3c5060e857da43d7fcfec96fcc58561277  tx/ledgers.csv
+ae9a3486d1ff57d9973018812f066f31ccf55dfa8a7dcc7c616f69f6f33c1341  tx/nft-tx.jsonl
+9af44b037a4e287e2596d75dbd6eabe479e7f9cbc8f26f4c66eef953c3b46676  tx/state.json
+(exit 0)
+$ cd nftflow/data && find . -type f | sort | xargs sha256sum
+19010e43b5df7b8513a789c9e4f91cfd8721ea08bcc9a1ed6da9050de1515989  ./drill-1/drill.log
+01b924e501a8675c9cda91567691f12d4f9b3c3d99cc13ad65d1609d5437a474  ./drill-1/drill/ledgers.csv
+c51961c1b0d42ebc6f9172f9303deb18d0cd5241b9eeb1293d0d3cbf5dea8b85  ./drill-1/drill/nft-tx.jsonl
+7d5861d7939b6e0f283d71abc77736bfa664d209929829762a1c2b0b985e19d5  ./drill-1/drill/state.json
+001c737e51d80a012e540c7fa43708ce95f1f9ef688dcc4ea54b24d21cb1eac5  ./drill-1/ref.log
+58e866d957fa900aa55378ce61ca09f924913fe4a5fcec08c38450a95c6149da  ./drill-1/ref/ledgers.csv
+c51961c1b0d42ebc6f9172f9303deb18d0cd5241b9eeb1293d0d3cbf5dea8b85  ./drill-1/ref/nft-tx.jsonl
+850b14a900a643743693d82000ec9d265e401df2a56189cf2502cfef8faa2fd0  ./drill-1/ref/state.json
+a5883881e2369625b31cf107a33e628bfa1952b05c9282644c7af90f0b9df2ed  ./snapA-snapshot.log
+f6addf4f9b4bedee8c7f308de7d755f66ab8577d6d96246512828d66d0cf1359  ./snapA-state.json
+71881c182006631dfb66caa93eb534fd3fcf21f2fb002d03ab59060a72befe46  ./snapB-snapshot.log
+eaa3198e9750d711f773ea77577433e4dee2e9b5a85797b0b8245654638dc165  ./snapB-state.json
+a08a43fe82c55c7e2ab66ed52d6f478c7ace1146b11b3957c1ad8e16a040fb5d  ./snapshot-7599848.jsonl.gz
+ec264f611fa5c07ab08d6fa1702a0fe075667deee6ace4aeb2170492419f06f5  ./snapshot-7628391.jsonl.gz
+4ba76e9408d12d5e761b43c96eb660addb85bdbae4d64321be484d1916d8b9ab  ./tx/collect.log
+280f4a5211c097bdc96aaeb4d253bc3c5060e857da43d7fcfec96fcc58561277  ./tx/ledgers.csv
+ae9a3486d1ff57d9973018812f066f31ccf55dfa8a7dcc7c616f69f6f33c1341  ./tx/nft-tx.jsonl
+9af44b037a4e287e2596d75dbd6eabe479e7f9cbc8f26f4c66eef953c3b46676  ./tx/state.json
+(exit 0)

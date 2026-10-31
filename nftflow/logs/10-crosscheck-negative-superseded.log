@@ -1,0 +1,185 @@
+# 2026-10-31T01:47:08Z nftflow crosscheck --negative (public RPC, must exit 1) | "Ubuntu 22.04.5 LTS" | commit a8c1cb789ae53465de070e557a19f64b6c325146 | crosscheck_nft.py sha256 7311f07039ef564843b5b6200f6a4f6c1f4d9c4a67deaf93e321098bdcc9ce72
+$ .venv/bin/python nftflow/crosscheck_nft.py nftflow/data/reconcile.json nftflow/data/snapshot-7599848.jsonl.gz nftflow/data/snapshot-7628391.jsonl.gz --count 20 --owners 3 --seed 1 --negative
+MISMATCH X1 mint tx 51A072AA… ledger=7605610 NFTokenMint id …0073C250 got …0073C257 result=tesSUCCESS
+MISMATCH X1 mint tx F47A9C37… ledger=7625283 NFTokenMint id …00742470 got …0074247B result=tesSUCCESS
+MISMATCH X1 mint tx 47044928… ledger=7602467 NFTokenMint id …00737E70 got …00737E75 result=tesSUCCESS
+MISMATCH X1 mint tx F0B127B1… ledger=7611314 NFTokenMint id …0073C250 got …0073C25E result=tesSUCCESS
+MISMATCH X1 mint tx F6902AC0… ledger=7604989 NFTokenMint id …007343E0 got …007343EF result=tesSUCCESS
+MISMATCH X1 mint tx A115D91E… ledger=7622189 NFTokenMint id …0073E240 got …0073E242 result=tesSUCCESS
+MISMATCH X1 mint tx DA4C494C… ledger=7620486 NFTokenMint id …00742BB0 got …00742BBC result=tesSUCCESS
+MISMATCH X1 mint tx 104B2FCD… ledger=7621338 NFTokenMint id …00734430 got …00734438 result=tesSUCCESS
+MISMATCH X1 mint tx 5A75AD39… ledger=7628327 NFTokenMint id …0073E250 got …0073E25F result=tesSUCCESS
+MISMATCH X1 mint tx 014D1A4D… ledger=7616793 NFTokenMint id …0073CB20 got …0073CB23 result=tesSUCCESS
+MISMATCH X1 mint tx 735287FF… ledger=7608929 NFTokenMint id …00739A30 got …00739A34 result=tesSUCCESS
+MISMATCH X1 mint tx A506515D… ledger=7603859 NFTokenMint id …0073C320 got …0073C327 result=tesSUCCESS
+MISMATCH X1 mint tx 5C1CFEA9… ledger=7621935 NFTokenMint id …007433F1 got …007433F0 result=tesSUCCESS
+MISMATCH X1 mint tx 359526E0… ledger=7600920 NFTokenMint id …007389E0 got …007389E8 result=tesSUCCESS
+MISMATCH X1 mint tx 0FB89C4B… ledger=7617244 NFTokenMint id …00741130 got …0074113A result=tesSUCCESS
+MISMATCH X1 mint tx 7C1EE412… ledger=7619746 NFTokenMint id …00742460 got …00742465 result=tesSUCCESS
+MISMATCH X1 mint tx EFF0E43A… ledger=7626746 NFTokenMint id …00739A50 got …00739A5B result=tesSUCCESS
+MISMATCH X1 mint tx 2BE84DD2… ledger=7599940 NFTokenMint id …00737E00 got …00737E01 result=tesSUCCESS
+MISMATCH X1 mint tx 7F229BD2… ledger=7620395 NFTokenMint id …00742BB0 got …00742BBB result=tesSUCCESS
+MISMATCH X1 mint tx CB0480AC… ledger=7611702 NFTokenMint id …0073FD80 got …0073FD8D result=tesSUCCESS
+MISMATCH X1 burn tx BA231F91… ledger=7612179 NFTokenBurn id …0073F510 got …0073F519 result=tesSUCCESS
+MISMATCH X1 burn tx 0F87028E… ledger=7605176 NFTokenBurn id …0072F9D0 got …0072F9D7 result=tesSUCCESS
+MISMATCH X1 burn tx F9575CF3… ledger=7616188 NFTokenBurn id …00733870 got …00733871 result=tesSUCCESS
+MISMATCH X1 burn tx A0F41F26… ledger=7601627 NFTokenBurn id …00734FC0 got …00734FC6 result=tesSUCCESS
+MISMATCH X1 burn tx 02E305FA… ledger=7601307 NFTokenBurn id …00733C90 got …00733C95 result=tesSUCCESS
+MISMATCH X1 burn tx 6CBA5134… ledger=7601558 NFTokenBurn id …00735020 got …00735026 result=tesSUCCESS
+MISMATCH X1 burn tx ADBB5B90… ledger=7600565 NFTokenBurn id …00738AF0 got …00738AF3 result=tesSUCCESS
+MISMATCH X1 burn tx 92F34377… ledger=7619485 NFTokenBurn id …0073E230 got …0073E236 result=tesSUCCESS
+MISMATCH X1 burn tx 8E144729… ledger=7611517 NFTokenBurn id …0072EA80 got …0072EA84 result=tesSUCCESS
+MISMATCH X1 burn tx 960A0D6D… ledger=7622521 NFTokenBurn id …0073CB10 got …0073CB18 result=tesSUCCESS
+MISMATCH X1 burn tx 9A00DFBD… ledger=7601606 NFTokenBurn id …00735010 got …00735012 result=tesSUCCESS
+MISMATCH X1 burn tx A61E0B6C… ledger=7611713 NFTokenBurn id …00741870 got …00741878 result=tesSUCCESS
+MISMATCH X1 burn tx E9E05161… ledger=7623290 NFTokenBurn id …00736990 got …00736995 result=tesSUCCESS
+MISMATCH X1 burn tx 17ED5AD2… ledger=7626403 NFTokenBurn id …00739A50 got …00739A58 result=tesSUCCESS
+MISMATCH X1 burn tx 45853106… ledger=7612392 NFTokenBurn id …00738B00 got …00738B0D result=tesSUCCESS
+MISMATCH X1 burn tx 62E7A7CA… ledger=7616572 NFTokenBurn id …0073C261 got …0073C260 result=tesSUCCESS
+MISMATCH X1 burn tx 63414070… ledger=7612238 NFTokenBurn id …0073C7B0 got …0073C7B1 result=tesSUCCESS
+MISMATCH X1 burn tx 19C6CF22… ledger=7611622 NFTokenBurn id …007343E0 got …007343E3 result=tesSUCCESS
+MISMATCH X1 burn tx EDAED017… ledger=7624594 NFTokenBurn id …00734410 got …00734417 result=tesSUCCESS
+MISMATCH X1 burn tx 0CF7BD6B… ledger=7615637 NFTokenBurn id …00730231 got …00730230 result=tesSUCCESS
+MISMATCH X2 owner rfo5PXej… account_nfts @B expected=385 got=386 missing=0 unexpected=1
+MISMATCH X2 owner rpCzwYfx… account_nfts @B expected=3 got=4 missing=0 unexpected=1
+MISMATCH X2 owner rJ8St5nx… account_nfts @B expected=13 got=14 missing=0 unexpected=1
+MISMATCH X3 burned …0073F519 absent from rJ9gWhdz… @B
+MISMATCH X3 burned …0072F9D7 absent from r3E72tL7… @B
+MISMATCH X3 burned …00733871 absent from rGXWvRL2… @B
+MISMATCH X3 burned …00734FC6 absent from ra1ViaGu… @B
+MISMATCH X3 burned …00733C95 absent from rHQLLP4j… @B
+MISMATCH X3 burned …00735026 absent from ra1ViaGu… @B
+MISMATCH X3 burned …00738AF3 absent from ra24GWzN… @B
+MISMATCH X3 burned …0073E236 absent from rPYq5Xgh… @B
+MISMATCH X3 burned …0072EA84 absent from r3FhsJPD… @B
+MISMATCH X3 burned …0073CB18 absent from rhdkuDxL… @B
+MISMATCH X3 burned …00735012 absent from ra1ViaGu… @B
+MISMATCH X3 burned …00741878 absent from rDDkjGGD… @B
+MISMATCH X3 burned …00736995 absent from r991NVgp… @B
+MISMATCH X3 burned …00739A58 absent from rEHAJNSu… @B
+MISMATCH X3 burned …00738B0D absent from ra24GWzN… @B
+MISMATCH X3 burned …0073C260 absent from r3beGYCm… @B
+MISMATCH X3 burned …0073C7B1 absent from rrsL2Dzw… @B
+MISMATCH X3 burned …007343E3 absent from rPbzrGZ3… @B
+MISMATCH X3 burned …00734417 absent from rPbzrGZ3… @B
+MISMATCH X3 burned …00730230 absent from raWprqkC… @B
+MISMATCH X4 issuer rrsL2Dzw… @A Minted/Burned expected=(22, 16) got=(21, 16)
+MISMATCH X4 issuer rrsL2Dzw… @B Minted/Burned expected=(64, 63) got=(63, 63)
+MISMATCH X4 issuer rPbzrGZ3… @A Minted/Burned expected=(189, 79) got=(188, 79)
+MISMATCH X4 issuer rPbzrGZ3… @B Minted/Burned expected=(298, 126) got=(297, 126)
+OK X4 issuer rbhaMmzW… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rbhaMmzW… @B Minted/Burned expected=(32, 19) got=(31, 19)
+OK X4 issuer rmJPH8ch… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rmJPH8ch… @B Minted/Burned expected=(69, 32) got=(68, 32)
+OK X4 issuer rpCzwYfx… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rpCzwYfx… @B Minted/Burned expected=(11, 6) got=(10, 6)
+MISMATCH X4 issuer rsS2Y6CK… @A Minted/Burned expected=(106, 0) got=(105, 0)
+MISMATCH X4 issuer rsS2Y6CK… @B Minted/Burned expected=(107, 0) got=(106, 0)
+MISMATCH X4 issuer rsYuy9f3… @A Minted/Burned expected=(32, 21) got=(31, 21)
+MISMATCH X4 issuer rsYuy9f3… @B Minted/Burned expected=(59, 46) got=(58, 46)
+OK X4 issuer rs2sEUSn… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rs2sEUSn… @B Minted/Burned expected=(25, 6) got=(24, 6)
+OK X4 issuer rsgDA2Cu… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rsgDA2Cu… @B Minted/Burned expected=(28, 12) got=(27, 12)
+MISMATCH X4 issuer rhBrpvL8… @A Minted/Burned expected=(16, 7) got=(15, 7)
+MISMATCH X4 issuer rhBrpvL8… @B Minted/Burned expected=(19, 18) got=(18, 18)
+OK X4 issuer rhUyVqix… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rhUyVqix… @B Minted/Burned expected=(21, 9) got=(20, 9)
+MISMATCH X4 issuer rhdkuDxL… @A Minted/Burned expected=(17, 5) got=(16, 5)
+MISMATCH X4 issuer rhdkuDxL… @B Minted/Burned expected=(44, 43) got=(43, 43)
+MISMATCH X4 issuer rnsrVj65… @A Minted/Burned expected=(15, 7) got=(14, 7)
+MISMATCH X4 issuer rnsrVj65… @B Minted/Burned expected=(46, 27) got=(45, 27)
+MISMATCH X4 issuer raWprqkC… @A Minted/Burned expected=(73, 41) got=(72, 41)
+MISMATCH X4 issuer raWprqkC… @B Minted/Burned expected=(91, 90) got=(90, 90)
+MISMATCH X4 issuer ra24GWzN… @A Minted/Burned expected=(76, 72) got=(75, 72)
+MISMATCH X4 issuer ra24GWzN… @B Minted/Burned expected=(131, 129) got=(130, 129)
+MISMATCH X4 issuer ra1ViaGu… @A Minted/Burned expected=(155, 76) got=(154, 76)
+MISMATCH X4 issuer ra1ViaGu… @B Minted/Burned expected=(165, 164) got=(164, 164)
+MISMATCH X4 issuer r3E72tL7… @A Minted/Burned expected=(21, 8) got=(20, 8)
+MISMATCH X4 issuer r3E72tL7… @B Minted/Burned expected=(26, 25) got=(25, 25)
+MISMATCH X4 issuer r3beGYCm… @A Minted/Burned expected=(15, 5) got=(14, 5)
+MISMATCH X4 issuer r3beGYCm… @B Minted/Burned expected=(49, 17) got=(48, 17)
+MISMATCH X4 issuer r3FhsJPD… @A Minted/Burned expected=(29, 19) got=(28, 19)
+MISMATCH X4 issuer r3FhsJPD… @B Minted/Burned expected=(30, 29) got=(29, 29)
+MISMATCH X4 issuer r991NVgp… @A Minted/Burned expected=(51, 40) got=(50, 40)
+MISMATCH X4 issuer r991NVgp… @B Minted/Burned expected=(99, 71) got=(98, 71)
+MISMATCH X4 issuer r9Hh3573… @A Minted/Burned expected=(13, 2) got=(12, 2)
+MISMATCH X4 issuer r9Hh3573… @B Minted/Burned expected=(19, 18) got=(18, 18)
+OK X4 issuer r944gFf2… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer r944gFf2… @B Minted/Burned expected=(12, 9) got=(11, 9)
+MISMATCH X4 issuer rwCFpe2p… @A Minted/Burned expected=(24, 15) got=(23, 15)
+MISMATCH X4 issuer rwCFpe2p… @B Minted/Burned expected=(30, 29) got=(29, 29)
+OK X4 issuer rwjdDQZ3… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rwjdDQZ3… @B Minted/Burned expected=(55, 17) got=(54, 17)
+OK X4 issuer rwFjPVuB… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rwFjPVuB… @B Minted/Burned expected=(8, 1) got=(7, 1)
+MISMATCH X4 issuer rwiEkARG… @A Minted/Burned expected=(96, 25) got=(95, 25)
+MISMATCH X4 issuer rwiEkARG… @B Minted/Burned expected=(214, 79) got=(213, 79)
+OK X4 issuer rwAMciVM… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rwAMciVM… @B Minted/Burned expected=(22, 6) got=(21, 6)
+OK X4 issuer rDDkjGGD… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rDDkjGGD… @B Minted/Burned expected=(71, 33) got=(70, 33)
+OK X4 issuer rDMWGci1… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rDMWGci1… @B Minted/Burned expected=(5, 0) got=(4, 0)
+MISMATCH X4 issuer rEHAJNSu… @A Minted/Burned expected=(63, 59) got=(62, 59)
+MISMATCH X4 issuer rEHAJNSu… @B Minted/Burned expected=(129, 127) got=(128, 127)
+MISMATCH X4 issuer rEofoVFS… @A Minted/Burned expected=(3, 1) got=(2, 1)
+MISMATCH X4 issuer rEofoVFS… @B Minted/Burned expected=(14, 6) got=(13, 6)
+MISMATCH X4 issuer rGXWvRL2… @A Minted/Burned expected=(97, 49) got=(96, 49)
+MISMATCH X4 issuer rGXWvRL2… @B Minted/Burned expected=(121, 120) got=(120, 120)
+MISMATCH X4 issuer rGmwPep2… @A Minted/Burned expected=(7, 3) got=(6, 3)
+MISMATCH X4 issuer rGmwPep2… @B Minted/Burned expected=(16, 13) got=(15, 13)
+OK X4 issuer rHJ95eas… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rHJ95eas… @B Minted/Burned expected=(7, 5) got=(6, 5)
+MISMATCH X4 issuer rHQLLP4j… @A Minted/Burned expected=(19, 9) got=(18, 9)
+MISMATCH X4 issuer rHQLLP4j… @B Minted/Burned expected=(35, 19) got=(34, 19)
+OK X4 issuer rH1EdQx1… @A Minted/Burned expected=None got=None
+MISMATCH X4 issuer rH1EdQx1… @B Minted/Burned expected=(7, 4) got=(6, 4)
+MISMATCH X4 issuer rJ9gWhdz… @A Minted/Burned expected=(2, 1) got=(1, 1)
+MISMATCH X4 issuer rJ9gWhdz… @B Minted/Burned expected=(12, 8) got=(11, 8)
+MISMATCH X4 issuer rKDvz3vr… @A Minted/Burned expected=(38, 18) got=(37, 18)
+MISMATCH X4 issuer rKDvz3vr… @B Minted/Burned expected=(77, 28) got=(76, 28)
+MISMATCH X4 issuer rKZ9SVg1… @A Minted/Burned expected=(77, 0) got=(76, 0)
+MISMATCH X4 issuer rKZ9SVg1… @B Minted/Burned expected=(78, 0) got=(77, 0)
+MISMATCH X4 issuer rKgWTTN6… @A Minted/Burned expected=(65, 32) got=(64, 32)
+MISMATCH X4 issuer rKgWTTN6… @B Minted/Burned expected=(127, 58) got=(126, 58)
+MISMATCH X4 issuer rKF7zToD… @A Minted/Burned expected=(142, 0) got=(141, 0)
+MISMATCH X4 issuer rKF7zToD… @B Minted/Burned expected=(144, 0) got=(143, 0)
+MISMATCH X4 issuer rLTwfjmN… @A Minted/Burned expected=(51, 29) got=(50, 29)
+MISMATCH X4 issuer rLTwfjmN… @B Minted/Burned expected=(62, 61) got=(61, 61)
+MISMATCH X4 issuer rLX16buk… @A Minted/Burned expected=(63, 60) got=(62, 60)
+MISMATCH X4 issuer rLX16buk… @B Minted/Burned expected=(86, 85) got=(85, 85)
+MISMATCH X4 issuer rLx6cHbm… @A Minted/Burned expected=(21, 9) got=(20, 9)
+MISMATCH X4 issuer rLx6cHbm… @B Minted/Burned expected=(35, 34) got=(34, 34)
+MISMATCH X4 issuer r4RPpeS2… @A Minted/Burned expected=(129, 0) got=(128, 0)
+MISMATCH X4 issuer r4RPpeS2… @B Minted/Burned expected=(130, 0) got=(129, 0)
+MISMATCH X4 issuer r473b62P… @A Minted/Burned expected=(24, 10) got=(23, 10)
+MISMATCH X4 issuer r473b62P… @B Minted/Burned expected=(36, 35) got=(35, 35)
+MISMATCH X4 issuer r4XLZKYK… @A Minted/Burned expected=(87, 0) got=(86, 0)
+MISMATCH X4 issuer r4XLZKYK… @B Minted/Burned expected=(88, 0) got=(87, 0)
+MISMATCH X4 issuer rPYq5Xgh… @A Minted/Burned expected=(26, 6) got=(25, 6)
+MISMATCH X4 issuer rPYq5Xgh… @B Minted/Burned expected=(141, 58) got=(140, 58)
+MISMATCH X4 issuer rPZq4TTx… @A Minted/Burned expected=(19, 5) got=(18, 5)
+MISMATCH X4 issuer rPZq4TTx… @B Minted/Burned expected=(41, 22) got=(40, 22)
+MISMATCH X5 offer A6287764… live @B
+MISMATCH X5 offer DC97EE8D… live @B
+MISMATCH X5 offer 17E62086… live @B
+MISMATCH X5 offer 4029BC88… live @B
+MISMATCH X5 offer CC370203… live @B
+MISMATCH X5 offer 66070BEB… live @B
+MISMATCH X5 offer 22BA15CE… live @B
+MISMATCH X5 offer 6EF458EA… live @B
+MISMATCH X5 offer A1C44E95… live @B
+MISMATCH X5 offer 8680F70C… live @B
+MISMATCH X5 offer AB8A62E9… live @B
+MISMATCH X5 offer 42D88D08… live @B
+MISMATCH X5 offer 66C409DD… live @B
+MISMATCH X5 offer C7523A02… live @B
+MISMATCH X5 offer 99333E4F… live @B
+MISMATCH X5 offer 8979AB46… live @B
+MISMATCH X5 offer 5FC76B87… live @B
+MISMATCH X5 offer F2DAC64F… live @B
+MISMATCH X5 offer 60D33254… live @B
+MISMATCH X5 offer A316EE42… live @B
+SUMMARY checked=181 mismatches=167 ledgers=7599848->7628391 mints=20/1339 burns=20/1078 transfers=0/0 owners=3/147 issuers=49 offers_live=20/45 offers_deleted=0/0 negative=True rpc_calls=177 retries=0 retries_by_error={}
+(exit 1)

@@ -1,0 +1,16 @@
+# 2026-10-30T01:11:25Z nftflow tx collector launch | commit bea8e3f38b399070cbd587f12f6d5bb7e62758a1 | collect_nft.py sha256 fe6217ca97807430bad3e3daf556535ce6fce33f5146f2d05b43773ddab1b57b | collect_tx.py sha256 7a1371f803fb51757b82819afd6a11d38f765730b9fe370dc3329488b89d4357
+$ sudo systemd-run --unit=pft-nftflow-tx --uid=<user> --working-directory=~/work/pft-ledger-stats /usr/bin/python3 -u ~/work/pft-ledger-stats/nftflow/collect_nft.py --out ~/work/pft-ledger-stats/data/nftflow/tx --log ~/work/pft-ledger-stats/data/nftflow/tx/collect.log --hours 24.5 --start 7599849
+Running as unit: pft-nftflow-tx.service
+(exit 0)
+$ systemctl is-active pft-nftflow-tx
+active
+(exit 0)
+$ cat data/nftflow/tx/collect.log
+2026-10-30T01:11:25Z node: build 1.0.9 state full complete_ledgers 7599233-7599851
+2026-10-30T01:11:25Z WINDOW START 2026-10-30T01:11:25Z -> 2026-10-31T01:41:25Z at ledger 7599849, stop_at None, rate <= 1.0 req/s
+(exit 0)
+$ tail -3 data/nftflow/tx/ledgers.csv
+7599855,509052AEF21EA9384B9CCADD3401FB30AC1C4D12B156786173FB61249DED604E,846637893,2026-10-30T01:11:33Z,0,0,2026-10-30T01:11:39Z
+7599856,2C954008EB7EDEA7A6505E89DF9247737ED6BE32C3E3BA07CA2290F277EFB2C1,846637900,2026-10-30T01:11:40Z,0,0,2026-10-30T01:11:41Z
+7599857,0161EA118070CF8095D1EAD991463F32EC0263EA4E6D1FAC81D1F4A08FE44E4C,846637901,2026-10-30T01:11:41Z,0,0,2026-10-30T01:11:44Z
+(exit 0)

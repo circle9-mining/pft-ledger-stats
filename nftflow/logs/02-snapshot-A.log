@@ -1,0 +1,24 @@
+# 2026-10-30T01:11:16Z nftflow snapshot A (retry of log 01: --log directory did not exist) | "Ubuntu 22.04.5 LTS" | commit bea8e3f38b399070cbd587f12f6d5bb7e62758a1 | snapshot.py sha256 0aac883bded3612f6b8b139f9d17b9b7cb92f5609815b17b5f435e80fb460f2b
+$ test -d data/nftflow/snapA && echo dir-present
+dir-present
+(exit 0)
+$ python3 -u state/snapshot.py --out data/nftflow/snapA --log data/nftflow/snapA/snapshot.log
+2026-10-30T01:11:16Z START ledger 7599848 B3DEA363978C06BECF28D581C32E2DEC976585B743068AB6DD300815DA73448F total_coins 99999999968885660 close 2026-10-30T01:11:12Z limit 2048 | host python 3.10.12
+2026-10-30T01:11:17Z page 0 +2048 objects (total 2048) marker 67BA0AF0A8068400
+2026-10-30T01:11:18Z page 1 +2048 objects (total 4096) marker D2C00AB5CFDB3CA5
+2026-10-30T01:11:18Z page 2 +850 objects (total 4946) marker -
+2026-10-30T01:11:19Z DONE 4946 objects in 3 pages, 5 RPC calls this run -> snapshot-7599848.jsonl.gz
+(exit 0)
+$ python3 -c 'import json;d=json.load(open("data/nftflow/snapA/state.json"));print(json.dumps({k:d[k] for k in d if k!="server_state"},indent=1,sort_keys=True)[:1500])'
+{
+ "account_hash": "740EDCF41A0099D8B0525791A8A5FC7F034F3C97990DB04BCD650ED707CC49BC",
+ "close_time": 846637872,
+ "close_time_iso": "2026-10-30T01:11:12Z",
+ "ledger_hash": "B3DEA363978C06BECF28D581C32E2DEC976585B743068AB6DD300815DA73448F",
+ "ledger_index": 7599848,
+ "server_state_reserve_base": 10000000,
+ "server_state_reserve_inc": 2000000,
+ "server_state_validated_seq": 7599848,
+ "total_coins": 99999999968885660
+}
+(exit 0)
