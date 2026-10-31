@@ -22,8 +22,8 @@ MUTANTS = [
     (
         "M2 burn owner not checked",
         "nftflow/reconcile_nft.py",
-        "                if live.get(nid) != ob:\n                    residuals.append(f\"R1 burn",
-        "                if False:\n                    residuals.append(f\"R1 burn",
+        '                if live.get(nid) != ob:\n                    residuals.append(f"R1 burn',
+        '                if False:\n                    residuals.append(f"R1 burn',
     ),
     (
         "M3 transfer leaves the old owner in the replay",
@@ -102,6 +102,12 @@ MUTANTS = [
         "nftflow/crosscheck_nft.py",
         '((la, acc_a, "A"), (lb, acc_b, "B"))',
         '((lb, acc_b, "A"), (lb, acc_b, "B"))',
+    ),
+    (
+        "M16 untouched tokens on a modified page counted as page moves",
+        "nftflow/reconcile_nft.py",
+        "        if pb is not None and pb == pa:\n",
+        "        if False:\n",
     ),
 ]
 TESTS = ["tests/" + p.name for p in sorted(Path("tests").glob("test_nftflow_*.py"))]

@@ -112,20 +112,20 @@ def tx_effects(meta):
             own = idx[:40]
             if kind == "CreatedNode":
                 for nid, tok in page_tokens(n.get("NewFields")).items():
-                    after[nid] = (own, tok)
+                    after[nid] = (own, tok, idx)
             elif kind == "ModifiedNode":
                 prev = n.get("PreviousFields") or {}
                 if "NFTokens" not in prev:
                     continue
                 for nid, tok in page_tokens(prev).items():
-                    before[nid] = (own, tok)
+                    before[nid] = (own, tok, idx)
                 for nid, tok in page_tokens(n.get("FinalFields")).items():
-                    after[nid] = (own, tok)
+                    after[nid] = (own, tok, idx)
             elif kind == "DeletedNode":
                 prev = n.get("PreviousFields") or {}
                 src = prev if "NFTokens" in prev else n.get("FinalFields")
                 for nid, tok in page_tokens(src).items():
-                    before[nid] = (own, tok)
+                    before[nid] = (own, tok, idx)
         elif let == "NFTokenOffer":
             if kind == "CreatedNode":
                 created_offers[idx] = dict(n.get("NewFields") or {}, index=idx, LedgerEntryType=let)
@@ -133,8 +133,10 @@ def tx_effects(meta):
                 deleted_offers[idx] = dict(n.get("FinalFields") or {}, index=idx)
     effects = []
     for nid in sorted(set(before) | set(after)):
-        ob = before.get(nid, (None, None))[0]
-        oa, tok = after.get(nid, (None, before.get(nid, (None, None))[1]))
+        ob, tok_b, pb = before.get(nid, (None, None, None))
+        oa, tok, pa = after.get(nid, (None, tok_b, None))
+        if pb is not None and pb == pa:
+            continue  # untouched token on a page the tx modified: no effect
         if ob is None:
             kind = "mint"
         elif oa is None:

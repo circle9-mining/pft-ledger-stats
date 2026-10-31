@@ -275,7 +275,19 @@ def test_page_split_is_a_move_not_a_mint():
         ]
     }
     effects, _, _ = rec.tx_effects(meta)
-    assert sorted((k, n) for k, n, *_ in effects) == [("mint", nid(3)), ("move", nid(1)), ("move", nid(2))]
+    assert sorted((k, n) for k, n, *_ in effects) == [("mint", nid(3)), ("move", nid(1))]
+
+
+def test_token_that_stays_on_its_page_is_not_a_move():
+    # a mint into a non-full page lists the page's old tokens in PreviousFields and FinalFields;
+    # those tokens did not move (a dev run on the real window counted 35384 "moves" for 225 page
+    # splits/merges before this check)
+    meta = {"AffectedNodes": [mod_page(ISS, [1, 2], [1, 2, 3])]}
+    effects, _, _ = rec.tx_effects(meta)
+    assert [(k, n) for k, n, *_ in effects] == [("mint", nid(3))]
+    meta = {"AffectedNodes": [mod_page(ISS, [1, 2, 3], [1, 3])]}
+    effects, _, _ = rec.tx_effects(meta)
+    assert [(k, n) for k, n, *_ in effects] == [("burn", nid(2))]
 
 
 def test_modified_page_without_nftokens_change_is_ignored():
