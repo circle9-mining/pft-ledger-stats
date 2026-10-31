@@ -109,6 +109,18 @@ MUTANTS = [
         "        if pb is not None and pb == pa:\n",
         "        if False:\n",
     ),
+    (
+        "M17 report accepts a failed or --negative reconciliation",
+        "nftflow/report_nft.py",
+        "    if failed or negative:\n",
+        "    if False:\n",
+    ),
+    (
+        "M18 report prints full addresses",
+        "nftflow/report_nft.py",
+        '    return (a or "?")[:8] + "…"\n',
+        '    return (a or "?") + "…"\n',
+    ),
 ]
 TESTS = ["tests/" + p.name for p in sorted(Path("tests").glob("test_nftflow_*.py"))]
 
