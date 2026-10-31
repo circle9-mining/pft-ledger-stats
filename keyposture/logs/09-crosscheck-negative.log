@@ -1,0 +1,63 @@
+# 2026-10-31T14:13:53Z keyposture crosscheck-negative (public RPC) | "Ubuntu 22.04.5 LTS" | commit 1aebeba7b68bcf31728d8612cfceb2de61173da8 | crosscheck_key.py sha256 7b9f771dd648b8d399d3bc37d6da29e4cfd67870206a5e06b614182160e2f8b6
+$ curl -s -m 20 -X POST -H 'content-type: application/json' -d '{"method":"server_info"}' https://rpc.testnet.postfiat.org | jq -c '.result.info | {server_state, complete_ledgers}'
+{"server_state":"full","complete_ledgers":"7550054-7643884"}
+(exit 0)
+$ .venv/bin/python -u keyposture/crosscheck_key.py keyposture/data/reconcile.json keyposture/data/snapshot-7614111.jsonl.gz keyposture/data/snapshot-7643241.jsonl.gz --count 20 --seed 1 --extra rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7 --negative
+accounts: 16 required (non-master_only, changed, extra) + 4 sampled
+MISMATCH K1 r4iUaBb7… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 r4iUaBb7… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rDMWGci1… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rDMWGci1… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rESRuMpk… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rESRuMpk… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rJXBbXBm… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rJXBbXBm… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rJxbcwqJ… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rJxbcwqJ… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rMzGUdox… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rMzGUdox… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rPwDi8RJ… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rPwDi8RJ… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rQED5Si2… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rQED5Si2… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rU24E8Nt… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rU24E8Nt… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rp2m3dG1… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rp2m3dG1… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rpCzwYfx… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rpCzwYfx… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rwAMciVM… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rwAMciVM… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rwFjPVuB… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rwFjPVuB… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rwdm72S9… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rwdm72S9… @7614111 server master_only snapshot no_usable_key
+MISMATCH K1 rwjdDQZ3… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rwjdDQZ3… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 rwztrYSu… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rwztrYSu… @7614111 server absent snapshot no_usable_key
+MISMATCH K1 r9b4hLjq… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 r9b4hLjq… @7614111 server master_only snapshot no_usable_key
+MISMATCH K1 rDsneeK7… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rDsneeK7… @7614111 server master_only snapshot no_usable_key
+MISMATCH K1 rEYP1TTL… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rEYP1TTL… @7614111 server master_only snapshot no_usable_key
+MISMATCH K1 rLnaMA6C… @7643241 server master_only snapshot no_usable_key
+MISMATCH K2 rLnaMA6C… @7614111 server master_only snapshot no_usable_key
+MISMATCH K3 EAF52D7F… Payment ledger 7616052 expect 7616053 tesSUCCESS
+MISMATCH K3 F1528CDA… Payment ledger 7631458 expect 7631459 tesSUCCESS
+MISMATCH K3 055725F5… Payment ledger 7637298 expect 7637299 tesSUCCESS
+MISMATCH K3 5E2C1BD8… Payment ledger 7615450 expect 7615451 tesSUCCESS
+MISMATCH K3 E0F10725… Payment ledger 7622367 expect 7622368 tesSUCCESS
+MISMATCH K3 8BD11255… Payment ledger 7635069 expect 7635070 tesSUCCESS
+MISMATCH K3 9C6EFD56… Payment ledger 7630917 expect 7630918 tesSUCCESS
+MISMATCH K3 C3754922… Payment ledger 7631081 expect 7631082 tesSUCCESS
+MISMATCH K3 BFAA78DB… Payment ledger 7617067 expect 7617068 tesSUCCESS
+MISMATCH K3 CE7FA42A… Payment ledger 7626028 expect 7626029 tesSUCCESS
+MISMATCH K3 6F422E32… Payment ledger 7629161 expect 7629162 tesSUCCESS
+MISMATCH K3 64FC9BB7… Payment ledger 7639865 expect 7639866 tesSUCCESS
+MISMATCH K3 34A68274… Payment ledger 7615440 expect 7615441 tesSUCCESS
+MISMATCH K3 E8EBC948… Payment ledger 7633708 expect 7633709 tesSUCCESS
+MISMATCH K3 42F8DC47… Payment ledger 7642730 expect 7642731 tesSUCCESS
+SUMMARY checked=55 mismatches=55 accounts=20 required=16 effect_txs=15 negative=True rpc_calls=55 retries=0 retries_by_error={}
+(exit 1)

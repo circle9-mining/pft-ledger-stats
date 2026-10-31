@@ -1,0 +1,18 @@
+# Ubuntu 22.04.5 LTS | 2026-10-30T13:10:47Z | git 1c586ab8d3a5f1057371f5eebd3ac4a12b6e4911
+# run 01 failed: --log dir did not exist (snapshot.py does not create it before opening the log); created here
+$ mkdir -p data/keyposture/snapA
+$ state/snapshot.py --out data/keyposture/snapA --log data/keyposture/snapA/snapshot.log
+2026-10-30T13:10:48Z START ledger 7614111 F727010F3F388DBF1DA10EB24F46C68A52ED58F4404FCFB501633E4AC761B2B6 total_coins 99999999968835064 close 2026-10-30T13:10:43Z limit 2048 | host python 3.10.12
+2026-10-30T13:10:50Z page 0 +2048 objects (total 2048) marker 67668DE617DFFB05
+2026-10-30T13:10:51Z page 1 +2048 objects (total 4096) marker D1A3C9FFDDF1C6AE
+2026-10-30T13:10:51Z page 2 +867 objects (total 4963) marker -
+2026-10-30T13:10:52Z DONE 4963 objects in 3 pages, 5 RPC calls this run -> snapshot-7614111.jsonl.gz
+(exit 0)
+$ keyposture/count_key.py data/keyposture/snapA/snapshot-7614111.jsonl.gz --json data/keyposture/snapA/count.json
+AccountRoot: snapshot 4433 paged 4433 (pages 5) dup 0 only_snapshot 0 only_paging 0 -> OK
+SignerList: snapshot 0 paged 0 (pages 5) dup 0 only_snapshot 0 only_paging 0 -> OK
+RESULT PASS ledger 7614111
+(exit 0)
+4b4702834adc5ed219d19c55db8c91765e730a3e2f9a6701605dcaa02033a065  data/keyposture/snapA/snapshot-7614111.jsonl.gz
+917f6e6f71a344ae90f098006f04872d4e9d65d28a7ed084b589ffd73bf81eaf  data/keyposture/snapA/count.json
+3803221b35c26cec17716d2f2e502345ae548d00d0fa5965d6904befa0d10bdb  keyposture/count_key.py

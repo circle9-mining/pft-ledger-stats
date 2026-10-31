@@ -1,0 +1,28 @@
+2026-10-30T13:11:31Z node: build 1.0.9 state full complete_ledgers 7613569-7614125
+2026-10-30T13:11:31Z WINDOW START 2026-10-30T13:11:31Z -> 2026-10-31T13:41:31Z at ledger 7614112, stop_at None, rate <= 1.0 req/s
+2026-10-30T14:11:32Z PROGRESS last=7615313 lag=0 ledgers=1202 key_tx=0 gaps=0 requests=3263
+2026-10-30T15:11:32Z PROGRESS last=7616504 lag=0 ledgers=2393 key_tx=3 gaps=0 requests=6579
+2026-10-30T16:11:32Z PROGRESS last=7617695 lag=0 ledgers=3584 key_tx=4 gaps=0 requests=9911
+2026-10-30T17:11:34Z PROGRESS last=7618886 lag=0 ledgers=4775 key_tx=4 gaps=0 requests=13211
+2026-10-30T18:11:35Z PROGRESS last=7620076 lag=0 ledgers=5965 key_tx=4 gaps=0 requests=16504
+2026-10-30T19:11:35Z PROGRESS last=7621264 lag=0 ledgers=7153 key_tx=4 gaps=0 requests=19817
+2026-10-30T20:11:35Z PROGRESS last=7622454 lag=0 ledgers=8343 key_tx=5 gaps=0 requests=23156
+2026-10-30T21:11:35Z PROGRESS last=7623642 lag=1 ledgers=9531 key_tx=5 gaps=0 requests=26513
+2026-10-30T22:11:37Z PROGRESS last=7624835 lag=0 ledgers=10724 key_tx=5 gaps=0 requests=29842
+2026-10-30T23:11:39Z PROGRESS last=7626026 lag=0 ledgers=11915 key_tx=5 gaps=0 requests=33146
+2026-10-31T00:11:39Z PROGRESS last=7627216 lag=0 ledgers=13105 key_tx=6 gaps=0 requests=36424
+2026-10-31T01:11:40Z PROGRESS last=7628397 lag=0 ledgers=14286 key_tx=6 gaps=0 requests=39702
+2026-10-31T02:11:40Z PROGRESS last=7629586 lag=1 ledgers=15475 key_tx=7 gaps=0 requests=42907
+2026-10-31T03:11:40Z PROGRESS last=7630778 lag=0 ledgers=16667 key_tx=7 gaps=0 requests=46165
+2026-10-31T04:11:40Z PROGRESS last=7631967 lag=0 ledgers=17856 key_tx=10 gaps=0 requests=49394
+2026-10-31T05:11:41Z PROGRESS last=7633154 lag=0 ledgers=19043 key_tx=10 gaps=0 requests=52637
+2026-10-31T06:11:41Z PROGRESS last=7634344 lag=0 ledgers=20233 key_tx=11 gaps=0 requests=55889
+2026-10-31T07:11:42Z PROGRESS last=7635534 lag=1 ledgers=21423 key_tx=12 gaps=0 requests=59154
+2026-10-31T08:11:42Z PROGRESS last=7636724 lag=0 ledgers=22613 key_tx=12 gaps=0 requests=62448
+2026-10-31T09:11:42Z PROGRESS last=7637910 lag=0 ledgers=23799 key_tx=13 gaps=0 requests=65739
+2026-10-31T10:11:44Z PROGRESS last=7639097 lag=0 ledgers=24986 key_tx=13 gaps=0 requests=69063
+2026-10-31T11:11:44Z PROGRESS last=7640277 lag=0 ledgers=26166 key_tx=14 gaps=0 requests=72344
+2026-10-31T12:11:45Z PROGRESS last=7641463 lag=0 ledgers=27352 key_tx=14 gaps=0 requests=75649
+2026-10-31T13:11:45Z PROGRESS last=7642651 lag=0 ledgers=28540 key_tx=14 gaps=0 requests=78955
+2026-10-31T13:41:32Z STOP (window end reached) requests this run=80490
+2026-10-31T13:41:32Z SUMMARY window 2026-10-30T13:11:31Z -> 2026-10-31T13:41:31Z ledgers 7614112-7643241 fetched=29130 key_tx=15 gaps=0

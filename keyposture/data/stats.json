@@ -1,0 +1,361 @@
+{
+ "buckets_b": [
+  {
+   "blackholed": 0,
+   "bucket": "0-20",
+   "master+multisig": 0,
+   "master+regular": 0,
+   "master+regular+multisig": 0,
+   "master_only": 3988,
+   "multisig_only": 0,
+   "no_usable_key": 0,
+   "regular+multisig": 0,
+   "regular_only": 0
+  },
+  {
+   "blackholed": 0,
+   "bucket": "20-100",
+   "master+multisig": 0,
+   "master+regular": 0,
+   "master+regular+multisig": 0,
+   "master_only": 126,
+   "multisig_only": 0,
+   "no_usable_key": 0,
+   "regular+multisig": 0,
+   "regular_only": 0
+  },
+  {
+   "blackholed": 0,
+   "bucket": "100-1,000",
+   "master+multisig": 0,
+   "master+regular": 0,
+   "master+regular+multisig": 0,
+   "master_only": 161,
+   "multisig_only": 0,
+   "no_usable_key": 0,
+   "regular+multisig": 0,
+   "regular_only": 0
+  },
+  {
+   "blackholed": 0,
+   "bucket": "1,000-10,000",
+   "master+multisig": 0,
+   "master+regular": 0,
+   "master+regular+multisig": 0,
+   "master_only": 31,
+   "multisig_only": 0,
+   "no_usable_key": 0,
+   "regular+multisig": 0,
+   "regular_only": 0
+  },
+  {
+   "blackholed": 0,
+   "bucket": "10,000-100,000",
+   "master+multisig": 0,
+   "master+regular": 0,
+   "master+regular+multisig": 0,
+   "master_only": 62,
+   "multisig_only": 0,
+   "no_usable_key": 0,
+   "regular+multisig": 0,
+   "regular_only": 0
+  },
+  {
+   "blackholed": 0,
+   "bucket": "100,000+",
+   "master+multisig": 0,
+   "master+regular": 0,
+   "master+regular+multisig": 0,
+   "master_only": 80,
+   "multisig_only": 0,
+   "no_usable_key": 0,
+   "regular+multisig": 0,
+   "regular_only": 0
+  }
+ ],
+ "classes_a": {
+  "blackholed": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master+multisig": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master+regular": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master+regular+multisig": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master_only": {
+   "accounts": 4433,
+   "pft": 99999999968.83507,
+   "pft_share": 1.0,
+   "share": 1.0
+  },
+  "multisig_only": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "no_usable_key": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "regular+multisig": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "regular_only": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  }
+ },
+ "classes_b": {
+  "blackholed": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master+multisig": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master+regular": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master+regular+multisig": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "master_only": {
+   "accounts": 4448,
+   "pft": 99999999968.73546,
+   "pft_share": 1.0,
+   "share": 1.0
+  },
+  "multisig_only": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "no_usable_key": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "regular+multisig": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  },
+  "regular_only": {
+   "accounts": 0,
+   "pft": 0.0,
+   "pft_share": 0.0,
+   "share": 0.0
+  }
+ },
+ "created": 15,
+ "deleted": 0,
+ "rewardflow": [
+  {
+   "account": "rwdm72\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 488295945.344478,
+   "role": "payer",
+   "weak_b": []
+  },
+  {
+   "account": "r3F4NY\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 1017.499987,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "r4RPpe\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 2531912.964183,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "r4XLZK\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 923817.607922,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rDep8S\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 1215759.009352,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rHv6jS\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 16810.249963,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rKF7zT\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 1115477.825565,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rPExxz\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 72144.949991,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rPTCS8\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 101594.299892,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rfLJ4Z\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 1499691.493344,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rpHvzM\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 27443.579988,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rpq9nq\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 3572.000004,
+   "role": "recipient",
+   "weak_b": []
+  },
+  {
+   "account": "rsVf8g\u2026",
+   "class_a": "master_only",
+   "class_b": "master_only",
+   "pft_b": 25124.999837,
+   "role": "recipient",
+   "weak_b": []
+  }
+ ],
+ "snap_a": {
+  "accounts": 4433,
+  "ledger_hash": "F727010F3F388DBF1DA10EB24F46C68A52ED58F4404FCFB501633E4AC761B2B6",
+  "ledger_index": 7614111,
+  "signer_lists": 0
+ },
+ "snap_b": {
+  "accounts": 4448,
+  "ledger_hash": "8938DBEF41C8AEAE6134BDF9D2A45BF18783D65AAC281C6C0838DA9E42C75A1F",
+  "ledger_index": 7643241,
+  "signer_lists": 0
+ },
+ "top_b": {
+  "master_only": [
+   {
+    "account": "r4vhrM\u2026",
+    "pft": 96999999999.99988
+   },
+   {
+    "account": "rwdm72\u2026",
+    "pft": 488295945.344478
+   },
+   {
+    "account": "rscWPz\u2026",
+    "pft": 250000000.0
+   },
+   {
+    "account": "rs3YdB\u2026",
+    "pft": 250000000.0
+   },
+   {
+    "account": "rJNBxu\u2026",
+    "pft": 250000000.0
+   },
+   {
+    "account": "rD9LaW\u2026",
+    "pft": 250000000.0
+   },
+   {
+    "account": "rBDbRY\u2026",
+    "pft": 249952699.999892
+   },
+   {
+    "account": "rhczhW\u2026",
+    "pft": 249714196.430448
+   },
+   {
+    "account": "rKddMw\u2026",
+    "pft": 248880686.825979
+   },
+   {
+    "account": "rJNwqD\u2026",
+    "pft": 246963444.5671
+   }
+  ]
+ },
+ "transitions": [
+  {
+   "from": "(new)",
+   "n": 15,
+   "to": "master_only"
+  }
+ ],
+ "weak_a": {},
+ "weak_b": {}
+}

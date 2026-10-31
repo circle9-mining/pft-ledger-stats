@@ -1,0 +1,15 @@
+# Ubuntu 22.04.5 LTS | 2026-10-30T13:10:42Z | git 1c586ab8d3a5f1057371f5eebd3ac4a12b6e4911
+$ state/snapshot.py --out data/keyposture/snapA --log data/keyposture/snapA/snapshot.log
+Traceback (most recent call last):
+  File "~/work/pft-ledger-stats/state/snapshot.py", line 291, in <module>
+    sys.exit(main())
+  File "~/work/pft-ledger-stats/state/snapshot.py", line 281, in main
+    logfh = open(args.log, "a") if args.log else None
+FileNotFoundError: [Errno 2] No such file or directory: 'data/keyposture/snapA/snapshot.log'
+(exit 1)
+ls: cannot access 'data/keyposture/snapA/snapshot-*.jsonl.gz': No such file or directory
+$ keyposture/count_key.py  --json data/keyposture/snapA/count.json
+ERROR bad snapshot: [Errno 2] No such file or directory: ''
+(exit 2)
+sha256sum: '': No such file or directory
+sha256sum: data/keyposture/snapA/count.json: No such file or directory

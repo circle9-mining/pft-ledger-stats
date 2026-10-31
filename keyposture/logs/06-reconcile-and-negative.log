@@ -1,0 +1,20 @@
+# 2026-10-31T14:11:59Z keyposture reconcile + --negative | "Ubuntu 22.04.5 LTS" | commit 1aebeba7b68bcf31728d8612cfceb2de61173da8 | reconcile_key.py sha256 d08d5e58b9f4744e712ce13679edb60e20fdcade4379a9b560901871f9f47c25
+$ keyposture/reconcile_key.py --snap-a keyposture/data/snapshot-7614111.jsonl.gz --snap-b keyposture/data/snapshot-7643241.jsonl.gz --tx keyposture/data/tx --count-a keyposture/data/snapA-count.json --count-b keyposture/data/snapB-count.json --json keyposture/data/reconcile.json
+A 7614111 accounts 4433 signer_lists 0 | B 7643241 accounts 4448 signer_lists 0
+ledgers 29130 key_tx 15 with_effect 15 created 15 deleted 0 posture_changed 15
+class master_only: A 4433 +15 -0 = 4448 | B 4448
+RESULT PASS residuals 0
+(exit 0)
+$ keyposture/reconcile_key.py --snap-a keyposture/data/snapshot-7614111.jsonl.gz --snap-b keyposture/data/snapshot-7643241.jsonl.gz --tx keyposture/data/tx --count-a keyposture/data/snapA-count.json --count-b keyposture/data/snapB-count.json --negative
+A 7614111 accounts 4433 signer_lists 0 | B 7643241 accounts 4448 signer_lists 0
+ledgers 29130 key_tx 14 with_effect 14 created 14 deleted 0 posture_changed 15
+class master_only: A 4433 +14 -0 = 4447 | B 4448
+NEGATIVE dropped 7615440/0 34A68274EB7E425673DACDAA4DFE22D95F41D2E9FE3C630D35F84A0590952044 (Payment)
+RESIDUAL R1 rpCzwYfxo1Fu67iuWJV58hZuUPjH6hfEfn: in B, absent after replay
+RESIDUAL R2 class master_only: A 4433 + in 14 - out 0 = 4447 != B 4448
+RESIDUAL R5 rpCzwYfxo1Fu67iuWJV58hZuUPjH6hfEfn: posture differs A->B but no collected tx touches it
+RESULT FAIL residuals 3
+(exit 1)
+$ sha256sum keyposture/data/reconcile.json
+46561aa0be0b68ee1043efdb0bed07a61c0b4012e66f70f7ddd7ac16e8e6da26  keyposture/data/reconcile.json
+(exit 0)

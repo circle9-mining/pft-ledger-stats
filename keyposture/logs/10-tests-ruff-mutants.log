@@ -1,0 +1,43 @@
+# 2026-10-31T14:15:25Z keyposture tests + ruff + shellcheck + mutants | "Ubuntu 22.04.5 LTS" | commit 1aebeba7b68bcf31728d8612cfceb2de61173da8 | mutants_key.py sha256 c70b7cfc5a9a14e7133ca15fb107f680c99538aae7a9d113613f48ce417a2ea5
+$ .venv/bin/python -m pytest -q 2>&1 | tail -1
+358 passed in 20.42s
+(exit 0)
+$ .venv/bin/python -m pytest -q tests/test_keyposture_*.py 2>&1 | tail -1
+55 passed in 2.41s
+(exit 0)
+$ .venv/bin/ruff check . && .venv/bin/ruff format --check keyposture tests/test_keyposture_*.py
+All checks passed!
+14 files already formatted
+(exit 0)
+$ shellcheck keyposture/*.sh && echo shellcheck clean
+shellcheck clean
+(exit 0)
+$ .venv/bin/python -u keyposture/mutants_key.py
+CONTROL unmutated: rc=0 55 passed in 2.14s
+CAUGHT K1 created AccountRoot already live not flagged: 1 failed, 54 passed in 2.57s
+CAUGHT K2 previous RegularKey not compared: 1 failed, 54 passed in 3.31s
+CAUGHT K3 previous master flag not compared: 1 failed, 54 passed in 3.36s
+CAUGHT K4 unchanged-field RegularKey check dropped: 1 failed, 54 passed in 2.40s
+CAUGHT K5 deleted account kept in replay: 7 failed, 40 passed, 8 errors in 1.01s
+CAUGHT K6 SignerList deletion not applied: 1 failed, 54 passed in 2.56s
+CAUGHT K7 metadata node order not fixed (AccountDelete): 7 failed, 40 passed, 8 errors in 0.80s
+CAUGHT K8 replay in file order, not (ledger, TransactionIndex): 2 failed, 53 passed in 2.25s
+CAUGHT K9 R1 posture comparison dropped: 2 failed, 53 passed in 2.23s
+CAUGHT K10 R2 outflow not subtracted: 8 failed, 39 passed, 8 errors in 0.82s
+CAUGHT K11 R3 SignerList set not compared: 1 failed, 54 passed in 2.37s
+CAUGHT K12 gaps.csv ignored: 1 failed, 54 passed in 1.98s
+CAUGHT K13 key_tx_count mismatch ignored: 1 failed, 54 passed in 2.37s
+CAUGHT K14 duplicate tx hash not rejected: 1 failed, 54 passed in 2.03s
+CAUGHT K15 AccountRoot keylet self-test dropped: 1 failed, 54 passed in 2.00s
+CAUGHT K16 count file ok flag ignored: 1 failed, 54 passed in 2.64s
+CAUGHT K17 SignerList keylet space byte wrong: 1 failed, 54 passed in 2.19s
+CAUGHT K18 single-signer-quorum uses > instead of >=: 2 failed, 53 passed in 2.50s
+CAUGHT K19 blackhole regular key treated as usable: 1 failed, 54 passed in 2.51s
+CAUGHT K20 collector ignores lsfDisableMaster flips: 1 failed, 54 passed in 2.74s
+CAUGHT K21 collector ignores RegularKey changes: 1 failed, 54 passed in 2.34s
+CAUGHT K22 count_key misses only-in-snapshot indexes: 1 failed, 54 passed in 10.48s
+CAUGHT K23 crosscheck tx result not checked: 1 failed, 54 passed in 4.45s
+CAUGHT K24 crosscheck posture comparison always OK: 2 failed, 53 passed in 2.72s
+CAUGHT K25 stats accepts a --negative reconciliation: 1 failed, 54 passed in 2.64s
+MUTANTS 25 caught=25 failed=0
+(exit 0)

@@ -1,0 +1,63 @@
+# 2026-10-31T14:12:31Z keyposture crosscheck (public RPC) | "Ubuntu 22.04.5 LTS" | commit 1aebeba7b68bcf31728d8612cfceb2de61173da8 | crosscheck_key.py sha256 7b9f771dd648b8d399d3bc37d6da29e4cfd67870206a5e06b614182160e2f8b6
+$ curl -s -m 20 -X POST -H 'content-type: application/json' -d '{"method":"server_info"}' https://rpc.testnet.postfiat.org | jq -c '.result.info | {server_state, complete_ledgers}'
+{"server_state":"full","complete_ledgers":"7550054-7643857"}
+(exit 0)
+$ .venv/bin/python -u keyposture/crosscheck_key.py keyposture/data/reconcile.json keyposture/data/snapshot-7614111.jsonl.gz keyposture/data/snapshot-7643241.jsonl.gz --count 20 --seed 1 --extra rwdm72S9YVKkZjeADKU2bbUMuY4vPnSfH7
+accounts: 16 required (non-master_only, changed, extra) + 4 sampled
+OK K1 r4iUaBb7… @7643241 server master_only snapshot master_only
+OK K2 r4iUaBb7… @7614111 server absent snapshot absent
+OK K1 rDMWGci1… @7643241 server master_only snapshot master_only
+OK K2 rDMWGci1… @7614111 server absent snapshot absent
+OK K1 rESRuMpk… @7643241 server master_only snapshot master_only
+OK K2 rESRuMpk… @7614111 server absent snapshot absent
+OK K1 rJXBbXBm… @7643241 server master_only snapshot master_only
+OK K2 rJXBbXBm… @7614111 server absent snapshot absent
+OK K1 rJxbcwqJ… @7643241 server master_only snapshot master_only
+OK K2 rJxbcwqJ… @7614111 server absent snapshot absent
+OK K1 rMzGUdox… @7643241 server master_only snapshot master_only
+OK K2 rMzGUdox… @7614111 server absent snapshot absent
+OK K1 rPwDi8RJ… @7643241 server master_only snapshot master_only
+OK K2 rPwDi8RJ… @7614111 server absent snapshot absent
+OK K1 rQED5Si2… @7643241 server master_only snapshot master_only
+OK K2 rQED5Si2… @7614111 server absent snapshot absent
+OK K1 rU24E8Nt… @7643241 server master_only snapshot master_only
+OK K2 rU24E8Nt… @7614111 server absent snapshot absent
+OK K1 rp2m3dG1… @7643241 server master_only snapshot master_only
+OK K2 rp2m3dG1… @7614111 server absent snapshot absent
+OK K1 rpCzwYfx… @7643241 server master_only snapshot master_only
+OK K2 rpCzwYfx… @7614111 server absent snapshot absent
+OK K1 rwAMciVM… @7643241 server master_only snapshot master_only
+OK K2 rwAMciVM… @7614111 server absent snapshot absent
+OK K1 rwFjPVuB… @7643241 server master_only snapshot master_only
+OK K2 rwFjPVuB… @7614111 server absent snapshot absent
+OK K1 rwdm72S9… @7643241 server master_only snapshot master_only
+OK K2 rwdm72S9… @7614111 server master_only snapshot master_only
+OK K1 rwjdDQZ3… @7643241 server master_only snapshot master_only
+OK K2 rwjdDQZ3… @7614111 server absent snapshot absent
+OK K1 rwztrYSu… @7643241 server master_only snapshot master_only
+OK K2 rwztrYSu… @7614111 server absent snapshot absent
+OK K1 r9b4hLjq… @7643241 server master_only snapshot master_only
+OK K2 r9b4hLjq… @7614111 server master_only snapshot master_only
+OK K1 rDsneeK7… @7643241 server master_only snapshot master_only
+OK K2 rDsneeK7… @7614111 server master_only snapshot master_only
+OK K1 rEYP1TTL… @7643241 server master_only snapshot master_only
+OK K2 rEYP1TTL… @7614111 server master_only snapshot master_only
+OK K1 rLnaMA6C… @7643241 server master_only snapshot master_only
+OK K2 rLnaMA6C… @7614111 server master_only snapshot master_only
+OK K3 EAF52D7F… Payment ledger 7616052 expect 7616052 tesSUCCESS
+OK K3 F1528CDA… Payment ledger 7631458 expect 7631458 tesSUCCESS
+OK K3 055725F5… Payment ledger 7637298 expect 7637298 tesSUCCESS
+OK K3 5E2C1BD8… Payment ledger 7615450 expect 7615450 tesSUCCESS
+OK K3 E0F10725… Payment ledger 7622367 expect 7622367 tesSUCCESS
+OK K3 8BD11255… Payment ledger 7635069 expect 7635069 tesSUCCESS
+OK K3 9C6EFD56… Payment ledger 7630917 expect 7630917 tesSUCCESS
+OK K3 C3754922… Payment ledger 7631081 expect 7631081 tesSUCCESS
+OK K3 BFAA78DB… Payment ledger 7617067 expect 7617067 tesSUCCESS
+OK K3 CE7FA42A… Payment ledger 7626028 expect 7626028 tesSUCCESS
+OK K3 6F422E32… Payment ledger 7629161 expect 7629161 tesSUCCESS
+OK K3 64FC9BB7… Payment ledger 7639865 expect 7639865 tesSUCCESS
+OK K3 34A68274… Payment ledger 7615440 expect 7615440 tesSUCCESS
+OK K3 E8EBC948… Payment ledger 7633708 expect 7633708 tesSUCCESS
+OK K3 42F8DC47… Payment ledger 7642730 expect 7642730 tesSUCCESS
+SUMMARY checked=55 mismatches=0 accounts=20 required=16 effect_txs=15 negative=False rpc_calls=55 retries=0 retries_by_error={}
+(exit 0)

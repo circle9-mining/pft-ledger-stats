@@ -1,0 +1,10 @@
+# 2026-10-31T14:18:35Z keyposture REPORT.md | "Ubuntu 22.04.5 LTS" | commit 929cad5c201ec12a0781bb0d5143717763749af8 | report_key.sh sha256 e5715faf6792409d2206d65a79fb9cfe7029c6242f76572f64c8f82738d514cf
+$ keyposture/report_key.sh keyposture/data keyposture/logs/08-crosscheck.log keyposture/logs/09-crosscheck-negative.log > keyposture/REPORT.md
+(exit 0)
+$ keyposture/report_key.sh keyposture/data keyposture/logs/08-crosscheck.log keyposture/logs/09-crosscheck-negative.log | cmp - keyposture/REPORT.md && echo 'rerun byte-identical'
+rerun byte-identical
+(exit 0)
+$ wc -l keyposture/REPORT.md; sha256sum keyposture/REPORT.md
+69 keyposture/REPORT.md
+428f2dcdc88b167b0056232b11cbe041389ae64a74b985cb6487b55b6a9a06f1  keyposture/REPORT.md
+(exit 0)

@@ -1,0 +1,19 @@
+# Ubuntu 22.04.5 LTS | 2026-10-31T14:08:12Z | git d668dd59331429ebb4f59648a56e6db22bd5f7f2
+# snapshot B pinned to the collector's last ledger (window end 13:41:31Z)
+$ mkdir -p data/keyposture/snapB
+(exit 0)
+$ state/snapshot.py --out data/keyposture/snapB --ledger 7643241 --log data/keyposture/snapB/snapshot.log
+2026-10-31T14:08:13Z START ledger 7643241 8938DBEF41C8AEAE6134BDF9D2A45BF18783D65AAC281C6C0838DA9E42C75A1F total_coins 99999999968735464 close 2026-10-31T13:41:30Z limit 2048 | host python 3.10.12
+2026-10-31T14:08:14Z page 0 +2048 objects (total 2048) marker 679E1309C5135075
+2026-10-31T14:08:15Z page 1 +2048 objects (total 4096) marker D16E1593000D1311
+2026-10-31T14:08:16Z page 2 +882 objects (total 4978) marker -
+2026-10-31T14:08:16Z DONE 4978 objects in 3 pages, 5 RPC calls this run -> snapshot-7643241.jsonl.gz
+(exit 0)
+$ keyposture/count_key.py data/keyposture/snapB/snapshot-7643241.jsonl.gz --json data/keyposture/snapB/count.json
+AccountRoot: snapshot 4448 paged 4448 (pages 5) dup 0 only_snapshot 0 only_paging 0 -> OK
+SignerList: snapshot 0 paged 0 (pages 5) dup 0 only_snapshot 0 only_paging 0 -> OK
+RESULT PASS ledger 7643241
+(exit 0)
+289600728368edcdae8fa59c5b17df51453f680588ce3b73e84eeffa861079e4  data/keyposture/snapB/snapshot-7643241.jsonl.gz
+7c2c513a4ee6fe07004d894caceb08d91fb7ba4bf753de53daca822dedecbc02  data/keyposture/snapB/count.json
+3803221b35c26cec17716d2f2e502345ae548d00d0fa5965d6904befa0d10bdb  keyposture/count_key.py

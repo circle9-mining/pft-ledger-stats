@@ -1,0 +1,79 @@
+{
+ "ledger_hash": "8938DBEF41C8AEAE6134BDF9D2A45BF18783D65AAC281C6C0838DA9E42C75A1F",
+ "ledger_index": 7643241,
+ "marker_chains": {
+  "account": [
+   {
+    "marker_in": null,
+    "marker_out": "321571243FFF5A6C4859A6C02165F8144283428C7EEF32BE6BD9F3A761937ECE",
+    "n": 918
+   },
+   {
+    "marker_in": "321571243FFF5A6C4859A6C02165F8144283428C7EEF32BE6BD9F3A761937ECE",
+    "marker_out": "679E1309C5135075383EDC9D82DCB94D3E171C9E33E9D1F310283E4068E94188",
+    "n": 919
+   },
+   {
+    "marker_in": "679E1309C5135075383EDC9D82DCB94D3E171C9E33E9D1F310283E4068E94188",
+    "marker_out": "9CB4C7245339EB5266A3893293C1A6F5E70A347CC331F7EC3A2D1B7AE5157350",
+    "n": 921
+   },
+   {
+    "marker_in": "9CB4C7245339EB5266A3893293C1A6F5E70A347CC331F7EC3A2D1B7AE5157350",
+    "marker_out": "D16E1593000D131155848B1BF6B839A38FFEF9B52DAA0E2549055E352BD8E7FE",
+    "n": 903
+   },
+   {
+    "marker_in": "D16E1593000D131155848B1BF6B839A38FFEF9B52DAA0E2549055E352BD8E7FE",
+    "marker_out": null,
+    "n": 787
+   }
+  ],
+  "signer_list": [
+   {
+    "marker_in": null,
+    "marker_out": "321571243FFF5A6C4859A6C02165F8144283428C7EEF32BE6BD9F3A761937ECE",
+    "n": 0
+   },
+   {
+    "marker_in": "321571243FFF5A6C4859A6C02165F8144283428C7EEF32BE6BD9F3A761937ECE",
+    "marker_out": "679E1309C5135075383EDC9D82DCB94D3E171C9E33E9D1F310283E4068E94188",
+    "n": 0
+   },
+   {
+    "marker_in": "679E1309C5135075383EDC9D82DCB94D3E171C9E33E9D1F310283E4068E94188",
+    "marker_out": "9CB4C7245339EB5266A3893293C1A6F5E70A347CC331F7EC3A2D1B7AE5157350",
+    "n": 0
+   },
+   {
+    "marker_in": "9CB4C7245339EB5266A3893293C1A6F5E70A347CC331F7EC3A2D1B7AE5157350",
+    "marker_out": "D16E1593000D131155848B1BF6B839A38FFEF9B52DAA0E2549055E352BD8E7FE",
+    "n": 0
+   },
+   {
+    "marker_in": "D16E1593000D131155848B1BF6B839A38FFEF9B52DAA0E2549055E352BD8E7FE",
+    "marker_out": null,
+    "n": 0
+   }
+  ]
+ },
+ "ok": true,
+ "result": {
+  "AccountRoot": {
+   "ok": true,
+   "only_in_paging": [],
+   "only_in_snapshot": [],
+   "paged": 4448,
+   "paged_duplicates": 0,
+   "snapshot": 4448
+  },
+  "SignerList": {
+   "ok": true,
+   "only_in_paging": [],
+   "only_in_snapshot": [],
+   "paged": 0,
+   "paged_duplicates": 0,
+   "snapshot": 0
+  }
+ }
+}

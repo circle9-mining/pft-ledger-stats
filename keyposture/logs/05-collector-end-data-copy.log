@@ -1,0 +1,54 @@
+# 2026-10-31T14:11:53Z keyposture collector end + data copy | "Ubuntu 22.04.5 LTS" | commit 1aebeba7b68bcf31728d8612cfceb2de61173da8 | collect_key.py sha256 be1c4aff86a38e96a6990e1b595f690fdb6157ec895972e9c547669a28ba4cc3
+$ systemctl is-active pft-keyposture-tx; systemctl show pft-keyposture-tx -p ExecMainStatus -p Result
+inactive
+Result=success
+ExecMainStatus=0
+(exit 0)
+$ grep -c PROGRESS data/keyposture/tx/collect.log; head -2 data/keyposture/tx/collect.log; tail -2 data/keyposture/tx/collect.log
+24
+2026-10-30T13:11:31Z node: build 1.0.9 state full complete_ledgers 7613569-7614125
+2026-10-30T13:11:31Z WINDOW START 2026-10-30T13:11:31Z -> 2026-10-31T13:41:31Z at ledger 7614112, stop_at None, rate <= 1.0 req/s
+2026-10-31T13:41:32Z STOP (window end reached) requests this run=80490
+2026-10-31T13:41:32Z SUMMARY window 2026-10-30T13:11:31Z -> 2026-10-31T13:41:31Z ledgers 7614112-7643241 fetched=29130 key_tx=15 gaps=0
+(exit 0)
+$ test -e data/keyposture/tx/gaps.csv && wc -l data/keyposture/tx/gaps.csv || echo 'no gaps.csv'
+no gaps.csv
+(exit 0)
+$ awk -F, 'NR==1{print "header: " $0} NR==2{print "first: " $1} END{print "last: " $1 " rows: " NR-1}' data/keyposture/tx/ledgers.csv
+header: ledger_index,ledger_hash,close_time,close_time_iso,txn_count,key_tx_count,fetched_utc
+first: 7614112
+last: 7643241 rows: 29130
+(exit 0)
+$ wc -l < data/keyposture/tx/key-tx.jsonl
+15
+(exit 0)
+$ mkdir -p keyposture/data/tx && cp data/keyposture/snapA/snapshot-7614111.jsonl.gz data/keyposture/snapB/snapshot-7643241.jsonl.gz keyposture/data/ && cp data/keyposture/snapA/state.json keyposture/data/snapA-state.json && cp data/keyposture/snapB/state.json keyposture/data/snapB-state.json && cp data/keyposture/snapA/snapshot.log keyposture/data/snapA-snapshot.log && cp data/keyposture/snapB/snapshot.log keyposture/data/snapB-snapshot.log && cp data/keyposture/snapA/count.json keyposture/data/snapA-count.json && cp data/keyposture/snapB/count.json keyposture/data/snapB-count.json && cp data/keyposture/tx/key-tx.jsonl data/keyposture/tx/ledgers.csv data/keyposture/tx/collect.log data/keyposture/tx/state.json keyposture/data/tx/
+(exit 0)
+$ cd data/keyposture && find snapA snapB tx -type f ! -name pages.jsonl | sort | xargs sha256sum; cd - >/dev/null
+917f6e6f71a344ae90f098006f04872d4e9d65d28a7ed084b589ffd73bf81eaf  snapA/count.json
+4b4702834adc5ed219d19c55db8c91765e730a3e2f9a6701605dcaa02033a065  snapA/snapshot-7614111.jsonl.gz
+eabe4e5871bbeff927c8eb6097c36f076331eecd2c77b17fde0e179fa2a1337d  snapA/snapshot.log
+a64a551d31a3850559fc4dfdf8fbab4082d3ac01c948cbe40a256dc0e32c79f5  snapA/state.json
+7c2c513a4ee6fe07004d894caceb08d91fb7ba4bf753de53daca822dedecbc02  snapB/count.json
+289600728368edcdae8fa59c5b17df51453f680588ce3b73e84eeffa861079e4  snapB/snapshot-7643241.jsonl.gz
+de4a7efd9880882e179c188f95276cdd50599aa0b2a27d6188023ee658913da6  snapB/snapshot.log
+cb7d35a3b9f3c30d9caaf68400949cdffada9f5d2e3e8c4298c0a7d756c4c447  snapB/state.json
+12b8560e5d73acf8265e2e2f2cafd901bdd0873cef6702e695db63ee7953d30a  tx/collect.log
+d0b05d3cf52652d55dc7f5c3c4b8b7728ea76e2bb6176378ae73157dc3634762  tx/key-tx.jsonl
+d715bf7b8b33dbbb4a66a46ed94fcc41cb182f509fd9c010ae82df014f7918d9  tx/ledgers.csv
+a30543036a5f1b746733b99a7b13867fe3eab9e7acb852765282f4f60a7d5068  tx/state.json
+(exit 0)
+$ cd keyposture/data && find . -type f | sort | xargs sha256sum; cd - >/dev/null
+917f6e6f71a344ae90f098006f04872d4e9d65d28a7ed084b589ffd73bf81eaf  ./snapA-count.json
+eabe4e5871bbeff927c8eb6097c36f076331eecd2c77b17fde0e179fa2a1337d  ./snapA-snapshot.log
+a64a551d31a3850559fc4dfdf8fbab4082d3ac01c948cbe40a256dc0e32c79f5  ./snapA-state.json
+7c2c513a4ee6fe07004d894caceb08d91fb7ba4bf753de53daca822dedecbc02  ./snapB-count.json
+de4a7efd9880882e179c188f95276cdd50599aa0b2a27d6188023ee658913da6  ./snapB-snapshot.log
+cb7d35a3b9f3c30d9caaf68400949cdffada9f5d2e3e8c4298c0a7d756c4c447  ./snapB-state.json
+4b4702834adc5ed219d19c55db8c91765e730a3e2f9a6701605dcaa02033a065  ./snapshot-7614111.jsonl.gz
+289600728368edcdae8fa59c5b17df51453f680588ce3b73e84eeffa861079e4  ./snapshot-7643241.jsonl.gz
+12b8560e5d73acf8265e2e2f2cafd901bdd0873cef6702e695db63ee7953d30a  ./tx/collect.log
+d0b05d3cf52652d55dc7f5c3c4b8b7728ea76e2bb6176378ae73157dc3634762  ./tx/key-tx.jsonl
+d715bf7b8b33dbbb4a66a46ed94fcc41cb182f509fd9c010ae82df014f7918d9  ./tx/ledgers.csv
+a30543036a5f1b746733b99a7b13867fe3eab9e7acb852765282f4f60a7d5068  ./tx/state.json
+(exit 0)

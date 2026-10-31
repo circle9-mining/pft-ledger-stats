@@ -1,0 +1,191 @@
+{
+ "changed_accounts": [
+  "r4iUaBb7mD8Zo9EiDDj6MRRnpzK9sRdR1W",
+  "rDMWGci1WikuFCBhJgQvpPU4MvAsW8eiQV",
+  "rESRuMpko34fa4LF6wDJ3vgL8JQ6LUCC4c",
+  "rJXBbXBmfJ6WRR59X8nJMQGBw4SwzCai7g",
+  "rJxbcwqJLVZyAxtafvH46XLsERwuob6kZh",
+  "rMzGUdoxC6KzXGT4tRmYkehUHYuTKLi7TE",
+  "rPwDi8RJaPxMvVjb49EpGdgeiYb4QYY96z",
+  "rQED5Si2GuMBPTmSHqmXKhHFyooKy91kcR",
+  "rU24E8NteLs94kWm2PM5NAfiGydeyhWd6Y",
+  "rp2m3dG1ArPzTUEVgduM72FoaQzaRZMvLQ",
+  "rpCzwYfxo1Fu67iuWJV58hZuUPjH6hfEfn",
+  "rwAMciVMErJ8mndfH22vjNV746KQCrE3TL",
+  "rwFjPVuBtnH5BoCycbW2utFkGoxU6BEZWL",
+  "rwjdDQZ3hYaqHnq3W23bSXdmdgtHEwDhq9",
+  "rwztrYSufwFwDKssjXoYiNQfSoWHMmc6jP"
+ ],
+ "created": 15,
+ "deleted": 0,
+ "effect_txs": [
+  {
+   "hash": "34A68274EB7E425673DACDAA4DFE22D95F41D2E9FE3C630D35F84A0590952044",
+   "ledger_index": 7615440,
+   "type": "Payment"
+  },
+  {
+   "hash": "5E2C1BD82DCC42E45E8E80BC7B842B5FFAEF0640C79FC2A8A9C614D9D1A20583",
+   "ledger_index": 7615450,
+   "type": "Payment"
+  },
+  {
+   "hash": "EAF52D7FB3DD5ED4F326E29463F75CF11749E4371FA81468DB699F4DCAE947B1",
+   "ledger_index": 7616052,
+   "type": "Payment"
+  },
+  {
+   "hash": "BFAA78DB94BD7AD9DD7E6115446A91F4ED82D33D87FA1D4409BC47CED6F29EDA",
+   "ledger_index": 7617067,
+   "type": "Payment"
+  },
+  {
+   "hash": "E0F10725FE7739E6D838EBB1FCA35A7A4CDFA08E8099FD0264F2A7E8F0EC5C4A",
+   "ledger_index": 7622367,
+   "type": "Payment"
+  },
+  {
+   "hash": "CE7FA42A4964B0F7CE68C7824341DDCCAD506A8D48019EDEFCF07A4758A319E7",
+   "ledger_index": 7626028,
+   "type": "Payment"
+  },
+  {
+   "hash": "6F422E32F45A5FD9BD62F08BB62A26A3C73BD4A70BFD0CD578FA96A2523D4D1D",
+   "ledger_index": 7629161,
+   "type": "Payment"
+  },
+  {
+   "hash": "9C6EFD563AA1F2B16407E88B36AE6B947CEE1F1D8F077C3EA38AE5BDF32E74DE",
+   "ledger_index": 7630917,
+   "type": "Payment"
+  },
+  {
+   "hash": "C3754922301622017270B043ABD9DF5C2CC1A6E14CFBE98A14AA7B2BA5430CDC",
+   "ledger_index": 7631081,
+   "type": "Payment"
+  },
+  {
+   "hash": "F1528CDA7574C27249A48B16DBD2241978C199F021F1B7857B59850240535FC5",
+   "ledger_index": 7631458,
+   "type": "Payment"
+  },
+  {
+   "hash": "E8EBC9485CAB85CC2D78C6F797A99F522E85F0BF483CC741ED624F92E38B9295",
+   "ledger_index": 7633708,
+   "type": "Payment"
+  },
+  {
+   "hash": "8BD1125591CA593D3D72D36D0B5A554FF7A60930058730AD9A022ED57FFC9057",
+   "ledger_index": 7635069,
+   "type": "Payment"
+  },
+  {
+   "hash": "055725F500799CF2AE1D38235B8E2CA95BDE20A0391FEC0AC4C0055A0C8CA3F9",
+   "ledger_index": 7637298,
+   "type": "Payment"
+  },
+  {
+   "hash": "64FC9BB7E148214838B863F000E816535A84EC081E539E7426B4080C847C9485",
+   "ledger_index": 7639865,
+   "type": "Payment"
+  },
+  {
+   "hash": "42F8DC47ED8952083AAA2D0830B26D3EE3E9586462A06C61C8C3E12AFF92ACD4",
+   "ledger_index": 7642730,
+   "type": "Payment"
+  }
+ ],
+ "key_tx": 15,
+ "key_tx_with_effect": 15,
+ "ledgers": 29130,
+ "negative": null,
+ "per_class": {
+  "blackholed": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  },
+  "master+multisig": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  },
+  "master+regular": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  },
+  "master+regular+multisig": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  },
+  "master_only": {
+   "A": 4433,
+   "B": 4448,
+   "expected_B": 4448,
+   "in": 15,
+   "out": 0
+  },
+  "multisig_only": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  },
+  "no_usable_key": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  },
+  "regular+multisig": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  },
+  "regular_only": {
+   "A": 0,
+   "B": 0,
+   "expected_B": 0,
+   "in": 0,
+   "out": 0
+  }
+ },
+ "residuals": [],
+ "result": "PASS",
+ "snap_a": {
+  "accounts": 4433,
+  "ledger_hash": "F727010F3F388DBF1DA10EB24F46C68A52ED58F4404FCFB501633E4AC761B2B6",
+  "ledger_index": 7614111,
+  "signer_lists": 0
+ },
+ "snap_b": {
+  "accounts": 4448,
+  "ledger_hash": "8938DBEF41C8AEAE6134BDF9D2A45BF18783D65AAC281C6C0838DA9E42C75A1F",
+  "ledger_index": 7643241,
+  "signer_lists": 0
+ },
+ "transitions": [
+  {
+   "from": "(new)",
+   "n": 15,
+   "to": "master_only"
+  }
+ ],
+ "tx_types": {
+  "Payment": 15
+ }
+}

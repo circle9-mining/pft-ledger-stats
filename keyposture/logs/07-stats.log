@@ -1,0 +1,50 @@
+# 2026-10-31T14:12:10Z keyposture stats + chart | "Ubuntu 22.04.5 LTS" | commit 1aebeba7b68bcf31728d8612cfceb2de61173da8 | stats_key.py sha256 0188ead0537867c795fb3f8a912a4de8b7b48572e9f782c88c3520fd17a9d47a
+$ sha256sum data/rewardflow/data.jsonl; wc -l < data/rewardflow/data.jsonl
+6e419ba823066f1228d9b8386d53dda357cbf4f89ce212af3bc010b27a0c171b  data/rewardflow/data.jsonl
+85
+(exit 0)
+$ .venv/bin/python keyposture/stats_key.py --reconcile keyposture/data/reconcile.json --snap-a keyposture/data/snapshot-7614111.jsonl.gz --snap-b keyposture/data/snapshot-7643241.jsonl.gz --rewardflow data/rewardflow/data.jsonl --json keyposture/data/stats.json --md keyposture/data/stats.md --chart keyposture/balances.png
+| class | A accounts | A share | B accounts | B share | B PFT | B PFT share |
+|---|---:|---:|---:|---:|---:|---:|
+| master_only | 4433 | 100.00% | 4448 | 100.00% | 99,999,999,968.735458 | 100.00% |
+| master+regular | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+| master+multisig | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+| master+regular+multisig | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+| regular_only | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+| multisig_only | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+| regular+multisig | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+| blackholed | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+| no_usable_key | 0 | 0.00% | 0 | 0.00% | 0.000000 | 0.00% |
+
+Weak configurations at B: none
+
+Transitions A->B (created 15, deleted 0): (new) -> master_only: 15
+
+| role | account | class A | class B | weak flags B | PFT at B |
+|---|---|---|---|---|---:|
+| payer | `rwdm72…` | master_only | master_only | - | 488,295,945.344478 |
+| recipient | `r3F4NY…` | master_only | master_only | - | 1,017.499987 |
+| recipient | `r4RPpe…` | master_only | master_only | - | 2,531,912.964183 |
+| recipient | `r4XLZK…` | master_only | master_only | - | 923,817.607922 |
+| recipient | `rDep8S…` | master_only | master_only | - | 1,215,759.009352 |
+| recipient | `rHv6jS…` | master_only | master_only | - | 16,810.249963 |
+| recipient | `rKF7zT…` | master_only | master_only | - | 1,115,477.825565 |
+| recipient | `rPExxz…` | master_only | master_only | - | 72,144.949991 |
+| recipient | `rPTCS8…` | master_only | master_only | - | 101,594.299892 |
+| recipient | `rfLJ4Z…` | master_only | master_only | - | 1,499,691.493344 |
+| recipient | `rpHvzM…` | master_only | master_only | - | 27,443.579988 |
+| recipient | `rpq9nq…` | master_only | master_only | - | 3,572.000004 |
+| recipient | `rsVf8g…` | master_only | master_only | - | 25,124.999837 |
+
+Top balances at B, master_only: `r4vhrM…` 97,000,000,000.00, `rwdm72…` 488,295,945.34, `rscWPz…` 250,000,000.00, `rs3YdB…` 250,000,000.00, `rJNBxu…` 250,000,000.00, `rD9LaW…` 250,000,000.00, `rBDbRY…` 249,952,700.00, `rhczhW…` 249,714,196.43, `rKddMw…` 248,880,686.83, `rJNwqD…` 246,963,444.57
+(exit 0)
+$ sha256sum keyposture/data/stats.json keyposture/data/stats.md keyposture/balances.png
+28f26fa27986ac83ce3d009c02c663a1e5bbb557969ad5d516b4f45e9bc9b927  keyposture/data/stats.json
+2586871a9f9a4988837bc81ae408c317bbf869feda68f955adc9d250351bcae7  keyposture/data/stats.md
+3c9862ca0a80bd5b00047726975c6cb28a2a9b07117eed40c36fe0dca603c85e  keyposture/balances.png
+(exit 0)
+$ .venv/bin/python keyposture/stats_key.py --reconcile keyposture/data/reconcile.json --snap-a keyposture/data/snapshot-7614111.jsonl.gz --snap-b keyposture/data/snapshot-7643241.jsonl.gz --rewardflow data/rewardflow/data.jsonl --json /tmp/kp-stats2.json --md /tmp/kp-stats2.md --chart /tmp/kp-bal2.png >/dev/null && cmp keyposture/data/stats.json /tmp/kp-stats2.json && cmp keyposture/data/stats.md /tmp/kp-stats2.md && cmp keyposture/balances.png /tmp/kp-bal2.png && echo 'rerun byte-identical (json, md, png)'
+rerun byte-identical (json, md, png)
+(exit 0)
+$ rm -f /tmp/kp-stats2.json /tmp/kp-stats2.md /tmp/kp-bal2.png
+(exit 0)
